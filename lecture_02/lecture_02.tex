@@ -12,194 +12,74 @@
 \begin{document}
 \maketitle
 \input{../preamble.tex}
-\section{General definitions}
+\section{Linear transformations}
 
-We present below the abstract mathematical definition of a vector space. 
-\textbf{Please do not try to memorize it!} 
-Simply remember that a vector space is a set whose elements are called \emph{vectors}, that one can add vectors together and multiply them by real numbers called \emph{scalars}.
-\begin{definition}[Vector space]
-	A vector space (over $\R$) consists of of a set $V$ (whose elements are called vectors) and two operations $+$ and $\cdot$ that verify:
-	\begin{enumerate}
-		\item The sum of two vectors is a vector: for all $\vec{x},\vec{y} \in V$ we have $\vec{x}+\vec{y} \in V$.
-		\item The vector sum is commutative and associative. For all $\vec{x},\vec{y},\vec{z} \in V$ we have
-			$$
-			\vec{x}+\vec{y} = \vec{y} + \vec{x} \qquad \text{and} \qquad \vec{x} + (\vec{y} + \vec{z}) = (\vec{x}+\vec{y}) + \vec{z}.
-			$$
-		\item There exists a zero vector $\vec{0} \in V$ that verifies $\vec{x} + \vec{0} = \vec{x}$ for all $\vec{x} \in V$.
-		\item For all $\vec{x} \in V$, there exists $\vec{y} \in V$ such that $\vec{x} + \vec{y} = \vec{0}$. Such $\vec{y}$ is called the additive inverse of $\vec{x}$ and is written $- \vec{x}$.
-		\item Scalar multiplication: for all $\vec{x} \in V$ and all $\alpha \in \R$, $\alpha \cdot \vec{x} \in V$.
-		\item Identity element for scalar multiplication: $1 \cdot \vec{x} = \vec{x}$ for all $\vec{x} \in V$.
-		\item Compatibility between scalar multiplication and the usual multiplication: for all $\alpha,\beta \in \R$ and all $\vec{x} \in V$, we have
-			$$
-			\alpha \cdot(\beta \cdot \vec{x}) = (\alpha \beta) \cdot \vec{x}.
-			$$
-		\item Distributivity: for all $\alpha,\beta \in \R$ and all $\vec{x},\vec{y} \in V$,
-			$$
-			(\alpha + \beta) \cdot \vec{x} = \alpha \cdot \vec{x} + \beta \cdot \vec{y}
-			\qquad \text{and} \qquad
-			\alpha \cdot (\vec{x} + \vec{y}) = \alpha \cdot \vec{x} + \alpha \cdot \vec{y}.
-			$$
-	\end{enumerate}
-\end{definition}
-
-From now we will ignore $\cdot$ and simply write $\alpha \vec{x}$ instead of $\alpha \cdot \vec{x}$.
-
-\begin{example}
-	\leavevmode
-	\begin{itemize}
-		\item The set $V = \R^n$ endowed with the usual vector addition $+$
-			$$
-			(x_1, \dots, x_n) + (y_1, \dots, y_n) = (x_1 + y_1, \dots, x_n + y_n)
-			$$
-			and the usual scalar multiplication $\cdot$
-			$$
-			\alpha \cdot (x_1, \dots, x_n)= (\alpha x_1, \dots, \alpha x_n)
-			$$
-			is a vector space.
-		\item The set $V = \cF(\R,\R) \defeq \{ f \, | \, f: \R \to \R \}$ of all functions from $\R$ to itself endowed with the addition $+$ and the scalar multiplication $\cdot$ defined by
-			$$
-			\begin{array}{rlll}
-			f+g :& \R & \to & \R \\
-				 &t & \mapsto & f(t) + g(t)
-			\end{array}
-			\qquad
-			\text{and}
-			\qquad
-			\begin{array}{rlll}
-			\alpha \cdot f :& \R & \to & \R \\
-							&t & \mapsto & \alpha f(t)
-			\end{array}
-			$$
-			is a vector space.
-	\end{itemize}
-\end{example}
-
-\begin{definition}[Subspace]
-	We say that a non-empty subset $S$ of a vector space $V$ is a \emph{subspace} is it is stable by addition and multiplication by a scalar, that is if
-	\begin{enumerate}[label=(\roman*),noitemsep]
-		\item for all $x,y \in S$ we have $x + y \in S$,
-		\item for all $x \in S$ and all $\alpha \in \R$ we have $\alpha x \in S$.
-	\end{enumerate}
-\end{definition}
-
-Notice that a subspace is also a vector space!
-
-\section{Linear dependency}
-
-\begin{definition}[Span]
-	Given vectors $x_1, \dots x_k \in V$ the \emph{span} of $x_1, \dots, x_k$ is the set of vectors that can be written as a linear combination of these:
-	$$
-	\Span(x_1, \dots, x_n) = 
-	\Big\{ \alpha_1 x_1 + \cdots + \alpha_k x_k \, \Big| \, \alpha_1, \dots, \alpha_k \in \R \Big\}.
-	$$
-\end{definition}
-
-One can easily verify (exercise!) that $\Span(x_1, \dots, x_n)$ is a subspace of $V$.
-
-\begin{definition}[Linear dependency]
-	Vectors $x_1, \dots x_k \in V$ are \emph{linearly dependent} is there exists $\alpha_1, \dots, \alpha_k \in \R$ \textbf{that are not all zero} such that 
-	$$
-	\alpha_1 x_1 + \cdots + \alpha_k x_k = 0.
-	$$
-	They are said to be \emph{linearly independent} otherwise.
-\end{definition}
-
-Saying that $x_1, \dots, x_k$ are linearly dependent precisely means that one of the vectors $x_1, \dots, x_k$ can be obtained as a linear combination of the others. 
-Indeed if $x_1, \dots, x_k$ are linearly dependent, then we can find $\alpha_1, \dots, \alpha_k \in \R$ that are not all zero (there exists $i$ such that $\alpha_i \neq 0$) such that $\alpha_1 x_1 + \cdots + \alpha_k x_k = 0$. This leads to
-$$
-x_i = \sum_{j \neq i} \frac{- \alpha_j}{\alpha_i} x_j,
-$$
-i.e.\ the vector $x_i$ can be expressed as a linear combinations of the vectors $x_j$ for $j \neq i$.
-Conversely if we have for some $i$, and $\alpha_1, \dots, \alpha_k \in \R$
-$$
-x_i = \alpha_1 x_1 + \cdots + \alpha_{i-1} x_{i-1} + \alpha_{i+1} x_{i+1} + \cdots \alpha_k x_k = 0.
-$$
-then $\alpha_1 x_1 + \cdots + \alpha_{i-1} x_{i-1} - x_i + \alpha_{i+1} x_{i+1} + \cdots \alpha_k x_k = 0$ which gives that $x_1, \dots, x_k$ are linearly dependent. 
-\\
-
-\begin{theorem}\label{th:lin_dep}
-	Let $v_1, \dots, v_n \in V$ and suppose that we have vectors $x_1, \dots, x_k \in V$ such that $k > n$ and $x_i \in \Span(v_1, \dots, v_n)$ for all $i \in \{1, \dots, k\}$.
-	Then $x_1, \dots, x_k$ are linearly dependent.
-\end{theorem}
-Theorem \ref{th:lin_dep} will be proved in Section \ref{sec:proof_lin_dep}.
-\\
-
-\begin{definition}[Basis]
-	A family $(x_1, \dots, x_n)$ of vectors of $V$ is a basis of $V$ if
+\begin{definition}[Linear transformation]
+	A function $L: \R^m \to \R^n$ is linear if
 	\begin{enumerate}[label=(\roman*)]
-		\item $x_1, \dots, x_n$ are linearly independent,
-		\item $\Span(x_1, \dots, x_n) = V$.
+		\item for all $v \in \R^m$ and all $\alpha \in \R$ we have $L(\alpha v) = \alpha L(v)$ and
+		\item for all $v,w \in \R^m$ we have $L(v + w) = L(v) + L(w)$.
 	\end{enumerate}
 \end{definition}
 
-\begin{definition}[Dimension]
-	If the vector space $V$ admits a base $(v_1, \dots, v_n)$, then any base of $V$ has also $n$ vectors. We say that $V$ has dimension $n$ and write $\dim(V) = n$.
-\end{definition}
-\begin{proof}
-	We proceed by contradiction and assume that there exists two basis $(v_1, \dots, v_n)$ and $(x_1, \dots, x_k)$ of $V$ such that $k \neq n$. Without loss of generality we can assume that $k > n$. For $i = 1, \dots, k$ we have
-	$$
-	x_i \in V = \Span(v_1, \dots, v_n),
-	$$
-	because $(v_1, \dots, v_n)$ is a basis of $V$. We can therefore apply Theorem \ref{th:lin_dep} to get that $x_1, \dots, x_{n+1}$ are linearly dependent. This contradicts the fact that $(x_1, \dots, x_{k})$ is a basis.
-\end{proof}
-\\
+Notice that $L: \R^m \to \R^n$ is linear if and only if $L(\alpha v + w) = \alpha L(v) + L(w)$ for all $v,w \in \R^m$ and all $\alpha \in \R$.
 
-\begin{proposition}[Coordinates]
-	Let $(v_1, \dots, v_n)$ be a basis of $V$. Then for every $x \in V$ there exists a unique vector $(\alpha_1, \dots, \alpha_n) \in \R^n$ such that
-	$$
-	x = \alpha_1 v_1 + \dots + \alpha_n v_n.
-	$$
-	We say that $(\alpha_1, \dots, \alpha_n)$ are the coordinates of $x$ in the basis $(v_1, \dots, v_n)$.
+\begin{proposition}
+	The set $\mathcal{L}(\R^m, \R^n)$ of all linear transformations from $\R^m$ to $\R^n$ is a vector space.
 \end{proposition}
-\begin{proof}
-	\textbf{Existence}. $(v_1, \dots, v_n)$ forms a basis of $V$ therefore  $V = \Span(v_1, \dots, v_n)$. We get that $x \in \Span(v_1, \dots, v_n)$ which gives that there exists $\alpha_1, \dots, \alpha_n$ such that $x = \alpha_1 v_1 + \cdot + \alpha_n v_n$.
-	\\
-	\textbf{Unicity}. Let $\alpha_1, \dots, \alpha_n, \beta_1, \dots, \beta_n \in \R$ such that
-	\begin{align*}
-		x &= \alpha_1 v_1 + \cdots + \alpha_n v_n = \beta_1 v_1 + \cdots + \beta_n v_n.
-	\end{align*}
-	This leads to
-	$$
-	(\alpha_1 - \beta_1) v_1 + \cdots + (\alpha_n - \beta_n) v_n = 0.
-	$$
-	The vectors $v_1, \dots, v_n$ are linearly independent because they forms a basis. Consequently $\alpha_1 - \beta_1 = \alpha_2 - \beta_2 = \cdots \alpha_n - \beta_n = 0$, i.e.\ $(\alpha_1, \dots, \alpha_n) = (\beta_1, \dots, \beta_n)$.
-\end{proof}
 
+\begin{proposition}
+	If $L: \R^m \to \R^n$ and $M: \R^n \to \R^k$ are two linear transformations, then the composite function $M \circ L: \R^m \to \R^k$ is also linear.
+\end{proposition}
 
-\section{Proof of Theorem \ref{th:lin_dep}}\label{sec:proof_lin_dep}
-	Notice that it suffices to prove the theorem for $k = n+1$ because if $x_1, \dots, x_{n+1}$ are linearly dependent, so are $x_1, \dots, x_{n+1}, \dots x_k$. We will therefore show for all $n \geq 1$
-	\begin{align*}
-		\mathcal{H}_n: \text{<< } &\text{For all } v_1, \dots, v_{n} \in V \ \text{and all } x_{1}, \dots x_{n+1} \in \Span(v_1, \dots, v_n), \\ &\text{the vectors } x_1, \dots, x_{n+1} \ \text{are linearly dependent. >>}
-	\end{align*}
-	\textbf{Base case:} $\mathcal{H}_1$ is true. Indeed, if $x_1,x_2 \in \Span(v_1)$, then there exists $\alpha_1, \alpha_2 \in \R$ such that $x_1 = \alpha_1 v_1$ and $x_2 = \alpha_2 v_1$. If $\alpha_1 = 0$ then $x_1 = 0$ and $x_1,x_2$ are therefore linearly dependent. 
-	Otherwise if $\alpha_1 \neq 0$ then $v_1 = \frac{1}{\alpha_1} x_1$ which then gives $x_2 = \frac{\alpha_2}{\alpha_1} x_1$: $x_1,x_2$ are linearly dependent. 
-	\\
+\begin{theorem}[Equality on a basis implies equality everywhere]\label{th:basis_cara}
+	Let $L$ and $M$ be two linear transformations from $\R^m$ to $\R^m$.
+	Let $(v_1, \dots, v_m)$ be a basis of $\R^m$ and supose that for all $i \in \{1, \dots,m\}$ we have
+	$$
+	L(v_i) = M(v_i).
+	$$
+	Then $L = M$, i.e.\ $L(v) = M(v)$ for all $v \in \R^m$.
+\end{theorem}
 
-	\noindent\textbf{Induction step:} We assume now that $\mathcal{H}_{n-1}$ holds for some $n \geq 2$ and we will show that $\mathcal{H}_{n}$ holds. We consider therefore $x_1, \dots, x_{n+1} \in \Span(v_1, \dots, v_n)$. We can find real numbers $\alpha_{i,j}$ such that
+\section{Matrix representation}
+
+From Theorem \ref{th:basis_cara} we that a linear transformation $L: \R^m \to \R^n$ is uniquely characterized by the image $L(v_1), \dots, L(v_m)$ of any basis $(v_1, \dots, v_m)$ of the input space.
+
+We consider the canonical basis $(e_1, \dots, e_m)$ of $\R^m$ and encode $L$ by a $n \times m$ matrix (that we will write also $L$) whose colums are $L(e_1), \dots, L(e_m)$:
+$$
+L =
+\begin{pmatrix}
+	| & | & & | \\
+	L(e_1) & L(e_2) & \cdots& L(e_m) \\
+	| & | & & |
+\end{pmatrix}
+= 
+\begin{pmatrix}
+	L_{1,1} & L_{1,2} & \cdots & L_{1,m} \\
+	L_{2,1} & L_{2,2} & \cdots & L_{2,m} \\
+	\vdots & \vdots & \ddots & \vdots \\
+	L_{n,1} & L_{n,2} & \cdots & L_{n,m} \\
+\end{pmatrix}
+$$
+where we write $L(e_j) = 
+\begin{pmatrix}
+	L_{1,j} \\
+	L_{2,j}\\
+	\vdots \\
+	L_{n,j}
+\end{pmatrix}$.
+The matrix $L$ is called the (canonical) matrix of the linear transformation $L$.
+
+\begin{definition}[Matrix product]
+	Let $L \in \R^{n \times m}$ and $M \in \R^{k \times n}$. The product $M L$ is the $k \times m$ matrix defined by
 	$$
-	\begin{array}{ccccccc}
-		x_1 &=& \alpha_{1,1} v_1 &+& \cdots &+& \alpha_{1,n} v_n\\
-		x_2 &=& \alpha_{2,1} v_1 &+& \cdots &+& \alpha_{2,n} v_n \\
-		\vdots &&&&&& \\
-		x_{n+1} &=& \alpha_{n+1,1} v_1 &+& \cdots &+& \alpha_{n+1,n} v_n.
-	\end{array}
+	(ML)_{i,j} = \sum_{r=1}^n M_{i,r} L_{r,j} \quad \text{for all} \quad 1 \leq i \leq k, \quad 1 \leq j \leq m.
 	$$
-	We have to show that $x_1, \dots, x_{n+1}$ are linearly dependent.
-	Let us consider the first line. If $\alpha_{1,1} = \alpha_{1,2} = \cdots = \alpha_{1,n} = 0$, then $x_1 = 0$ which gives then that $x_1, \dots, x_{n+1}$ are linearly dependent.
-	Otherwise, there exists $j$ such that $\alpha_{1,j} \neq 0$. Without loss of generality we can assume that $\alpha_{1,1} \neq 0$. 
-	$$
-	\begin{array}{ccccccc}
-		x_1 &=& \alpha_{1,1} v_1 &+& \cdots &+& \alpha_{1,n} v_n\\
-		x_2 - \frac{\alpha_{2,1}}{\alpha_{1,1}} x_1 &=& 0 &+& \cdots &+& \alpha_{2,n} v_n - \frac{\alpha_{2,1}}{\alpha_{1,1}} \alpha_{1,n}v_n \\
-		\vdots &&&&&& \\
-		x_{n+1} - \frac{\alpha_{n+1,1}}{\alpha_{1,1}} x_1&=& 0 &+& \cdots &+& \alpha_{n+1,n} v_n- \frac{\alpha_{n+1,1}}{\alpha_{1,1}} \alpha_{1,n}v_n.
-	\end{array}
-	$$
-	If we define $y_i \defeq x_i - \frac{\alpha_{i,1}}{\alpha_{1,1}} x_1$ for $i = 2, \dots, n+1$ we obtain have $y_i \in \Span(v_2, \dots, v_{n})$. We can now apply the induction hypothesis $\mathcal{H}_{n-1}$ to get that $y_2, \dots, y_{n+1}$ are linearly dependent. This means that there exists $\beta_2, \dots \beta_{n+1}$ that are not all zero, such that $\beta_2 y_2 + \cdots + \beta_{n+1} y_{n+1} = 0$ which finally gives
-	$$
-	\Big(- \beta_2 \frac{\alpha_{2,1}}{\alpha_1,1} - \cdots - \beta_{n+1} \frac{\alpha_{n+1,1}}{\alpha_{1,1}}\Big) x_1 + \beta_2 x_2 + \cdots + \beta_{n+1} x_{n+1} = 0.
-	$$
-	Since $\beta_2, \dots, \beta_{n+1}$ are not all zero we get that $x_1, \dots, x_{n+1}$ are linearly dependent. $\mathcal{H}_{n}$ is proved.
+\end{definition}
+
+\begin{proposition}[Matrix product means composition of linear transformations]
+\end{proposition}
+
 
 	\vspace{1cm}
 	\centerline{\pgfornament[width=7cm]{71}}
