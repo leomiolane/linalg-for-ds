@@ -75,10 +75,82 @@ The matrix $L$ is called the (canonical) matrix of the linear transformation $L$
 	$$
 	(ML)_{i,j} = \sum_{r=1}^n M_{i,r} L_{r,j} \quad \text{for all} \quad 1 \leq i \leq k, \quad 1 \leq j \leq m.
 	$$
+	For $x \in \R^n$, we define the matrix-vector product $M x \in \R^k$ by
+	$$
+	(Lx)_i = \sum_{r=1}^n M_{i,r} x_r, \qquad 1 \leq i \leq k.
+	$$
+	Notice that, if we see the vector $x \in \R^n$ as a $n \times 1$ matrix, to the matrix product between $M$ and $x$.
 \end{definition}
 
-\begin{proposition}[Matrix product means composition of linear transformations]
+\begin{proposition}
+	Let $M \in \R^{n \times m}$. Then for all $x \in \R^m$,
+	$M(x) = Mx$.
 \end{proposition}
+
+\begin{proposition}[Matrix product means composition of linear transformations]
+	Let $L: \R^m \to \R^n$ and $M: \R^n \to \R^k$ be two linear transformations whose matrices are also denoted by $L \in \R^{n \times m}$ and $M \in \R^{k \times n}$.
+	Then the $k \times m$ matrix $ML$ is the matrix of the linear transformation $M \circ L: \R^m \to \R^k$.
+\end{proposition}
+
+\begin{definition}[Matrix inverse]
+	Let $M \in \R^{n \times n}$. We say that $M$ is invertible if there exists a matrix $M^{-1} \in \R^{n \times n}$ such that 
+	$$
+	M M^{-1} = \Id_n \quad \text{or equivalently, such that} \quad M^{-1} M = \Id_n.
+	$$
+	In that case, the matrix $M^{-1}$ is called the inverse of $M$.
+\end{definition}
+
+\section{Kernel and image}
+
+\begin{definition}[Kernel]
+	The kernel $\Ker(L)$ (or nullspace) of a linear transformation $L: \R^m \to \R^n$ is defined as the set of all vectors $v \in \R^m$ such that $L(v) = 0$, i.e.
+	$$
+	\Ker(L) \defeq \big\{ v \in \R^m \, \big| \, L(v) = 0 \big\}.
+	$$
+\end{definition}
+
+\begin{definition}[Image]
+	The image $\Im(L)$ (or column space) of a linear transformation $L: \R^m \to \R^n$ is defined as the set of all vectors $u \in \R^n$ such that there exists $v \in \R^m$ such that $L(v) = u$. 
+	$\Im(L)$ is also the Span of the columns of the matrix representation of $L$.
+\end{definition}
+
+\begin{proposition}
+	$\Ker(L)$ and $\Im(L)$ are subspaces of respectively $\R^m$ and $\R^n$.
+\end{proposition}
+\vspace{1cm}
+
+\noindent
+\textbf{Application}: Solutions of a linear system.
+\\
+
+We are interested into solving the system of equations in $x = (x_1, \dots, x_m) \in \R^m$
+\begin{equation}\label{eq:system}
+	\left\{
+		\begin{array}{ccccccccc}
+		a_{1,1} x_1 &+& a_{1,2} x_2 &+& \dots &+& a_{1,m} x_m &=& y_1 \\
+		\vdots &&&&&&&& \\
+		a_{n,1} x_1 &+& a_{n,2} x_2 &+& \dots &+& a_{n,m} x_m &=& y_n
+	\end{array}
+	\right.
+\end{equation}
+where $a_{i,j} \in \R$ and $y = (y_1, \dots, y_n) \in \R^n$. If we define the matrix $A \in \R^{n \times m}$ by $A_{i,j} = a_{i,j}$ the system \eqref{eq:system} can be rewritten as
+$$
+A x = y.
+$$
+Solving \eqref{eq:system} precisely mean << finding the inverse image of $y$ by $A$ >>. From the definition of $\Im(A)$ we get that 
+\textbf{the equation $Ax = y$ admits (at least) a solution $x_0$ if and only if $y \in \Im(A)$}.
+\\
+
+We suppose now to be in that case. We would now like to know if there are other solutions. Let $x$ be another solution to $Ax = y$. By subtraction we get 
+$$
+A(x - x_0) = y - y = 0.
+$$
+This means that $(x - x_0) \in \Ker(A)$: any solution of $Ax = y$ can therefore be written as $x = x_0 + v$ with $v \in \Ker(A)$. Conversely, one can verify easily that any vector of this form is a solution. We conclude that if the equation $Ax = y$ admits a solution $x_0$, then the set of \textbf{all} solutions is
+$$
+x_0 + \Ker(A) \defeq \big\{ x_0 + v \, \big| \, v \in \Ker(A) \}.
+$$
+In particular, \textbf{$x_0$ is the unique solution if and only if $\Ker(A) = \{0\}$}.
+
 
 
 	\vspace{1cm}

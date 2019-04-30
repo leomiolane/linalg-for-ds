@@ -1,0 +1,46 @@
+\documentclass[11pt,nocut]{article}
+
+\usepackage{../latex_style/packages}
+\usepackage{../latex_style/notations}
+
+\title{\vspace{-2.0cm}%
+	Optimization and Computational Linear Algebra for Data Science\\
+	Lecture 3: Rank}
+	\author{Léo \textsc{Miolane} \ $\cdot$ \ \texttt{leo.miolane@gmail.com}}
+\date{\today}
+
+\begin{document}
+\maketitle
+\input{../preamble.tex}
+\section{Rank of a matrix}
+
+\begin{definition}[Rank]
+	The rank of a matrix $M \in \R^{n \times m}$ is defined as the dimension of the image of $M$:
+	$$
+	\rank(M) = \dim(\Im(M)).
+	$$
+\end{definition}
+
+\begin{proposition}
+	Let $L: \R^m \to \R^n$ and $M: \R^n \to \R^k$, two linear applications. Then the following holds
+	\begin{enumerate}[label=(\roman*)]
+		\item $\rank(L) \leq \min(n,m)$.
+		\item $\rank(ML) \leq \min(\rank(L),\rank(M))$.
+	\end{enumerate}
+\end{proposition}
+
+\begin{theorem}[Rank-nullity theorem]
+	Let $L: \R^m \to \R^n$ be a linear transformation. Then
+	$$
+	\rank(L) + \dim(\Im(L)) = m.
+	$$
+\end{theorem}
+
+
+
+	\vspace{1cm}
+	\centerline{\pgfornament[width=7cm]{71}}
+
+%\bibliographystyle{plain}
+%\bibliography{./references.bib}
+\end{document}
