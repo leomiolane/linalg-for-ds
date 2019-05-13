@@ -14,12 +14,27 @@
 \input{../preamble.tex}
 \section{Rank of a matrix}
 
+\begin{definition}
+	We define the rank of a family $x_1, \dots, x_k$ of vectors of $\R^n$ as the dimension of its span:
+	$$
+	\rank(x_1, \dots, x_k) \defeq \dim (\Span(x_1, \dots, x_k)).
+	$$
+\end{definition}
+
+If the vectors $x_1, \dots x_k$ are linearly independent then $\rank(x_1, \dots x_k) = k$. Indeed, in that case $(x_1, \dots, x_k)$ forms a base of $\Span(x_1, \dots, x_k)$ so $\dim(\Span(x_1, \dots, x_k)) = k$.
+
+\begin{proposition}
+	Let $x_1, \dots, x_k \in \R^n$ and write $r = \rank(x_1, \dots, x_r)$. Then there exists $i_1, \dots i_r \in \{1 \dots k\}$ such that $(x_{i_1}, \dots, x_{i_r})$ forms a basis of $\Span(x_1, \dots, x_k)$.
+\end{proposition}
+
 \begin{definition}[Rank]
 	The rank of a matrix $M \in \R^{n \times m}$ is defined as the dimension of the image of $M$:
 	$$
 	\rank(M) = \dim(\Im(M)).
 	$$
 \end{definition}
+
+Let $c_1, \dots, c_m$ be the columns of $M$, then 
 
 \begin{proposition}
 	Let $L: \R^m \to \R^n$ and $M: \R^n \to \R^k$, two linear applications. Then the following holds

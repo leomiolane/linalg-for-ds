@@ -14,6 +14,11 @@
 \input{../preamble.tex}
 \section{Linear transformations}
 
+\begin{center}
+From now, we will always work with vector spaces of the form $\R^k$ for $k \in \N^*$.
+\end{center}
+\vspace{1mm}
+
 \begin{definition}[Linear transformation]
 	A function $L: \R^m \to \R^n$ is linear if
 	\begin{enumerate}[label=(\roman*)]
@@ -34,7 +39,7 @@ Notice that $L: \R^m \to \R^n$ is linear if and only if $L(\alpha v + w) = \alph
 
 \begin{theorem}[Equality on a basis implies equality everywhere]\label{th:basis_cara}
 	Let $L$ and $M$ be two linear transformations from $\R^m$ to $\R^m$.
-	Let $(v_1, \dots, v_m)$ be a basis of $\R^m$ and supose that for all $i \in \{1, \dots,m\}$ we have
+	Let $(v_1, \dots, v_m)$ be a basis of $\R^m$ and suppose that for all $i \in \{1, \dots,m\}$ we have
 	$$
 	L(v_i) = M(v_i).
 	$$
@@ -43,9 +48,9 @@ Notice that $L: \R^m \to \R^n$ is linear if and only if $L(\alpha v + w) = \alph
 
 \section{Matrix representation}
 
-From Theorem \ref{th:basis_cara} we that a linear transformation $L: \R^m \to \R^n$ is uniquely characterized by the image $L(v_1), \dots, L(v_m)$ of any basis $(v_1, \dots, v_m)$ of the input space.
+From Theorem \ref{th:basis_cara} we know that a linear transformation $L: \R^m \to \R^n$ is uniquely characterized by the image $L(v_1), \dots, L(v_m)$ of any basis $(v_1, \dots, v_m)$ of the input space.
 
-We consider the canonical basis $(e_1, \dots, e_m)$ of $\R^m$ and encode $L$ by a $n \times m$ matrix (that we will write also $L$) whose colums are $L(e_1), \dots, L(e_m)$:
+We consider the canonical basis $(e_1, \dots, e_m)$ of $\R^m$ and encode $L$ by a $n \times m$ matrix (that we will write also $L$) whose columns are $L(e_1), \dots, L(e_m)$:
 $$
 L =
 \begin{pmatrix}
@@ -68,7 +73,39 @@ where we write $L(e_j) =
 	\vdots \\
 	L_{n,j}
 \end{pmatrix}$.
-The matrix $L$ is called the (canonical) matrix of the linear transformation $L$.
+The matrix $L$ is called the (canonical) matrix of the linear transformation $L$. We denote by $\R^{n \times m}$ the set of all $n \times m$ matrices.
+
+\begin{example}[Homothety]
+	Let $\lambda \in \R$. The mapping (called ``homothety of ratio $\lambda$'')
+	$$
+	\begin{array}{cccc}
+		L: & \R^n & \to & \R^n \\
+		   & x & \mapsto & \lambda x
+	\end{array}
+	$$
+	is linear. The canonical matrix of $L$ is 
+	$$
+	\begin{pmatrix}
+		\lambda & 0 & 0 & \cdots & 0 \\
+		0 & \lambda & 0 & \cdots & 0 \\
+		0 & 0 &\lambda &  \cdots & 0 \\
+		\vdots & \vdots& \vdots & \ddots & \vdots \\
+		0 & 0 & 0 & \cdots & \lambda
+	\end{pmatrix}
+	.
+	$$
+	In the case where $\lambda = 1$, $L$ is simply the identity, its matrix is called the identity matrix and denoted by
+	$$\Id_n
+	\ \defeq \
+	\begin{pmatrix}
+		1 & 0 & 0 & \cdots & 0 \\
+		0 & 1 & 0 & \cdots & 0 \\
+		0 & 0 &1 &  \cdots & 0 \\
+		\vdots & \vdots& \vdots & \ddots & \vdots \\
+		0 & 0 & 0 & \cdots & 1
+	\end{pmatrix}.
+	$$
+\end{example}
 
 \begin{definition}[Matrix product]
 	Let $L \in \R^{n \times m}$ and $M \in \R^{k \times n}$. The product $M L$ is the $k \times m$ matrix defined by
@@ -79,7 +116,7 @@ The matrix $L$ is called the (canonical) matrix of the linear transformation $L$
 	$$
 	(Lx)_i = \sum_{r=1}^n M_{i,r} x_r, \qquad 1 \leq i \leq k.
 	$$
-	Notice that, if we see the vector $x \in \R^n$ as a $n \times 1$ matrix, to the matrix product between $M$ and $x$.
+	Notice that this corresponds -- if we see the vector $x \in \R^n$ as a $n \times 1$ matrix -- to the matrix product between $M$ and $x$.
 \end{definition}
 
 \begin{proposition}
@@ -92,6 +129,13 @@ The matrix $L$ is called the (canonical) matrix of the linear transformation $L$
 	Then the $k \times m$ matrix $ML$ is the matrix of the linear transformation $M \circ L: \R^m \to \R^k$.
 \end{proposition}
 
+\begin{proposition}
+	Let $A \in \R^{p \times q}$, $B \in \R^{q \times r}$ and $C \in \R^{r \times s}$. Then
+	$$
+	(AB) C = A (BC).
+	$$
+\end{proposition}
+
 \begin{definition}[Matrix inverse]
 	Let $M \in \R^{n \times n}$. We say that $M$ is invertible if there exists a matrix $M^{-1} \in \R^{n \times n}$ such that 
 	$$
@@ -99,6 +143,10 @@ The matrix $L$ is called the (canonical) matrix of the linear transformation $L$
 	$$
 	In that case, the matrix $M^{-1}$ is called the inverse of $M$.
 \end{definition}
+
+\begin{remark}
+	$M \in \R^{n \times n}$ is invertible if and only if the linear transformation associated to $M$ is a bijection. In that case, $M^{-1}$ is the matrix associated to the inverse transformation.
+\end{remark}
 
 \section{Kernel and image}
 

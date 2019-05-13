@@ -86,15 +86,33 @@ Notice that a subspace is also a vector space!
 
 \section{Linear dependency}
 
-\begin{definition}[Span]
-	Given vectors $x_1, \dots x_k \in V$ the \emph{span} of $x_1, \dots, x_k$ is the set of vectors that can be written as a linear combination of these:
+\begin{definition}[Linear combination]
+	Let $V$ be a vector space and $A \subset V$. We say that $y \in V$ is a \emph{linear combination} of elements of $A$ if there exist $k \in \N$, $x_1, \dots, x_k \in A$ and $\alpha_1, \dots, \alpha_k$ such that
 	$$
-	\Span(x_1, \dots, x_n) = 
-	\Big\{ \alpha_1 x_1 + \cdots + \alpha_k x_k \, \Big| \, \alpha_1, \dots, \alpha_k \in \R \Big\}.
+	y = \sum_{i=1}^k \alpha_i x_i.
 	$$
 \end{definition}
 
-One can easily verify (exercise!) that $\Span(x_1, \dots, x_n)$ is a subspace of $V$.
+Remember that a linear combination is always a \emph{finite} sum.
+
+\begin{definition}[Span]
+	Let $V$ be a vector space and $A \subset V$. The \emph{linear span} of $A$ is the set of all linear combinations of elements of $A$:
+	$$
+	\Span(A) = 
+	\Big\{ y \, \Big| \, \exists k \in \N, \, x_1, \dots, x_k \in A, \, \alpha_1, \dots, \alpha_k \in \R, \, y = \sum_{i=1}^k \alpha_i x_i \Big\}.
+	$$
+\end{definition}
+	Given vectors $x_1, \dots x_k \in V$ we will simply write
+	$$
+	\Span(x_1, \dots, x_k) = \Span(\{x_1, \dots, x_k \}) =
+	\Big\{ \alpha_1 x_1 + \cdots + \alpha_k x_k \, \Big| \, \alpha_1, \dots, \alpha_k \in \R \Big\}.
+	$$
+
+	One can easily verify (exercise!) that $\Span(A)$ is a subspace of $V$. One can also verify (exercise!) that
+$$
+\Span(A) = \bigcap_{\substack{S \ \text{subspace of} \ V \\ A \subset S}} S,
+$$
+$\Span(A)$ is therefore the smallest (for the inclusion $\subset$) subspace of $S$ that contains $A$.
 
 \begin{definition}[Linear dependency]
 	Vectors $x_1, \dots x_k \in V$ are \emph{linearly dependent} is there exists $\alpha_1, \dots, \alpha_k \in \R$ \textbf{that are not all zero} such that 
@@ -133,7 +151,7 @@ Theorem \ref{th:lin_dep} will be proved in Section \ref{sec:proof_lin_dep}.
 \end{definition}
 
 \begin{definition}[Dimension]
-	If the vector space $V$ admits a base $(v_1, \dots, v_n)$, then any base of $V$ has also $n$ vectors. We say that $V$ has dimension $n$ and write $\dim(V) = n$.
+	If the vector space $V$ admits a base $(v_1, \dots, v_n)$, then every base of $V$ has also $n$ vectors. We say that $V$ has dimension $n$ and write $\dim(V) = n$.
 \end{definition}
 \begin{proof}
 	We proceed by contradiction and assume that there exists two basis $(v_1, \dots, v_n)$ and $(x_1, \dots, x_k)$ of $V$ such that $k \neq n$. Without loss of generality we can assume that $k > n$. For $i = 1, \dots, k$ we have
