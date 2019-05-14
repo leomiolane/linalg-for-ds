@@ -2,6 +2,8 @@
 
 \usepackage{../latex_style/packages}
 \usepackage{../latex_style/notations}
+\externaldocument{../lecture_02/lecture_02}
+
 
 \title{\vspace{-2.0cm}%
 	Optimization and Computational Linear Algebra for Data Science\\
@@ -12,9 +14,22 @@
 \begin{document}
 \maketitle
 \input{../preamble.tex}
-\section{Rank of a matrix}
 
-\begin{definition}
+\section{More on basis}
+
+\begin{proposition}\label{prop:complete}
+	Let $V$ be a vector space of dimension $n$.
+	Let $x_1, \dots, x_k \in V$. 
+	If $x_1, \dots, x_k$  are linearly independent then one can find vectors $x_{k+1}, \dots, x_{n} \in V$ such that $(x_1, \dots, x_n)$ forms a basis of $V$.
+\end{proposition}
+
+%\begin{proposition}\label{prop:extract}
+	%Let $x_1, \dots, x_k \in V$ and write $r = \dim(\Span(x_1, \dots, x_k))$. Then there exists $i_1, \dots i_r \in \{1 \dots k\}$ such that $(x_{i_1}, \dots, x_{i_r})$ forms a basis of $\Span(x_1, \dots, x_k)$.
+%\end{proposition}
+
+\section{Definition of the rank}
+
+\begin{definition}[Rank of a family of vectors]
 	We define the rank of a family $x_1, \dots, x_k$ of vectors of $\R^n$ as the dimension of its span:
 	$$
 	\rank(x_1, \dots, x_k) \defeq \dim (\Span(x_1, \dots, x_k)).
@@ -23,35 +38,147 @@
 
 If the vectors $x_1, \dots x_k$ are linearly independent then $\rank(x_1, \dots x_k) = k$. Indeed, in that case $(x_1, \dots, x_k)$ forms a base of $\Span(x_1, \dots, x_k)$ so $\dim(\Span(x_1, \dots, x_k)) = k$.
 
-\begin{proposition}
-	Let $x_1, \dots, x_k \in \R^n$ and write $r = \rank(x_1, \dots, x_r)$. Then there exists $i_1, \dots i_r \in \{1 \dots k\}$ such that $(x_{i_1}, \dots, x_{i_r})$ forms a basis of $\Span(x_1, \dots, x_k)$.
-\end{proposition}
 
-\begin{definition}[Rank]
-	The rank of a matrix $M \in \R^{n \times m}$ is defined as the dimension of the image of $M$:
-	$$
-	\rank(M) = \dim(\Im(M)).
-	$$
+\begin{definition}[Rank of a matrix]\label{def:rank}
+	Let $M \in \R^{n \times m}$. Let $\ell_1, \dots, \ell_n \in \R^m$ be the lines of $M$ and $c_1, \dots, c_m \in \R^n$ be its columns.
+	Then we have
+	\begin{equation}\label{eq:rank}
+	\rank(\ell_1, \dots, \ell_n) = \rank(c_1, \dots, c_m).
+	\end{equation}
+	The rank of the matrix $M$ is then defined as $\rank(M) \defeq\rank(\ell_1, \dots, \ell_n) = \rank(c_1, \dots, c_m)$.
 \end{definition}
 
-Let $c_1, \dots, c_m$ be the columns of $M$, then 
+Since $\Im(M) = \Span(c_1, \dots, c_m)$ an equivalent definition could be $\rank(M) = \dim(\Im(M))$.
+\\
+
+\begin{proof}
+	In order to prove \eqref{eq:rank} it suffices to show (since columns and rows are playing exchangeable roles) that $\rank(\ell_1, \dots, \ell_n) \leq \rank(c_1, \dots, c_m)$.
+	Let $r \defeq \rank(\ell_1, \dots, \ell_n)$ and $(x_1, \dots, x_r)$ be a basis of $\Span(\ell_1, \dots, \ell_n)$. We will prove that
+	\begin{equation}\label{eq:goal_proof}
+	(M x_1, \dots, M x_r) \ \text{is linearly independent}.
+	\end{equation}
+	The result follows. Indeed $(M x_1, \dots, M x_r)$ is then a linearly independent family of $r$ vectors of $\Im(M) = \Span(c_1, \dots, c_m)$: this implies that $\rank(c_1, \dots, c_m) = \dim(\Span(c_1, \dots, c_m)) \geq r = \rank(\ell_1, \dots, \ell_n)$.
+
+	It remains to prove \eqref{eq:goal_proof}. Let $\alpha_1, \dots, \alpha_r \in \R$ such that $\alpha_1 M x_1 + \cdots + \alpha_r M x_r = 0$. We will show that in such case the $\alpha_i$ are all zero. Define $v \defeq \alpha_1 x_1 + \cdots + \alpha_r x_r$. We have by linearity
+	$$
+	M v = M (\alpha_1 x_1 + \cdots + \alpha_r x_r) = \alpha_1 M x_1 + \cdots + \alpha_r M x_r = 0.
+	$$
+	Since the $i^{\rm th}$ coordinate of $Mv$ is equal to $(Mv)_i = \ell_i \cdot v$, we get that $v$ is orthogonal to all the $\ell_i$, and therefore to $\Span(\ell_1, \dots, \ell_n)$. Notice now that $v \in \Span(x_1, \dots, x_r) = \Span(\ell_1, \dots, \ell_n)$ by construction. The vector $v$ is orthogonal to itself, hence $\alpha_1 x_1 + \cdots + \alpha_r x_r = v= 0$. Recall that the family $(x_1, \dots, x_r)$ is linearly independent (because it is a basis) so $\alpha_1 = \cdots = \alpha_r = 0$.
+\end{proof}
+
+\section{Properties of the rank}
 
 \begin{proposition}
-	Let $L: \R^m \to \R^n$ and $M: \R^n \to \R^k$, two linear applications. Then the following holds
+	Let $A \in \R^{n \times m}$ and $B \in \R^{m \times k}$. Then the following holds
 	\begin{enumerate}[label=(\roman*)]
-		\item $\rank(L) \leq \min(n,m)$.
-		\item $\rank(ML) \leq \min(\rank(L),\rank(M))$.
+		\item $\rank(A) \leq \min(n,m)$.
+		\item $\rank(AB) \leq \min(\rank(A),\rank(B))$.
 	\end{enumerate}
 \end{proposition}
 
-\begin{theorem}[Rank-nullity theorem]
+\begin{theorem}
+	Let $M \in \R^{n \times m}$. The following points are equivalent:
+	\begin{enumerate}[label=(\roman*)]
+		\item \label{item:th_i} $M$ is invertible.
+		\item \label{item:th_ii} $\rank(M) = n$.
+		\item \label{item:th_iii} $\Ker(M) = \{0\}$.
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	Points \ref{item:th_ii} and \ref{item:th_iii} are equivalent by Theorem \ref{th:rank} below. The fact that \ref{item:th_i} $\Leftrightarrow$ [\ref{item:th_ii}-\ref{item:th_iii}] follows from Proposition \ref{prop:inj_sur} from Lecture~2.
+\end{proof}
+
+\begin{theorem}[Rank-nullity theorem]\label{th:rank}
 	Let $L: \R^m \to \R^n$ be a linear transformation. Then
 	$$
-	\rank(L) + \dim(\Im(L)) = m.
+	\rank(L) + \dim(\Ker(L)) = m.
 	$$
 \end{theorem}
 
+\begin{proof}
+	Let us write $k = \dim(\Ker(L))$ and let us fix a basis $(x_1, \dots, x_k)$ of $\Ker(L)$. By Proposition \ref{prop:complete} one can complete this family into a basis $(x_1, \dots, x_k, x_{k+1}, \dots x_m)$ of $\R^m$.
+	We will show that
+	\begin{enumerate}[label=(\roman*)]
+		\item \label{item:proof_i} $\Span(L(x_{k+1}), \dots, L(x_m)) = \Im(L)$.
+		\item \label{item:proof_ii} the family $(L(x_{k+1}), \dots, L(x_{m}))$ is linearly independent.
+	\end{enumerate}
 
+	By proving \ref{item:proof_i} and \ref{item:proof_ii} we will get that $(L(x_{k+1}), \dots, L(x_{m}))$ is a basis of $\Im(L)$ which implies that 
+	$$
+	\rank(L) = \dim(\Im(L)) = m - k = m - \dim(\Ker(L)),
+	$$
+	hence the result.
+\\
+
+We start by proving \ref{item:proof_i}. Since $L(x_{k+1}), \dots, L(x_m)$ are all in $\Im(L)$ (which is a linear subspace) any linear combination of these vectors belongs to $\Im(L)$, hence $\Span(L(x_{k+1}), \dots, L(x_m)) \subset \Im(L)$.
+
+Let us prove the converse inclusion.
+Let $y \in \Im(L)$, which means that we can find $z \in \R^m$ such that $y = L(z)$. Let $(\alpha_1, \dots, \alpha_m) \in \R^m$ be the coordinates of $z$ in the basis $(x_1, \dots, x_m)$: $z = \alpha_1 x_1 + \cdots + \alpha_m x_m$. We have then by linearity of $L$
+\begin{align*}
+y = L(z) = L(\alpha_1 x_1 + \cdots + \alpha_m x_m)
+= \alpha_1 L(x_1) + \cdots + \alpha_m L(x_m).
+\end{align*}
+Recall now that $x_1, \dots, x_k$ belong to $\Ker(L)$. Therefore $L(x_1) = \cdots = L(x_k) = 0$. We get
+$$
+y = \alpha_{k+1} L(x_{k+1}) + \cdots + \alpha_{m} L(x_{m}),
+$$
+hence $y \in \Span(L(x_{k+1}), \dots, L(x_m))$: $\Im(L) \subset \Span(L(x_{k+1}), \dots, L(x_m))$. We conclude that $\Im(L) = \Span(L(x_{k+1}), \dots, L(x_m))$.
+\\
+
+Let us now prove \ref{item:proof_ii}. To prove that $(L(x_{k+1}), \dots, L(x_m))$ are linearly independent, we consider scalars $\alpha_{k+1}, \dots, \alpha_m \in \R$ such that $\alpha_{k+1} L(x_{k+1}) + \dots + \alpha_m L(x_m) =0$. Our goal is to show that $\alpha_{k+1} = \cdots = \alpha_m = 0$. We have by linearity of $L$:
+$$
+0 =\alpha_{k+1} L(x_{k+1}) + \dots + \alpha_m L(x_m) = L(\alpha_{k+1} x_{k+1} + \cdots + \alpha_m x_m)
+$$
+which gives that $\alpha_{k+1} x_{k+1} + \cdots + \alpha_m x_m \in \Ker(L)$. Recall that $(x_1, \dots, x_k)$ is a basis of $\Ker(L)$, so there exists scalars $\alpha_1, \dots, \alpha_k$ such that $\alpha_1 x_1 + \cdots + \alpha_k x_k = \alpha_{k+1} x_{k+1} + \cdots + \alpha_m x_m$. We obtain
+$$
+\alpha_1 x_1 + \cdots + \alpha_k x_k - \alpha_{k+1} x_{k+1} - \cdots - \alpha_m x_m = 0
+$$
+which implies that $\alpha_1 = \cdots = \alpha_m = 0$ because $(x_1, \dots, x_m)$ is a base of $\R^m$. This proves \ref{item:proof_ii}.
+\end{proof}
+
+\section{Transpose of a matrix}
+
+\begin{definition}[Transpose]
+	Let $M \in \R^{n \times m}$. We define its \emph{transpose} $M^{\sT} \in \R^{m \times n}$ by
+	$$
+	(M^{\sT})_{i,j} = M_{i,j}
+	$$
+	for all $i \in \{1, \dots, m\}$ and $j \in \{1, \dots, n\}$.
+\end{definition}
+
+\begin{remark}
+	\leavevmode
+	\begin{itemize}
+		\item We have $(M^{\sT})^{\sT} = M$. 
+		\item The mapping $M \mapsto M^{\sT}$ is linear.
+	\end{itemize}
+\end{remark}
+
+We remark also that the rows of $M$ become the columns of $M^{\sT}$ and that the columns of $M$ become the rows of $M^{\sT}$. By Definition \ref{def:rank}, this gives:
+\begin{proposition}
+	$\rank(M) = \rank(M^{\sT})$.
+\end{proposition}
+
+\begin{proposition}\label{prop:transpose_product}
+	Let $A \in \R^{n \times m}$ and $B \in \R^{m \times k}$. Then
+	$$
+	(AB)^{\sT} = B^{\sT} A^{\sT}.
+	$$
+\end{proposition}
+
+\begin{corollary}
+	If $M \in \R^{n \times n}$ is invertible, then so is $M^{\sT}$ and
+	$$
+	(M^{\sT})^{-1} = (M^{-1})^{\sT}.
+	$$
+\end{corollary}
+\begin{proof}
+	We compute, using Proposition \ref{prop:transpose_product}:
+	$$
+	M^{\sT} (M^{-1})^{\sT} = (M^{-1} M)^{\sT} = \Id_n^{\sT} = \Id_n.
+	$$
+	This proves that $M^{\sT}$ is invertible with inverse $(M^{-1})^{\sT}$.
+\end{proof}
 
 	\vspace{1cm}
 	\centerline{\pgfornament[width=7cm]{71}}

@@ -95,6 +95,10 @@ Notice that a subspace is also a vector space!
 
 Remember that a linear combination is always a \emph{finite} sum.
 
+\begin{remark}
+	If $S$ is a subspace of a vector space $V$, any linear combination of elements of $S$ belongs to $S$.
+\end{remark}
+
 \begin{definition}[Span]
 	Let $V$ be a vector space and $A \subset V$. The \emph{linear span} of $A$ is the set of all linear combinations of elements of $A$:
 	$$
@@ -112,7 +116,7 @@ Remember that a linear combination is always a \emph{finite} sum.
 $$
 \Span(A) = \bigcap_{\substack{S \ \text{subspace of} \ V \\ A \subset S}} S,
 $$
-$\Span(A)$ is therefore the smallest (for the inclusion $\subset$) subspace of $S$ that contains $A$.
+$\Span(A)$ is therefore the \textbf{smallest} (for the inclusion $\subset$) \textbf{subspace of $S$ that contains $A$}.
 
 \begin{definition}[Linear dependency]
 	Vectors $x_1, \dots x_k \in V$ are \emph{linearly dependent} is there exists $\alpha_1, \dots, \alpha_k \in \R$ \textbf{that are not all zero} such that 
@@ -151,8 +155,14 @@ Theorem \ref{th:lin_dep} will be proved in Section \ref{sec:proof_lin_dep}.
 \end{definition}
 
 \begin{definition}[Dimension]
-	If the vector space $V$ admits a base $(v_1, \dots, v_n)$, then every base of $V$ has also $n$ vectors. We say that $V$ has dimension $n$ and write $\dim(V) = n$.
+	Let $V$ be a vector space.
+	\begin{itemize}
+		\item If $V$ admits a basis $(v_1, \dots, v_n)$, then every basis of $V$ has also $n$ vectors. We say that $V$ has dimension $n$ and write $\dim(V) = n$.
+		\item Otherwise, we say that $V$ has infinite dimension: $\dim(V) = +\infty$.
+	\end{itemize}
 \end{definition}
+In this course we are going to focus mostly on finite dimensional spaces.
+\\
 \begin{proof}
 	We proceed by contradiction and assume that there exists two basis $(v_1, \dots, v_n)$ and $(x_1, \dots, x_k)$ of $V$ such that $k \neq n$. Without loss of generality we can assume that $k > n$. For $i = 1, \dots, k$ we have
 	$$

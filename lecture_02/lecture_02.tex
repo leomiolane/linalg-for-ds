@@ -38,7 +38,7 @@ Notice that $L: \R^m \to \R^n$ is linear if and only if $L(\alpha v + w) = \alph
 \end{proposition}
 
 \begin{theorem}[Equality on a basis implies equality everywhere]\label{th:basis_cara}
-	Let $L$ and $M$ be two linear transformations from $\R^m$ to $\R^m$.
+	Let $L$ and $M$ be two linear transformations from $\R^m$ to $\R^n$.
 	Let $(v_1, \dots, v_m)$ be a basis of $\R^m$ and suppose that for all $i \in \{1, \dots,m\}$ we have
 	$$
 	L(v_i) = M(v_i).
@@ -137,11 +137,12 @@ The matrix $L$ is called the (canonical) matrix of the linear transformation $L$
 \end{proposition}
 
 \begin{definition}[Matrix inverse]
-	Let $M \in \R^{n \times n}$. We say that $M$ is invertible if there exists a matrix $M^{-1} \in \R^{n \times n}$ such that 
+	Let $M \in \R^{n \times n}$. Assume that there exists a matrix $M^{-1} \in \R^{n \times n}$ such that 
 	$$
-	M M^{-1} = \Id_n \quad \text{or equivalently, such that} \quad M^{-1} M = \Id_n.
+	M M^{-1} = \Id_n \quad \text{or, such that} \quad M^{-1} M = \Id_n.
 	$$
-	In that case, the matrix $M^{-1}$ is called the inverse of $M$.
+	Then $M M^{-1} = M^{-1} M = \Id_n$ and $M^{-1}$ is the unique matrix that verifies this property.
+	We say that $M$ is \emph{invertible} and the matrix $M^{-1}$ is called the \emph{inverse} of $M$.
 \end{definition}
 
 \begin{remark}
@@ -162,8 +163,15 @@ The matrix $L$ is called the (canonical) matrix of the linear transformation $L$
 	$\Im(L)$ is also the Span of the columns of the matrix representation of $L$.
 \end{definition}
 
-\begin{proposition}
-	$\Ker(L)$ and $\Im(L)$ are subspaces of respectively $\R^m$ and $\R^n$.
+\begin{proposition}\label{prop:inj_sur}
+	$\Ker(L)$ and $\Im(L)$ are subspaces of respectively $\R^m$ and $\R^n$. We have
+	\begin{center}
+		$L$ injective \ $\Longleftrightarrow$ \ $\Ker(L) = \{0 \}$
+	\end{center}
+	and
+	\begin{center}
+		$L$ surjective \ $\Longleftrightarrow$ \ $\Im(L) = \R^m$.
+	\end{center}
 \end{proposition}
 \vspace{1cm}
 
