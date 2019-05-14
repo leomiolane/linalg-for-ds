@@ -1,0 +1,156 @@
+\documentclass[11pt,nocut]{article}
+
+\usepackage{../latex_style/packages}
+\usepackage{../latex_style/notations}
+\externaldocument{../lecture_02/lecture_02}
+
+
+\title{\vspace{-2.0cm}%
+	Optimization and Computational Linear Algebra for Data Science\\
+Lecture 4: Norm and dot product}
+\author{Léo \textsc{Miolane} \ $\cdot$ \ \texttt{leo.miolane@gmail.com}}
+\date{\today}
+
+\begin{document}
+\maketitle
+\input{../preamble.tex}
+
+\section{Norm}
+
+\begin{definition}[Norm]
+	Let $V$ be a vector space.
+	A norm $\| \cdot \|$ on $V$ is a function from $V$ to $\R_{\geq 0}$ that verifies the following points:
+	\begin{enumerate}[label=(\roman*)]
+		\item \emph{Triangular inequality}: $\|u + v\| \leq \|u\| + \|v\|$ for all $u,v \in V$.
+		\item \emph{Homogeneity}: $\| \alpha v \| = |\alpha|\times \| v\|$ for all $\alpha \in \R$ and  $v \in V$.
+		\item \emph{Positive definiteness}: if $\|v\| = 0$ for some $v \in V$, then $v=0$.
+	\end{enumerate}
+\end{definition}
+
+\begin{example}
+	One can consider various norms over $\R^n$:
+	\begin{itemize}
+		\item The Euclidean norm $\|x\|_2 \defeq \sqrt{\sum_{i=1}^n x_i^2}$.
+		\item The $\ell_1$ norm $\|x\|_1 \defeq \sum_{i=1}^n |x_i|$.
+		\item More generally, given $p \geq 1$, the $\ell_p$-norm $\|x\|_p \defeq \big(\sum_{i=1}^n |x_i|^p \big)^{1/p}$.
+		\item The infinity-norm $\|x \|_{\infty} \defeq \max(|x_1|, \dots, |x_n|)$.
+	\end{itemize}
+\end{example}
+
+
+\section{Dot product}
+
+\begin{definition}[Scalar product, or ``dot product'', or ``inner product'']
+	Let $V$ be a vector space.
+	A scalar product on $V$ is a function $\langle \cdot, \cdot \rangle$ from $V \times V$ to $\R$ that verifies the following points:
+	\begin{enumerate}[label=(\roman*)]
+		\item \emph{Symmetry}: $\langle u, v \rangle = \langle v, u\rangle$ for all $u,v \in V$.
+		\item \emph{Linearity}: $\langle u+v, w \rangle = \langle u, w\rangle + \langle v, w\rangle$ and $\langle \alpha v, w \rangle = \alpha \langle v, w \rangle$ for all $u,v,w \in V$ and $\alpha \in \R$.
+		\item \emph{Positive definiteness}: $\langle v, v\rangle \geq 0$ with equality if and only if $v = 0$.
+	\end{enumerate}
+\end{definition}
+
+\begin{example}
+	\leavevmode
+	\begin{itemize}
+		\item For $V = \R^n$, the Euclidean scalar product $\langle x,y\rangle = \sum_{i=1}^n x_i y_i = x^{\sT} y$ is a scalar product.
+		\item If $V$ is the set of all continuous functions on $[0,1]$, then $\langle f,g\rangle = \int_0^1 f(t) g(t) dt$ is a scalar product.
+	\end{itemize}
+\end{example}
+
+\begin{proposition}[Norm induced by a scalar product]
+	If $\langle \cdot, \cdot \rangle$ is a scalar product on $V$ then $\| v \| \defeq \sqrt{\langle v, v \rangle}$ is a norm on $V$. We say  that the norm $\| \cdot \|$ is induced by the scalar product $\langle \cdot, \cdot \rangle$.
+\end{proposition}
+
+\begin{theorem}[Cauchy-Schwarz inequality]
+	Let $\| \cdot \|$ be the norm induced by the scalar product $\langle \cdot , \cdot \rangle$ on the vector space $V$. Then for all $x,y \in V$:
+	\begin{equation}\label{eq:cauchy_schwarz}
+	| \langle x,y \rangle | \leq \|x\| \, \|y\|.
+	\end{equation}
+	Moreover, there is equality in \eqref{eq:cauchy_schwarz} if and only if $x$ and $y$ are linearly dependent, i.e.\ $x = \alpha y$ or $y = \alpha x$ for some $\alpha \in \R$.
+\end{theorem}
+\begin{proof}
+	If $x = 0$ or $y = 0$ the result is obvious, we assume therefore to be in the case where $x \neq 0$ and $y \neq 0$.
+	For $t \in \R$ we define the function $f(t) = \|t x - y \|^2$. Since the norm $\| \cdot \|$ is induced by the scalar product $\langle \cdot, \cdot \rangle$ we have
+	$$
+	f(t) = \langle t x - y , t x - y \rangle = t^2 \|x\|^2 - 2t \langle x,y\rangle + \|y\|^2.
+	$$
+	$f$ is therefore a quadratic function of $t$. Notice that $f$ is non-negative because $f(t)= \|t x - y \|^2 \geq 0$. This gives that its discriminant $\Delta$ is non-positive:
+	$$
+	\Delta =  (2 \langle x,y \rangle)^2 - 4 \|x\|^2 \|y\|^2 \leq 0,
+	$$
+	which proves \eqref{eq:cauchy_schwarz}. We have equality in \eqref{eq:cauchy_schwarz} if and only if $\Delta = 0$ that is if and only if $f$ admits a zero $\alpha$, which is equivalent to $\alpha x - y = 0$, i.e.\ $y = \alpha x$.
+\end{proof}
+
+\section{Orthogonality}
+
+In this section we consider a scalar product $\langle \cdot, \cdot \rangle$ (that induces a norm $\| \cdot \|$) on a vector space $V$. For simplicity one may think of $\langle \cdot, \cdot \rangle$ and $\| \cdot \|$ to be the usual Euclidean dot product and norm on $V = \R^n$.
+
+\begin{definition}[Orthogonality]
+	\begin{itemize}
+		\item We say that vectors $x$ and $y$ are \emph{orthogonal} if $\langle x,y \rangle = 0$. We write then $x \perp y$.
+		\item We say that a vector $x$ is orthogonal to a set of vectors $A \subset V$ if $x$ is orthogonal to all the vectors in $A$, i.e.\ $\forall y \in A, \ \langle x,y\rangle = 0$. We write then $x \perp A$.
+		\item More generality we say that $A \subset V$ and $B \subset V$ are orthogonal if $\langle x,y \rangle = 0$ for all $x \in A$ and all $y \in B$. As before, we write $A \perp B$.
+	\end{itemize}
+\end{definition}
+
+\begin{proposition}
+	If $x$ is orthogonal to $v_1, \dots, v_k$ then $x$ is orthogonal to any linear combination of these vectors i.e.\ $x \perp \Span(v_1, \dots, v_k)$.
+\end{proposition}
+
+\begin{theorem}[Pythagorean theorem]
+	Let $x,y \in V$. Then
+	$$
+	x \perp y \ \Longleftrightarrow \|x+y\|^2 = \|x\|^2 + \|y\|^2.
+	$$
+\end{theorem}
+
+
+\begin{definition}[Orthogonal and orthonormal basis]
+	Assume that $\dim(V)=n$ and let $(v_1, \dots, v_n)$ be a basis of $V$. We say that
+	\begin{itemize}
+		\item $(v_1, \dots, v_n)$ is an \emph{orthogonal} basis of $V$ if the vectors $v_1, \dots, v_n$ are pairwise orthogonal, i.e.\ $\langle v_i, v_j \rangle = 0$ for all $i \neq j$.
+		\item $(v_1, \dots, v_n)$ is an \emph{orthonormal} basis of $V$ if it is an orthogonal basis and if all the $v_i$ have unit norm: $\|v_1\| = \dots = \|v_n\| = 1$.
+	\end{itemize}
+\end{definition}
+
+Orthonormal basis are particularly convenient for computing coordinates of vectors:
+
+\begin{proposition}
+	Assume that $\dim(V)=n$ and let $(v_1, \dots, v_n)$ be an \textbf{orthonormal} basis of $V$. Then the coordinates of a vector $x \in V$ in the basis $(v_1, \dots, v_n)$ are $(\langle v_1, x\rangle, \dots, \langle v_n,x \rangle)$:
+	$$
+	x = \langle v_1, x \rangle v_1 + \cdots + \langle v_n, x \rangle v_n.
+	$$
+\end{proposition}
+
+\section{Orthogonal projection and distance to a subspace}
+
+We assume in this section that $V = \R^n$ and that $\langle \cdot, \cdot \rangle$, $\| \cdot \|$ are respectively the Euclidean scalar product and Euclidean norm.
+
+\begin{definition}[Orthogonal projection and distance to a subspace]
+	Let $S$ be a subspace of $V = \R^n$. The \emph{orthogonal projection} of a vector $x$ onto $S$ is defined as the vector $P_S(x)$ is $S$ that minimizes the distance to $x$:
+	$$
+	P_S(x) \defeq \argmin_{y \in S} \|x - y\|.
+	$$
+	The distance of $x$ to the subspace $S$ is then defined as
+	$$
+	d(x,S) \defeq \min_{y \in S} \| x - y \| = \|x - P_S(x)\|.
+	$$
+\end{definition}
+
+\begin{proposition}
+	Let $S$ be a subspace of $V = \R^n$ and let $(v_1, \dots, v_k)$ be a basis of $S$. Then for all $x \in V$,
+	\begin{itemize}
+		\item $P_S(x) = \langle v_1, x \rangle v_1 + \cdots + \langle v_k, x \rangle v_k$.
+		\item $x - P_S(x)$ is orthogonal to $S$.
+	\end{itemize}
+\end{proposition}
+
+\section{Gram-Schmidt orthogonalisation method}
+
+\vspace{1cm}
+\centerline{\pgfornament[width=7cm]{71}}
+
+%\bibliographystyle{plain}
+%\bibliography{./references.bib}
+\end{document}
