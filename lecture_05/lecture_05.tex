@@ -1,0 +1,146 @@
+\documentclass[11pt,nocut]{article}
+
+\usepackage{../latex_style/packages}
+\usepackage{../latex_style/notations}
+\externaldocument{../lecture_02/lecture_02}
+\externaldocument{../lecture_04/lecture_04}
+
+
+\title{\vspace{-2.0cm}%
+	Optimization and Computational Linear Algebra for Data Science\\
+Lecture 5: Matrices and orthogonality}
+\author{Léo \textsc{Miolane} \ $\cdot$ \ \texttt{leo.miolane@gmail.com}}
+\date{\today}
+
+\begin{document}
+\maketitle
+\input{../preamble.tex}
+
+\section{Gram-Schmidt orthogonalisation method}\label{sec:gram_schmidt}
+
+The Gram-Schmidt process takes as input a \emph{linearly independent} family $(x_1, \dots, x_k)$ of vectors of $\R^n$ and produces as output an \emph{orthonormal basis} $(v_1, \dots, v_k)$ of $\Span(x_1, \dots, x_k)$.
+
+In particular in the case $k=n$ where $(x_1, \dots, x_n)$ is a basis of $\R^n$, it gives us a way to construct an orthonormal basis $(v_1, \dots ,v_n)$ of $\R^n$ from any basis.
+
+The Gram-Schmidt process is iterative and constructs progessively families $(v_1, \dots, v_i)$ that all verify:
+	\begin{align*}
+		\mathcal{H}_i: \ (v_1, \dots, v_i) \ \text{is an orthonormal family and} \  \ \Span(v_1, \dots, v_i) = \Span(x_1, \dots, x_i).
+\end{align*}
+
+\paragraph{Construction of $v_1$:} We simply take $v_1 = x_1 / \|x_1\|$ and $\mathcal{H}_1$ is obviously verified.
+
+\paragraph{Construction of $v_{i+1}$ from $(v_1, \dots, v_i)$:} 
+Suppose that we already constructed $(v_1, \dots, v_i)$ that verifies $\mathcal{H}_i$.
+We first substract to $x_{i+1}$ its orthogonal projection on $\Span(v_1, \dots, v_i)$:
+\begin{equation}\label{eq:gs1}
+\widetilde{v}_{i+1} \defeq 
+x_{i+1} - P_{\Span(v_1, \dots, v_i)}(x_{i+1}) =
+x_{i+1} - \sum_{j=1}^i \langle v_j, x_{i+1} \rangle v_j.
+\end{equation}
+Then we normalize $\widetilde{v}_{i+1}$ to obtain $v_{i+1}$:
+\begin{equation}\label{eq:gs2}
+v_{i+1} = \frac{\widetilde{v}_{i+1}}{\| \widetilde{v}_{i+1} \|}.
+\end{equation}
+Let us now verify that $\mathcal{H}_{i+1}$ holds. 
+The fact that $\Span(v_1, \dots, v_{i+1}) = \Span(x_1, \dots, x_{i+1})$ can be easily checked using $\mathcal{H}_i$ and equations \eqref{eq:gs1}-\eqref{eq:gs2}.
+It remains thus to prove that $(v_1, \dots, v_{i+1})$ is orthonormal.
+
+By construction $v_{i+1} = 1$. 
+Then, by Proposition \ref{prop:ortho} from Lecture~4, we have $\widetilde{v}_{i+1} = x_{i+1} - P_{\Span(v_1, \dots, v_i)}(x_{i+1}) \in \Span(v_1, \dots, v_i)^{\perp}$. Consequently $v_{i+1}$ is orthogonal to $\Span(v_1, \dots, v_i)$ and therefore to the vectors $v_1, \dots, v_i$. This proves that $(v_1, \dots, v_{i+1})$ is orthonormal.
+\\
+
+We conclude:
+
+\begin{theorem}[Gram-Schmidt]\label{th:gram_schmidt}
+	Let $(x_1, \dots x_k)$ be a linearly independent family of vectors of $\R^n$. The ``Gram-Schmidt'' procedure described above produces an \emph{orthonormal family} $(v_1, \dots, v_k)$ such that for all $i \in \{1, \dots, k\}$,
+	$$
+	\Span(x_1, \dots, x_i) = \Span(v_1, \dots, v_i).
+	$$
+\end{theorem}
+
+\section{Orthogonal matrices}
+
+\begin{definition}[Orthogonal matrices]
+	A matrix $A \in \R^{n \times n}$ is called an \emph{orthogonal matrix} if its columns are an orthonormal family (and therefore a basis of $\R^n$ because it is a linearly independent family of size $n = \dim(\R^n)$).
+\end{definition}
+
+\begin{proposition}\label{prop:equiv_orthogonal}
+	Let $A \in \R^{n \times n}$. The following points are equivalent:
+	\begin{enumerate}[label=(\roman*)]
+		\item \label{item:pi} $A$ is orthogonal.
+		\item \label{item:pii} $A^{\sT} A = \Id_n$.
+		\item \label{item:piii} $A A^{\sT} = \Id_n$
+	\end{enumerate}
+\end{proposition}
+In particular we get that the inverse of an orthogonal matrix $A$ is $A^{\sT}$. We also get that if $A$ is orthogonal then so is $A^{\sT}$: the lines of an orthogonal matrix are an orthonormal family of vectors.
+\\
+
+\begin{proof}
+	We first show that \ref{item:pi} $\Leftrightarrow$ \ref{item:pii}. We denote the columns of $A$ by $c_1, \dots, c_n$. For $i,j \in \{1 ,\dots, n \}$ we have
+	$$
+	(A^{\sT}A)_{i,j} = \langle c_i, c_j \rangle.
+	$$
+	Consequently, $A^{\sT} A = \Id_n$ if and only if $(c_1, \dots, c_n)$ is orthonormal. 
+	Now, by Proposition \ref{prop:matrix_inverse} from Lecture~2 we have
+	$$
+		A^{\sT} A = \Id_n
+		\ \Leftrightarrow \
+		A \ \text{is invertible with inverse} \ A^{\sT}
+		\ \Leftrightarrow \
+		A A^{\sT} = \Id_n,
+	$$
+	which concludes the proof.
+\end{proof}
+
+\begin{example}[Rotation matrices in dimention 2]
+	For $\theta \in \R$, the matrix
+	$$
+	R_{\theta} \ \defeq \
+	\begin{pmatrix}
+		\cos \theta & - \sin \theta \\
+		\sin \theta & \cos \theta
+	\end{pmatrix}
+	$$
+	is orthogonal. The linear transformation $x \in \R^2 \mapsto R_{\theta} x$ is the rotation of center $0$ and angle $\theta$. 
+\end{example}
+
+\begin{proposition}[Orthogonal matrices preserve the dot product]
+	Let $A \in \R^{n \times n}$ be an orthogonal matrix. Then $A$ preserves the dot product in the sense that for all $x,y \in \R^n$,
+	$$
+	\langle Ax, Ay \rangle = \langle x,y\rangle.
+	$$
+	In particular if we take $x=y$ we see that $A$ preserves the Euclidean norm: $\|Ax\| = \|x\|$.
+\end{proposition}
+\begin{proof}
+	By Proposition \ref{prop:equiv_orthogonal} $A^{\sT} A = \Id_n$, hence
+	$$
+	\langle Ax, Ay \rangle 
+	=
+	(Ax)^{\sT} Ay = x^{\sT} A^{\sT} A y = x^{\sT} \Id_n y = x^{\sT} y = \langle x,y\rangle.
+	$$
+\end{proof}
+%\\
+
+%One can reinterpret the Gram-Schmidt method of Section~1 as a matrix factorisation result.
+%\begin{proposition}[QR decomposition, a.k.a.\  Gram-Schmidt revisited]
+	%Let $k \leq n$ and consider $A \in \R^{n \times k}$ such that $\rank(A) = k$. Then 
+	%there exists a $n \times n$ orthogonal matrix $Q$ and a $n \times k$ upper-triangular matrix $R$ such that 
+	%$$
+	%A = Q R.
+	%$$
+%\end{proposition}
+%\begin{proof}
+	%Let $x_1, \dots, x_k \in \R^n$ denote the columns of $A$. 
+	%By definition $\rank(A) = \rank(x_1, \dots, x_k) = k$, so the family $(x_1, \dots, x_k)$ is linearly independent.
+	%We can therefore apply the Gram-Schmidt procedure of Section \ref{sec:gram_schmidt} to obtain an orthonormal family $(v_1, \dots, v_k)$.
+%\end{proof}
+
+
+
+
+\vspace{1cm}
+\centerline{\pgfornament[width=7cm]{71}}
+
+%\bibliographystyle{plain}
+%\bibliography{./references.bib}
+\end{document}

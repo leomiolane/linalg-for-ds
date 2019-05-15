@@ -94,6 +94,7 @@ In this section we consider a scalar product $\langle \cdot, \cdot \rangle$ (tha
 	\end{itemize}
 \end{definition}
 
+
 \begin{proposition}
 	If $x$ is orthogonal to $v_1, \dots, v_k$ then $x$ is orthogonal to any linear combination of these vectors i.e.\ $x \perp \Span(v_1, \dots, v_k)$.
 \end{proposition}
@@ -128,7 +129,7 @@ Orthonormal basis are particularly convenient for computing coordinates of vecto
 We assume in this section that $V = \R^n$ and that $\langle \cdot, \cdot \rangle$, $\| \cdot \|$ are respectively the Euclidean scalar product and Euclidean norm.
 
 \begin{definition}[Orthogonal projection and distance to a subspace]
-	Let $S$ be a subspace of $V = \R^n$. The \emph{orthogonal projection} of a vector $x$ onto $S$ is defined as the vector $P_S(x)$ is $S$ that minimizes the distance to $x$:
+	Let $S$ be a subspace of $\R^n$. The \emph{orthogonal projection} of a vector $x$ onto $S$ is defined as the vector $P_S(x)$ is $S$ that minimizes the distance to $x$:
 	$$
 	P_S(x) \defeq \argmin_{y \in S} \|x - y\|.
 	$$
@@ -138,15 +139,30 @@ We assume in this section that $V = \R^n$ and that $\langle \cdot, \cdot \rangle
 	$$
 \end{definition}
 
-\begin{proposition}
-	Let $S$ be a subspace of $V = \R^n$ and let $(v_1, \dots, v_k)$ be a basis of $S$. Then for all $x \in V$,
+\begin{proposition}\label{prop:ortho}
+	Let $S$ be a subspace of $\R^n$ and let $(v_1, \dots, v_k)$ be a basis of $S$. Then for all $x \in \R^n$,
 	\begin{itemize}
 		\item $P_S(x) = \langle v_1, x \rangle v_1 + \cdots + \langle v_k, x \rangle v_k$.
 		\item $x - P_S(x)$ is orthogonal to $S$.
 	\end{itemize}
 \end{proposition}
 
-\section{Gram-Schmidt orthogonalisation method}
+
+\begin{definition}[Orthogonal complement]
+	Let $S$ be a subspace of $\R^n$. The orthogonal complement of $S$ is defined by
+	$$
+	S^{\perp} \defeq 
+	\big\{ x \in \R^n \, \big| \, x \perp S \big\} = 
+	\big\{ x \in \R^n \, \big| \, \forall y \in S, \, \langle x,y \rangle = 0 \big\}.
+	$$
+\end{definition}
+
+\begin{proposition}
+	Let $S$ be a subspace of $\R^n$. Then $S^{\perp}$ is also a subspace of $\R^n$ with dimension
+	$$
+	\dim(S^{\perp}) = n - \dim(S).
+	$$
+\end{proposition}
 
 \vspace{1cm}
 \centerline{\pgfornament[width=7cm]{71}}

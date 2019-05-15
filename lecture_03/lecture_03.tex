@@ -1,5 +1,10 @@
 \documentclass[11pt,nocut]{article}
 
+%\makeatletter
+      %\newwrite\tf@toc
+      %\immediate\openout\tf@toc\jobname.toc\relax
+%\makeatother
+
 \usepackage{../latex_style/packages}
 \usepackage{../latex_style/notations}
 \externaldocument{../lecture_02/lecture_02}
@@ -179,6 +184,21 @@ We remark also that the rows of $M$ become the columns of $M^{\sT}$ and that the
 	$$
 	This proves that $M^{\sT}$ is invertible with inverse $(M^{-1})^{\sT}$.
 \end{proof}
+
+\section{Symmetric matrices}
+
+\begin{definition}[Symmetric matrix]
+	A square matrix $A \in \R^{n \times n}$ is said to be \emph{symmetric} if
+	$$
+	\forall i,j \in \{1, \dots, n\}, \ A_{i,j} = A_{j,i}
+	$$
+	or, equivalently if $A = A^{\sT}$.
+\end{definition}
+
+The following example is fundamental:
+\begin{example}[Gram matrices]
+	Let $M \in \R^{k \times n}$. Then the $n\times n$ ``Gram matrix'' $A \defeq M^{\sT} M$ is symmetric.
+\end{example}
 
 	\vspace{1cm}
 	\centerline{\pgfornament[width=7cm]{71}}
