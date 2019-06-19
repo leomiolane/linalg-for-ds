@@ -23,9 +23,50 @@ Lecture 6: Eigenvalues, eigenvectors and Markov chains}
 	$$
 	A v = \lambda v.
 	$$
-	The scalar $\lambda$ is called the eigenvalue (of $A$) associated to $v$.
+	The scalar $\lambda$ is called the eigenvalue (of $A$) associated to $v$. The set
+	$$
+	E_{\lambda}(A) = \big\{ x \in \R^n \, \big| \, Ax = \lambda x \big\} = \Ker(A-\lambda \Id)
+	$$
+	is called the eigenspace of $A$ associated to $\lambda$.
 \end{definition}
 
+\begin{remark}
+	Notice that $E_{\lambda}(A)$ is a subspace of $\R^n$: any (non-zero) linear combination of eigenvectors associated with the eigenvalue $\lambda$ is also an eigenvector of $A$ associated with $\lambda$.
+\end{remark}
+
+\begin{proposition}
+	Let $A \in \R^{n \times n}$. 
+	Suppose that $A$ has an eigenvalue $\lambda \in \R$ and let $x \in \R^n$ be an eigenvector associated to $\lambda$.
+	The following holds:
+	\begin{itemize}
+		\item For all $\alpha \in \R$, $\alpha \lambda$ is an eigenvalue of the matrix $\alpha A$ and $x$ is an associated eigenvector.
+		\item For all $\alpha \in \R$, $\lambda + \alpha$ is an eigenvalue of the matrix $A + \alpha \Id$ and $x$ is an associated eigenvector.
+		\item For all $k \in \N$, $\lambda^k$ is an eigenvalue of the matrix $A^k$ and $x$ is an associated eigenvector.
+		\item If $A$ is invertible then $1/\lambda$ is an eigenvalue of the matrix inverse $A^{-1}$ and $x$ is an associated eigenvector.
+	\end{itemize}
+\end{proposition}
+
+\begin{definition}
+	The set of all eigenvalues of $A$ is called the \emph{spectrum} of $A$ and denoted by $\Sp(A)$.
+\end{definition}
+
+\begin{proposition}
+	A $n \times n$ matrix $A$ admits at most $n$ eigenvalues: $\# \Sp(A) \leq n$.
+\end{proposition}
+
+\section{Diagonalizable matrices}
+
+\begin{definition}
+	A matrix $A \in \R^{n \times n}$ is said to be \emph{diagonalizable} if there exists a basis $(v_1, \dots, v_n)$ of $\R^n$ consisting of eigenvectors of $A$, i.e.\ such that there exists $\lambda_1, \dots, \lambda_n \in \R$, $Av_i = \lambda_i v_i$.
+\end{definition}
+
+\begin{proposition}
+	A matrix $A \in \R^{n \times n}$ is diagonalizable if and only if there exists an invertible $n \times n$ matrix $P$ and a diagonal matrix $D = \Diag(\lambda_1, \dots, \lambda_n)$ such that
+	$$
+	A = P D P^{-1}.
+	$$
+	In this case, the $i^{\rm th}$ column of $P$ is an eigenvector of $A$ associated with the eigenvalue $\lambda_i$.
+\end{proposition}
 
 \section{Application to Markov chains}
 

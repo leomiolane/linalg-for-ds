@@ -16,9 +16,7 @@ Lecture 7: Singular value decomposition}
 \maketitle
 \input{../preamble.tex}
 
-
-\section{Spectral Theorem}
-
+\section{The Spectral Theorem}
 
 
 \begin{theorem}[Spectral Theorem]\label{th:spectral}
@@ -62,7 +60,7 @@ By multiplying by $P^{\sT}$ on both sides, we get $A P P^{\sT} = P D P^{\sT}$. R
 	$$
 \end{theorem}
 
-\begin{proposition}
+\begin{proposition}\label{prop:eigen_var}
 	Let $A$ be a $n \times n$ symmetric matrix and let $\lambda_1 \geq \cdots \geq \lambda_n$ be its $n$ eigenvalues and $v_1, \dots, v_n$ be the associated orthonormal family of eigenvectors. Then 
 	$$
 	v_1 = \argmax_{\|v\| = 1} v^{\sT} A v\,,
@@ -79,9 +77,168 @@ By multiplying by $P^{\sT}$ on both sides, we get $A P P^{\sT} = P D P^{\sT}$. R
 	$$
 \end{remark}
 
+\subsection{Positive matrices}
+
+\begin{definition}
+	A symmetric matrix $A \in \R^{n \times n}$ is said to be \emph{positive semi-definite} if 
+	\begin{equation}\label{eq:def_pos}
+		\forall x \in \R^n, \ x^{\sT} A x \geq 0.
+	\end{equation}
+	The matrix $A$ is said to be \emph{positive definite} if moreover the inequality in \eqref{eq:def_pos} is strict for all $x \neq 0$.
+\end{definition}
+\begin{remark}
+	Negative semi-definite and negative definite matrices are defined analogously.
+\end{remark}
+
+\begin{proposition}
+	Let $A \in \R^{n \times n}$ be a symmetric matrix, and let $\lambda_1, \dots,\lambda_n \in \R$ its eigenvalues. Then
+	$$
+	A \ \text{is positive semi-definite} \ \Longleftrightarrow \
+	\lambda_i \geq 0 \ \text{for} \ i = 1, \dots, n,
+	$$
+	and
+	$$
+	A \ \text{is positive definite} \ \Longleftrightarrow \
+	\lambda_i > 0 \ \text{for} \ i = 1, \dots, n.
+	$$
+\end{proposition}
 
 \section{Singular value decomposition}
 
+\begin{theorem}[Singular value decomposition (SVD)]\label{th:SVD}
+	Let $A \in \R^{n \times m}$. Then there exists two orthogonal matrices $U \in \R^{n \times n}$ and $V \in \R^{m \times m}$ and a matrix $\Sigma \in \R^{n \times m}$ such that $\Sigma_{1,1} \geq \Sigma_{2,2}  \geq \cdots \geq 0$ and $\Sigma_{i,j} = 0$ for $i\neq j$
+	$$
+	A = U \Sigma V^{\sT}.
+	$$
+	The columns of $U$ (respectively $V$) are called the left (resp.\ right) singular vectors of $A$. The non-negative numbers $\Sigma_{i,i}$ are the singular values of $A$. Moreover $\rank(A) = \# \{i \, | \, \Sigma_{i,i} \neq 0 \}$.
+\end{theorem}
+
+\subsection{Properties of the SVD}
+
+Let $A \in \R^{n \times m}$ and let $U \Sigma V^{\sT}$ be a singular value decomposition of $A$ as in Theorem \ref{th:SVD}. Let $u_1, \dots, u_n$ be the left singular vectors (i.e.\ the columns of $U$) and $v_1, \dots, v_m$ be the right singular vectors (i.e.\ the columns of $V$). Let $\sigma_i = \Sigma_{i,i}$ be the singular values of $A$.
+
+\begin{proposition}
+	For $i=1, \dots, \rank(A)$ we have
+	$$
+	A v_i = \sigma_i u_i
+	\qquad \text{and} \qquad
+	A^{\sT} u_i = \sigma_i v_i.
+	$$
+\end{proposition}
+
+The most important property of the singular vectors for us is the following:
+\begin{proposition}
+	We have
+	\begin{equation}
+		v_1 = \argmax_{\|v\| = 1} \|A v\| 
+		\qquad \text{and} \qquad 
+		\sigma_1 = \max_{\|v\| = 1} \|A v\|.
+	\end{equation}
+	It holds also that
+	\begin{equation}
+		v_2 = \argmax_{\|v\| = 1, \, v \perp v_1} \| A v \|
+		\qquad \text{and} \qquad 
+		\sigma_2 = \max_{\|v\| = 1, \, v \perp v_1} \| A v \|
+	\end{equation}
+	and more generally:
+	\begin{equation}
+		v_{k}   = \argmax_{\|v\| = 1, \, v \perp v_1, \dots, v_{k-1}} \| A v \|.
+		\qquad \text{and} \qquad 
+		\sigma_{k} = \max_{\|v\| = 1, \, v \perp v_1, \dots, v_{k-1}} \| A v \|.
+	\end{equation}
+\end{proposition}
+\begin{remark}
+	Considering $A^{\sT}$ leads to an analogous result for the left singular vectors $u_k$:
+	\begin{equation}
+		u_{k}   = \argmax_{\|u\| = 1, \, u \perp u_1, \dots, u_{k-1}} \| A^{\sT} u \|.
+		\qquad \text{and} \qquad 
+		\sigma_{k} = \max_{\|u\| = 1, \, u \perp u_1, \dots, u_{k-1}} \| A^{\sT} u \|.
+	\end{equation}
+\end{remark}
+\begin{proof}
+	Compute $A^{\sT} A = V \Sigma^{\sT} \Sigma V^{\sT} = V D V^{\sT}$ where the matrix $D \defeq \Sigma^{\sT} \Sigma$ is diagonal with $D_{i,i} = \sigma_i^2$. The family $(v_1, \dots, v_m)$ is therefore an orthonormal family of eigenvectors of the symmetric matrix $A^{\sT} A$ and $\sigma_1^2 \geq \cdot \geq \sigma_m^2$ are the corresponding eigenvalues. The result follows then from Proposition \ref{prop:eigen_var} applied to $A^{\sT} A$, noticing that $v^{\sT} A^{\sT} A v = \|Av\|^2$.
+\end{proof}
+
+
+\subsection{Proof of Theorem \ref{th:SVD}}
+We apply the Spectral Theorem (Theorem \ref{th:spectral}) to the $m \times m$ matrix $A^{\sT} A$: there exists an orthonormal basis $(v_1, \dots, v_m)$ of $\R^m$ of eigenvectors of $A^{\sT} A$ associated to eigenvalues $\lambda_1 \geq \cdots \geq \lambda_m$ that are all non-negative because $A^{\sT} A$ is non-negative.
+Let $V \in \R^{m \times m}$ be the orthogonal matrix whose columns are $(v_1, \dots, v_m)$.
+\\
+
+Let us write $\sigma_i = \sqrt{\lambda_i}$ and let $r = \max\{ i | \sigma_i > 0\}$.
+Define for $i = 1, \dots, r$
+\begin{equation}\label{eq:def_u}
+	u_i = \frac{1}{\sigma_i} A v_i \in \R^n.
+\end{equation}
+\begin{lemma}
+	The family $(u_1, \dots, u_r)$ is orthonormal.
+\end{lemma}
+\begin{proof}
+	Let $i,j \in \{1, \dots, r \}$.
+	$$
+	\langle u_i, u_j \rangle = \Big(\frac{1}{\sigma_i} A v_i\Big)^{\sT}\Big(\frac{1}{\sigma_j} A v_j\Big) = \frac{1}{\sigma_i \sigma_j} v_i^{\sT} A^{\sT} A v_j
+	= \frac{\sigma_i}{\sigma_j} v_i^{\sT} v_j = \1_{i = j},
+	$$
+	since $A^{\sT} A v_i = \sigma_i^2 v_i$.
+\end{proof}
+
+If $r < n$ we let $(u_{r+1}, \dots, u_n)$ be an orthonormal family of vectors of $\R^n$ that are orthogonal to $u_1, \dots, u_r$. The family $(u_1, \dots, u_n)$ is then an orthonormal basis of $\R^n$
+Let $U \in \R^{n \times n}$ be the orthogonal matrix whose columns are $(u_1, \dots, u_n)$.
+
+\begin{lemma}\label{lem:kernelA}
+	For $i = r+1, \dots, m$, $A v_i = 0$.
+\end{lemma}
+\begin{proof}
+	We compute for $i = r+1, \dots, m$:
+	$$
+	\|Av_i \|^2 = v_i^{\sT} A^{\sT} A^{\sT} v_i = v_i^{\sT}(\lambda_i v_i) = \sigma_i^2 = 0.
+	$$
+\end{proof}
+\\
+
+Finally, we let $\Sigma \in \R^{n \times m}$ defined by:
+$$
+\Sigma_{i,j} =
+\begin{cases}
+	\sigma_i & \text{if} \quad i=j \\
+	0 & \text{otherwise}.
+\end{cases}
+$$
+It remains to verify that $A = U \Sigma V^{\sT}$.
+Compute for $i=1, \dots, m$, using the definition \eqref{eq:def_u} and Lemma \ref{lem:kernelA}:
+$$
+A v_i = 
+\begin{cases}
+	\sigma_i u_i & \text{if} \ i \leq r \\
+	0 & \text{otherwise}.
+\end{cases}
+$$
+By orthogonality of $V$ and the construction of $\Sigma$ one verify easily that
+$$
+U \Sigma V^{\sT} v_i = 
+\begin{cases}
+	\sigma_i u_i & \text{if} \ i \leq r \\
+	0 & \text{otherwise}.
+\end{cases}
+$$
+We conclude that for all $i \in \{1, \dots, m\}$, $A v_i = U \Sigma V^{\sT} v_i$. Since a linear transformation is uniquely determined by the image of a basis, we conclude that $A = U \Sigma V^{\sT}$.
+\\
+
+It remains to show:
+\begin{lemma}
+	$\rank(A) = r$.
+\end{lemma}
+\begin{proof}
+	The family $(u_1, \dots, u_r)$ is orthonormal, hence linearly independent. By definition $u_i \in \Im(A)$ which implies that $\rank(A) = \dim(\Im(A)) \geq r$.
+	To prove the converse inequality, notice that by Lemma \ref{lem:kernelA} $v_i \in \Ker(A)$ for $i=r+1, \dots, m$.
+	The vectors $(v_{r+1}, \dots, v_m)$ are orthonormal, hence linearly independent. This implies that $\dim(\Ker(A)) \geq m-r$. We conclude by applying the rank Theorem:
+	$$
+	\rank(A) = m - \dim(\Ker(A)) \leq m - (m-r) = r.
+	$$
+\end{proof}
+\\
+
+\section{Interpretation of the SVD}
 \subsection{Best-fitting subspace}
 Let $a_1, \dots, a_n \in \R^d$ be $n$ points in $d$ dimensions.
 
@@ -99,13 +256,13 @@ d(a_i, S)^2 =  \|a_i\|^2 - \langle v_1, a_i \rangle^2.
 $$
 Minimizing \eqref{eq:fit} is therefore equivalent to maximize
 \begin{equation}\label{eq:fit2}
-\sum_{i=1}^n \| P_{S}(a_i) \|^2.
+	\sum_{i=1}^n \| P_{S}(a_i) \|^2.
 \end{equation}
 Let us fix an orthonormal basis $(v_1, \dots, v_k)$ of $S$. Then for all $x \in \R^d$,
 $P_S(x)= \langle v_1, x \rangle v_1 + \cdots + \langle v_k, x \rangle v_k$, hence
 \begin{equation}\label{eq:fit3}
-\sum_{i=1}^n \| P_{S}(a_i) \|^2 = \sum_{i=1}^n \sum_{j = 1}^k \langle a_i, v_j \rangle^2
-= \| A v_1 \|^2 + \cdots + \| A v_k \|^2,
+	\sum_{i=1}^n \| P_{S}(a_i) \|^2 = \sum_{i=1}^n \sum_{j = 1}^k \langle a_i, v_j \rangle^2
+	= \| A v_1 \|^2 + \cdots + \| A v_k \|^2,
 \end{equation}
 where $A$ is the $n \times d$ matrix whose rows are $a_1, \dots, a_n$.
 Consequently, minimizing \eqref{eq:fit} is equivalent to maximizing \eqref{eq:fit3} over all orthonormal families $(v_1, \dots, v_k)$.
@@ -113,15 +270,15 @@ Consequently, minimizing \eqref{eq:fit} is equivalent to maximizing \eqref{eq:fi
 
 For $k=1$, a subspace of dimension $1$ that minimizes \eqref{eq:fit} is therefore $\Span(v_1)$ where
 \begin{equation}\label{eq:def_first_singular}
-v_1 \defeq \argmax_{\|v\| = 1} \|A v\|.
+	v_1 \defeq \argmax_{\|v\| = 1} \|A v\|.
 \end{equation}
 If we now want to solve the problem for $k=2$, a natural candidate for the subspace $S$ would be $S = \Span(v_1, v_2)$ where
 \begin{equation}\label{eq:def_second_singular}
-v_2 \defeq \argmax_{\|v\| = 1, \, v \perp v_1} \| A v \|.
+	v_2 \defeq \argmax_{\|v\| = 1, \, v \perp v_1} \| A v \|.
 \end{equation}
 We can follow this greedy strategy for $k = 3, \dots, n$ and define recursively
 \begin{equation}\label{eq:def_singular}
-v_{k} \defeq \argmax_{\|v\| = 1, \, v \perp v_1, \dots, v_{k-1}} \| A v \|.
+	v_{k} \defeq \argmax_{\|v\| = 1, \, v \perp v_1, \dots, v_{k-1}} \| A v \|.
 \end{equation}
 \begin{definition}
 	\begin{itemize}
@@ -134,7 +291,6 @@ Of course \eqref{eq:def_first_singular}-\eqref{eq:def_singular} admits many othe
 \begin{proposition}\label{prop:right_eigen}
 	The singular vectors $(v_1, \dots, v_n)$ form an orthonormal basis of $\R^n$ consisting of eigenvectors of $A^{\sT} A$ and the singular values $\sigma_1, \dots, \sigma_n$ are the square roots of the corresponding eigenvalues.
 \end{proposition}
-\\
 
 It is not a priori obvious (except for $k=1$) that $S = \Span(v_1, \dots, v_k)$ is a minimizer of \eqref{eq:fit} over all the subspaces of dimension $k$.
 We need the following lemma.
@@ -175,7 +331,7 @@ Using Lemma \ref{lem:svd_rec} we get by induction:
 Recall that $\sigma_1 \geq \sigma_2 \geq \cdots \geq \sigma_n \geq 0$ denotes the singular values of $A$. Let
 $$
 r \ \defeq \
-	\# \big\{ i \, \big| \, \sigma_i > 0\big\}.
+\# \big\{ i \, \big| \, \sigma_i > 0\big\}.
 $$
 
 \begin{proposition}
@@ -230,9 +386,9 @@ U =
 %\qquad \text{and} \qquad
 %\Sigma =
 %\begin{pmatrix}
-	%\sigma_1 & 0 & 0& \cdots & 0 \\
-	%0 & \sigma_2 & 0 & \cdots & 0 \\
-	%\vdots &  &  \ddots &  & \vddots
+%\sigma_1 & 0 & 0& \cdots & 0 \\
+%0 & \sigma_2 & 0 & \cdots & 0 \\
+%\vdots &  &  \ddots &  & \vddots
 %\end{pmatrix}
 $$
 and $\Sigma \in \R^{d \times n}$ defined by
@@ -249,19 +405,8 @@ $$
 A = U \Sigma V^{\sT}.
 $$
 
-\subsection{Conclusion}
 
-\begin{theorem}[Singular value decomposition]
-	Let $A \in \R^{d \times n}$. Then there exists two orthogonal matrices $U \in \R^{d \times d}$ and $V \in \R^{n \times n}$ and a matrix $\Sigma \in \R^{d \times n}$ such that $\Sigma_{i,i} \geq 0$ and $\Sigma_{i,j} = 0$ for i\neq j$
-$$
-A = U \Sigma V^{\sT}.
-$$
-The columns of $U$ (respectively $V$) are called the left (resp. right) singular vectors of $A$. The non-negative numbers $\Sigma_{1,1}, \dots, \Sigma_{n,n}$ are the singular values of $A$. Moreover $\rank(A) = \# \{i \, | \, \Sigma_{i,i} \neq 0 \}$.
-\end{theorem}
-
-\section{Geometric interpretation of SVD}
-
-\section{Another interpretation of the singular vectors}
+\subsection{Another interpretation of the singular vectors}
 Let $a_1, \dots, a_n \in \R^d$ be $n$ points in $d$ dimensions. We assume that this points are centered, meaning that 
 $$
 \sum_{i=1}^n a_i = 0.
@@ -274,7 +419,7 @@ This quantity is the variance of the coordinates of the points $a_1, \dots, a_n$
 
 The first singular vector $v_1$ gives the direction along which the variance of the data is maximal. Recall that
 \begin{equation}
-v_{k} \defeq \argmax_{\|v\| = 1, \, v \perp v_1, \dots, v_{k-1}} \| A v \|^2.
+	v_{k} \defeq \argmax_{\|v\| = 1, \, v \perp v_1, \dots, v_{k-1}} \| A v \|^2.
 \end{equation}
 Hence $v_2$ gives the direction orthogonal to $v_1$ that maximizes the variance and so on...
 

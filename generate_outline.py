@@ -37,7 +37,7 @@ while (folder_exists):
         search = 'Lecture ' + str(N) + ': ' + '(.*?)\}'
         title = re.findall(search, tex_file, re.S)
 
-        search = 'section{(.*?)}'
+        search = r'\\section{(.*?)}'
         sections = re.findall(search, tex_file, re.S)
 
         outline_tex.write(title_item_tex(title[0]))
