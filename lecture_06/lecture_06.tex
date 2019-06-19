@@ -60,12 +60,22 @@ Lecture 6: Eigenvalues, eigenvectors and Markov chains}
 	A matrix $A \in \R^{n \times n}$ is said to be \emph{diagonalizable} if there exists a basis $(v_1, \dots, v_n)$ of $\R^n$ consisting of eigenvectors of $A$, i.e.\ such that there exists $\lambda_1, \dots, \lambda_n \in \R$, $Av_i = \lambda_i v_i$.
 \end{definition}
 
-\begin{proposition}
+\begin{proposition}\label{prop:diag}
 	A matrix $A \in \R^{n \times n}$ is diagonalizable if and only if there exists an invertible $n \times n$ matrix $P$ and a diagonal matrix $D = \Diag(\lambda_1, \dots, \lambda_n)$ such that
 	$$
 	A = P D P^{-1}.
 	$$
 	In this case, the $i^{\rm th}$ column of $P$ is an eigenvector of $A$ associated with the eigenvalue $\lambda_i$.
+\end{proposition}
+
+\begin{proposition}
+	Let $A = P \Diag(\lambda_1,\dots,\lambda_n) P^{-1}$ (where $P \in \R^{n \times n}$ is invertible) be a diagonalizable matrix. Then
+$$
+\Tr(A) = \sum_{i=1}^n \lambda_i
+\qquad \text{and} \qquad
+\rank(A) = \# \{ i \, | \, \lambda_i \neq 0 \}.
+$$
+Consequently, $A$ is invertible if and only if $\lambda_i \neq 0$ for all $i$. In such case, $A^{-1} = P \Diag(\lambda_1^{-1}, \dots, \lambda_n^{-1}) P^{-1}$.
 \end{proposition}
 
 \section{Application to Markov chains}
