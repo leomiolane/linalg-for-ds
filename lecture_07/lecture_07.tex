@@ -1,0 +1,286 @@
+\documentclass[11pt,nocut]{article}
+
+\usepackage{../latex_style/packages}
+\usepackage{../latex_style/notations}
+\externaldocument{../lecture_02/lecture_02}
+\externaldocument{../lecture_04/lecture_04}
+
+
+\title{\vspace{-2.0cm}%
+	Optimization and Computational Linear Algebra for Data Science\\
+Lecture 7: Singular value decomposition}
+\author{Léo \textsc{Miolane} \ $\cdot$ \ \texttt{leo.miolane@gmail.com}}
+\date{\today}
+
+\begin{document}
+\maketitle
+\input{../preamble.tex}
+
+
+\section{Spectral Theorem}
+
+
+
+\begin{theorem}[Spectral Theorem]\label{th:spectral}
+	Let $A \in \R^{n \times n}$ be a \textbf{symmetric} matrix. Then there is a orthonormal basis of $\R^n$ composed of eigenvectors of $A$.
+\end{theorem}
+
+Given an $n \times n$ symmetric matrix $A$, Theorem \ref{th:spectral} tells us that one can find an orthonormal basis $(v_1, \dots, v_n)$ of $\R^n$ and scalars $\lambda_1, \dots, \lambda_n \in \R$ such that for all $i \in \{1, \dots, n\}$,
+$$
+A v_i = \lambda_i v_i.
+$$
+Let $P$ be the $n \times n$ matrix whose columns are $v_1, \dots, v_n$. Since $(v_1, \dots, v_n)$ is an orthonormal basis, we get that $P$ is an orthogonal matrix. Let $D = {\rm Diag}(\lambda_1, \dots, \lambda_n)$ and compute
+$$
+A P
+= 
+A 
+\begin{pmatrix}
+	| & | & & | \\
+	v_1 & v_2 & \cdots& v_n \\
+	| & | & & |
+\end{pmatrix}
+= 
+\begin{pmatrix}
+	| & | & & | \\
+	Av_1 & Av_2 & \cdots& Av_n \\
+	| & | & & |
+\end{pmatrix}
+= 
+\begin{pmatrix}
+	| & | & & | \\
+	\lambda_1 v_1 & \lambda_2 v_2 & \cdots& \lambda_n v_n \\
+	| & | & & |
+\end{pmatrix}
+= P D.
+$$
+By multiplying by $P^{\sT}$ on both sides, we get $A P P^{\sT} = P D P^{\sT}$. Recall now that $P$ is orthogonal, therefore $P P^{\sT} = \Id_n$. We conclude that $A = P D P^{\sT}$.
+
+\begin{theorem}[Spectral Theorem, matrix formulation]\label{th:spectral2}
+	Let $A \in \R^{n \times n}$ be a symmetric matrix. Then there exists an orthogonal matrix $P$ and a diagonal matrix $D$ of sizes $n \times n$, such that
+	$$
+	A = P D P^{\sT}.
+	$$
+\end{theorem}
+
+\begin{proposition}
+	Let $A$ be a $n \times n$ symmetric matrix and let $\lambda_1 \geq \cdots \geq \lambda_n$ be its $n$ eigenvalues and $v_1, \dots, v_n$ be the associated orthonormal family of eigenvectors. Then 
+	$$
+	v_1 = \argmax_{\|v\| = 1} v^{\sT} A v\,,
+	\qquad \text{and for} \ k=2, \dots n, \qquad
+	v_{k} = \argmax_{\|v\| = 1, \, v \perp v_1, \dots, v_{k-1}} v^{\sT} A v.
+	$$
+\end{proposition}
+
+\begin{remark} Applying the proposition above to the matrix $-A$ which is symmetric with eigenvalues $-\lambda_n \geq \cdots \geq -\lambda_1$ and associated eigenvectors $v_n, \dots, v_1$, we get
+	$$
+	v_n = \argmin_{\|v\| = 1} v^{\sT} A v\,,
+	\qquad \text{and for} \ k=1, \dots , n-1 \qquad
+	v_{k} = \argmin_{\|v\| = 1, \, v \perp v_{k+1}, \dots, v_{n}} v^{\sT} A v.
+	$$
+\end{remark}
+
+
+\section{Singular value decomposition}
+
+\subsection{Best-fitting subspace}
+Let $a_1, \dots, a_n \in \R^d$ be $n$ points in $d$ dimensions.
+
+The goal of Singular Value Decomposition (SVD) is to find the $k$-dimensional subspace (for $k = 1, \dots, n$) that fits ``the best'' these $n$ data points. By ``best'', we mean here the $k$-dimensional subspace $S$ that minimize the sum of the square distances to the $n$ points:
+\begin{equation}\label{eq:fit}
+	\text{minimize} \ \ \sum_{i=1}^n d(a_i, S)^2 \ \ \text{with respect to} \ S \ \text{subspace of dimension} \ k.
+\end{equation}
+In this case we have for all $i \in \{1, \dots, n\}$,
+$$
+d(a_i, S)^2 = \| a_i - P_{S}(a_i) \|^2 = \|a_i\|^2 - \| P_{S}(a_i) \|^2,
+$$
+by Pythagorean Theorem (recall that $P_{S}(a_i) \perp (a_i - P_S(a_i))$). Since $v_1$ is of unit norm, $P_{S}(a_i) = \langle v_1, a_i \rangle v_1$, hence:
+$$
+d(a_i, S)^2 =  \|a_i\|^2 - \langle v_1, a_i \rangle^2.
+$$
+Minimizing \eqref{eq:fit} is therefore equivalent to maximize
+\begin{equation}\label{eq:fit2}
+\sum_{i=1}^n \| P_{S}(a_i) \|^2.
+\end{equation}
+Let us fix an orthonormal basis $(v_1, \dots, v_k)$ of $S$. Then for all $x \in \R^d$,
+$P_S(x)= \langle v_1, x \rangle v_1 + \cdots + \langle v_k, x \rangle v_k$, hence
+\begin{equation}\label{eq:fit3}
+\sum_{i=1}^n \| P_{S}(a_i) \|^2 = \sum_{i=1}^n \sum_{j = 1}^k \langle a_i, v_j \rangle^2
+= \| A v_1 \|^2 + \cdots + \| A v_k \|^2,
+\end{equation}
+where $A$ is the $n \times d$ matrix whose rows are $a_1, \dots, a_n$.
+Consequently, minimizing \eqref{eq:fit} is equivalent to maximizing \eqref{eq:fit3} over all orthonormal families $(v_1, \dots, v_k)$.
+\\
+
+For $k=1$, a subspace of dimension $1$ that minimizes \eqref{eq:fit} is therefore $\Span(v_1)$ where
+\begin{equation}\label{eq:def_first_singular}
+v_1 \defeq \argmax_{\|v\| = 1} \|A v\|.
+\end{equation}
+If we now want to solve the problem for $k=2$, a natural candidate for the subspace $S$ would be $S = \Span(v_1, v_2)$ where
+\begin{equation}\label{eq:def_second_singular}
+v_2 \defeq \argmax_{\|v\| = 1, \, v \perp v_1} \| A v \|.
+\end{equation}
+We can follow this greedy strategy for $k = 3, \dots, n$ and define recursively
+\begin{equation}\label{eq:def_singular}
+v_{k} \defeq \argmax_{\|v\| = 1, \, v \perp v_1, \dots, v_{k-1}} \| A v \|.
+\end{equation}
+\begin{definition}
+	\begin{itemize}
+		\item The vectors $v_1, \dots, v_n$ are called \emph{right singular vectors} of the matrix $A$.
+		\item The non-negative numbers $\sigma_k \defeq \|A v_k\|$ are called the \emph{singular values} of $A$.
+	\end{itemize}
+\end{definition}
+Of course \eqref{eq:def_first_singular}-\eqref{eq:def_singular} admits many other maximizers (for instance $-v_k$), so \textbf{the singular vectors are not uniquely defined}.
+
+\begin{proposition}\label{prop:right_eigen}
+	The singular vectors $(v_1, \dots, v_n)$ form an orthonormal basis of $\R^n$ consisting of eigenvectors of $A^{\sT} A$ and the singular values $\sigma_1, \dots, \sigma_n$ are the square roots of the corresponding eigenvalues.
+\end{proposition}
+\\
+
+It is not a priori obvious (except for $k=1$) that $S = \Span(v_1, \dots, v_k)$ is a minimizer of \eqref{eq:fit} over all the subspaces of dimension $k$.
+We need the following lemma.
+
+\begin{lemma}\label{lem:svd_rec}
+	Let $k \in \{2, \dots, k\}$. Assume that $(v_1, \dots, v_{k-1})$ is an orthonormal family that maximizes \eqref{eq:fit3}.
+	Define 
+	$$
+	v_k = \argmax_{\|v\| = 1, \, v \perp \Span(v_1, \dots, v_{k-1})} \|Av\|.
+	$$
+	Then $(v_1, \dots, v_{k})$ is an orthonormal family and $\Span(v_1, \dots v_k)$ minimizes \eqref{eq:fit}, i.e.\ $(v_1, \dots, v_{k})$ maximizes \eqref{eq:fit3}.
+\end{lemma}
+\begin{proof}
+	Let $S$ be a subspace of dimension $k$. Let $(w_1, \dots, w_k)$ be an orthonormal basis of $S$ such that $w_{k} \perp \Span(v_1, \dots, v_{k-1})$. By definition of $v_k$,
+	we have $\|A w_k \| \leq \| A v_k\|$. 
+	We also assumed that $(v_1, \dots, v_k)$ maximizes \eqref{eq:fit3}, so
+	$$
+	\|A v_1\|^2 + \cdots + \| A v_{k-1} \|^2 \geq
+	\|A w_1\|^2 + \cdots+ \| A w_{k-1} \|^2.
+	$$
+	We conclude that
+	$$
+	\|A v_1\|^2 + \cdots + \| A v_{k} \|^2 \geq
+	\|A w_1\|^2 + \cdots + \| A w_{k} \|^2,
+	$$
+	so $(v_1, \dots, v_k)$ maximizes \eqref{eq:fit3}.
+\end{proof}
+\\
+
+Using Lemma \ref{lem:svd_rec} we get by induction:
+\begin{proposition}
+	Let $v_1, \dots, v_n$ be singular vectors of $A$ defined by \eqref{eq:def_first_singular}-\eqref{eq:def_singular}. Then for all $k \in \{1, \dots, n\}$, the subspace $\Span(v_1, \dots, v_k)$ is a solution of \eqref{eq:fit}.
+\end{proposition}
+
+
+\subsection{Properties}
+
+Recall that $\sigma_1 \geq \sigma_2 \geq \cdots \geq \sigma_n \geq 0$ denotes the singular values of $A$. Let
+$$
+r \ \defeq \
+	\# \big\{ i \, \big| \, \sigma_i > 0\big\}.
+$$
+
+\begin{proposition}
+	$\rank(A) = r$.
+\end{proposition}
+
+\begin{definition}[Left-singular vectors]
+	Define
+	$$
+	u_i \defeq \frac{1}{\sigma_i} A v_i
+	$$
+	for $i = 1 \dots r$. If $r<d$ we let $(u_{r+1}, \dots, u_d)$ be an orthonormal family of vectors of $\R^d$ that are orthogonal to $u_1, \dots, u_r$.
+	The vectors $u_1, \dots, u_d$ are called the \emph{left singular vectors} of $A$.
+\end{definition}
+
+\begin{proposition}
+	\begin{itemize}
+		\item $(u_1, \dots, u_d)$ is an orthonormal basis of $\R^d$ consisting of eigenvectors of $AA^{\sT}$.
+		\item For $i=1, \dots, r$ we have
+			$$
+			A v_i = \sigma_i u_i
+			\qquad \text{and} \qquad
+			A^{\sT} u_i = \sigma_i v_i.
+			$$
+	\end{itemize}
+\end{proposition}
+\begin{proof}
+	We have to show that $(u_1, \dots, u_r)$ is an orthonormal family.
+	$$
+	\langle u_i, u_j \rangle = \big(\frac{1}{\sigma_i} A v_i\big)^{\sT}\big(\frac{1}{\sigma_j} A v_j\big) = \frac{1}{\sigma_i \sigma_j} v_i^{\sT} A^{\sT} A v_j
+	= \frac{\sigma_i}{\sigma_j} v_i^{\sT} v_j = \1_{i = j},
+	$$
+	since by Proposition \ref{prop:right_eigen} $A^{\sT} A v_i = \sigma_i^2 v_i$.
+\end{proof}
+\\
+
+Define
+$$
+V = 
+\begin{pmatrix}
+	| & | & & | \\
+	v_1 & v_2 & \cdots& v_n \\
+	| & | & & |
+\end{pmatrix}
+,\qquad
+U = 
+\begin{pmatrix}
+	| & | & & | \\
+	u_1 & u_2 & \cdots& u_d \\
+	| & | & & |
+\end{pmatrix}
+%\qquad \text{and} \qquad
+%\Sigma =
+%\begin{pmatrix}
+	%\sigma_1 & 0 & 0& \cdots & 0 \\
+	%0 & \sigma_2 & 0 & \cdots & 0 \\
+	%\vdots &  &  \ddots &  & \vddots
+%\end{pmatrix}
+$$
+and $\Sigma \in \R^{d \times n}$ defined by
+$$
+\Sigma_{i,j} =
+\begin{cases}
+	\sigma_i & \text{if} \quad i=j \\
+	0 & \text{otherwise}.
+\end{cases}
+$$
+From what we have seen above, the matrices $V$ and $U$ are orthogonal $n \times n$ and $d \times d$ matrices.
+Recall that a linear transformation is uniquely determined by the image of a basis. We therefore get that
+$$
+A = U \Sigma V^{\sT}.
+$$
+
+\subsection{Conclusion}
+
+\begin{theorem}[Singular value decomposition]
+	Let $A \in \R^{d \times n}$. Then there exists two orthogonal matrices $U \in \R^{d \times d}$ and $V \in \R^{n \times n}$ and a matrix $\Sigma \in \R^{d \times n}$ such that $\Sigma_{i,i} \geq 0$ and $\Sigma_{i,j} = 0$ for i\neq j$
+$$
+A = U \Sigma V^{\sT}.
+$$
+The columns of $U$ (respectively $V$) are called the left (resp. right) singular vectors of $A$. The non-negative numbers $\Sigma_{1,1}, \dots, \Sigma_{n,n}$ are the singular values of $A$. Moreover $\rank(A) = \# \{i \, | \, \Sigma_{i,i} \neq 0 \}$.
+\end{theorem}
+
+\section{Geometric interpretation of SVD}
+
+\section{Another interpretation of the singular vectors}
+Let $a_1, \dots, a_n \in \R^d$ be $n$ points in $d$ dimensions. We assume that this points are centered, meaning that 
+$$
+\sum_{i=1}^n a_i = 0.
+$$
+Recall that the first singular vector maximizes
+$$
+\|A v\|^2 =  \sum_{i=1}^n \langle a_i, v \rangle^2.
+$$
+This quantity is the variance of the coordinates of the points $a_1, \dots, a_n$ along the direction $\Span(v)$.
+
+The first singular vector $v_1$ gives the direction along which the variance of the data is maximal. Recall that
+\begin{equation}
+v_{k} \defeq \argmax_{\|v\| = 1, \, v \perp v_1, \dots, v_{k-1}} \| A v \|^2.
+\end{equation}
+Hence $v_2$ gives the direction orthogonal to $v_1$ that maximizes the variance and so on...
+
+\vspace{1cm}
+\centerline{\pgfornament[width=7cm]{71}}
+
+%\bibliographystyle{plain}
+%\bibliography{./references.bib}
+\end{document}

@@ -8,7 +8,7 @@
 
 \title{\vspace{-2.0cm}%
 	Optimization and Computational Linear Algebra for Data Science\\
-Lecture 6: Singular value decomposition}
+Lecture 6: Eigenvalues, eigenvectors and Markov chains}
 \author{Léo \textsc{Miolane} \ $\cdot$ \ \texttt{leo.miolane@gmail.com}}
 \date{\today}
 
@@ -27,150 +27,166 @@ Lecture 6: Singular value decomposition}
 \end{definition}
 
 
-\begin{theorem}[Spectral Theorem]\label{th:spectral}
-	Let $A \in \R^{n \times n}$ be a \textbf{symmetric} matrix. Then there is a orthonormal basis of $\R^n$ composed of eigenvectors of $A$.
-\end{theorem}
+\section{Application to Markov chains}
 
-Given an $n \times n$ symmetric matrix $A$, Theorem \ref{th:spectral} tells us that one can find an orthonormal basis $(v_1, \dots, v_n)$ of $\R^n$ and scalars $\lambda_1, \dots, \lambda_n \in \R$ such that for all $i \in \{1, \dots, n\}$,
-$$
-A v_i = \lambda_i v_i.
-$$
-Let $P$ be the $n \times n$ matrix whose columns are $v_1, \dots, v_n$. Since $(v_1, \dots, v_n)$ is an orthonormal basis, we get that $P$ is an orthogonal matrix. Let $D = {\rm Diag}(\lambda_1, \dots, \lambda_n)$ and compute
-$$
-A P
-= 
-A 
-\begin{pmatrix}
-	| & | & & | \\
-	v_1 & v_2 & \cdots& v_n \\
-	| & | & & |
-\end{pmatrix}
-= 
-\begin{pmatrix}
-	| & | & & | \\
-	Av_1 & Av_2 & \cdots& Av_n \\
-	| & | & & |
-\end{pmatrix}
-= 
-\begin{pmatrix}
-	| & | & & | \\
-	\lambda_1 v_1 & \lambda_2 v_2 & \cdots& \lambda_n v_n \\
-	| & | & & |
-\end{pmatrix}
-= P D.
-$$
-By multiplying by $P^{\sT}$ on both sides, we get $A P P^{\sT} = P D P^{\sT}$. Recall now that $P$ is orthogonal, therefore $P P^{\sT} = \Id_n$. We conclude that $A = P D P^{\sT}$.
+\subsection{First definitions and properties}
 
-\begin{theorem}[Spectral Theorem, matrix formulation]\label{th:spectral2}
-	Let $A \in \R^{n \times n}$ be a symmetric matrix. Then there exists an orthogonal matrix $P$ and a diagonal matrix $D$ of sizes $n \times n$, such that
+A finite Markov chain is a process which moves among the elements of a finite set $E$ in the following manner: when at $x \in E$, the next position is chosen according to a fixed probability distribution $P(x, \cdot)$. More formally:
+
+\begin{definition}
+	A sequence of random variables $(X_0, X_1, \dots)$ is a Markov chain with state space $E$ and transition matrix $P$ if for all $t \geq 0$, 
 	$$
-	A = P D P^{\sT}.
+	\P\big( X_{t+1} = y \, \big| \, X_0= x_0, \dots, X_t = x_t ) = P(x_t,y)
 	$$
-\end{theorem}
+	for all $x_0, \dots, x_t$ such that $\P(X_0 = x_0, \dots, X_t = x_t) >0$.
+\end{definition}
+
+The transition matrix $P$ verifies therefore, for all $x \in E$,
+\begin{equation}
+	\sum_{y \in E} P(x,y) = 1.
+\end{equation}
+
+In order to simplify the notations, we will assume that $E = \{1,2, \dots, n\}$ and write for all $i,j \in E$, $P_{i,j} = P(j,i)$. 
+\textbf{Note that we switched here the order of $i$ and $j$. This is not what is usually done in the literature, but this will allow us to be more coherent}.
+Such matrix is said to be stochastic:
+
+\begin{definition}[Stochastic matrix]
+	A matrix $P \in \R^{n \times n}$ is said to be \emph{stochastic} if:
+	\begin{enumerate}[label=(\roman*),noitemsep]
+		\item $P_{i,j} \geq 0$ for all $1 \leq i,j \leq n$.
+		\item $\sum\limits_{i=1}^n P_{i,j} = 1$, for all $1 \leq j \leq n$.
+	\end{enumerate}
+\end{definition}
+
+Let $(X_0, X_1, \dots)$ be a Markov chain on $\{1, \dots, n\}$ with transition matrix $P$. For $t \geq 0$ we will encode the distribution of $X_t$ in the $1 \times n$ vector
+$$
+x^{(t)} = (x^{(t)}_1, \dots x^{(t)}_n) 
+= \big(\P(X_t = 1), \dots, \P(X_t = n)\big) \in \Delta_n
+$$
+where $\Delta_n$ is the ``$n$-simplex''
+$$
+\Delta_n \defeq \Big\{ x \in \R^n \, \Big| \, \sum_{i=1}^n x_i = 1 \ \text{and} \ x_i \geq 0 \ \text{for all} \ i \Big\}.
+$$
+
 
 \begin{proposition}
-	Let $A$ be a $n \times n$ symmetric matrix and let $\lambda_1 \geq \cdots \geq \lambda_n$ be its $n$ eigenvalues and $v_1, \dots, v_n$ be the associated orthonormal family of eigenvectors. Then 
+	For all $t \geq 0$
 	$$
-	v_1 = \argmax_{\|v\| = 1} v^{\sT} A v\,,
-	\qquad \text{and for} \ k=2, \dots n, \qquad
-	v_{k} = \argmax_{\|v\| = 1, \, v \perp v_1, \dots, v_{k-1}} v^{\sT} A v.
+	x^{(t+1)} = P x^{(t)}
+	\quad \text{and consequently,} \quad
+	x^{(t)} =  P^t x^{(0)}.
 	$$
 \end{proposition}
+\begin{proof} Let $i \in \{1,\dots, n\}$.
+	\begin{align*}
+		x^{(t+1)}_i
+		= \P(X_{t+1}=i)
+		= \sum_{j=1}^n \P(X_{t+1}=i|X_t = j) \P(X_t = j)
+		= \sum_{i=1}^n P_{i,j} x^{(t)}_j
+		= (x^{(t)} P)_i.
+	\end{align*}
+\end{proof}
 
-\begin{remark} Applying the proposition above to the matrix $-A$ which is symmetric with eigenvalues $-\lambda_n \geq \cdots \geq -\lambda_1$ and associated eigenvectors $v_n, \dots, v_1$, we get
+\begin{corollary}\label{cor:stab}
+	Let $P$ be a stochastic matrix. Then
+	\begin{itemize}
+		\item For all $x \in \Delta_n$, $Px \in \Delta_n$.
+		\item For all $t \geq 1$, $P^t$ is stochastic.
+	\end{itemize}
+\end{corollary}
+
+
+\subsection{Invariant measures and the Perron-Frobenius Theorem}
+We will be interested in the distribution of $X_t$ for $t$ large, that is the limit of $x^{(t)} = x^{(0)} P^t$. As we will see, under suitable conditions on the matrix $A$, this
+
+\begin{definition}
+	A vector $\mu \in \Delta_n$ is an invariant measure for the transition matrix $P$ if $\mu = P \mu$, i.e.\
 	$$
-	v_n = \argmin_{\|v\| = 1} v^{\sT} A v\,,
-	\qquad \text{and for} \ k=1, \dots , n-1 \qquad
-	v_{k} = \argmin_{\|v\| = 1, \, v \perp v_{k+1}, \dots, v_{n}} v^{\sT} A v.
+	\text{for all} \ j \in \{1, \dots, n\}, \ \mu_i = \sum_{j=1}^n P_{i,j} \mu_j.
 	$$
+\end{definition}
+
+\begin{remark}
+	An invariant measure is an eigenvector of $P$ with associated eigenvalue $1$.
 \end{remark}
 
 
-\section{Singular value decomposition}
+\begin{theorem}[Perron-Frobenius, stochastic case]\label{th:perron_frobenius}
+	Let $P$ be a stochastic matrix such that there exists $k \geq 1$ such that all the entries of $P^k$ are strictly positive. Then the following holds:
+	\begin{enumerate}[label=(\roman*),noitemsep]
+		\item\label{item:i} $1$ is an eigenvalue of $P$ and there exists an eigenvector $\mu \in \Delta_n$ associated to $1$.
+		\item\label{item:ii} The eigenvectors associated to $1$ are unique up to scalar multiple (i.e.\ $\Ker(P-\Id) = \Span(\mu)$).
+		\item\label{item:iii} For all $x \in \Delta_n$, $P^t x \xrightarrow[t \to \infty]{} \mu$.
+	\end{enumerate}
+\end{theorem}
 
-Let $a_1, \dots, a_n \in \R^d$ be $n$ points in $d$ dimension.
+Theorem \ref{th:perron_frobenius} is proved in the next section.
 
-The goal of Singular Value Decomposition (SVD) is to find the $k$-dimensional subspace (for $k = 1, \dots, n$) that fits ``the best'' these $n$ data points. By ``best'', we mean here the $k$-dimensional subspace $S$ that minimize the sum of the square distances to the $n$ points:
-\begin{equation}\label{eq:fit}
-	\text{minimize} \ \ \sum_{i=1}^n d(a_i, S)^2 \ \ \text{with respect to} \ S \ \text{subspace of dimension} \ k.
-\end{equation}
-In this case we have for all $i \in \{1, \dots, n\}$,
-$$
-d(a_i, S)^2 = \| a_i - P_{S}(a_i) \|^2 = \|a_i\|^2 - \| P_{S}(a_i) \|^2,
-$$
-by Pythagorean Theorem (recall that $P_{S}(a_i) \perp (a_i - P_S(a_i))$). Since $v_1$ is of unit norm, $P_{S}(a_i) = \langle v_1, a_i \rangle v_1$, hence:
-$$
-d(a_i, S)^2 =  \|a_i\|^2 - \langle v_1, a_i \rangle^2.
-$$
-Minimizing \eqref{eq:fit} is therefore equivalent to maximize
-\begin{equation}\label{eq:fit2}
-\sum_{i=1}^n \| P_{S}(a_i) \|^2.
-\end{equation}
-Let us fix an orthonormal basis $(v_1, \dots, v_k)$ of $S$. Then for all $x \in \R^d$,
-$P_S(x)= \langle v_1, x \rangle v_1 + \cdots + \langle v_k, x \rangle v_k$, hence
-\begin{equation}\label{eq:fit3}
-\sum_{i=1}^n \| P_{S}(a_i) \|^2 = \sum_{i=1}^n \sum_{j = 1}^k \langle a_i, v_j \rangle^2
-= \| A v_1 \|^2 + \cdots + \| A v_k \|^2,
-\end{equation}
-where $A$ is the $n \times d$ matrix whose rows are $a_1, \dots, a_n$.
-Consequently, minimizing \eqref{eq:fit} is equivalent to maximizing \eqref{eq:fit3} over all orthonormal families $(v_1, \dots, v_k)$.
-\\
-
-For $k=1$, a subspace of dimension $1$ that minimizes \eqref{eq:fit} is therefore $\Span(v_1)$ where
-\begin{equation}\label{eq:def_first_singular}
-v_1 \defeq \argmax_{\|v\| = 1} \|A v\|.
-\end{equation}
-If we now want to solve the problem for $k=2$, a natural candidate for the subspace $S$ would be $S = \Span(v_1, v_2)$ where
-\begin{equation}\label{eq:def_second_singular}
-v_2 \defeq \argmax_{\|v\| = 1, \, v \perp v_1} \| A v \|.
-\end{equation}
-We can follow this greedy strategy for $k = 3, \dots, n$ and define recursively
-\begin{equation}\label{eq:def_singular}
-v_{k} \defeq \argmax_{\|v\| = 1, \, v \perp v_1, \dots, v_{k-1}} \| A v \|.
-\end{equation}
-\begin{definition}
-	\begin{itemize}
-		\item The vectors $v_1, \dots, v_n$ are called \emph{singular vectors} of the matrix $A$.
-		\item The non-negative numbers $\sigma_k \defeq \|A v_k\|$ are called the \emph{singular values} of $A$.
-	\end{itemize}
-\end{definition}
-Of course \eqref{eq:def_first_singular}-\eqref{eq:def_singular} admits many other maximizers (for instance $-v_k$), so \textbf{the singular vectors are not uniquely defined}.
-\\
-
-It is not a priori obvious (except for $k=1$) that $S = \Span(v_1, \dots, v_k)$ is a minimizer of \eqref{eq:fit} over all the subspaces of dimension $k$.
-We need the following lemma.
-
-\begin{lemma}\label{lem:svd_rec}
-	Let $k \in \{2, \dots, k\}$. Assume that $(v_1, \dots, v_{k-1})$ is an orthonormal family that maximizes \eqref{eq:fit3}.
-	Define 
+\begin{corollary}
+	Let $P$ be a stochastic matrix such that there exists $k \geq 1$ such that all the entries of $P^k$ are strictly positive. Then there exists a unique invariant measure $\mu$ and for all initial condition $x^{(0)} \in \Delta_n$,
 	$$
-	v_k = \argmax_{\|v\| = 1, \, v \perp \Span(v_1, \dots, v_{k-1})} \|Av\|.
+	x^{(t)} \xrightarrow[t \to \infty]{} \mu.
 	$$
-	Then $(v_1, \dots, v_{k})$ is an orthonormal family and $\Span(v_1, \dots v_k)$ minimizes \eqref{eq:fit}, i.e.\ $(v_1, \dots, v_{k})$ maximizes \eqref{eq:fit3}.
+\end{corollary}
+
+\subsection{Proof of Theorem \ref{th:perron_frobenius}}
+We first prove the theorem in the case $k=1$, when $P_{i,j} > 0$ for all $i,j$.
+\begin{lemma}\label{lem:contract}
+	The mapping 
+	$$
+	\begin{array}{cccc}
+		\varphi:& \Delta_n &\to& \Delta_n \\
+				& x & \mapsto & Px
+	\end{array}
+	$$
+	is contracting for the $\ell_1$-norm: there exists $c \in (0,1)$ such that for all $x,y \in \Delta_n$:
+	$$
+	\| Px - Py \|_1 \leq c \| x-y\|_1.
+	$$
 \end{lemma}
 \begin{proof}
-	Let $S$ be a subspace of dimension $k$. Let $(w_1, \dots, w_k)$ be an orthonormal basis of $S$ such that $w_{k} \perp \Span(v_1, \dots, v_{k-1})$. By definition of $v_k$,
-	we have $\|A w_k \| \leq \| A v_k\|$. 
-	We also assumed that $(v_1, \dots, v_k)$ maximizes \eqref{eq:fit3}, so
+	%Let $x \in \Delta_n$. Since the entries of $x$ and $P$ are non-negative, the entries of $Px$ are also non-negative. Compute
+	%$$
+	%\|Px\|_1 = \sum_{i=1}^n (Px)_i = \sum_{i=1}^n \sum_{j=1}^n P_{i,j} x_j
+	%= \sum_{j=1}^n \Big(\sum_{i=1}^n P_{i,j}\Big) x_j.
+	%$$
+	%Since $P$ is stochastic  we have $\sum_{i=1}^n P_{i,j} = 1$ which gives
+	%$$
+	%\|Px\|_1 = \sum_{j=1}^n x_j = 1.
+	%$$
+	%Hence $Px \in \Delta_n$. 
+	First notice that $\varphi$ is well-defined by Corollary \ref{cor:stab}.
+	Let us write $\alpha \defeq \min_{i,j} P_{i,j} \in (0,1)$.
+	Let $x,y \in \Delta_n$. We will show that $\| Px - Py \|_1 \leq (1-\alpha) \| x-y\|_1$, i.e.\ $\|P z\|_1 \leq \alpha \|z\|_1$ where $z = x-y$. Compute
 	$$
-	\|A v_1\|^2 + \cdots + \| A v_{k-1} \|^2 \geq
-	\|A w_1\|^2 + \cdots+ \| A w_{k-1} \|^2.
+	\| P z\|_1 
+	= \sum_{i=1}^n \big| (Pz)_i \big|
+	= \sum_{i=1}^n \Big| \sum_{j=1}^n P_{i,j}z_j \Big|.
 	$$
-	We conclude that
+	Since $\sum_{j} z_j = 0$ we have $\sum_j (P_{i,j} - \alpha/n) z_j = \sum_j P_{i,j} z_j$. Hence
 	$$
-	\|A v_1\|^2 + \cdots + \| A v_{k} \|^2 \geq
-	\|A w_1\|^2 + \cdots + \| A w_{k} \|^2,
+	\| P z\|_1 
+	= \sum_{i=1}^n \Big| \sum_{j=1}^n (P_{i,j} - \alpha/n) z_j \Big|
+	\leq \sum_{i=1}^n \sum_{j=1}^n (P_{i,j} - \alpha/n) |z_j| 
+	= \sum_{j=1}^n (1-\alpha) |z_j|
+	= (1-\alpha) \|z\|_1.
 	$$
-	so $(v_1, \dots, v_k)$ maximizes \eqref{eq:fit3}.
 \end{proof}
+
+Using Lemma \ref{lem:contract}, Banach fixed point Theorem tells us that $\varphi$ admits a unique fixed point $\mu$ on $\Delta_n$ (i.e.\ a unique $\mu \in \Delta_n$ such that $P\mu = \mu$) and that for all $x \in \Delta_n$, $P^t x \xrightarrow[t \to \infty]{} \mu$. This proves Theorem \ref{th:perron_frobenius} in the case $k=1$.
 \\
 
-Using Lemma \ref{lem:svd_rec} we get by induction:
-\begin{proposition}
-	Let $v_1, \dots, v_n$ be singular vectors of $A$ defined by \eqref{eq:def_first_singular}-\eqref{eq:def_singular}. Then for all $k \in \{1, \dots, n\}$, the subspace $\Span(v_1, \dots, v_k)$ is a solution of \eqref{eq:fit}.
-\end{proposition}
+In the case $k > 1$ we simply apply the result for $k=1$ to $P^k$.
 
+This gives that there exists a unique $\mu \in \Delta_n$ such that $P^k \mu = \mu$. Multiplying by $P$ on both sides leads to $P^k (P\mu) = P\mu$. 
+Since $P\mu \in \Delta_n$ we obtain that $P\mu = \mu$ by uniqueness of $\mu$. This proves \ref{item:i}. To prove \ref{item:ii} we consider $x \in \R^n$ such that $P x = x$. By iteration we get $P^k x = x$ which implies (using the result on $P^k$) that $x \in \Vect(\mu)$.
+To prove \ref{item:iii} we fix $\ell \in \{0, \dots, k-1\}$. Let $x \in \Delta_n$. By applying the point \ref{item:iii} to $P^k$, we have 
+$$
+P^{kt} P^{\ell} x \xrightarrow[t \to \infty]{} \mu.
+$$
+Since this holds for all $\ell \leq k-1$ we obtain that $P^T x \xrightarrow[T \to \infty]{} \mu$ using the Euclidean division of $T$ by $k$.
 
+\section{Example: Google's PageRank algorithm}
 
 
 \vspace{1cm}
