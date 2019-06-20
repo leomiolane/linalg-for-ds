@@ -173,7 +173,7 @@ We will be interested in the distribution of $X_t$ for $t$ large, that is the li
 
 Theorem \ref{th:perron_frobenius} is proved in the next section.
 
-\begin{corollary}
+\begin{corollary}\label{cor:perron}
 	Let $P$ be a stochastic matrix such that there exists $k \geq 1$ such that all the entries of $P^k$ are strictly positive. Then there exists a unique invariant measure $\mu$ and for all initial condition $x^{(0)} \in \Delta_n$,
 	$$
 	x^{(t)} \xrightarrow[t \to \infty]{} \mu.
@@ -238,6 +238,110 @@ $$
 Since this holds for all $\ell \leq k-1$ we obtain that $P^T x \xrightarrow[T \to \infty]{} \mu$ using the Euclidean division of $T$ by $k$.
 
 \section{Example: Google's PageRank algorithm}
+
+\subsection{The PageRank algorithm}
+
+\subsection{Ranking tennis players}
+We aim at ranking the following $n=54$ tennis players:
+\begin{center}
+Federer, Nadal, Djokovic, Murray, Del Potro, Roddick, Coria, Zverev, Ferrer, Soderling, Tsonga, Nishikori, Raonic, Nalbandian, Wawrinka, Berdych, Hewitt, Tsitsipas, Monfils, Gonzalez, Thiem, Ljubicic, Davydenko, Cilic, Pouille, Safin, Isner, Dimitrov, Medvedev, Ferrero, Goffin, Bautista Agut, Sock, Gasquet, Simon, Blake, Monaco, Coric, Stepanek, Khachanov, Almagro, Robredo, Verdasco, Anderson, Youzhny, Baghdatis, Dolgopolov, Kohlschreiber, Fognini, Melzer, Paire, Querrey, Tomic, Basilashvili.
+\end{center}
+
+To do so, we have access to the ``head to head'' record between them (see Figure \ref{fig:confrontations}) in the from of the matrix $R \in \R^{n \times n}$:
+\begin{equation}\label{eq:def_R}
+R_{i,j} = \ \text{<<\,number of wins of player $i$ against player $j$\,>>}.
+\end{equation}
+
+We will use the PageRank strategy of the previous section in order to rank the players. In our case, instead of a ``drunk surfer'' we will consider a ``drunk spectator''.
+At time $t$ the value $X_t \in \{1, \dots, n\}$ indicates which tennis player our spectator believes to be the best. At time $t+1$, the spectator picks uniformly at random a game played by its favorite player $X_t$ against one of the other players, $x$.
+If $X_t$ wins the game, then the spectator still believes that $X_t$ is the best: $X_{t+1} = X_t$. Otherwise the spectator changes his mind: $X_{t+1} = x$.
+
+This corresponds to a Markov chain with transition matrix
+$$
+P_{i,j} = 
+\begin{cases}
+	V_j/G_j & \text{if} \ i = j \\
+	R_{i,j}/G_j & \text{otherwise,}
+\end{cases}
+$$
+where $V_j$ denotes the total number of victories of player $i$ and where $G_j$ denotes the total number of game played by $j$:
+$$
+V_{j} = \sum_{i=1}^n R_{j,i} \qquad \text{and} \qquad G_j = \sum_{i=1}^n R_{i,j} + R_{j,i}.
+$$
+Let $\mu$ be the ``Perron-Frobenius'' eigenvector of $P$. The vector $\mu$ is displayed on Figure \ref{fig:ranking}.
+Applying Corollary \ref{cor:perron} to the matrix $P$ we get that the ``drunk spectator'' will (in the $t \to \infty$ limit) spend a fraction $\mu_i$ of its time thinking that the player $i$ is the best. The values $(\mu_1, \dots, \mu_n)$ can therefore be used to rank the players. We obtained the following order:
+\begin{center}
+Federer (14.4\%),
+Djokovic (13.7\%),
+Nadal (13.6\%),
+Murray (5.8\%),
+Ferrer (3.0\%),
+Del Potro (2.8\%),
+Berdych (2.5\%),
+Roddick (2.4\%),
+Wawrinka (2.3\%),
+Tsonga (2.1\%),
+Nishikori (1.6\%),
+Nalbandian (1.6\%),
+Hewitt (1.5\%),
+Monfils (1.5\%),
+Davydenko (1.5\%),
+Cilic (1.4\%),
+Soderling (1.4\%),
+Verdasco (1.2\%),
+Gonzalez (1.2\%),
+Raonic (1.2\%),
+Ljubicic (1.2\%),
+Gasquet (1.2\%),
+Simon (1.1\%),
+Thiem (1.1\%),
+Isner (1.0\%),
+Zverev (1.0\%),
+Youzhny (1.0\%),
+Robredo (0.9\%),
+Kohlschreiber (0.9\%),
+Ferrero (0.9\%),
+Stepanek (0.8\%),
+Safin (0.8\%),
+Dimitrov (0.8\%),
+Almagro (0.7\%),
+Baghdatis (0.7\%),
+Blake (0.7\%),
+Anderson (0.7\%),
+Goffin (0.7\%),
+Coria (0.7\%),
+Bautista Agut (0.6\%),
+Monaco (0.6\%),
+Fognini (0.6\%),
+Querrey (0.6\%),
+Melzer (0.6\%),
+Dolgopolov (0.5\%),
+Coric (0.5\%),
+Pouille (0.4\%),
+Tsitsipas (0.4\%),
+Sock (0.4\%),
+Paire (0.3\%),
+Medvedev (0.3\%),
+Khachanov (0.3\%),
+Tomic (0.2\%),
+Basilashvili (0.1\%).
+\end{center}
+
+
+\begin{figure}
+    \centering
+	\hspace*{-2cm}
+	\includegraphics[width=1.23\textwidth]{./confrontations.pdf}
+	\caption{The matrix $R$ given by \eqref{eq:def_R}}
+	\label{fig:confrontations}
+\end{figure}
+\begin{figure}
+    \centering
+	\hspace*{-2cm}
+	\includegraphics[width=1.23\textwidth]{./pagerank_tennis.pdf}
+	\caption{Comparison of the ranking by the percentage of wins (on the left) and the ranking using PageRank.}
+	\label{fig:ranking}
+\end{figure}
 
 
 \vspace{1cm}

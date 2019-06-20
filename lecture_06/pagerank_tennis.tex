@@ -1,0 +1,25 @@
+\documentclass{standalone}
+\usepackage[utf8]{inputenc} %encodage des caractères
+\usepackage{float} % position des figures
+\usepackage{graphicx}
+\usepackage{subfig} % figures côte-à-côte
+%\usepackage[mono=false]{libertine}
+
+\begin{document}
+
+\minipage{1.8\textwidth}
+\begin{figure}
+    \centering
+	\subfloat[Percentage of wins]
+        {\includegraphics[width=0.47\textwidth]{./st_tennis.pdf}}
+    %\
+	\subfloat[PageRank]
+        {\includegraphics[width=0.47\textwidth]{./pg_tennis.pdf}}
+\end{figure}
+\endminipage
+
+\end{document}
+
+
+
+
