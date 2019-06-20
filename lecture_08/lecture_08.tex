@@ -1,0 +1,90 @@
+\documentclass[11pt,nocut]{article}
+
+\usepackage{../latex_style/packages}
+\usepackage{../latex_style/notations}
+\externaldocument{../lecture_02/lecture_02}
+\externaldocument{../lecture_04/lecture_04}
+
+
+\title{\vspace{-2.0cm}%
+	Optimization and Computational Linear Algebra for Data Science\\
+Lecture 8: Graphs and Linear Algebra}
+\author{Léo \textsc{Miolane} \ $\cdot$ \ \texttt{leo.miolane@gmail.com}}
+\date{\today}
+
+\begin{document}
+\maketitle
+\input{../preamble.tex}
+
+\section{Graphs}
+
+We start by a formal definition of a (simple non-oriented) graph:
+\begin{definition}[Graph]
+	A graph $G$ is defined as a pair $V_G,E_G$ where $V=V_G$ is the set of vertices of $G$ and $E = E_G$ is the set of edges of $G$ which is a subset of $V \times V$.
+	Two vertices $i,j$ are connected by an edge if $\{i,j\} \in E$. In such case we write $i \sim j$ and say that $i$ and $j$ are neighboors.
+\end{definition}
+
+\begin{definition}
+	The degree of a node $i \in V$ is the number of its neighboors.
+\end{definition}
+
+In this lecture we will only consider finite graphs, where $V$ is finite. We let $n = \# V$. One can assume (up to renaming the vertices) that $V = \{1, \dots, n\}$.
+
+\begin{definition}
+	We define the adjacency matrix $A \in \R^{n \times n}$ of the graph $G$ by
+	$$
+	A_{i,j} = 
+	\begin{cases}
+		1 & \text{if} \ i \sim j \\
+		0 & \text{otherwise.}
+	\end{cases}
+	$$
+	The degree matrix of $G$ is defined by $D = \Diag(\deg(1), \dots, \deg(n))$. 
+\end{definition}
+
+Notice that $A$ is a symmetric matrix.
+
+\section{Graph Laplacian}
+
+\begin{definition}[Graph Laplacian]
+	The Laplacian matrix of $G$ is defined as
+	$$
+	L = D - A.
+	$$
+\end{definition}
+
+\begin{proposition}
+	The matrix $L$ satisfies the following properties:
+	\begin{enumerate}
+		\item $L$ is symmetric and positive semi-definite.
+		\item The smallest eigenvalue of $L$ is $0$, the corresponding eigenvector is the constant one vector $(1,1, \dots, 1)$.
+		\item $L$ has $n$ non-negative eigenvalues $0 = \lambda_1 \leq \lambda_2 \leq \dots \leq \lambda_n$.
+	\end{enumerate}
+\end{proposition}
+
+\begin{proposition}
+	The graph $G$ is connected if and only if $\lambda_2 > 0$.
+\end{proposition}
+More generally, one can show that the multiplicity of the eigenvalue $0$ of $L$ (i.e.\ the number of $i$ such that $\lambda_i = 0$) is equal to the number of connected components of $L$.
+
+\section{Spectral clustering with the graph Laplacian}
+
+\begin{proposition}
+	Assume that $G$ is connected. Let $v_2$ be an eigenvector associated to $\lambda_2$, the second smallest eigenvalue of $L$. Let
+	$$
+	W = \{ i \, | \ v_2(i) \geq 0 \}.
+	$$
+	Then the subgraph induced by $W$ is connected.
+\end{proposition}
+
+This indicates that 
+
+$$
+{\rm cut}(G,v) = \sum_{i \sim j} \1(v_i \neq v_i) = \frac{1}{2} \sum_{i,j} A_{i,j} (1 - v_i v_j)
+$$
+\vspace{1cm}
+\centerline{\pgfornament[width=7cm]{71}}
+
+%\bibliographystyle{plain}
+%\bibliography{./references.bib}
+\end{document}
