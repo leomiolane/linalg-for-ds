@@ -172,6 +172,7 @@ We will be interested in the distribution of $X_t$ for $t$ large, that is the li
 \end{theorem}
 
 Theorem \ref{th:perron_frobenius} is proved in the next section.
+Theorem \ref{th:perron_frobenius} tells us that there is a unique $\mu \in \Delta_n$ such that $P \mu = \mu$. We call $\mu$ the Perron-Frobenius eigenvector of $P$.
 
 \begin{corollary}\label{cor:perron}
 	Let $P$ be a stochastic matrix such that there exists $k \geq 1$ such that all the entries of $P^k$ are strictly positive. Then there exists a unique invariant measure $\mu$ and for all initial condition $x^{(0)} \in \Delta_n$,
@@ -241,13 +242,38 @@ Since this holds for all $\ell \leq k-1$ we obtain that $P^T x \xrightarrow[T \t
 
 \subsection{The PageRank algorithm}
 
+The PageRank algorithm was invented by Larry Page and Sergey Brin \cite{page1999pagerank}.
+
+The goal is to rank $n$ web pages in term of ``importance''.
+
+They consider a ``drunk surfer'' that goes from a page $j$ to an other page $i$ by randomly clicking on the links that are on the page $j$.
+This can be modeled by a Markov chain with state space $\{1, \dots, n\}$ and transition matrix $P$ given by
+$$
+P_{i,j} 
+= 
+\begin{cases}
+	1 / \deg(j) & \text{if there is a link} \ j \to i \\
+	0 & \text{otherwise},
+\end{cases}
+$$
+where $\deg(j)$ denotes the number of outgoing links on page $j$.
+The matrix $P$ is however not guaranteed to satisfy the hypotheses of Corollary \ref{cor:perron}. Brin and Page proposed to use instead of $P$ the matrix
+$$
+G = \alpha P + \frac{1-\alpha}{n} \1,
+$$
+where $\alpha \in [0,1]$ and $\1$ denotes the all-one matrix.
+
+The PageRank algorithm computes $\mu$ the Perron-Frobenius eigenvector of the matrix $G$ and uses the coordinates of $\mu$ to rank the web pages.
+
 \subsection{Ranking tennis players}
+
+Let us do a small numerical experiment based on PageRank.
 We aim at ranking the following $n=54$ tennis players:
 \begin{center}
 Federer, Nadal, Djokovic, Murray, Del Potro, Roddick, Coria, Zverev, Ferrer, Soderling, Tsonga, Nishikori, Raonic, Nalbandian, Wawrinka, Berdych, Hewitt, Tsitsipas, Monfils, Gonzalez, Thiem, Ljubicic, Davydenko, Cilic, Pouille, Safin, Isner, Dimitrov, Medvedev, Ferrero, Goffin, Bautista Agut, Sock, Gasquet, Simon, Blake, Monaco, Coric, Stepanek, Khachanov, Almagro, Robredo, Verdasco, Anderson, Youzhny, Baghdatis, Dolgopolov, Kohlschreiber, Fognini, Melzer, Paire, Querrey, Tomic, Basilashvili.
 \end{center}
 
-To do so, we have access to the ``head to head'' record between them (see Figure \ref{fig:confrontations}) in the from of the matrix $R \in \R^{n \times n}$:
+To do so, we have access to the ``head to head'' record between them (see Figure \ref{fig:confrontations}) in the form of the matrix $R \in \R^{n \times n}$:
 \begin{equation}\label{eq:def_R}
 R_{i,j} = \ \text{<<\,number of wins of player $i$ against player $j$\,>>}.
 \end{equation}
@@ -269,7 +295,7 @@ $$
 V_{j} = \sum_{i=1}^n R_{j,i} \qquad \text{and} \qquad G_j = \sum_{i=1}^n R_{i,j} + R_{j,i}.
 $$
 Let $\mu$ be the ``Perron-Frobenius'' eigenvector of $P$. The vector $\mu$ is displayed on Figure \ref{fig:ranking}.
-Applying Corollary \ref{cor:perron} to the matrix $P$ we get that the ``drunk spectator'' will (in the $t \to \infty$ limit) spend a fraction $\mu_i$ of its time thinking that the player $i$ is the best. The values $(\mu_1, \dots, \mu_n)$ can therefore be used to rank the players. We obtained the following order:
+Applying Corollary \ref{cor:perron} to the matrix $P$ we get that the ``drunk spectator'' will (in the $t \to \infty$ limit) spend a fraction $\mu_i$ of its time thinking that the player $i$ is the best. The values $(\mu_1, \dots, \mu_n)$ can therefore be used to rank the players. We obtain the following order:
 \begin{center}
 Federer (14.4\%),
 Djokovic (13.7\%),
