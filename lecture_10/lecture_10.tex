@@ -114,10 +114,11 @@ We will only cover the case where the equality constraints are linear, i.e. $h_i
 This generalize to the case \eqref{eq:problem} where we have multiple constraints:
 
 \begin{definition}
-	We say that the constraints are \emph{qualified} at $x \in F$ if there exists a vector $v \in \R^n$ such that
+	We say that the constraints are \emph{qualified} at $x \in F$ if there exists a vector $v \in \R^n$ such that $\langle v, \nabla h_i \rangle = 0$ for all $i=1, \dots, p$ and such that
+	for all $i = 1, \dots, m$ we have either
 	\begin{itemize}
-		\item $\langle v, \nabla g_i \rangle < 0$ for all $i=1,\dots, m$.
-		\item $\langle v, \nabla h_i \rangle = 0$ for all $i=1, \dots, p$.
+		\item $\langle v, \nabla g_i \rangle < 0$
+		\item or $\langle v, \nabla g_i \rangle \leq 0$, and $g_i$ is affine.
 	\end{itemize}
 \end{definition}
 
@@ -208,8 +209,9 @@ $$
 F(x) \leq L(x,\lambda,\nu) \leq L(x',\lambda,\nu) \leq F(x')
 $$
 for all $x' \in \R^n$. By an analog argument one also get that $(\lambda,\nu)$ is a solution of the dual problem \eqref{eq:dual_problem}.
+In fact, it is not difficult to verify the stronger statement below:
 
-\begin{theorem}[Saddle-point theorem]\label{th:saddle}
+\begin{theorem}\label{th:saddle}
 	$(x; \lambda,\nu) \in \R^n \times \R_{\geq 0}^m \times \R^p$ is a saddle-point of $L$ if and only if
 	\begin{equation}\label{eq:th_saddle}
 	F(x)
@@ -226,24 +228,40 @@ for all $x' \in \R^n$. By an analog argument one also get that $(\lambda,\nu)$ i
 
 \subsection{Solving the primal problem via the dual}
 
-From Theorem \ref{th:saddle} we get that if strong duality holds and if $(\lambda^*,\nu^*)$ is a solution of the dual problem, then any solution of the primal problem is a minimizer of $x \mapsto L(x,\lambda^*,\nu^*)$.
-\\
-
-Assume that strong duality holds and assume that we computed a solution $(\lambda^*,\nu^*)$ of the dual problem \eqref{eq:dual_problem}. Assume also that $x \mapsto L(x,\lambda^*,\nu^*)$ admits a unique minimizer $x^*$. Then if $x^*$ is feasible then it is a solution of the problem \eqref{eq:problem}. If $x^*$ is not feasible then the minimum of \eqref{eq:problem} is not attained. Indeed, one has by construction of $x^*$ and definition of $\ell$
+Assume that strong duality holds and that we have found a solution $(\lambda^*,\nu^*)$ of the dual problem. 
+By Theorem \ref{th:saddle} we get that a point $x^* \in \R^n$ is a solution of the primal problem if and only if $(x^*;\lambda^*,\nu^*)$ is a saddle-point of $L$:
 $$
-L(x^*,\lambda^*,\nu^*) = \inf_{x} L(x,\lambda^*,\nu^*) = \ell(\lambda^*,\nu^*) = p^*
+x^* \quad \text{is solution of the primal problem} \quad
+\Longleftrightarrow
+\quad
+\left\{
+	\!\!
+\begin{array}{lll}
+	x^* & \text{minimizes} & L(\cdot, \lambda^*,\nu^*), \\
+	(\lambda^*,\nu^*) & \text{maximizes} & L(x^*, \cdot, \cdot).
+\end{array}
+\right.
 $$
-where the last equality comes from the definition of $(\lambda^*,\nu^*)$ and the strong duality.
-%So if $x^*$ is feasible, then 
-%for all $x \in \R^n$
-%$$
-%L(x^*,\lambda^*,\nu^*) \leq L(x,\lambda^*,\nu^*) \leq F(x)
-%$$
+Notice that $(\lambda^*,\nu^*)$ maximizes the linear function $L(x^*, \cdot,\cdot)$ if and only $x^*$ is feasible. We obtain:
+$$
+x^* \quad \text{is solution of the primal problem} \quad
+\Longleftrightarrow
+\quad
+\begin{cases}
+	x^* \quad \text{minimizes} \quad L(\cdot, \lambda^*,\nu^*), \\
+	x^* \quad \text{is feasible.}
+\end{cases}
+$$
 
+This is particularly useful, indeed the dual problem might be easier to solve than the primal one. In the case when there is strong duality, the equivalence above tells us that it suffices then to solve the \textbf{unconstrained} optimization problem $\min_{x \in \R^n} L(x,\lambda^*,\nu^*)$.
+Assume for simplicity that $x \mapsto L(x,\lambda^*,\nu^*)$ admits a unique minimizer $x^*$. Then if $x^*$ is feasible then it is a solution of the problem \eqref{eq:problem}. 
+If $x^*$ is not feasible then the minimum of \eqref{eq:problem} can not be attained.
 
 \section{Kuhn Tucker Theorem}
 
 In this section, we assume that the functions $f$, $g_1, \dots, g_m$ are convex and that $h_1, \dots, h_p$ are linear. We say then that the optimization problem \eqref{eq:problem} is convex.
+
+We will see in this section that \textbf{strong duality holds for convex problems under mild assumptions}, known as ``Slater's condition''.
 
 
 \begin{definition}[Slater's condition]
@@ -263,12 +281,6 @@ One can verify that is the problem \eqref{eq:problem} is convex and verifies Sla
 	\end{equation}
 	In other words, $x$ is a solution of \eqref{eq:problem} if and only if there exists $\lambda \in \R_{\geq 0}^m$ and $\nu \in \R^p$ such that $(x; \lambda, \nu)$ is a saddle point of the Lagrangian $L$.
 \end{theorem}
-
-\begin{enumerate}
-	\item First we find a solution $(\lambda,\nu)$ of the dual problem \eqref{eq:dual_problem}.
-	\item Then we solve the \textbf{unconstrained} minimization problem $\min_x L(x,\lambda,\nu)$ to find a solution $x$.
-	\item Finally, Theorem \ref{th:saddle} and Theorem \ref{th:kuhn_tucker} give us that $x$ is a solution of the original problem \eqref{eq:problem}. Indeed, since $(\lambda,\nu)$ is solution of the dual problem, the last equality of \eqref{eq:th_saddle} holds.
-\end{enumerate}
 
 \section*{Further reading}
 
