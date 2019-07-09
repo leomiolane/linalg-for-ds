@@ -10,28 +10,29 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="210mm"
-   height="297mm"
-   viewBox="0 0 210 297"
-   version="1.1"
+   sodipodi:docname="lecture_10.svg"
    id="svg8"
-   inkscape:version="0.92.4 5da689c313, 2019-01-14"
-   sodipodi:docname="lecture_10.svg">
+   version="1.1"
+   viewBox="0 0 164.52019 88.687309"
+   height="88.687309mm"
+   width="164.52019mm"
+   inkscape:version="0.92.4 5da689c313, 2019-01-14">
   <defs
      id="defs2">
     <marker
        inkscape:stockid="Arrow2Lstart"
        orient="auto"
-       refY="0.0"
-       refX="0.0"
+       refY="0"
+       refX="0"
        id="Arrow2Lstart"
        style="overflow:visible"
        inkscape:isstock="true">
       <path
          id="path1451"
-         style="fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round;stroke:#000000;stroke-opacity:1;fill:#000000;fill-opacity:1"
-         d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.9730900,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
-         transform="scale(1.1) translate(1,0)" />
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="matrix(1.1,0,0,1.1,1.1,0)"
+         inkscape:connector-curvature="0" />
     </marker>
     <inkscape:path-effect
        effect="bspline"
@@ -64,8 +65,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.5680645"
-     inkscape:cx="352.63375"
-     inkscape:cy="812.52774"
+     inkscape:cx="311.16113"
+     inkscape:cy="258.88482"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -73,10 +74,16 @@
      inkscape:window-height="1015"
      inkscape:window-x="0"
      inkscape:window-y="0"
-     inkscape:window-maximized="1">
+     inkscape:window-maximized="1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0">
     <inkscape:grid
        id="grid815"
-       type="xygrid" />
+       type="xygrid"
+       originx="-10.972965"
+       originy="-171.02477" />
   </sodipodi:namedview>
   <metadata
      id="metadata5">
@@ -93,7 +100,8 @@
   <g
      inkscape:label="Calque 1"
      inkscape:groupmode="layer"
-     id="layer1">
+     id="layer1"
+     transform="translate(-10.972965,-37.287914)">
     <path
        style="fill:#a1ffbd;fill-opacity:0.5857143;fill-rule:evenodd;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 88.511794,40.82823 c -5.699984,1.43139 -12.073858,3.130835 -19.677222,6.387006 -7.603363,3.256171 -15.350955,7.909139 -20.152467,13.971358 -4.801511,6.062218 -7.209981,14.949596 -6.786494,23.794382 0.423487,8.844786 2.843756,16.122714 8.143592,23.249914 5.299837,7.12719 13.321789,11.57819 23.59427,14.0301 10.272482,2.45192 23.975254,3.31553 36.242647,3.76096 12.26739,0.44544 25.31386,0.51002 33.61565,-0.69713 8.30179,-1.20715 16.95765,-4.31785 21.69289,-9.63337 4.73524,-5.31551 7.8611,-13.12105 9.80716,-22.900939 1.94605,-9.779893 2.4141,-23.465871 -0.53448,-30.150313 -2.94858,-6.684443 -9.39965,-12.431764 -17.16339,-16.115951 -7.76374,-3.684188 -17.02732,-5.688455 -26.1154,-6.988825 -9.08809,-1.300369 -18.32437,-1.860327 -25.14063,-1.563243 -6.816264,0.297085 -11.826142,1.424662 -17.526126,2.856051 z"
