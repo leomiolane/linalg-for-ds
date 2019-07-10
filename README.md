@@ -7,7 +7,7 @@ They only contain the main results from the course. Examples, figures, and many 
 ## Outline
 1. [Vector spaces](lecture_01/lecture_01.pdf)
 2. [Linear transformations](lecture_02/lecture_02.pdf)
-3. [Rank](https://github.com/leomiolane/linalg-for-ds/raw/master/lecture_01/lecture_01.pdf)
+3. [Rank](https://github.com/leomiolane/linalg-for-ds/raw/master/lecture_01/lecture_01.pdf){:target="_blank" rel="noopener"}
 4. [Norm and dot product](lecture_04/lecture_04.pdf)
 5. [Matrices and orthogonality](lecture_05/lecture_05.pdf)
 6. [Eigenvalues, eigenvectors and Markov chains](lecture_06/lecture_06.pdf)
