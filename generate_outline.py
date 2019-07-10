@@ -17,8 +17,21 @@ def item_tex(title):
 N = 0
 folder_exists = True
 
+# Latex outline
 outline_tex = open('outline_content.tex', 'w')
 outline_tex.write('\\begin{enumerate}[label=\\textbf{\\arabic*.}]\n')
+
+readme = open('README.md', 'w')
+readme.write('# Optimization and Computational Linear Algebra for Data Science\n')
+readme.write('\n')
+readme.write('This repository contains some notes for the course, as well as the homeworks.\n')
+readme.write('')
+readme.write('**These materials are not meant to be proper lecture notes.**\n')
+readme.write('They only contain the main results from the course. Examples, figures, and many proofs are missing.\n')
+
+readme.write('\n')
+readme.write('## Outline\n')
+
 
 while (folder_exists):
     N += 1
@@ -40,6 +53,7 @@ while (folder_exists):
         search = r'\\section{(.*?)}'
         sections = re.findall(search, tex_file, re.S)
 
+        readme.write(str(N)+ '. ' + title[0] + '\n')
         outline_tex.write(title_item_tex(title[0]))
         outline_tex.write('\\vspace{-0.2cm}\n')
         outline_tex.write('\\begin{enumerate}[label=\\arabic*.,noitemsep]\n')
