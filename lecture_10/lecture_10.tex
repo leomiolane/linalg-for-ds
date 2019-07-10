@@ -274,6 +274,8 @@ If $x^*$ is not feasible then the minimum of \eqref{eq:problem} can not be attai
 \section{Kuhn Tucker Theorem}
 
 In this section, we assume that the functions $f$, $g_1, \dots, g_m$ are convex and that $h_1, \dots, h_p$ are linear. We say then that the optimization problem \eqref{eq:problem} is convex.
+Notice in that case that the set of feasible points is convex, as the intersection of the convex sets $\{x | g_i(x) \leq 0 \}$ and $\{x|h_i(x) =0\}$.
+\\
 
 We will see in this section that \textbf{strong duality holds for convex problems under mild assumptions}, known as ``Slater's condition''.
 
@@ -281,7 +283,6 @@ We will see in this section that \textbf{strong duality holds for convex problem
 \begin{definition}[Slater's condition]
 	We say that the problem \eqref{eq:problem} verifies Slater's condition if there exists a feasible point $x$ such that $g_i(x) < 0$ for all $i \in \{1, \dots, m\}$.
 \end{definition}
-%One can verify that is the problem \eqref{eq:problem} is convex and verifies Slater's condition, then the constraints are qualified at every feasible point.
 
 \begin{theorem}[Kuhn Tucker]\label{th:kuhn_tucker}
 	Assume that the functions $f$, $g_1, \dots, g_m$ are \textbf{convex}, differentiable and that $h_1, \dots, h_p$ are linear. Assume that \eqref{eq:problem} verifies Slater's condition.
