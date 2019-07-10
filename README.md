@@ -5,14 +5,14 @@ This repository contains some notes for the course, as well as the homeworks.
 They only contain the main results from the course. Examples, figures, and many proofs are missing.
 
 ## Outline
-1. Vector spaces
-2. Linear transformations
-3. Rank
-4. Norm and dot product
-5. Matrices and orthogonality
-6. Eigenvalues, eigenvectors and Markov chains
-7. Singular value decomposition
-8. Graphs and Linear Algebra
-9. Convex functions
-10. Optimality conditions
-11. Gradient descent
+1. [Vector spaces](lecture_01/lecture_01.pdf)
+2. [Linear transformations](lecture_02/lecture_02.pdf)
+3. [Rank](lecture_03/lecture_03.pdf)
+4. [Norm and dot product](lecture_04/lecture_04.pdf)
+5. [Matrices and orthogonality](lecture_05/lecture_05.pdf)
+6. [Eigenvalues, eigenvectors and Markov chains](lecture_06/lecture_06.pdf)
+7. [Singular value decomposition](lecture_07/lecture_07.pdf)
+8. [Graphs and Linear Algebra](lecture_08/lecture_08.pdf)
+9. [Convex functions](lecture_09/lecture_09.pdf)
+10. [Optimality conditions](lecture_10/lecture_10.pdf)
+11. [Gradient descent](lecture_11/lecture_11.pdf)

@@ -53,7 +53,7 @@ while (folder_exists):
         search = r'\\section{(.*?)}'
         sections = re.findall(search, tex_file, re.S)
 
-        readme.write(str(N)+ '. ' + title[0] + '\n')
+        readme.write(str(N)+ '. [' + title[0] + '](' + folder_name + '/' + folder_name +'.pdf)' + '\n')
         outline_tex.write(title_item_tex(title[0]))
         outline_tex.write('\\vspace{-0.2cm}\n')
         outline_tex.write('\\begin{enumerate}[label=\\arabic*.,noitemsep]\n')
