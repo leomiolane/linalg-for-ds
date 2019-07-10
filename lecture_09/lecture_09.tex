@@ -25,6 +25,14 @@ Lecture 9: Convex functions}
 	$$
 \end{definition}
 
+\begin{figure}[h!]
+	\begin{center}
+	\includegraphics[width=0.4\textwidth]{figures/convex.pdf}
+	\hspace{0.9cm}
+	\includegraphics[width=0.4\textwidth]{figures/non_convex.pdf}
+	\end{center}
+	\caption{Left: a convex set. Right: a non-convex set.}
+\end{figure}
 \begin{definition}[Convex combination]
 	We say that $y \in \R^n$ is a convex combination of $x_1, \dots, x_k \in \R^n$ if there exists $\alpha_1, \dots, \alpha_k \geq 0$ such that
 	$$
@@ -47,6 +55,12 @@ We say that $f$ is \emph{strictly convex} is there is strict inequality in \eqre
 \\
 A function $f$ is concave (respectively strictly concave) if $-f$ is convex (respectively strictly convex).
 \end{definition}
+\begin{figure}[h!]
+	\begin{center}
+	\includegraphics[width=0.7\textwidth]{figures/convex_function.pdf}
+	\end{center}
+	\caption{A convex function.}
+\end{figure}
 
 Notice that a linear function is also a convex function since it verifies \eqref{eq:def_convex} with equality.
 
@@ -64,7 +78,7 @@ Notice that a linear function is also a convex function since it verifies \eqref
 \subsection{Convex function and differential}
 
 \begin{proposition}
-	A differentiable function $f: \R^n \to \R$ is convex if and only if for all $x,y$
+	A differentiable function $f: \R^n \to \R$ is convex if and only if for all $x,y \in \R^n$
 	$$
 	f(y) \geq f(x) + \nabla f(x)^{\sT} (y-x).
 	$$
