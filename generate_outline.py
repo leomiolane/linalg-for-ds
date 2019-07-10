@@ -30,8 +30,9 @@ readme.write('**These materials are not meant to be proper lecture notes.**\n')
 readme.write('They only contain the main results from the course. Examples, figures, and many proofs are missing.\n')
 
 readme.write('\n')
+readme.write('You can download all the notes [here](https://github.com/leomiolane/linalg-for-ds/raw/master/notes.zip) in *.zip* format.\n')
+readme.write('\n')
 readme.write('## Outline\n')
-
 
 while (folder_exists):
     N += 1
@@ -52,8 +53,8 @@ while (folder_exists):
 
         search = r'\\section{(.*?)}'
         sections = re.findall(search, tex_file, re.S)
-
-        readme.write(str(N)+ '. [' + title[0] + '](' + folder_name + '/' + folder_name +'.pdf)' + '\n')
+        url_github = 'https://github.com/leomiolane/linalg-for-ds/raw/master/'
+        readme.write(str(N)+ '. [' + title[0] + '](' + url_github + folder_name + '/' + folder_name +'.pdf)' + '\n')
         outline_tex.write(title_item_tex(title[0]))
         outline_tex.write('\\vspace{-0.2cm}\n')
         outline_tex.write('\\begin{enumerate}[label=\\arabic*.,noitemsep]\n')
