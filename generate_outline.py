@@ -41,7 +41,8 @@ while (folder_exists):
         sections = re.findall(search, tex_file, re.S)
 
         outline_tex.write(title_item_tex(title[0]))
-        outline_tex.write('\\begin{enumerate}[label=\\arabic*.]\n')
+        outline_tex.write('\\vspace{-0.2cm}\n')
+        outline_tex.write('\\begin{enumerate}[label=\\arabic*.,noitemsep]\n')
 
         for i in range(len(sections)):
             sections[i] = correct_ref(sections[i])
