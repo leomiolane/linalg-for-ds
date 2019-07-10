@@ -1,0 +1,95 @@
+\documentclass[11pt,nocut]{article}
+
+\usepackage{../latex_style/packages}
+\usepackage{../latex_style/notations}
+%\externaldocument{../lecture_02/lecture_02}
+\externaldocument{../lecture_07/lecture_07}
+
+
+\title{\vspace{-2.0cm}%
+	Optimization and Computational Linear Algebra for Data Science\\
+Lecture 9: Convex functions}
+\author{Léo \textsc{Miolane} \ $\cdot$ \ \texttt{leo.miolane@gmail.com}}
+\date{\today}
+
+\begin{document}
+\maketitle
+\input{../preamble.tex}
+
+\section{Convex sets}
+
+\begin{definition}[Convex set]
+	A set $C \subset \R^n$ is \emph{convex} if for all $x,y \in C$ and all $\alpha \in [0,1]$,
+	$$
+	\alpha x + (1-\alpha) y \in C.
+	$$
+\end{definition}
+
+\begin{definition}[Convex combination]
+	We say that $y \in \R^n$ is a convex combination of $x_1, \dots, x_k \in \R^n$ if there exists $\alpha_1, \dots, \alpha_k \geq 0$ such that
+	$$
+	y = \sum_{i=1}^k \alpha_i x_i \qquad \text{and} \qquad \sum_{i=1}^k \alpha_i = 1.
+	$$
+\end{definition}
+
+\begin{proposition}
+	If $C$ is convex then all convex combination of elements of $C$ remains in $C$.
+\end{proposition}
+
+\section{Convex functions}
+
+\begin{definition}
+	A function $f: \R^n \to \R$ is convex if for all $x,y \in \R^n$ and all $\alpha \in [0,1]$,
+	\begin{equation}\label{eq:def_convex}
+	f(\alpha x + (1-\alpha) y) \leq \alpha f(x) + (1-\alpha) f(y).
+\end{equation}
+\end{definition}
+
+Notice that a linear function is also a convex function since it verifies \eqref{eq:def_convex} with equality.
+
+\begin{exercise}
+	Let $f : \R^n \to \R$ a convex function and $a \in \R$. Show that the set 
+	$$
+	\big\{ x \in \R^n \, \big| \, f(x) \leq a \big\}
+	$$
+	is convex.
+\end{exercise}
+
+\section{Convex function and differential}
+
+\subsection{1-D case}
+
+\begin{proposition}
+	Let $f: \R \to \R$ be a differentiable function. Then $f$ is convex if and only if $f'$ is non-decreasing.
+\end{proposition}
+
+\begin{proposition}
+	Let $f: \R \to \R$ be a twice-differentiable function. Then $f$ is convex if and only if $\forall x \in \R,\ f''(x) \geq 0$.
+\end{proposition}
+
+\subsection{General case}
+
+\begin{proposition}
+	Let $f: \R^n \to \R$ be a differentiable function. Then $f$ is convex if and only 
+	$$
+	\forall x,y \in \R^n, \
+	\langle x - y, \, \nabla f(x) - \nabla f(y) \rangle \geq 0.
+	$$
+\end{proposition}
+
+\begin{proposition}
+	Let $f: \R^n \to \R$ be a twice-differentiable function. We denote by $H_f$ the Hessian matrix of $f$.
+	Then $f$ is convex if and only if for all $x \in \R^n$, $H_f(x)$ is positive semi-definite.
+\end{proposition}
+
+\section*{Further reading}
+
+See \cite{von2007tutorial} for a very nice introduction to spectral clustering and \cite{spielman2012spectral} for lecture notes on spectral graph theory.
+
+\vspace{1cm}
+\centerline{\pgfornament[width=7cm]{71}}
+
+
+\bibliographystyle{plain}
+\bibliography{../references.bib}
+\end{document}
