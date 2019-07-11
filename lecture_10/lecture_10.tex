@@ -57,6 +57,7 @@ We would now like to investigate constrained optimization problems:
 \end{equation}
 with variable $x \in \R^n$.
 Here we have $m$ inequality constraints $g_1(x) \leq 0, \dots, g_m(x)\leq  0$ and $p$ equality constraints $h_1(x) = 0, \dots, h_p(x) = 0$ to satisfy.
+We denote by $p^* \in \R \cup \{\pm \infty\}$ the optimal value of \eqref{eq:problem}.
 
 \begin{definition}[Feasible point]
 	A point $x \in \R^n$ is \emph{feasible} if it satisfies all the constraints: $g_1(x) \leq 0, \dots, g_m(x)\leq  0$ and $h_1(x) = 0, \dots, h_p(x) = 0$. We will denote by $F$ the set of feasible points.
@@ -139,12 +140,12 @@ This generalize to the case \eqref{eq:problem} where we have multiple constraint
 The scalars $\lambda_i, \nu_i$ are called \emph{Lagrange multipliers}.
 The first-order conditions of Theorem \ref{th:first_order} are often called the Karush-Kuhn-Tucker (KKT) conditions and Theorem \ref{th:first_order} is presented the following way.
 If $x$ is a solution of \eqref{eq:problem} then there exists numbers $\lambda_i,\nu_i$ such that:
-\begin{itemize}
-	\item \emph{Primal feasibility}: $g_i(x) \leq 0$ for $i=1, \dots, m$ and $h_i(x) = 0$ for $i=1, \dots, p$.
-	\item \emph{Dual feasibility}: $\lambda_i \geq 0$ for $i=1, \dots, m$.
-	\item \emph{Stationarity}: $\nabla f(x) + \sum\limits_{i=1}^m \lambda_i \nabla g_i(x) + \sum\limits_{i=1}^p \nu_i \nabla h_i(x) = 0$.
-	\item \emph{Complementary slackness}: $\lambda_i g_i(x) = 0$ for $i = 1 ,\dots, m$.
-\end{itemize}
+\begin{enumerate}[label=(\roman*)]
+	\item\label{item:kkt1} \emph{Primal feasibility}: $g_i(x) \leq 0$ for $i=1, \dots, m$ and $h_i(x) = 0$ for $i=1, \dots, p$.
+	\item\label{item:kkt2} \emph{Dual feasibility}: $\lambda_i \geq 0$ for $i=1, \dots, m$.
+	\item\label{item:kkt3} \emph{Stationarity}: $\nabla f(x) + \sum\limits_{i=1}^m \lambda_i \nabla g_i(x) + \sum\limits_{i=1}^p \nu_i \nabla h_i(x) = 0$.
+	\item\label{item:kkt4} \emph{Complementary slackness}: $\lambda_i g_i(x) = 0$ for $i = 1 ,\dots, m$.
+\end{enumerate}
 The terms ``primal'' and ``dual'' will be explained in the next section.
 
 \section{The Lagrangian and the dual problem}
@@ -165,7 +166,7 @@ L(x,\lambda,\nu)
 $$
 because $h_i(x) = 0$ and $\lambda_i g_i(x) \leq 0$. By taking the infimum in $x$ on both sides of the inequality we get a lower bound on the value of the optimization problem \eqref{eq:problem}:
 \begin{proposition}
-	Let $p^*$ be the optimal value of the problem \eqref{eq:problem}.
+	%Let $p^*$ be the optimal value of the problem \eqref{eq:problem}.
 	For all $\lambda_1, \dots, \lambda_m \geq 0$ and all $\nu_1, \dots,\nu_p \in \R$ we have:
 	\begin{equation}\label{eq:dual_lower_bound}
 		\ell(\lambda,\nu) \leq p^*.
@@ -183,14 +184,14 @@ We would like to make the lower bound \eqref{eq:dual_lower_bound} as tight as po
 	\end{array}
 \end{equation}
 Notice that the Lagrange dual function is always concave, as an infimum of linear functions. Hence, the dual problem might be easier to solve than the original problem.
-
-From \eqref{eq:dual_lower_bound} we deduce that the optimal value of the primal problem is greater or equal than the one of the dual problem:
-\begin{equation}\label{eq:weak_duality}
-	\sup_{\lambda \geq 0, \nu} \ell(\lambda,\nu) \leq p^*.
-\end{equation}
-This is known as \emph{weak duality}.
 \\
 
+We denote by $d^*$ the optimal value of the dual problem \eqref{eq:dual_problem}.
+From \eqref{eq:dual_lower_bound} we deduce that the optimal value of the primal problem is greater or equal than the one of the dual problem:
+\begin{equation}\label{eq:weak_duality}
+	d^* \leq p^*.
+\end{equation}
+This is known as \emph{weak duality}.
 Notice that $p^* = \inf_{x \in \R^n} F(x)$ where
 $$
 F(x) \defeq
@@ -218,27 +219,50 @@ When there is equality in \eqref{eq:weak_duality} (or equivalently in \eqref{eq:
 \end{equation}
 \end{definition}
 
-Notice that if $(x; \lambda,\nu)$ is a saddle point of $L$, then $x$ is solution of \eqref{eq:problem}. Indeed, by taking the supremum in \eqref{eq:def_saddle} we get:
+Notice that if $(x; \lambda,\nu)$ is a saddle point of $L$, then $x$ is solution of \eqref{eq:problem}. Indeed, by taking the supremum over $(\lambda',\nu')$ in \eqref{eq:def_saddle} we get:
 $$
 F(x) \leq L(x,\lambda,\nu) \leq L(x',\lambda,\nu) \leq F(x')
 $$
-for all $x' \in \R^n$. By an analog argument one also get that $(\lambda,\nu)$ is a solution of the dual problem \eqref{eq:dual_problem}.
-In fact, it is not difficult to verify the stronger statement below:
+for all $x' \in \R^n$. 
+This gives that $F(x) = \min F = L(x,\lambda,\nu)$.
+By a ``symmetric'' argument one also gets that $(\lambda,\nu)$ is a solution of the dual problem \eqref{eq:dual_problem} and $\ell(\lambda,\nu) = \max_{\lambda \geq 0,\nu} \ell(\lambda',\nu') = L(x,\lambda,\nu)$.
+
+We conclude that if $(x,\lambda,\nu)$ is a saddle point of $L$, then $x$ is primal optimal, that $(\lambda,\nu)$ is dual optimal and that strong duality holds. The next Theorem shows that the converse is true.
 
 \begin{theorem}\label{th:saddle}
-	$(x; \lambda,\nu) \in \R^n \times \R_{\geq 0}^m \times \R^p$ is a saddle-point of $L$ if and only if
-	\begin{equation}\label{eq:th_saddle}
-	F(x)
-	= 
-	\inf_{x'}\sup_{\lambda' \geq 0, \nu'} L(x',\lambda',\nu')
-	=
-	\sup_{\lambda' \geq 0, \nu'}
-	\inf_{x'}
-	L(x',\lambda',\nu') 
-	= \ell(\lambda,\nu),
-	\end{equation}
-	i.e.\ if and only if $x$ is a solution of the primal problem \eqref{eq:problem}, $(\lambda,\nu)$ is a solution of the dual problem \eqref{eq:dual_problem} and strong duality holds.
+	Let $(x; \lambda,\nu) \in \R^n \times \R_{\geq 0}^m \times \R^p$. Then
+	\vspace{-4mm}
+	$$
+	(x;\lambda,\nu) \ \text{is a saddle-point of} \ L
+	\quad \Longleftrightarrow \quad
+	\begin{cases}
+x \ \text{is a solution of the primal problem} \ \eqref{eq:problem}, \\
+(\lambda,\nu) \ \text{is a solution of the dual problem} \ \eqref{eq:dual_problem}, \\
+	\text{strong duality holds.}
+	\end{cases}
+	$$
+	\vspace{-3mm}
 \end{theorem}
+	%\begin{equation}\label{eq:th_saddle}
+	%F(x)
+	%= 
+	%\inf_{x'}\sup_{\lambda' \geq 0, \nu'} L(x',\lambda',\nu')
+	%=
+	%\sup_{\lambda' \geq 0, \nu'}
+	%\inf_{x'}
+	%L(x',\lambda',\nu') 
+	%= \ell(\lambda,\nu),
+	%\end{equation}
+	%i.e.\ if and only if 
+\begin{proof}
+Assume that $x$ is a solution of the primal problem \eqref{eq:problem}, that $(\lambda,\nu)$ is a solution of the dual problem \eqref{eq:dual_problem} and strong duality holds.
+We have
+$$
+\ell(\lambda,\nu) = \inf_{x'} L(x',\lambda,\nu) \leq
+L(x,\lambda,\nu) \leq \sup_{\lambda' \geq 0, \nu'} L(x,\lambda',\nu') = F(x).
+$$
+Since there is strong duality, we have $\ell(\lambda,\nu) = F(x)$: hence the inequalities above are in fact equalities. This implies that $(x;\lambda,\nu)$ is a saddle-point of $L$.
+\end{proof}
 
 \subsection{Solving the primal problem via the dual}
 
@@ -256,7 +280,7 @@ x^* \quad \text{is solution of the primal problem} \quad
 \end{array}
 \right.
 $$
-Notice that $(\lambda^*,\nu^*)$ maximizes the linear function $L(x^*, \cdot,\cdot)$ if and only $x^*$ is feasible. We obtain:
+Notice that $(\lambda^*,\nu^*)$ maximizes the linear function $L(x^*, \cdot,\cdot)$ if and only if $x^*$ is feasible. We obtain:
 $$
 x^* \quad \text{is solution of the primal problem} \quad
 \Longleftrightarrow
@@ -267,7 +291,7 @@ x^* \quad \text{is solution of the primal problem} \quad
 \end{cases}
 $$
 
-This is particularly useful, indeed the dual problem might be easier to solve than the primal one. In the case when there is strong duality, the equivalence above tells us that it suffices then to solve the \textbf{unconstrained} optimization problem $\min_{x \in \R^n} L(x,\lambda^*,\nu^*)$.
+This is particularly useful, because the dual problem might be easier to solve than the primal one. In the case when there is strong duality, the equivalence above tells us that it suffices then to solve the \textbf{unconstrained} optimization problem $\min_{x \in \R^n} L(x,\lambda^*,\nu^*)$.
 Assume for simplicity that $x \mapsto L(x,\lambda^*,\nu^*)$ admits a unique minimizer $x^*$. Then if $x^*$ is feasible then it is a solution of the problem \eqref{eq:problem}. 
 If $x^*$ is not feasible then the minimum of \eqref{eq:problem} can not be attained.
 
@@ -284,18 +308,50 @@ We will see in this section that \textbf{strong duality holds for convex problem
 	We say that the problem \eqref{eq:problem} verifies Slater's condition if there exists a feasible point $x$ such that $g_i(x) < 0$ for all $i \in \{1, \dots, m\}$.
 \end{definition}
 
+\begin{proposition}\label{prop:slater}
+	If the problem \eqref{eq:problem} is convex and verifies Slater's condition, then strong duality holds and the optimal value of the dual problem is attained at some $(\lambda,\nu) \in \R_{\geq 0}^m \times \R^p*$.
+\end{proposition}
+We refer to Section~5.2.3 of~\cite{boyd2004convex} for a proof of Proposition \ref{prop:slater}.
+
+
+
 \begin{theorem}[Kuhn Tucker]\label{th:kuhn_tucker}
-	Assume that the functions $f$, $g_1, \dots, g_m$ are \textbf{convex}, differentiable and that $h_1, \dots, h_p$ are linear. Assume that \eqref{eq:problem} verifies Slater's condition.
-	Then 
-	$x \in \R^n$ is solution of \eqref{eq:problem} if and only if $x$ is feasible and there exists $\lambda \in \R_{\geq 0}^m$ and $\nu \in \R^p$ such that
+	Assume that the functions $f$, $g_1, \dots, g_m$ are \textbf{convex}, differentiable and that $h_1, \dots, h_p$ are linear. Assume that strong duality holds and that the optimal value of the dual problem is attained at some $(\lambda,\nu) \in \R_{\geq 0}^m \times \R^p$. (This is for instance the case under Slater's condition).
+	\\
+
+	Then $x \in \R^n$ is solution of \eqref{eq:problem} if and only if $x$ is feasible and
 	\begin{equation}\label{eq:kkt}
 		\begin{cases}
 			\displaystyle \nabla f(x) + \sum_{i=1}^m \lambda_i \nabla g_i(x) + \sum_{i=1}^p \nu_i \nabla h_i(x) = 0 \\
 		\lambda_i g_i(x) = 0 \quad \text{for all} \quad i=1, \dots, m.
 		\end{cases}
 	\end{equation}
-	In other words, $x$ is a solution of \eqref{eq:problem} if and only if there exists $\lambda \in \R_{\geq 0}^m$ and $\nu \in \R^p$ such that $(x; \lambda, \nu)$ is a saddle point of the Lagrangian $L$.
+	In other words, a feasible point $x$ is a solution of \eqref{eq:problem} if and only if $(x; \lambda, \nu)$ is a saddle-point of the Lagrangian $L$.
 \end{theorem}
+
+\noindent Such couple $(\lambda,\nu)$ is sometimes called a ``dual certificate'', since it certifies the optimality of $x$.
+\\
+
+\begin{proof}[of Theorem \ref{th:kuhn_tucker}]
+	Let $x$ be a feasible point.
+	By Theorem \ref{th:saddle} we have
+	\begin{center}
+		$x$ solution of \eqref{eq:problem} $\Longleftrightarrow$ $(x; \lambda, \nu)$ is a saddle point of the Lagrangian $L$.
+	\end{center}
+	
+	We assumed that the problem \eqref{eq:problem} is convex. 
+	The function $L(\cdot, \lambda,\nu)$ is thus convex and the function $L(x,\cdot,\cdot)$ is concave (in fact it is affine). Hence
+	\begin{align*}
+			\nabla f(x) + \sum_{i=1}^m \lambda_i \nabla g_i(x) + \sum_{i=1}^p \nu_i \nabla h_i(x) = 0
+			\quad &\Longleftrightarrow \quad
+			x \ \text{minimizes} \ L(\cdot,\lambda,\nu)
+			\\
+		\lambda_i g_i(x) = 0 \quad \text{for all} \quad i=1, \dots, m
+		\quad &\Longleftrightarrow \quad
+			(\lambda,\nu) \ \text{maximizes} \ L(x,\cdot,\cdot).
+	\end{align*}
+	We get that \eqref{eq:kkt} $\Longleftrightarrow$ $(x;\lambda,\nu)$ is a saddle-point of $L$, which concludes the proof.
+\end{proof}
 
 \section*{Further reading}
 

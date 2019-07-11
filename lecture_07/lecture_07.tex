@@ -224,7 +224,7 @@ A v_i =
 	0 & \text{otherwise}.
 \end{cases}
 $$
-By orthogonality of $V$ and the construction of $\Sigma$ one verify easily that
+By orthogonality of $V$ and the construction of $\Sigma$ one verifies easily that
 $$
 U \Sigma V^{\sT} v_i = 
 \begin{cases}
@@ -249,7 +249,7 @@ It remains to show:
 \end{proof}
 \\
 
-\section{Interpretation of the SVD}
+\section{Interpretation and applications of the SVD}
 
 \subsection{Geometric interpretation}
 
@@ -271,6 +271,10 @@ The first right singular vector $v_1$ gives therefore the direction along which 
 	v_{k} = \argmax_{\|v\| = 1, \, v \perp v_1, \dots, v_{k-1}} \| A v \|^2.
 \end{equation}
 Hence $v_2$ gives the direction orthogonal to $v_1$ that maximizes the variance and so on...
+
+\subsection{Application: Principal Component Analysis (PCA)}
+
+
 \subsection{Best-fitting subspace}
 Let $a_1, \dots, a_n \in \R^d$ be $n$ points in $d$ dimensions.
 We consider the problem of finding the $k$-dimensional subspace (for $k = 1, \dots, n$) that fits ``the best'' these $n$ data points. By ``best'', we mean here the $k$-dimensional subspace $S$ that minimize the sum of the square distances to the $n$ points:
