@@ -219,7 +219,7 @@ When there is equality in \eqref{eq:weak_duality} (or equivalently in \eqref{eq:
 \end{equation}
 \end{definition}
 
-Notice that if $(x; \lambda,\nu)$ is a saddle point of $L$, then $x$ is solution of \eqref{eq:problem}. Indeed, by taking the supremum over $(\lambda',\nu')$ in \eqref{eq:def_saddle} we get:
+Notice that if $(x; \lambda,\nu)$ is a saddle-point of $L$, then $x$ is solution of \eqref{eq:problem}. Indeed, by taking the supremum over $(\lambda',\nu')$ in \eqref{eq:def_saddle} we get:
 $$
 F(x) \leq L(x,\lambda,\nu) \leq L(x',\lambda,\nu) \leq F(x')
 $$
@@ -227,7 +227,7 @@ for all $x' \in \R^n$.
 This gives that $F(x) = \min F = L(x,\lambda,\nu)$.
 By a ``symmetric'' argument one also gets that $(\lambda,\nu)$ is a solution of the dual problem \eqref{eq:dual_problem} and $\ell(\lambda,\nu) = \max_{\lambda \geq 0,\nu} \ell(\lambda',\nu') = L(x,\lambda,\nu)$.
 
-We conclude that if $(x,\lambda,\nu)$ is a saddle point of $L$, then $x$ is primal optimal, that $(\lambda,\nu)$ is dual optimal and that strong duality holds. The next Theorem shows that the converse is true.
+We conclude that if $(x,\lambda,\nu)$ is a saddle-point of $L$, then $x$ is primal optimal, that $(\lambda,\nu)$ is dual optimal and that strong duality holds. The next Theorem shows that the converse is true.
 
 \begin{theorem}\label{th:saddle}
 	Let $(x; \lambda,\nu) \in \R^n \times \R_{\geq 0}^m \times \R^p$. Then
@@ -309,7 +309,7 @@ We will see in this section that \textbf{strong duality holds for convex problem
 \end{definition}
 
 \begin{proposition}\label{prop:slater}
-	If the problem \eqref{eq:problem} is convex and verifies Slater's condition, then strong duality holds and the optimal value of the dual problem is attained at some $(\lambda,\nu) \in \R_{\geq 0}^m \times \R^p*$.
+	If the problem \eqref{eq:problem} is convex and verifies Slater's condition, then strong duality holds and the optimal value of the dual problem is attained at some $(\lambda,\nu) \in \R_{\geq 0}^m \times \R^p$.
 \end{proposition}
 We refer to Section~5.2.3 of~\cite{boyd2004convex} for a proof of Proposition \ref{prop:slater}.
 
@@ -336,7 +336,7 @@ We refer to Section~5.2.3 of~\cite{boyd2004convex} for a proof of Proposition \r
 	Let $x$ be a feasible point.
 	By Theorem \ref{th:saddle} we have
 	\begin{center}
-		$x$ solution of \eqref{eq:problem} $\Longleftrightarrow$ $(x; \lambda, \nu)$ is a saddle point of the Lagrangian $L$.
+		$x$ solution of \eqref{eq:problem} $\Longleftrightarrow$ $(x; \lambda, \nu)$ is a saddle-point of the Lagrangian $L$.
 	\end{center}
 	
 	We assumed that the problem \eqref{eq:problem} is convex. 
