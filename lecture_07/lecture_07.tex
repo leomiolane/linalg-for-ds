@@ -253,7 +253,7 @@ It remains to show:
 
 \subsection{Geometric interpretation}
 
-\subsection{``Maximal variance'' interpretation}
+\subsection{``Maximal variance'' interpretation}\label{sec:maximal_variance}
 Let $a_1, \dots, a_n \in \R^d$ be $n$ points in $d$ dimensions. We assume that this points are centered, meaning that 
 $$
 \sum_{i=1}^n a_i = 0.
@@ -273,6 +273,44 @@ The first right singular vector $v_1$ gives therefore the direction along which 
 Hence $v_2$ gives the direction orthogonal to $v_1$ that maximizes the variance and so on...
 
 \subsection{Application: Principal Component Analysis (PCA)}
+
+The SVD is commonly used for dimensionality reduction. Assume that we are given a dataset of $n$ points $a_1, \dots, a_n \in \R^d$, with $d$ very large. We at reprensenting this dataset in lower dimension, i.e.\ finding $\widetilde{a}_1, \dots, \widetilde{a}_n \in \R^k$ with $k$ ``small'', such that the points $(\widetilde{a}_1, \dots, \widetilde{a}_n)$ look like the original ones $(a_1, \dots, a_n)$. This could be for instance used
+\begin{itemize}
+	\item to reduce computing time.
+	\item to visualize an high-dimensional dataset in dimension $k=2$ or 3.
+\end{itemize}
+
+Assume that the dataset is centered (otherwise substract the mean $\mu = \frac{1}{n} \sum_{i=1}^n a_i$ to all the points). As we have seen in Section \ref{sec:maximal_variance} above, the $k$ first right-singular vectors $v_1, \dots, v_k$ gives the $k$ first orthogonal direction along which the variance of the dataset is maximal. 
+
+Hence, it is very natural to poject the original dataset $a_1, \dots, a_k$ on these directions $\Span(v_1, \dots, v_k)$: we are going to represent each point $a_i$ by the coordinates of its projection, in the basis $v_1, \dots, v_k$. 
+Since $(v_1, \dots, v_k)$ is orthonormal, the coordinate of $a_i$ along the vector $v_j$ is 
+$\langle a_i, v_j \rangle$. Consequently we take $$\widetilde{a}_i =(\langle v_1, a_i \rangle, \dots, \langle v_k, a_i \rangle) = V^{\sT}_{|k} a_i,$$
+where $V_{|k} = (v_1 | \cdots | v_k) \in \R^{d \times k}$.
+
+\paragraph{How do we chose $k$ ?}
+The dimension $k$ of the ouput space can be chosen by looking at the singular values of $A$. Let $\sigma_1 \geq \sigma_2 \geq \cdots \geq \sigma_{\min(n,d)}$ be the singular values of $A$. As seen in Section \ref{sec:maximal_variance}, the variance of the dataset along the direction $v_i$ is $\sigma_i^2$.
+
+\begin{figure}[h!]
+	\begin{center}
+	\includegraphics[width = 0.7\linewidth]{figures/elbow.pdf}
+	\end{center}
+	\caption{Singular values of $A$, ranked in decreasing order.}
+	\label{fig:elbow}
+\end{figure}
+
+A simple way to chose $k$ is therefore to plot the square singular values as on Figure \ref{fig:elbow} and look for a good cut-off ($k=4$ on Figure \ref{fig:elbow}). Doing so, one captures a fraction
+$$
+\frac{\sum_{i=1}^k \sigma_i^2}{\sum_{i=1}^{\min(n,d)} \sigma_i^2}
+$$
+of the total variance.
+
+\paragraph{Should we normalize the dataset?}
+It depends, but in general the answer is yes, especially if you have data from eterogeneous types.
+Imagine that you have measured the size and the weight of $n$ objects, and stored the information in vectors $a_i= (\text{size of object} \ i \ \text{in cm}, \ \text{weight of object} \ i \text{ in kg})$.
+If I change the weighting unit from kilograms to grams, this multiply the variance along the second coordinates by $10^6$, leading to very different principal components.
+Normalizing the dataset (i.e.\ dividing the columns of the data matrix by their standard deviation) allows to be unafftected by a change of units.
+
+However, this decreases a lot the variance of that has an high variance and amplify a lot the variance of columns with low variance. Hence you may not always want to normalize the columns.
 
 
 \subsection{Best-fitting subspace}

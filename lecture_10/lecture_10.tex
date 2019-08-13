@@ -309,14 +309,15 @@ We will see in this section that \textbf{strong duality holds for convex problem
 \end{definition}
 
 \begin{proposition}\label{prop:slater}
-	If the problem \eqref{eq:problem} is convex and verifies Slater's condition, then strong duality holds and the optimal value of the dual problem is attained at some $(\lambda,\nu) \in \R_{\geq 0}^m \times \R^p$.
+	If the problem \eqref{eq:problem} is convex and verifies Slater's condition, then strong duality holds.
+	Moreover if $p^*=d^*$ is finite then the optimal value of the dual problem is attained at some $(\lambda,\nu) \in \R_{\geq 0}^m \times \R^p$.
 \end{proposition}
 We refer to Section~5.2.3 of~\cite{boyd2004convex} for a proof of Proposition \ref{prop:slater}.
 
 
 
 \begin{theorem}[Kuhn Tucker]\label{th:kuhn_tucker}
-	Assume that the functions $f$, $g_1, \dots, g_m$ are \textbf{convex}, differentiable and that $h_1, \dots, h_p$ are linear. Assume that strong duality holds and that the optimal value of the dual problem is attained at some $(\lambda,\nu) \in \R_{\geq 0}^m \times \R^p$. (This is for instance the case under Slater's condition).
+	Assume that the functions $f$, $g_1, \dots, g_m$ are \textbf{convex}, differentiable and that $h_1, \dots, h_p$ are linear. Assume that strong duality holds, that $p^*=d^*$ is finite, and that the optimal value of the dual problem is attained at some $(\lambda,\nu) \in \R_{\geq 0}^m \times \R^p$. (This is for instance the case under Slater's condition).
 	\\
 
 	Then $x \in \R^n$ is solution of \eqref{eq:problem} if and only if $x$ is feasible and
