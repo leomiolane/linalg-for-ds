@@ -53,6 +53,11 @@ Notice that $A$ is a symmetric matrix.
 	$$
 \end{definition}
 
+\begin{remark}
+	There exists a ``normalized Laplacian'' matrix $L_{\rm norm} = D^{-1/2} L D^{-1/2} = \Id - D^{-1/2} A D^{-1/2}$. Both $L$ and $L_{\rm norm}$ enjoy similar properties.
+	While we focus for simplicity on $L$ in this lecture, several arguments advocate for using $L_{\rm norm}$ instead of $L$ for clustering applications, see the discussion in \cite[Section~8.4]{von2007tutorial}.
+\end{remark}
+
 \begin{proposition}
 	The matrix $L$ satisfies the following properties:
 	\begin{enumerate}
@@ -212,11 +217,20 @@ $$
 $$
 By Proposition \ref{prop:eigen_var} from Lecture~7, we know that the minimum is achieved by the Fiedler eigenvector $v_2$ (recall that $v_1 = \1$ is the first eigenvector of the Laplacian).
 
-However $v_2$ may not belong to $\{\pm 1\}^n$. So in order to obtain a partition $S,S^c$ from $v_2$, we finally perform a ``rounding procedure'':
+However $v_2$ may not belong to $\{\pm 1\}^n$. So in order to obtain a partition $(S,S^c)$ from $v_2$, we finally perform a ``rounding procedure'':
 $$
 S = \{ i \, | \, v_2(i) \geq 0\}.
 $$
 This is exactly the spectral clustering studied in the previous sections.
+
+\section{Spectral clustering beyond graphs}
+
+A natural generalization is to consider weighted graphs, where each edge has a weight indicating how close two connected neighbors are.
+This amounts to allow the entries of the adjacency matrix $A$ to take different values from $0$ and $1$: $A_{i,j}$ quantify how ``close'' $i$ and $j$ are.
+We call such matrices ``similarity matrices''.
+
+We can straightforwardly extend all the object defined above in the particular case of adjacency matrices to the case of similarity matrices. For instance $\deg(i) = \sum_{j} S_{i,j}$.
+
 
 \section*{Further reading}
 
