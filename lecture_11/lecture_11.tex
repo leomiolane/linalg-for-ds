@@ -93,17 +93,99 @@ $$
 $V \Sigma^2 V^{\sT}$ is therefore the SVD of $A^{\sT} A$. Hence $(A^{\sT} A)^{\dagger} = V \Sigma^{-2} V^{\sT}$.
 This gives $(A^{\sT}A)^{\dagger} A^{\sT} = V \Sigma^{-2} V^{\sT}V \Sigma U^{\sT} = A^{\dagger}$. We conclude:
 
-\begin{proposition}
+\begin{proposition}[Least squares]\label{prop:least_squares}
 	The set of solution of the minimization problem $\min_{x \in \R^n} \|Ax - y\|^2$ is
 	$$
 	A^{\dagger} y + \Ker(A).
 	$$
 \end{proposition}
 
-
 \section{Penalized least squares: Ridge regression and Lasso}
 
+When $\Ker(A) \neq \emptyset$ the least squares problem \eqref{eq:least_squares} has an infinite number of solutions: which one should we pick?
+
+\subsection{Ridge regression}
+
+The Ridge regression adds a $\ell_2$ penalty to the least square problem, and minimizes
+\begin{equation}\label{eq:ridge}
+	\min_{x \in \R^d} \Big\{ \| Ax - y \|^2 + \lambda \|x\|^2 \Big\},
+\end{equation}
+for some penalization parameter $\lambda >0$.
+\begin{exercise}
+	Show that \eqref{eq:ridge} admits a unique solution given by
+	$$
+	x^{\rm Ridge} = (A^{\sT} A + \lambda \Id)^{-1} A^{\sT} y.
+	$$
+\end{exercise}
+
+\subsection{Lasso}
+
+The Lasso adds a $\ell_1$ penalty to the least square problem, and minimizes
+\begin{equation}\label{eq:lasso}
+	\min_{x \in \R^d} \Big\{ \frac{1}{2} \| Ax - y \|^2 + \lambda \|x\|_1 \Big\},
+\end{equation}
+for some penalization parameter $\lambda >0$.
+The Lasso has the wonderful property of \emph{feature selection}: the solution $x^*$ of \eqref{eq:lasso} is likely to be \emph{sparse} (many coordinates $x^*_j$ will be set to $0$).
+In words, the Lasso estimator discards the ``useless features'' by setting its corresponding coefficient to $0$. 
+This is particularly nice for the interpretability of the results: in many application, each data point $a_i$ has an enormous number of features ($d$ very large), but only a small number of them are useful to predict the label $y_i$.
+\\
+
+We can gain some intuition on this phenomena on Figure.
+
+\\
+
+\paragraph{Lasso for orthonormal design}
+In general there is no closed form formula for the Lasso estimator. It is however possible to derive one in the case where the matrix $A$ has orthonormal columns: $A^{\sT} A = \Id$. 
+The least square estimator is then given by $x^{\rm LS} = A^{\sT} y$ and the Lasso cost function becomes
+\begin{equation}\label{eq:lasso_o}
+\frac{1}{2} \| Ax - y \|^2 + \lambda \|x\|_1 
+= \frac{1}{2} \|x\|^2 - \langle x^{\rm LS}, x \rangle + \frac{1}{2} \|y\|^2 + \lambda \|x\|_1.
+\end{equation}
+The minimizer of \eqref{eq:lasso_o} is therefore the minimizer of
+$$
+\frac{1}{2} \|x\|^2 - \langle x^{\rm LS}, x \rangle + \lambda \|x\|_1
+=
+\sum_{j=1}^d \frac{x_j^2}{2} - x^{\rm LS}_j x_j + \lambda |x_j| 
+=
+\sum_{j=1}^d f_{x_j^{\rm LS}}(x_j),
+$$
+where $f_{x_0}(x) \defeq \frac{1}{2}x^2 - x_0 x + \lambda |x|$.
+
+\begin{exercise}
+	Show that the function $f_{x_0}$ admits a unique minimizer given by
+	$$
+	x^* = \eta(x_0; \lambda),
+	$$
+	where $\eta$ denotes the ``soft-thresholding'' function:
+	$$
+	\eta(x_0;\lambda) = 
+	\begin{cases}
+		x_0-\lambda & \text{if} \quad x_0 \geq \lambda \\
+		0 & \text{if} \quad -\lambda \leq x_0 \leq \lambda \\
+		x_0 + \lambda & \text{if} \quad x_0 \leq -\lambda.
+	\end{cases}
+	$$
+\end{exercise}
+\vspace{2mm}
+
+We conclude that the Lasso estimator is given by
+$$
+x^{\rm Lasso}_{j} = \eta\big(x_j^{\rm LS}; \lambda\big) \qquad \text{for} \quad j=1, \dots, d.
+$$
+This formula confirms the intuition of Figure: the Lasso estimator translates the coefficients of the least-square solution by $\lambda$, truncating at $0$.
+
 \section{Norms for matrices}
+
+Before looking at low-rank matrix estimation and matrix completion, we need to look at different norms we can have for matrices. Recall that $\R^{n \times m}$, the set of $n \times m$ matrices, is a vector space (of dimension $nm$).
+\\
+
+The most obvious norm to consider is the equivalent of the $\ell_2$ norm, called the Frobenius norm:
+\begin{definition}[Frobenius norm]
+	The Frobenius norm of a matrix $A \in \R^{n \times m}$ is defined as
+	$$
+	\|A\|_F = \sqrt{\sum_{i=1}^n \sum_{j=1}^m A_{i,j}^2}. 
+	$$
+\end{definition}
 
 \section{Low-rank matrix estimation and matrix completion}
 
