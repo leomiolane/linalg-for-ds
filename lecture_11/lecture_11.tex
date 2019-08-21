@@ -18,6 +18,88 @@ Lecture 11: Linear regression, matrix completion}
 
 \section{Least squares}
 
+Assume that we are given point $a_i = (a_{i,1}, \dots, a_{i,d}) \in \R^d$ with labels $y_i \in \R$ for $i=1 \dots n$.
+We aim at finding a vector $x\in\R^d$ such that
+$$
+y_i \simeq \langle a_i, x \rangle = \sum_{j=1}^d a_{i,j} x_j, \qquad \text{for} \ \ i=1 \dots n.
+$$
+If we denote by $A$ the $n \times d$ matrix whose rows are $a_1, \dots, a_n$, i.e.\ $A_{i,j} = a_{i,j}$, we are looking for some $x$ such that $Ax \simeq y$.
+
+\subsection{Solving the system $Ax=y$}
+
+As we have seen in Lecture 2, we can distinguish two cases:
+\begin{itemize}
+	\item If $y \not\in \Im(A)$ then the equation $Ax=y$ does not admit any solution (by definition of $\Im(A)$).
+	\item If $y \in \Im(A)$ then the equation $Ax=y$ admits at least a solution $x_0$ (by definition of $\Im(A)$). Moreover, the set of (all) solutions is
+		$$
+		x_0 + \Ker(A) = \{x_0 + v \, | \, v \in \Ker(A) \}.
+		$$
+		In particular, if $\Ker(A) = \{0\}$ then the equation admits a unique solution.
+\end{itemize}
+
+In the second case, one can obtain an expression for a particular solution $x_0$ using the SVD of $A$.
+Let $r = \rank(A)$, $\sigma_1, \sigma_2, \dots, \sigma_r >0$ be the non-zero singular values of $A$ and $\Sigma = \Diag(\sigma_1, \dots, \sigma_r)$. Finally, let $A = U \Sigma V^{\sT}$ be the SVD of $A$, where $V \in \R^{n \times r}$ and $U \in \R^{d \times r}$ are matrices that have orthonormal columns. 
+\\
+
+Notice that $V^{\sT} V = \Id$ and that $U U^{\sT}$ is the orthogonal projection on $\Im(A)$. Hence, if we let $x_0 = V \Sigma^{-1} U^{\sT} y$, we have
+$$
+A x_0 =U \Sigma V^{\sT}V \Sigma^{-1} U^{\sT} y
+= U U^{\sT} y = y
+$$
+because we assumed that $y \in \Im(A)$.
+This motivates the following definition:
+\begin{definition}[Moore-Penrose pseudo-inverse]
+	The matrix $A^{\dagger} \defeq V \Sigma^{-1} U^{\sT}$ is called the (Moore-Penrose) pseudo-inverse of $A$.
+\end{definition}
+
+Notice that in the case where $A$ is invertible, $A^{\dagger} = A^{-1}$.
+From the analysis above, we deduce:
+\begin{proposition}\label{prop:linear_system}
+	The set of solution of the linear system $Ax = y$ is
+	\begin{itemize}
+		\item $\emptyset$ if $y \not\in \Im(A)$.
+		\item $A^{\dagger}y + \Ker(A)$ otherwise.
+	\end{itemize}
+\end{proposition}
+
+\subsection{Least squares}
+
+In general, there is no reason for $y$ to belong to $\Im(A)$, especially when $n > d$. (Exercise: why?)
+Therefore one is rather interested by solving
+\begin{equation}\label{eq:least_squares}
+\min_{x \in \R^d} \| Ax - y \|^2.
+\end{equation}
+The function $f: x \mapsto \|Ax - y\|^2$ is convex (Exercise: why?) and differentiable. Hence
+$x$ is solution of \eqref{eq:least_squares} if and only if $\nabla f (x) = 0$. Compute
+$$
+f(x) = (Ax - y)^{\sT}(Ax - y) = x^{\sT} A^{\sT} A x - 2 y^{\sT} A x + \|y\|^2.
+$$
+Hence $\nabla f(x) = 2 A^{\sT} A x - 2 A^{\sT} y$. We conclude
+$$
+x \ \ \text{is solution of} \ \ \eqref{eq:least_squares} \qquad
+\Longleftrightarrow
+\qquad A^{\sT} A x = A^{\sT} y.
+$$
+If $A^{\sT} A$ is invertible there is a unique minimizer $x^* = (A^{\sT} A)^{-1} A^{\sT} y$.
+In the general case, we see that the solutions of \eqref{eq:least_squares} are the solutions of the linear system $A^{\sT} A x = A^{\sT} y$. From Proposition \ref{prop:linear_system} we get that the solutions of \eqref{eq:least_squares} are
+$$
+(A^{\sT}A)^{\dagger} A^{\sT}y + \Ker(A^{\sT} A).
+$$
+This expression simplifies a lot. First (exercise!) we have $\Ker(A^{\sT} A) = \Ker(A)$.
+Then if we let $A = U \Sigma V^{\sT}$ be the SVD of $A$, we have
+$$
+A^{\sT} A = V \Sigma^2 V^{\sT}.
+$$
+$V \Sigma^2 V^{\sT}$ is therefore the SVD of $A^{\sT} A$. Hence $(A^{\sT} A)^{\dagger} = V \Sigma^{-2} V^{\sT}$.
+This gives $(A^{\sT}A)^{\dagger} A^{\sT} = V \Sigma^{-2} V^{\sT}V \Sigma U^{\sT} = A^{\dagger}$. We conclude:
+
+\begin{proposition}
+	The set of solution of the minimization problem $\min_{x \in \R^n} \|Ax - y\|^2$ is
+	$$
+	A^{\dagger} y + \Ker(A).
+	$$
+\end{proposition}
+
 
 \section{Penalized least squares: Ridge regression and Lasso}
 
