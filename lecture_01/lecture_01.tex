@@ -42,7 +42,7 @@ Simply remember that a vector space is a set whose elements are called \emph{vec
 	\end{enumerate}
 \end{definition}
 
-From now we will ignore $\cdot$ and simply write $\alpha \vec{x}$ instead of $\alpha \cdot \vec{x}$.
+From now we will ignore $\cdot$ and simply write $\alpha \vec{x}$ instead of $\alpha \cdot \vec{x}$. We will also remove the arrows and write $x$ instead of $\vec{x}$.
 
 \begin{example}
 	\leavevmode
@@ -76,7 +76,7 @@ From now we will ignore $\cdot$ and simply write $\alpha \vec{x}$ instead of $\a
 \end{example}
 
 \begin{definition}[Subspace]
-	We say that a non-empty subset $S$ of a vector space $V$ is a \emph{subspace} is it is stable by addition and multiplication by a scalar, that is if
+	We say that a non-empty subset $S$ of a vector space $V$ is a \emph{subspace} if it is stable by addition and multiplication by a scalar, that is if
 	\begin{enumerate}[label=(\roman*),noitemsep]
 		\item for all $x,y \in S$ we have $x + y \in S$,
 		\item for all $x \in S$ and all $\alpha \in \R$ we have $\alpha x \in S$.
@@ -163,7 +163,7 @@ Theorem \ref{th:lin_dep} will be proved in Section \ref{sec:proof_lin_dep}.
 	\end{itemize}
 \end{definition}
 The dimension is therefore the minimum number of vector needed to span the vector space.
-In this course we are going to focus mostly on finite dimensional spaces.
+In this course we are going to focus mostly on finite dimensional spaces and $\R^n$ in particular.
 \\
 \begin{proof}
 	We proceed by contradiction and assume that there exists two basis $(v_1, \dots, v_n)$ and $(x_1, \dots, x_k)$ of $V$ such that $k \neq n$. Without loss of generality we can assume that $k > n$. For $i = 1, \dots, k$ we have
@@ -173,6 +173,18 @@ In this course we are going to focus mostly on finite dimensional spaces.
 	because $(v_1, \dots, v_n)$ is a basis of $V$. We can therefore apply Theorem \ref{th:lin_dep} to get that $x_1, \dots, x_{n+1}$ are linearly dependent. This contradicts the fact that $(x_1, \dots, x_{k})$ is a basis.
 \end{proof}
 \\
+
+\begin{example}
+	Let us define the vectors $e_1, \dots, e_n \in \R^n$ by
+	\begin{align*}
+		e_1 &= (1, 0, 0, \dots, 0) \\
+		e_2 &= (0, 1, 0, \dots, 0) \\
+		\vdots & \\
+		e_n &= (0, 0, 0, \dots, 1).
+	\end{align*}
+	One can verify (exercise!) that the family $(e_1, \dots, e_n)$ is a basis of $\R^n$. This basis is called the ``canonical basis'' of $\R^n$. We conclude that $\R^n$ has dimension $n$.
+\end{example}
+\vspace{2mm}
 
 \begin{proposition}[Coordinates]
 	Let $(v_1, \dots, v_n)$ be a basis of $V$. Then for every $x \in V$ there exists a unique vector $(\alpha_1, \dots, \alpha_n) \in \R^n$ such that
@@ -192,10 +204,9 @@ In this course we are going to focus mostly on finite dimensional spaces.
 	$$
 	(\alpha_1 - \beta_1) v_1 + \cdots + (\alpha_n - \beta_n) v_n = 0.
 	$$
-	The vectors $v_1, \dots, v_n$ are linearly independent because they forms a basis. Consequently $\alpha_1 - \beta_1 = \alpha_2 - \beta_2 = \cdots \alpha_n - \beta_n = 0$, i.e.\ $(\alpha_1, \dots, \alpha_n) = (\beta_1, \dots, \beta_n)$.
+	The vectors $v_1, \dots, v_n$ are linearly independent because they forms a basis. Consequently $\alpha_1 - \beta_1 = \alpha_2 - \beta_2 = \cdots =  \alpha_n - \beta_n = 0$, i.e.\ $(\alpha_1, \dots, \alpha_n) = (\beta_1, \dots, \beta_n)$.
 \end{proof}
 \\
-
 \begin{definition}[Lines, hyperplanes]
 	Let $S$ be a subspace of $\R^n$.
 	\begin{itemize}
@@ -203,6 +214,14 @@ In this course we are going to focus mostly on finite dimensional spaces.
 		\item We call $S$ an \emph{hyperplane} if $\dim(S) = n-1$.
 	\end{itemize}
 \end{definition}
+\begin{proposition}
+	Let	$U$ and $V$ be two subspaces of $\R^n$. Assume that $U \subset V$. Then
+	$$
+	\dim(U) \leq \dim(V) \leq n.
+	$$
+	If \textbf{moreover} $\dim(U) = \dim(V)$, then $U = V$.
+\end{proposition}
+
 
 
 \section{Proof of Theorem \ref{th:lin_dep}}\label{sec:proof_lin_dep}

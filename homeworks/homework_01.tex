@@ -7,7 +7,7 @@
 	Optimization and Computational Linear Algebra for Data Science\\
 Homework 1: Vector spaces}
 %\author{Léo \textsc{Miolane} \ $\cdot$ \ \texttt{leo.miolane@gmail.com}}
-\date{\vspace{-1cm}Due on September 7, 2019}
+\date{\vspace{-1cm}Due on September 10, 2019}
 \setcounter{section}{1}
 
 \begin{document}
@@ -15,13 +15,13 @@ Homework 1: Vector spaces}
 \input{./preamble_homeworks.tex}
 
 
-\begin{problem}
+\begin{problem}[2 points]
 	Let $u,v$ be two vectors of $\R^2$. Show that either they are linearly dependent or that they span the whole of $\R^2$.
 \end{problem}
 
 \vspace{1mm}
 
-\begin{problem}
+\begin{problem}[3 points]
 	Are the following sets subspaces of $\R^3$? Justify your answer.
 	\begin{enumerate}[label=\normalfont(\textbf{\alph*})]
 		\item $E_1= \big\{ (x,y,z) \in \R^3 \, \big| \, x - 2y + z= 0 \big\}$.
@@ -32,15 +32,16 @@ Homework 1: Vector spaces}
 
 \vspace{1mm}
 
-\begin{problem}\label{prob:add_vector}
+\begin{problem}[3 points]\label{prob:add_vector}
 	Suppose that $v_1, \dots, v_k \in \R^n$ are linearly independent. Let $x \in \R^n$ and assume that $x \not\in \Span(v_1,\dots, v_k)$.
 	Show that $(v_1,\dots,v_k,x)$ are linearly independent.
 \end{problem}
 
 \vspace{1mm}
 
-\begin{problem}
+\begin{problem}[2 points]
 	Let $S$ be a subspace of $\R^n$ and $v_1, \dots, v_k \in S$.
+	We assume that $v_1, \dots, v_k$ are linearly independent.
 	Show (using the result of Problem~\ref{prob:add_vector}) that one can find vectors $v_{k+1}, \dots, v_{k+m}$ in $S$ such that $(v_1, \dots, v_{k+m})$ is a basis of $S$.
 \end{problem}
 
