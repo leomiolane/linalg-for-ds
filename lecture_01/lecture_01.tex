@@ -140,12 +140,13 @@ $$
 then $\alpha_1 x_1 + \cdots + \alpha_{i-1} x_{i-1} - x_i + \alpha_{i+1} x_{i+1} + \cdots \alpha_k x_k = 0$ which gives that $x_1, \dots, x_k$ are linearly dependent. 
 \\
 
-\begin{theorem}\label{th:lin_dep}
+\begin{lemma}\label{lem:lin_dep}
 	Let $v_1, \dots, v_n \in V$ and suppose that we have vectors $x_1, \dots, x_k \in V$ such that $k > n$ and $x_i \in \Span(v_1, \dots, v_n)$ for all $i \in \{1, \dots, k\}$.
 	Then $x_1, \dots, x_k$ are linearly dependent.
-\end{theorem}
-Theorem \ref{th:lin_dep} will be proved in Section \ref{sec:proof_lin_dep}.
-\\
+\end{lemma}
+Lemma \ref{lem:lin_dep} will be proved at the end of the notes.
+
+\section{Basis, dimension}
 
 \begin{definition}[Basis]
 	A family $(x_1, \dots, x_n)$ of vectors of $V$ is a basis of $V$ if
@@ -170,7 +171,7 @@ In this course we are going to focus mostly on finite dimensional spaces and $\R
 	$$
 	x_i \in V = \Span(v_1, \dots, v_n),
 	$$
-	because $(v_1, \dots, v_n)$ is a basis of $V$. We can therefore apply Theorem \ref{th:lin_dep} to get that $x_1, \dots, x_{n+1}$ are linearly dependent. This contradicts the fact that $(x_1, \dots, x_{k})$ is a basis.
+	because $(v_1, \dots, v_n)$ is a basis of $V$. We can therefore apply Lemma \ref{lem:lin_dep} to get that $x_1, \dots, x_{n+1}$ are linearly dependent. This contradicts the fact that $(x_1, \dots, x_{k})$ is a basis.
 \end{proof}
 \\
 
@@ -224,7 +225,7 @@ In this course we are going to focus mostly on finite dimensional spaces and $\R
 
 
 
-\section{Proof of Theorem \ref{th:lin_dep}}\label{sec:proof_lin_dep}
+\section*{Proof of Lemma \ref{lem:lin_dep}}\label{sec:proof_lin_dep}
 Notice that it suffices to prove the theorem for $k = n+1$ because if $x_1, \dots, x_{n+1}$ are linearly dependent, so are $x_1, \dots, x_{n+1}, \dots x_k$. We will therefore show for all $n \geq 1$
 \begin{align*}
 	\mathcal{H}_n: \text{<< } &\text{For all } v_1, \dots, v_{n} \in V \ \text{and all } x_{1}, \dots x_{n+1} \in \Span(v_1, \dots, v_n), \\ &\text{the vectors } x_1, \dots, x_{n+1} \ \text{are linearly dependent. >>}
