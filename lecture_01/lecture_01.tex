@@ -88,7 +88,7 @@ Notice that a subspace is also a vector space!
 \section{Linear dependency}
 
 \begin{definition}[Linear combination]
-	Let $V$ be a vector space and $A \subset V$. We say that $y \in V$ is a \emph{linear combination} of elements of $A$ if there exist $k \in \N$, $x_1, \dots, x_k \in A$ and $\alpha_1, \dots, \alpha_k \in \R$ such that
+	Let $V$ be a vector space and $x_1, \dots, x_k \in V$. We say that $y \in V$ is a \emph{linear combination} of the vectors $x_1, \dots, x_k$ if there exists $\alpha_1, \dots, \alpha_k \in \R$ such that
 	$$
 	y = \sum_{i=1}^k \alpha_i x_i.
 	$$
@@ -101,23 +101,28 @@ Remember that a linear combination is always a \emph{finite} sum.
 \end{remark}
 
 \begin{definition}[Span]
-	Let $V$ be a vector space and $A \subset V$. The \emph{linear span} of $A$ is the set of all linear combinations of elements of $A$:
-	$$
-	\Span(A) = 
-	\Big\{ y \, \Big| \, \exists k \in \N, \, x_1, \dots, x_k \in A, \, \alpha_1, \dots, \alpha_k \in \R, \, y = \sum_{i=1}^k \alpha_i x_i \Big\}.
-	$$
-\end{definition}
-Given vectors $x_1, \dots x_k \in V$ we will simply write
+	%Let $V$ be a vector space and $A \subset V$. The \emph{linear span} of $A$ is the set of all linear combinations of elements of $A$:
+	%$$
+	%\Span(A) = 
+	%\Big\{ y \, \Big| \, \exists k \in \N, \, x_1, \dots, x_k \in A, \, \alpha_1, \dots, \alpha_k \in \R, \, y = \sum_{i=1}^k \alpha_i x_i \Big\}.
+	%$$
+	Let $x_1, \dots, x_k$ be vectors in a vector space $V$. We define the \emph{linear span} of $x_1, \dots, x_k$ as the set of all linear combinations of these vectors:
 $$
-\Span(x_1, \dots, x_k) = \Span(\{x_1, \dots, x_k \}) =
+\Span(x_1, \dots, x_k) \defeq
 \Big\{ \alpha_1 x_1 + \cdots + \alpha_k x_k \, \Big| \, \alpha_1, \dots, \alpha_k \in \R \Big\}.
 $$
+\end{definition}
+%Given vectors $x_1, \dots x_k \in V$ we will simply write
+%$$
+%\Span(x_1, \dots, x_k) = \Span(\{x_1, \dots, x_k \}) =
+%\Big\{ \alpha_1 x_1 + \cdots + \alpha_k x_k \, \Big| \, \alpha_1, \dots, \alpha_k \in \R \Big\}.
+%$$
 
-One can easily verify (exercise!) that $\Span(A)$ is a subspace of $V$. One can also verify (exercise!) that
+One can easily verify (exercise!) that $\Span(x_1,\dots,x_k)$ is a subspace of $V$. One can also verify (exercise!) that
 $$
-\Span(A) = \bigcap_{\substack{S \ \text{subspace of} \ V \\ A \subset S}} S,
+\Span(x_1, \dots, x_k) = \bigcap_{\substack{S \ \text{subspace of} \ V \\ x_1, \dots, x_k \in S}} S,
 $$
-$\Span(A)$ is therefore the \textbf{smallest} (for the inclusion $\subset$) \textbf{subspace of $S$ that contains $A$}.
+$\Span(x_1,\dots,x_k)$ is therefore the \textbf{smallest} (for the inclusion $\subset$) \textbf{subspace of $S$ that contains $x_1,\dots,x_k$}.
 
 \begin{definition}[Linear dependency]
 	Vectors $x_1, \dots x_k \in V$ are \emph{linearly dependent} is there exists $\alpha_1, \dots, \alpha_k \in \R$ \textbf{that are not all zero} such that 
@@ -138,13 +143,7 @@ $$
 x_i = \alpha_1 x_1 + \cdots + \alpha_{i-1} x_{i-1} + \alpha_{i+1} x_{i+1} + \cdots \alpha_k x_k = 0.
 $$
 then $\alpha_1 x_1 + \cdots + \alpha_{i-1} x_{i-1} - x_i + \alpha_{i+1} x_{i+1} + \cdots \alpha_k x_k = 0$ which gives that $x_1, \dots, x_k$ are linearly dependent. 
-\\
 
-\begin{lemma}\label{lem:lin_dep}
-	Let $v_1, \dots, v_n \in V$ and suppose that we have vectors $x_1, \dots, x_k \in V$ such that $k > n$ and $x_i \in \Span(v_1, \dots, v_n)$ for all $i \in \{1, \dots, k\}$.
-	Then $x_1, \dots, x_k$ are linearly dependent.
-\end{lemma}
-Lemma \ref{lem:lin_dep} will be proved at the end of the notes.
 
 \section{Basis, dimension}
 
@@ -166,7 +165,14 @@ Lemma \ref{lem:lin_dep} will be proved at the end of the notes.
 The dimension is therefore the minimum number of vector needed to span the vector space.
 In this course we are going to focus mostly on finite dimensional spaces and $\R^n$ in particular.
 \\
+
 \begin{proof}
+	We will need the following lemma:
+	\begin{lemma}\label{lem:lin_dep}
+		Let $v_1, \dots, v_n \in V$ and suppose that we have vectors $x_1, \dots, x_k \in V$ such that $k > n$ and $x_i \in \Span(v_1, \dots, v_n)$ for all $i \in \{1, \dots, k\}$.
+		Then $x_1, \dots, x_k$ are linearly dependent.
+	\end{lemma}
+	Lemma \ref{lem:lin_dep} will be proved at the end of the notes.
 	We proceed by contradiction and assume that there exists two basis $(v_1, \dots, v_n)$ and $(x_1, \dots, x_k)$ of $V$ such that $k \neq n$. Without loss of generality we can assume that $k > n$. For $i = 1, \dots, k$ we have
 	$$
 	x_i \in V = \Span(v_1, \dots, v_n),
@@ -186,6 +192,21 @@ In this course we are going to focus mostly on finite dimensional spaces and $\R
 	One can verify (exercise!) that the family $(e_1, \dots, e_n)$ is a basis of $\R^n$. This basis is called the ``canonical basis'' of $\R^n$. We conclude that $\R^n$ has dimension $n$.
 \end{example}
 \vspace{2mm}
+
+\begin{definition}[Lines, hyperplanes]
+	Let $S$ be a subspace of $\R^n$.
+	\begin{itemize}
+		\item We call $S$ a \emph{line} if $\dim(S) = 1$.
+		\item We call $S$ an \emph{hyperplane} if $\dim(S) = n-1$.
+	\end{itemize}
+\end{definition}
+\begin{proposition}
+	Let	$U$ and $V$ be two subspaces of $\R^n$. Assume that $U \subset V$. Then
+	$$
+	\dim(U) \leq \dim(V) \leq n.
+	$$
+	If \textbf{moreover} $\dim(U) = \dim(V)$, then $U = V$.
+\end{proposition}
 
 \begin{proposition}[Coordinates]
 	Let $(v_1, \dots, v_n)$ be a basis of $V$. Then for every $x \in V$ there exists a unique vector $(\alpha_1, \dots, \alpha_n) \in \R^n$ such that
@@ -207,22 +228,6 @@ In this course we are going to focus mostly on finite dimensional spaces and $\R
 	$$
 	The vectors $v_1, \dots, v_n$ are linearly independent because they forms a basis. Consequently $\alpha_1 - \beta_1 = \alpha_2 - \beta_2 = \cdots =  \alpha_n - \beta_n = 0$, i.e.\ $(\alpha_1, \dots, \alpha_n) = (\beta_1, \dots, \beta_n)$.
 \end{proof}
-\\
-\begin{definition}[Lines, hyperplanes]
-	Let $S$ be a subspace of $\R^n$.
-	\begin{itemize}
-		\item We call $S$ a \emph{line} if $\dim(S) = 1$.
-		\item We call $S$ an \emph{hyperplane} if $\dim(S) = n-1$.
-	\end{itemize}
-\end{definition}
-\begin{proposition}
-	Let	$U$ and $V$ be two subspaces of $\R^n$. Assume that $U \subset V$. Then
-	$$
-	\dim(U) \leq \dim(V) \leq n.
-	$$
-	If \textbf{moreover} $\dim(U) = \dim(V)$, then $U = V$.
-\end{proposition}
-
 
 
 \section*{Proof of Lemma \ref{lem:lin_dep}}\label{sec:proof_lin_dep}
