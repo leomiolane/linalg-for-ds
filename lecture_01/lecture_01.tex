@@ -193,13 +193,18 @@ In this course we are going to focus mostly on finite dimensional spaces and $\R
 \end{example}
 \vspace{2mm}
 
-\begin{definition}[Lines, hyperplanes]
-	Let $S$ be a subspace of $\R^n$.
+\begin{proposition}\label{prop:cara}
+	Let $V$ be a vector space that has dimension $\dim(V) = n$. Then
 	\begin{itemize}
-		\item We call $S$ a \emph{line} if $\dim(S) = 1$.
-		\item We call $S$ an \emph{hyperplane} if $\dim(S) = n-1$.
+		\item Any family of vectors of $V$ that are linearly independent contains at most $n$ vectors (i.e.\ if $x_1, \dots, x_k \in V$ are linearly independent, then $k \leq n$).
+		\item Any family of vectors of $V$ that spans $V$ contains at least $n$ vectors (i.e.\ if $x_1, \dots, x_k \in V$ are such that $\Span(v_1, \dots, v_k) = V$, then $k \geq n$).
 	\end{itemize}
-\end{definition}
+\end{proposition}
+\begin{exercise}
+	Prove Proposition \ref{prop:cara} using Lemma \ref{lem:lin_dep}.
+\end{exercise}
+
+
 \begin{proposition}
 	Let	$U$ and $V$ be two subspaces of $\R^n$. Assume that $U \subset V$. Then
 	$$
@@ -207,6 +212,14 @@ In this course we are going to focus mostly on finite dimensional spaces and $\R
 	$$
 	If \textbf{moreover} $\dim(U) = \dim(V)$, then $U = V$.
 \end{proposition}
+
+\begin{definition}[Lines, hyperplanes]
+	Let $S$ be a subspace of $\R^n$.
+	\begin{itemize}
+		\item We call $S$ a \emph{line} if $\dim(S) = 1$.
+		\item We call $S$ an \emph{hyperplane} if $\dim(S) = n-1$.
+	\end{itemize}
+\end{definition}
 
 \begin{proposition}[Coordinates]
 	Let $(v_1, \dots, v_n)$ be a basis of $V$. Then for every $x \in V$ there exists a unique vector $(\alpha_1, \dots, \alpha_n) \in \R^n$ such that
