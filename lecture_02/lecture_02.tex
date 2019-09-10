@@ -29,28 +29,50 @@
 
 Notice that $L: \R^m \to \R^n$ is linear if and only if $L(\alpha v + w) = \alpha L(v) + L(w)$ for all $v,w \in \R^m$ and all $\alpha \in \R$.
 
-\begin{proposition}
-	The set $\mathcal{L}(\R^m, \R^n)$ of all linear transformations from $\R^m$ to $\R^n$ is a vector space.
-\end{proposition}
+%\begin{proposition}
+	%The set $\mathcal{L}(\R^m, \R^n)$ of all linear transformations from $\R^m$ to $\R^n$ is a vector space.
+%\end{proposition}
 
 \begin{proposition}
 	If $L: \R^m \to \R^n$ and $M: \R^n \to \R^k$ are two linear transformations, then the composite function $M \circ L: \R^m \to \R^k$ is also linear.
 \end{proposition}
 
-\begin{theorem}[Equality on a basis implies equality everywhere]\label{th:basis_cara}
-	Let $L$ and $M$ be two linear transformations from $\R^m$ to $\R^n$.
-	Let $(v_1, \dots, v_m)$ be a basis of $\R^m$ and suppose that for all $i \in \{1, \dots,m\}$ we have
-	$$
-	L(v_i) = M(v_i).
-	$$
-	Then $L = M$, i.e.\ $L(v) = M(v)$ for all $v \in \R^m$.
-\end{theorem}
+\begin{remark} Let $L: \R^m \to \R^n$ be a linear transformation. Then
+	\begin{itemize}
+		\item $L(0) = L(0.0) = 0.L(0) = 0$.
+		\item $L\big(\sum_{i=1}^k \alpha_i v_i \big) = \sum_{i=1}^k \alpha_i L(v_i)$.
+	\end{itemize}
+\end{remark}
+
+Let $(e_1, \dots, e_m)$ be the canonical basis of $\R^m$.
+As a consequence of the second point above we have that for all $x = (x_1, \dots, x_m) \in \R^m$:
+$$
+L(x) = 
+L\big( \sum_{i=1}^m x_i e_i \Big) = \sum_{i=1}^m x_i L(e_i).
+$$
+This means that a linear transformation $L: \R^m \to \R^n$ is uniquely characterized by the vectors $L(e_1), \dots, L(e_m) \in \R^n$.
+
+%\begin{theorem}[Equality on a basis implies equality everywhere]\label{th:basis_cara}
+	%Let $L$ and $M$ be two linear transformations from $\R^m$ to $\R^n$.
+	%Let $(v_1, \dots, v_m)$ be a basis of $\R^m$ and suppose that for all $i \in \{1, \dots,m\}$ we have
+	%$$
+	%L(v_i) = M(v_i).
+	%$$
+	%Then $L = M$, i.e.\ $L(v) = M(v)$ for all $v \in \R^m$.
+%\end{theorem}
 
 \section{Matrix representation}
 
-From Theorem \ref{th:basis_cara} we know that a linear transformation $L: \R^m \to \R^n$ is uniquely characterized by the image $L(v_1), \dots, L(v_m)$ of any basis $(v_1, \dots, v_m)$ of the input space.
 
-We consider the canonical basis $(e_1, \dots, e_m)$ of $\R^m$ and encode $L$ by a $n \times m$ matrix (that we will write also $L$) whose columns are $L(e_1), \dots, L(e_m)$:
+\begin{definition}
+	A $n \times m$ matrix is an array (of real numbers) with $n$ rows and $m$ columns.
+	We denote by $\R^{n \times m}$ the set of all $n \times m$ matrices.
+\end{definition}
+
+We can encode a linear transformation $L: \R^m \to \R^n$ by a $n \times m$ matrix.
+\begin{definition}\label{def:canonical_matrix}
+	Let $L: \R^m \to \R^n$ be a linear transformation.
+	The canonical matrix of $L$ is the $n \times m$ matrix (that we will write also $L$) whose columns are $L(e_1), \dots, L(e_m)$:
 $$
 L =
 \begin{pmatrix}
@@ -73,7 +95,7 @@ where we write $L(e_j) =
 	\vdots \\
 	L_{n,j}
 \end{pmatrix}$.
-The matrix $L$ is called the (canonical) matrix of the linear transformation $L$. We denote by $\R^{n \times m}$ the set of all $n \times m$ matrices.
+\end{definition}
 
 \begin{example}[Homothety]
 	Let $\lambda \in \R$. The mapping (called ``homothety of ratio $\lambda$'')
@@ -107,27 +129,35 @@ The matrix $L$ is called the (canonical) matrix of the linear transformation $L$
 	$$
 \end{example}
 
-\begin{definition}[Matrix product]
-	Let $L \in \R^{n \times m}$ and $M \in \R^{k \times n}$. The product $M L$ is the $k \times m$ matrix defined by
+Definition \ref{def:canonical_matrix} tells us that one can associate a matrix to a linear transformation. The next definition show that one can do the reverse operation: we can obtain a linear transformation from a matrix.
+
+\begin{definition}
+	The linear transformation associated to a matrix $L \in \R^{n \times m}$ is the map
 	$$
-	(ML)_{i,j} = \sum_{r=1}^n M_{i,r} L_{r,j} \quad \text{for all} \quad 1 \leq i \leq k, \quad 1 \leq j \leq m.
+	\begin{array}{cccc}
+		L:& \R^m & \to & \R^n \\
+		  & x & \mapsto & Lx
+	\end{array}
 	$$
-	For $x \in \R^n$, we define the matrix-vector product $M x \in \R^k$ by
+	where the ``matrix-vector'' product $Lx \in \R^n$ is defined by
 	$$
-	(Lx)_i = \sum_{r=1}^n M_{i,r} x_r, \qquad 1 \leq i \leq k.
+	(Lx)_i = \sum_{j=1}^m L_{i,j} x_j \qquad \text{for all} \ i \in \{1, \dots, n\}.
 	$$
-	Notice that this corresponds -- if we see the vector $x \in \R^n$ as a $n \times 1$ matrix -- to the matrix product between $M$ and $x$.
 \end{definition}
 
-\begin{proposition}
-	Let $M \in \R^{n \times m}$. Then for all $x \in \R^m$,
-	$M(x) = Mx$.
-\end{proposition}
+\begin{definition}[Matrix product]
+	Let $L \in \R^{n \times m}$ and $M \in \R^{m \times k}$. 
+	We define the matrix product $LM$ as the $n \times k$ matrix of the linear transformation $L \circ M$.
+	His coefficients are given by the formula:
+	$$
+	(LM)_{i,j} = \sum_{\ell=1}^m L_{i,\ell} M_{\ell,j} \quad \text{for all} \quad 1 \leq i \leq n, \quad 1 \leq j \leq k.
+	$$
+\end{definition}
 
-\begin{proposition}[Matrix product means composition of linear transformations]
-	Let $L: \R^m \to \R^n$ and $M: \R^n \to \R^k$ be two linear transformations whose matrices are also denoted by $L \in \R^{n \times m}$ and $M \in \R^{k \times n}$.
-	Then the $k \times m$ matrix $ML$ is the matrix of the linear transformation $M \circ L: \R^m \to \R^k$.
-\end{proposition}
+%\begin{proposition}[Matrix product means composition of linear transformations]
+	%Let $L: \R^m \to \R^n$ and $M: \R^n \to \R^k$ be two linear transformations whose matrices are also denoted by $L \in \R^{n \times m}$ and $M \in \R^{k \times n}$.
+	%Then the $k \times m$ matrix $ML$ is the matrix of the linear transformation $M \circ L: \R^m \to \R^k$.
+%\end{proposition}
 
 \begin{proposition}
 	Let $A \in \R^{p \times q}$, $B \in \R^{q \times r}$ and $C \in \R^{r \times s}$. Then
@@ -170,7 +200,7 @@ The matrix $L$ is called the (canonical) matrix of the linear transformation $L$
 	\end{center}
 	and
 	\begin{center}
-		$L$ surjective \ $\Longleftrightarrow$ \ $\Im(L) = \R^m$.
+		$L$ surjective \ $\Longleftrightarrow$ \ $\Im(L) = \R^n$.
 	\end{center}
 \end{proposition}
 %\vspace{1cm}
