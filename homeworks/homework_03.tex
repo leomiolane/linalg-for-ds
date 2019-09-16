@@ -1,0 +1,83 @@
+\documentclass[11pt,nocut]{article}
+
+\usepackage{../latex_style/packages}
+\usepackage{../latex_style/notations}
+
+\title{\vspace{-2.0cm}%
+	Optimization and Computational Linear Algebra for Data Science\\
+Homework 3: Rank}
+%\author{Léo \textsc{Miolane} \ $\cdot$ \ \texttt{leo.miolane@gmail.com}}
+\date{\vspace{-1cm}Due on September 24, 2019}
+\setcounter{section}{3}
+
+\begin{document}
+\maketitle
+\input{./preamble_homeworks.tex}
+
+
+\begin{problem}[2 points]
+	Let $A \in \R^{n \times n}$.
+	\begin{enumerate}[label=\normalfont(\textbf{\alph*})]
+		\item Show that if $A = \alpha \Id_n$ for some $\alpha \in \R$, then for all $B \in \R^{n \times n}$ we have $A B = B A$.
+		\item Conversely, show that if for all $B \in \R^{n \times n}$ we have $AB = BA$, then there exists $\alpha \in \R$ such that $A = \alpha \Id_n$.
+	\end{enumerate}
+\end{problem}
+
+\vspace{1mm}
+
+\begin{problem}[2 points]
+	Let $M \in \R^{n \times m}$ and $r = \rank(M)$. Show that there exists $A \in \R^{n \times r}$ and $B \in \R^{r \times m}$ such that $M = AB$.
+\end{problem}
+
+\vspace{1mm}
+
+\begin{problem}[3 points]
+Let $A \in \R^{n \times m}$. 
+	\begin{enumerate}[label=\normalfont(\textbf{\alph*})]
+		\item Let $M \in \R^{m \times m}$ be an invertible matrix.
+			Show that
+			$$
+			\rank(AM) = \rank(A).
+			$$
+		\item Let $M \in \R^{n \times n}$ be an invertible matrix.
+			Show that
+			$$
+			\rank(MA) = \rank(A).
+			$$
+\end{enumerate}
+\end{problem}
+
+\vspace{1mm}
+
+\begin{problem}[3 points]
+	Let $A \in \R^{n \times n}$ be an ``upper triangular matrix'', i.e.\ a matrix of the form
+	$$
+	A=
+	\begin{pmatrix}
+		a_{1,1}&a_{1,2}&a_{1,3}&\ldots& a_{1,n}\\
+		0 & a_{2,2}&a_{2,3}&\ldots& a_{2,n}\\
+			   \vdots & &\ddots &\ddots &\vdots \\
+			   \vdots & & & \ddots & a_{n-1,n}\\
+		0& \cdots& \cdots & 0 &a_{n,n}
+	\end{pmatrix}.
+	$$
+	Show that $A$ is invertible \emph{if and only if} its diagonal coefficients $a_{1,1}, a_{2,2}, \dots, a_{n,n}$ are all non-zero.
+\end{problem}
+
+
+\begin{problem}[$\star$]
+	The trace $\Tr(M)$ of a $k \times k$ matrix $M$ is defined as the sum of its diagonal coefficients, i.e.
+	$$
+	\Tr(M) = \sum_{i=1}^k M_{i,i}.
+	$$
+	Let $A \in \R^{n \times m}$ and $B \in \R^{m \times n}$. Show that
+	$$
+	\Tr(AB) = \Tr(BA).
+	$$
+\end{problem}
+\vspace{1cm}
+\centerline{\pgfornament[width=7cm]{87}}
+
+%\bibliographystyle{plain}
+%\bibliography{./references.bib}
+\end{document}
