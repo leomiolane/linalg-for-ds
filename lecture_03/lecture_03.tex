@@ -49,20 +49,21 @@ If the vectors $x_1, \dots x_k$ are linearly independent then $\rank(x_1, \dots 
 	\end{equation}
 \end{proposition}
 
-%\begin{proof}
-	%In order to prove \eqref{eq:rank} it suffices to show (since columns and rows are playing exchangeable roles) that $\rank(\ell_1, \dots, \ell_n) \leq \rank(c_1, \dots, c_m)$.
-	%Let $r \defeq \rank(\ell_1, \dots, \ell_n)$ and $(x_1, \dots, x_r)$ be a basis of $\Span(\ell_1, \dots, \ell_n)$. We will prove that
-	%\begin{equation}\label{eq:goal_proof}
-	%(M x_1, \dots, M x_r) \ \text{is linearly independent}.
-	%\end{equation}
-	%The result follows. Indeed $(M x_1, \dots, M x_r)$ is then a linearly independent family of $r$ vectors of $\Im(M) = \Span(c_1, \dots, c_m)$: this implies that $\rank(c_1, \dots, c_m) = \dim(\Span(c_1, \dots, c_m)) \geq r = \rank(\ell_1, \dots, \ell_n)$.
 
-	%It remains to prove \eqref{eq:goal_proof}. Let $\alpha_1, \dots, \alpha_r \in \R$ such that $\alpha_1 M x_1 + \cdots + \alpha_r M x_r = 0$. We will show that in such case the $\alpha_i$ are all zero. Define $v \defeq \alpha_1 x_1 + \cdots + \alpha_r x_r$. We have by linearity
-	%$$
-	%M v = M (\alpha_1 x_1 + \cdots + \alpha_r x_r) = \alpha_1 M x_1 + \cdots + \alpha_r M x_r = 0.
-	%$$
-	%Since the $i^{\rm th}$ coordinate of $Mv$ is equal to $(Mv)_i = \ell_i \cdot v$, we get that $v$ is orthogonal to all the $\ell_i$, and therefore to $\Span(\ell_1, \dots, \ell_n)$. Notice now that $v \in \Span(x_1, \dots, x_r) = \Span(\ell_1, \dots, \ell_n)$ by construction. The vector $v$ is orthogonal to itself, hence $\alpha_1 x_1 + \cdots + \alpha_r x_r = v= 0$. Recall that the family $(x_1, \dots, x_r)$ is linearly independent (because it is a basis) so $\alpha_1 = \cdots = \alpha_r = 0$.
-%\end{proof}
+\begin{proof}
+	In order to prove \eqref{eq:rank} it suffices to show (since columns and rows are playing exchangeable roles) that $\rank(\ell_1, \dots, \ell_n) \leq \rank(c_1, \dots, c_m)$.
+	Let $r \defeq \rank(\ell_1, \dots, \ell_n)$ and $(x_1, \dots, x_r)$ be a basis of $\Span(\ell_1, \dots, \ell_n)$. We will prove that
+	\begin{equation}\label{eq:goal_proof}
+	(M x_1, \dots, M x_r) \ \text{is linearly independent}.
+	\end{equation}
+	The result follows. Indeed $(M x_1, \dots, M x_r)$ is then a linearly independent family of $r$ vectors of $\Im(M) = \Span(c_1, \dots, c_m)$: this implies that $\rank(c_1, \dots, c_m) = \dim(\Span(c_1, \dots, c_m)) \geq r = \rank(\ell_1, \dots, \ell_n)$.
+
+	It remains to prove \eqref{eq:goal_proof}. Let $\alpha_1, \dots, \alpha_r \in \R$ such that $\alpha_1 M x_1 + \cdots + \alpha_r M x_r = 0$. We will show that in such case the $\alpha_i$ are all zero. Define $v \defeq \alpha_1 x_1 + \cdots + \alpha_r x_r$. We have by linearity
+	$$
+	M v = M (\alpha_1 x_1 + \cdots + \alpha_r x_r) = \alpha_1 M x_1 + \cdots + \alpha_r M x_r = 0.
+	$$
+	Since the $i^{\rm th}$ coordinate of $Mv$ is equal to $(Mv)_i = \ell_i \cdot v$, we get that $v$ is orthogonal to all the $\ell_i$, and therefore to $\Span(\ell_1, \dots, \ell_n)$. Notice now that $v \in \Span(x_1, \dots, x_r) = \Span(\ell_1, \dots, \ell_n)$ by construction. The vector $v$ is orthogonal to itself, hence $\alpha_1 x_1 + \cdots + \alpha_r x_r = v= 0$. Recall that the family $(x_1, \dots, x_r)$ is linearly independent (because it is a basis) so $\alpha_1 = \cdots = \alpha_r = 0$.
+\end{proof}
 
 \begin{remark}
 	For $v_1, \dots, v_k \in \R^n$, and $\alpha \in \R \setminus \{0\}, \, \beta \in \R$ one can easily verify that
@@ -78,6 +79,16 @@ If the vectors $x_1, \dots x_k$ are linearly independent then $\rank(x_1, \dots 
 
 \section{Properties of the rank}
 
+
+
+\begin{theorem}[Rank-nullity theorem]\label{th:rank}
+	Let $L: \R^m \to \R^n$ be a linear transformation. Then
+	$$
+	\rank(L) + \dim(\Ker(L)) = m.
+	$$
+\end{theorem}
+Theorem \ref{th:rank} is proved at the end of these notes.
+
 \begin{proposition}
 	Let $A \in \R^{n \times m}$ and $B \in \R^{m \times k}$. Then the following holds
 	\begin{enumerate}[label=(\roman*)]
@@ -90,15 +101,19 @@ If the vectors $x_1, \dots x_k$ are linearly independent then $\rank(x_1, \dots 
 	Let $M \in \R^{n \times m}$ and $r = \rank(M)$. Show that there exist $A \in \R^{n \times r}$ and $B \in \R^{r \times m}$ such that $M = AB$.
 \end{exercise}
 
+\section{Invertible matrices}
 
-\begin{theorem}[Rank-nullity theorem]\label{th:rank}
-	Let $L: \R^m \to \R^n$ be a linear transformation. Then
+\begin{definition}[Matrix inverse]\label{prop:matrix_inverse}
+	A matrix $M \in \R^{n \times n}$ is called \emph{invertible} if there exists a matrix $M^{-1} \in \R^{n \times n}$ such that 
 	$$
-	\rank(L) + \dim(\Ker(L)) = m.
+	M M^{-1} = M^{-1} M = \Id_n.
 	$$
-\end{theorem}
-Theorem \ref{th:rank} is proved at the end of these notes.
+	Such matrix $M^{-1}$ is unique and is called the \emph{inverse} of $M$.
+\end{definition}
 
+\begin{remark}
+	$M \in \R^{n \times n}$ is invertible if and only if the linear transformation associated to $M$ is a bijection. In that case, $M^{-1}$ is the matrix associated to the inverse transformation.
+\end{remark}
 
 \begin{theorem}
 	Let $M \in \R^{n \times n}$. The following points are equivalent:
@@ -109,7 +124,12 @@ Theorem \ref{th:rank} is proved at the end of these notes.
 	\end{enumerate}
 \end{theorem}
 \begin{proof}
-	Points \ref{item:th_ii} and \ref{item:th_iii} are equivalent by Theorem \ref{th:rank} below. The fact that \ref{item:th_i} $\Leftrightarrow$ [\ref{item:th_ii}-\ref{item:th_iii}] follows from Proposition \ref{prop:inj_sur} from Lecture~2.
+	Points \ref{item:th_ii} and \ref{item:th_iii} are equivalent by Theorem \ref{th:rank}. 
+	It remains to prove that \ref{item:th_i} $\Leftrightarrow$ [\ref{item:th_ii}-\ref{item:th_iii}].
+
+	We start by proving that \ref{item:th_i} implies \ref{item:th_iii}. Assume that $M$ is invertible and consider $x \in \Ker(M)$. Since $M^{-1} M = \Id_n$, we have $M^{-1} M x = x$, which leads to $0 = x$ because $Mx = 0$. Hence $\Ker(M) = \{0\}$.
+
+	Conversely assume that [\ref{item:th_ii}-\ref{item:th_iii}] hold. Then, as seen at the end of Lecture~2, for all $y \in \R^n$ there exists a unique $x^{(y)}\in \R^n$ such that $Mx^{(y)} = y$. One can verify easily that the map $L: y \mapsto x^{(y)}$ is linear and verifies (by construction) $L \circ M = M \circ L = \Id$. Consequently, the corresponding matrices verify: $LM=ML=\Id_n$.
 \end{proof}
 
 
