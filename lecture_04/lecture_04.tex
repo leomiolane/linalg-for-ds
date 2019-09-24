@@ -40,9 +40,9 @@ Lecture 4: Norm and dot product}
 
 \section{Dot product}
 
-\begin{definition}[Scalar product, or ``dot product'', or ``inner product'']
+\begin{definition}[Scalar product or ``inner product'']
 	Let $V$ be a vector space.
-	A scalar product on $V$ is a function $\langle \cdot, \cdot \rangle$ from $V \times V$ to $\R$ that verifies the following points:
+	An inner product on $V$ is a function $\langle \cdot, \cdot \rangle$ from $V \times V$ to $\R$ that verifies the following points:
 	\begin{enumerate}[label=(\roman*)]
 		\item \emph{Symmetry}: $\langle u, v \rangle = \langle v, u\rangle$ for all $u,v \in V$.
 		\item \emph{Linearity}: $\langle u+v, w \rangle = \langle u, w\rangle + \langle v, w\rangle$ and $\langle \alpha v, w \rangle = \alpha \langle v, w \rangle$ for all $u,v,w \in V$ and $\alpha \in \R$.
@@ -53,17 +53,17 @@ Lecture 4: Norm and dot product}
 \begin{example}
 	\leavevmode
 	\begin{itemize}
-		\item For $V = \R^n$, the Euclidean scalar product $\langle x,y\rangle = \sum_{i=1}^n x_i y_i = x^{\sT} y$ is a scalar product.
-		\item If $V$ is the set of all continuous functions on $[0,1]$, then $\langle f,g\rangle = \int_0^1 f(t) g(t) dt$ is a scalar product.
+		\item For $V = \R^n$, the Euclidean inner product $\langle x,y\rangle = \sum_{i=1}^n x_i y_i = x^{\sT} y$ is an inner product.
+		\item If $V$ is the set of all continuous functions on $[0,1]$, then $\langle f,g\rangle = \int_0^1 f(t) g(t) dt$ is an inner product.
 	\end{itemize}
 \end{example}
 
-\begin{proposition}[Norm induced by a scalar product]
-	If $\langle \cdot, \cdot \rangle$ is a scalar product on $V$ then $\| v \| \defeq \sqrt{\langle v, v \rangle}$ is a norm on $V$. We say  that the norm $\| \cdot \|$ is induced by the scalar product $\langle \cdot, \cdot \rangle$.
+\begin{proposition}[Norm induced by an inner product]
+	If $\langle \cdot, \cdot \rangle$ is an inner product on $V$ then $\| v \| \defeq \sqrt{\langle v, v \rangle}$ is a norm on $V$. We say  that the norm $\| \cdot \|$ is induced by the inner product $\langle \cdot, \cdot \rangle$.
 \end{proposition}
 
 \begin{theorem}[Cauchy-Schwarz inequality]
-	Let $\| \cdot \|$ be the norm induced by the scalar product $\langle \cdot , \cdot \rangle$ on the vector space $V$. Then for all $x,y \in V$:
+	Let $\| \cdot \|$ be the norm induced by the inner product $\langle \cdot , \cdot \rangle$ on the vector space $V$. Then for all $x,y \in V$:
 	\begin{equation}\label{eq:cauchy_schwarz}
 	| \langle x,y \rangle | \leq \|x\| \, \|y\|.
 	\end{equation}
@@ -71,7 +71,7 @@ Lecture 4: Norm and dot product}
 \end{theorem}
 \begin{proof}
 	If $x = 0$ or $y = 0$ the result is obvious, we assume therefore to be in the case where $x \neq 0$ and $y \neq 0$.
-	For $t \in \R$ we define the function $f(t) = \|t x - y \|^2$. Since the norm $\| \cdot \|$ is induced by the scalar product $\langle \cdot, \cdot \rangle$ we have
+	For $t \in \R$ we define the function $f(t) = \|t x - y \|^2$. Since the norm $\| \cdot \|$ is induced by the inner product $\langle \cdot, \cdot \rangle$ we have
 	$$
 	f(t) = \langle t x - y , t x - y \rangle = t^2 \|x\|^2 - 2t \langle x,y\rangle + \|y\|^2.
 	$$
@@ -84,7 +84,7 @@ Lecture 4: Norm and dot product}
 
 \section{Orthogonality}
 
-In this section we consider a scalar product $\langle \cdot, \cdot \rangle$ (that induces a norm $\| \cdot \|$) on a vector space $V$. For simplicity one may think of $\langle \cdot, \cdot \rangle$ and $\| \cdot \|$ to be the usual Euclidean dot product and norm on $V = \R^n$.
+In this section we consider an inner product $\langle \cdot, \cdot \rangle$ (that induces a norm $\| \cdot \|$) on a vector space $V$. For simplicity one may think of $\langle \cdot, \cdot \rangle$ and $\| \cdot \|$ to be the usual Euclidean dot product and norm on $V = \R^n$.
 
 \begin{definition}[Orthogonality]
 	\begin{itemize}
@@ -130,7 +130,7 @@ Orthonormal basis are particularly convenient for computing coordinates of vecto
 
 \section{Orthogonal projection and distance to a subspace}
 
-We assume in this section that $V = \R^n$ and that $\langle \cdot, \cdot \rangle$, $\| \cdot \|$ are respectively the Euclidean scalar product and Euclidean norm.
+We assume in this section that $V = \R^n$ and that $\langle \cdot, \cdot \rangle$, $\| \cdot \|$ are respectively the Euclidean dot product and Euclidean norm.
 
 \begin{definition}[Orthogonal projection and distance to a subspace]
 	Let $S$ be a subspace of $\R^n$. The \emph{orthogonal projection} of a vector $x$ onto $S$ is defined as the vector $P_S(x)$ is $S$ that minimizes the distance to $x$:
