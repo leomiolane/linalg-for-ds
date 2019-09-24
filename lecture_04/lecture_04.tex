@@ -95,9 +95,9 @@ In this section we consider a scalar product $\langle \cdot, \cdot \rangle$ (tha
 \end{definition}
 
 
-\begin{proposition}
-	If $x$ is orthogonal to $v_1, \dots, v_k$ then $x$ is orthogonal to any linear combination of these vectors i.e.\ $x \perp \Span(v_1, \dots, v_k)$.
-\end{proposition}
+%\begin{proposition}
+	%If $x$ is orthogonal to $v_1, \dots, v_k$ then $x$ is orthogonal to any linear combination of these vectors i.e.\ $x \perp \Span(v_1, \dots, v_k)$.
+%\end{proposition}
 
 \begin{theorem}[Pythagorean theorem]
 	Let $x,y \in V$. Then
@@ -108,19 +108,23 @@ In this section we consider a scalar product $\langle \cdot, \cdot \rangle$ (tha
 
 
 \begin{definition}[Orthogonal and orthonormal basis]
-	Assume that $\dim(V)=n$ and let $(v_1, \dots, v_n)$ be a basis of $V$. We say that
+	Let $v_1, \dots, v_k$ be vectors of $V$. We say that the family of vectors $(v_1, \dots, v_k)$ is
 	\begin{itemize}
-		\item $(v_1, \dots, v_n)$ is an \emph{orthogonal} basis of $V$ if the vectors $v_1, \dots, v_n$ are pairwise orthogonal, i.e.\ $\langle v_i, v_j \rangle = 0$ for all $i \neq j$.
-		\item $(v_1, \dots, v_n)$ is an \emph{orthonormal} basis of $V$ if it is an orthogonal basis and if all the $v_i$ have unit norm: $\|v_1\| = \dots = \|v_n\| = 1$.
+		\item \emph{orthogonal} if the vectors $v_1, \dots, v_n$ are pairwise orthogonal, i.e.\ $\langle v_i, v_j \rangle = 0$ for all $i \neq j$.
+		\item \emph{orthonormal} if it is orthogonal and if all the $v_i$ have unit norm: $\|v_1\| = \dots = \|v_k\| = 1$.
 	\end{itemize}
 \end{definition}
 
 Orthonormal basis are particularly convenient for computing coordinates of vectors:
 
-\begin{proposition}
+\begin{proposition}\label{prop:coords}
 	Assume that $\dim(V)=n$ and let $(v_1, \dots, v_n)$ be an \textbf{orthonormal} basis of $V$. Then the coordinates of a vector $x \in V$ in the basis $(v_1, \dots, v_n)$ are $(\langle v_1, x\rangle, \dots, \langle v_n,x \rangle)$:
 	$$
 	x = \langle v_1, x \rangle v_1 + \cdots + \langle v_n, x \rangle v_n.
+	$$
+	Moreover
+	$$
+	\|x\| = \sqrt{\langle v_1, x \rangle^2 + \cdots + \langle v_n, x \rangle^2}.
 	$$
 \end{proposition}
 
@@ -140,12 +144,62 @@ We assume in this section that $V = \R^n$ and that $\langle \cdot, \cdot \rangle
 \end{definition}
 
 \begin{proposition}\label{prop:ortho}
-	Let $S$ be a subspace of $\R^n$ and let $(v_1, \dots, v_k)$ be a basis of $S$. Then for all $x \in \R^n$,
-	\begin{itemize}
-		\item $P_S(x) = \langle v_1, x \rangle v_1 + \cdots + \langle v_k, x \rangle v_k$.
-		\item $x - P_S(x)$ is orthogonal to $S$.
-	\end{itemize}
+	Let $S$ be a subspace of $\R^n$ and let $(v_1, \dots, v_k)$ be an \textbf{orthonormal basis} of $S$. Then for all $x \in \R^n$,
+		$$P_S(x) = \langle v_1, x \rangle v_1 + \cdots + \langle v_k, x \rangle v_k.$$
+		In other words, if we let
+		$$
+		V = 
+\begin{pmatrix}
+	| & | & & | \\
+	v_1 & v_2 & \cdots& v_k \\
+	| & | & & |
+\end{pmatrix}
+\in \R^{n \times k},
+		$$
+		then $P_S$ is a linear transformation whose matrix is $VV^{\sT}$:
+		$$
+		\forall x \in \R^n, \quad P_S(x) = V V^{\sT} x.
+		$$
 \end{proposition}
+\begin{proof}
+	Let us add vectors $v_{k+1}, \dots, v_n$ to the basis $(v_1, \dots, v_k)$ to obtain an orthonormal basis of $\R^n$. (This is made possible by the Gram-Schmidt orthonormalization principle that we will see in the next lecture.)
+	Let $\alpha_1 = \langle x, v_1 \rangle, \dots, \alpha_n = \langle x , v_n \rangle$ be the coordinates of $x$ in the basis $(v_1, \dots, v_n)$.
+	Let $y \in S$, and let $\beta_1, \dots, \beta_k$ be its coordinates in the basis $(v_1, \dots, v_k)$. By Proposition \ref{prop:coords}:
+	$$
+	\|x-y\|^2 = \sum_{i=1}^k (\alpha_i - \beta_i)^2 + \sum_{i=k+1}^n \alpha_i^2.
+	$$
+	Minimizing this quantity over $y \in S$ is equivalent to minimizing it over the coordinates $\beta_1, \dots, \beta_k$ of $y$. The minimum is uniquely achieved for $\beta_i = \alpha_i$ for all $i$, hence
+	$$
+	P_S(x) \defeq \argmin_{y \in S} \|x - y\|
+	= \alpha_1 v_1 + \dots + \alpha_k v_k
+	= \langle v_1, x \rangle v_1 + \dots + \langle v_k, x \rangle v_k.
+	$$
+	The second part of the proposition is a rewritting of this last equation, obtained by noticing that
+	$$
+	V^{\sT} x 
+	= 
+\begin{pmatrix}
+	- \, v_1 \, -\\
+	\vdots\\
+	- \, v_k \,-
+\end{pmatrix}
+x
+=
+\begin{pmatrix}
+	\langle v_1, x \rangle \\
+	\vdots \\
+	\langle v_k, x \rangle
+\end{pmatrix}.
+	$$
+\end{proof}
+
+\begin{corollary}
+	For all $x \in \R^n$,
+	\begin{itemize}
+		\item $x - P_S(x)$ is orthogonal to $S$.
+		\item $\|P_S(x) \| \leq \|x\|$.
+	\end{itemize}
+\end{corollary}
 
 
 \begin{definition}[Orthogonal complement]
