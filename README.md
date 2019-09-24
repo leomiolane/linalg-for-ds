@@ -1,6 +1,5 @@
 # Optimization and Computational Linear Algebra for Data Science
 
-The course's page is [here](https://leomiolane.github.io/linalg-for-ds.html).
 This repository contains some notes for the course, as well as the homeworks.
 **These materials are not meant to be proper lecture notes.**
 They only contain the main results from the course. Examples, figures, and many proofs are missing.
@@ -11,7 +10,7 @@ You can download all the notes [here](https://github.com/leomiolane/linalg-for-d
 1. [Vector spaces](https://github.com/leomiolane/linalg-for-ds/raw/master/lecture_01/lecture_01.pdf)
 2. [Linear transformations](https://github.com/leomiolane/linalg-for-ds/raw/master/lecture_02/lecture_02.pdf)
 3. [Rank](https://github.com/leomiolane/linalg-for-ds/raw/master/lecture_03/lecture_03.pdf)
-4. [Norm and dot product](https://github.com/leomiolane/linalg-for-ds/raw/master/lecture_04/lecture_04.pdf)
+4. [Norm and inner product](https://github.com/leomiolane/linalg-for-ds/raw/master/lecture_04/lecture_04.pdf)
 5. [Matrices and orthogonality](https://github.com/leomiolane/linalg-for-ds/raw/master/lecture_05/lecture_05.pdf)
 6. [Eigenvalues, eigenvectors and Markov chains](https://github.com/leomiolane/linalg-for-ds/raw/master/lecture_06/lecture_06.pdf)
 7. [Singular value decomposition](https://github.com/leomiolane/linalg-for-ds/raw/master/lecture_07/lecture_07.pdf)
