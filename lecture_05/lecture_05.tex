@@ -31,7 +31,7 @@ The Gram-Schmidt process is iterative and constructs progessively families $(v_1
 
 \paragraph{Construction of $v_{i+1}$ from $(v_1, \dots, v_i)$:} 
 Suppose that we already constructed $(v_1, \dots, v_i)$ that verifies $\mathcal{H}_i$.
-We first substract to $x_{i+1}$ its orthogonal projection on $\Span(v_1, \dots, v_i)$:
+We first subtract to $x_{i+1}$ its orthogonal projection on $\Span(v_1, \dots, v_i)$:
 \begin{equation}\label{eq:gs1}
 \widetilde{v}_{i+1} \defeq 
 x_{i+1} - P_{\Span(v_1, \dots, v_i)}(x_{i+1}) =
@@ -46,7 +46,7 @@ The fact that $\Span(v_1, \dots, v_{i+1}) = \Span(x_1, \dots, x_{i+1})$ can be e
 It remains thus to prove that $(v_1, \dots, v_{i+1})$ is orthonormal.
 
 By construction $v_{i+1} = 1$. 
-Then, by Proposition \ref{prop:ortho} from Lecture~4, we have $\widetilde{v}_{i+1} = x_{i+1} - P_{\Span(v_1, \dots, v_i)}(x_{i+1}) \in \Span(v_1, \dots, v_i)^{\perp}$. Consequently $v_{i+1}$ is orthogonal to $\Span(v_1, \dots, v_i)$ and therefore to the vectors $v_1, \dots, v_i$. This proves that $(v_1, \dots, v_{i+1})$ is orthonormal.
+Then, by Corollary \ref{cor:projection} from Lecture~4, we have $\widetilde{v}_{i+1} = x_{i+1} - P_{\Span(v_1, \dots, v_i)}(x_{i+1}) \in \Span(v_1, \dots, v_i)^{\perp}$. Consequently $v_{i+1}$ is orthogonal to $\Span(v_1, \dots, v_i)$ and therefore to the vectors $v_1, \dots, v_i$. This proves that $(v_1, \dots, v_{i+1})$ is orthonormal.
 \\
 
 We conclude:
