@@ -1,0 +1,96 @@
+\documentclass[11pt,nocut]{article}
+
+\usepackage{../latex_style/packages}
+\usepackage{../latex_style/notations}
+
+\title{\vspace{-2.0cm}%
+	Optimization and Computational Linear Algebra for Data Science\\
+Homework 5: Orthogonal matrices, eigenvalues and eigenvectors}
+%\author{Léo \textsc{Miolane} \ $\cdot$ \ \texttt{leo.miolane@gmail.com}}
+\date{\vspace{-1cm}Due on October 8, 2019}
+\setcounter{section}{5}
+
+\begin{document}
+\maketitle
+\input{./preamble_homeworks.tex}
+
+\begin{problem}[1 points]
+	Is the following matrix diagonalizable?
+	$$
+	M= 
+	\begin{pmatrix}
+		1 & \pi^2 \\
+		0 & 1
+	\end{pmatrix}.
+	$$
+\end{problem}
+
+\vspace{1mm}
+
+\begin{problem}[3 points]
+	Let $S$ be a subspace of $\R^n$ and let $P_S$ be the matrix of the orthogonal projection onto $S$. Let $M = \Id_n - 2 P_S$.
+	\begin{enumerate}[label=\normalfont(\textbf{\alph*})]
+		\item Show that the matrix $M$ is orthogonal.
+		\item Show that if $\lambda \in \R$ is an eigenvalue of $M$, then $\lambda = 1$ or $\lambda=-1$.
+		\item Show that $M$ is diagonalizable.
+\end{problem}
+
+\vspace{1mm}
+
+\begin{problem}[3 points]
+	Let $A \in \R^{n \times n}$ be a symmetric matrix.
+	\begin{enumerate}[label=\normalfont(\textbf{\alph*})]
+		\item Show that if $v_1, v_2 \in \R^n$ are two eigenvectors of $A$ associated to some eigenvalues $\lambda_1 \neq \lambda_2$ ($Av_1 = \lambda_1 v_1$ and $Av_2 = \lambda_2 v_2$), then $v_1 \perp v_2$.
+		\item Show that if $A$ is diagonalizable, then there exists an orthonormal basis $(u_1, \dots, u_n)$ of eigenvectors of $A$.
+	\end{enumerate}
+\end{problem}
+
+\vspace{1mm}
+
+\begin{problem}[3 points]
+	Let $A \in \R^{n \times n}$ be a diagonalizable matrix. Let $(v_1, \dots, v_n)$ be a basis of $\R^n$ consisting of eigenvectors of $A$, and let $(\lambda_1, \dots, \lambda_n)$ be the associated eigenvalues. Assume that
+	$$
+	\lambda_1 > |\lambda_i| \qquad \text{for all} \ i \in \{2, \dots, n\}.
+	$$
+	We consider the following algorithm:
+	\begin{itemize}
+		\item Initialize $x_0 \in \R^n$.
+		\item Perform the updates: $x_{t+1} = \frac{A x_t}{\|A x_t\|}$.
+	\end{itemize}
+	\begin{enumerate}[label=\normalfont(\textbf{\alph*})]
+		\item Show that for all $t \geq 1$, 
+			$$
+			x_t = \frac{A^t x_0}{\|A^t x_0\|}.
+			$$
+		\item Assume that $x_0$ is a unit vector ($\|x_0\|=1$) whose direction is chosen uniformly at random (this basically means that all the possible directions for $x_0$ are equally likely to be chosen). Let $(\alpha_1, \dots, \alpha_n)$ be the coordinates of $x_0$ in the basis $(v_1, \dots, v_n)$. Explain why we can be sure that $\alpha_1 \neq 0$. You do not have to do a rigorous proof of that, just give an intuitive argument.
+		\item Show that
+			$$
+			x_t \xrightarrow[t \to \infty]{} \frac{\alpha_1 v_1}{\|\alpha_1 v_1\|}
+			\qquad \text{and} \qquad
+			\|A x_t\| \xrightarrow[t \to \infty]{} \lambda_1.
+			$$
+	\end{enumerate}
+\end{problem}
+
+\vspace{1mm}
+
+
+\begin{problem}[$\star$]
+	Let $A \in \R^{n \times n}$ be a symmetric matrix. Define the function
+	$$
+	\begin{array}{cccc}
+		f:& \R^n \setminus \{0\} & \to & \R \\
+				& x & \mapsto & \displaystyle \frac{x^{\sT} A x}{x^{\sT} x}.
+	\end{array}
+	$$
+	Show that $f$ has a maximum at some $x_{\star} \in \R^n \setminus \{0\}$ and that $x_{\star}$ verifies
+	$$
+	A x_{\star} = \lambda x_{\star}, \qquad \text{where} \quad \lambda = f(x_{\star}).
+	$$
+\end{problem}
+\vspace{1cm}
+\centerline{\pgfornament[width=7cm]{87}}
+
+%\bibliographystyle{plain}
+%\bibliography{./references.bib}
+\end{document}
