@@ -14,11 +14,33 @@ Homework 6: Eigenvectors and Markov chains}
 \maketitle
 \input{./preamble_homeworks.tex}
 
-DRAFT
+%DRAFT
 
-\color{green}
+%\color{green}
 
-\begin{problem}[4 points]
+\begin{problem}[2 points]
+	Let $A \in \R^{n \times n}$ be a symmetric matrix. Show that $A$ is orthogonal if and only if its eigenvalues all have absolute value 1.
+\end{problem}
+
+\vspace{1mm}
+
+\begin{problem}[3 points]
+	We say that a symmetric matrix $M \in \R^{n \times n}$ is positive semi-definite if for all $x \in \R^n$,
+	$$
+	x^{\sT} M x \geq 0.
+	$$
+	\begin{enumerate}[label=\normalfont(\textbf{\alph*})]
+		\item Let $A \in \R^{n \times k}$. Show that $A A^{\sT}$ is positive semi-definite.
+		\item Show that a symmetric matrix $M \in \R^{n \times n}$ is positive semi-definite if and only if all its eigenvalues are non-negative.
+		\item Let $M \in \R^{n \times n}$ be a (symmetric) positive semi-definite matrix. Let $r = \rank(M)$. Show that there exists $A \in \R^{n \times r}$ such that $M = AA^{\sT}$.
+	\end{enumerate}
+	
+\end{problem}
+
+\vspace{1mm}
+
+
+\begin{problem}[5 points]
 	The CSV file \texttt{nba17-18.csv} contains the scores of all the games of the NBA baskeball 2017-2018 season, playoffs/finals included. 
 	The \emph{Jupyter notebook} \texttt{nba.ipynb} contains functions to read the CSV file and construct the $30 \times 30$ (there is $30$ teams) matrix \texttt{winLoss} where
 	$$
@@ -30,30 +52,20 @@ DRAFT
 		\item The ranking of question \ref{item:a} uses only the number of win and loss, and not the scores of the games. Propose an evolution of the PageRank method of question \ref{item:a} in order to takes the scores into account, and compute the corresponding ranking.
 	\end{enumerate}
 
-	\textbf{It is intented that you use here Python and the provided Jupyter Notebook. Your answers to this problem have to be submitted inside the provided Jupyter notebook. Please make use of comments/markdown cells (where you can type in Latex) in order to make your code/answers readable.}
+	\textbf{It is intented that you code in Python and use the provided Jupyter Notebook. Your answers to this problem have to be submitted inside the provided Jupyter notebook. Please make use of comments/markdown cells (where you can type in Latex) in order to make your code/answers readable.}
 \end{problem}
 
 
 \vspace{1mm}
 
+%\begin{problem}[3 points]
+%\end{problem}
 
-\begin{problem}[2 points]
-	Let $A \in \R^{n \times n}$.
-	\begin{enumerate}[label=\normalfont(\textbf{\alph*})]
-		\item Show that $A^{\sT} A$ positive semi-definite.
-		\item Let $M$ be a $n \times n$ symmetric positive semi-definite matrix. Show that there exists $A \in \R^{n \times n}$ such that $M = A^{\sT} A$.
-	\end{enumerate}
-\end{problem}
-
-\vspace{1mm}
-
-\begin{problem}[3 points]
-\end{problem}
-
-\vspace{1mm}
+%\vspace{1mm}
 
 
 \begin{problem}[$\star$]
+	Let $A \in \R^{n \times n}$ such that for all $x \in \R^n$, $x^{\sT} A x \geq 0$. Show that $\Ker(A) = \Ker(A^{\sT})$.
 \end{problem}
 \vspace{1cm}
 \centerline{\pgfornament[width=7cm]{87}}

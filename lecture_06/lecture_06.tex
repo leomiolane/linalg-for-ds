@@ -286,10 +286,8 @@ Since this holds for all $\ell \leq k-1$ we obtain that $P^r x \xrightarrow[r \t
 \subsection{The PageRank algorithm}
 
 The PageRank algorithm was invented by Larry Page and Sergey Brin \cite{page1999pagerank}.
-
 The goal is to rank $n$ web pages in terms of ``importance''.
-
-They consider a ``drunk surfer'' that goes from a page $j$ to an other page $i$ by randomly clicking on the links that are on the page $j$.
+L.\ Page and S.\ Brin  considered a ``drunk surfer'' that goes from a page $j$ to an other page $i$ by randomly clicking on the links that are on the page $j$.
 This can be modeled by a Markov chain with state space $\{1, \dots, n\}$ and transition matrix $P$ given by
 $$
 P_{i,j} 
@@ -300,7 +298,7 @@ P_{i,j}
 \end{cases}
 $$
 where $\deg(j)$ denotes the number of outgoing links on page $j$.
-The idea behind PageRank is to quantify the importance of the page $i$ by the fraction of time spent by the ``drunk surfer'' on it. By Theorem~\ref{th:ergodic} we know that this corresponds to the coefficient $\mu_i$ of the invariant measure $\mu$ of $P$.
+The idea behind PageRank is to quantify the importance of a page $i$ by the fraction of time spent by the ``drunk surfer'' on it. By Theorem~\ref{th:ergodic} we know that this corresponds to the coefficient $\mu_i$ of the invariant measure $\mu$ of $P$.
 \\
 
 The matrix $P$ is however not guaranteed to satisfy the hypotheses of Theorem~\ref{th:ergodic}-Corollary~\ref{cor:perron}. Brin and Page proposed to use instead of $P$ the matrix
@@ -308,13 +306,12 @@ $$
 G = \alpha P + \frac{1-\alpha}{n} \1,
 $$
 where $\alpha \in (0,1)$ is a parameter close to $1$ (Google takes $\alpha \simeq 0.85$) and $\1$ denotes the all-one matrix.
-
-The PageRank algorithm computes $\mu$ the Perron-Frobenius eigenvector of the matrix $G$ and uses the coordinates of $\mu$ to rank the web pages.
+The PageRank algorithm computes $\mu$ the Perron-Frobenius eigenvector of the matrix $G$ and ranked the webpages according to their coordinate in the vector $\mu$: the higher $\mu_i$, the better page $i$ will be ranked.
 
 \subsection{Ranking tennis players}
 
-Let us do a small numerical experiment based on PageRank.
-We aim at ranking the following $n=54$ tennis players:
+The ideas behind PageRank can be applied in many different contexts, not only for ranking webpages.
+In the following example we aim at ranking the following $n=54$ tennis players:
 \begin{center}
 Federer, Nadal, Djokovic, Murray, Del Potro, Roddick, Coria, Zverev, Ferrer, Soderling, Tsonga, Nishikori, Raonic, Nalbandian, Wawrinka, Berdych, Hewitt, Tsitsipas, Monfils, Gonzalez, Thiem, Ljubicic, Davydenko, Cilic, Pouille, Safin, Isner, Dimitrov, Medvedev, Ferrero, Goffin, Bautista Agut, Sock, Gasquet, Simon, Blake, Monaco, Coric, Stepanek, Khachanov, Almagro, Robredo, Verdasco, Anderson, Youzhny, Baghdatis, Dolgopolov, Kohlschreiber, Fognini, Melzer, Paire, Querrey, Tomic, Basilashvili.
 \end{center}
@@ -324,11 +321,12 @@ To do so, we have access to the ``head to head'' record between them (see Figure
 R_{i,j} = \ \text{<<\,number of wins of player $i$ against player $j$\,>>}.
 \end{equation}
 
+
 We will use the PageRank strategy of the previous section in order to rank the players. In our case, instead of a ``drunk surfer'' we will consider a ``drunk spectator''.
 At time $t$ the value $X_t \in \{1, \dots, n\}$ indicates which tennis player the spectator believes to be the best. At time $t+1$, the spectator picks uniformly at random a game played by its favorite player $X_t$ against one of the other players, $x$.
-If $X_t$ wins the game, then the spectator still believes that $X_t$ is the best: $X_{t+1} = X_t$. Otherwise the spectator changes his mind: $X_{t+1} = x$.
+If the game was won by $X_t$, then the spectator still believes that $X_t$ is the best: $X_{t+1} = X_t$. Otherwise the spectator changes his mind: $X_{t+1} = x$.
 
-This corresponds to a Markov chain with transition matrix
+This can be modeled by a Markov chain with transition matrix:
 $$
 P_{i,j} = 
 \begin{cases}
@@ -341,7 +339,7 @@ $$
 V_{j} = \sum_{i=1}^n R_{j,i} \qquad \text{and} \qquad G_j = \sum_{i=1}^n R_{i,j} + R_{j,i}.
 $$
 Let $\mu$ be the ``Perron-Frobenius'' eigenvector of $P$. The vector $\mu$ is displayed on Figure~\ref{fig:ranking}.
-Applying Corollary~\ref{cor:perron} to the matrix $P$ we get that the ``drunk spectator'' will (in the $t \to \infty$ limit) spend a fraction $\mu_i$ of its time thinking that the player $i$ is the best. The values $(\mu_1, \dots, \mu_n)$ can therefore be used to rank the players. We obtain the following order:
+Applying Corollary~\ref{cor:perron}-Theorem \ref{th:ergodic} to the matrix $P$ we get that the ``drunk spectator'' will (in the $t \to \infty$ limit) spend a fraction $\mu_i$ of its time thinking that the player $i$ is the best. The values $(\mu_1, \dots, \mu_n)$ can therefore be used to rank the players. We obtain the following order (see also Figure \ref{fig:ranking})
 \begin{center}
 Federer (14.4\%),
 Djokovic (13.7\%),
@@ -399,20 +397,19 @@ Tomic (0.2\%),
 Basilashvili (0.1\%).
 \end{center}
 
-
-\begin{figure}
-    \centering
-	\hspace*{-2cm}
-	\includegraphics[width=1.23\textwidth]{./confrontations.pdf}
-	\caption{The matrix $R$ given by \eqref{eq:def_R}}
-	\label{fig:confrontations}
-\end{figure}
-\begin{figure}
+\begin{figure}[h!]
     \centering
 	\hspace*{-2cm}
 	\includegraphics[width=1.23\textwidth]{./pagerank_tennis.pdf}
 	\caption{Comparison of the ranking by the percentage of wins (on the left) and the ranking using PageRank.}
 	\label{fig:ranking}
+\end{figure}
+\begin{figure}[h!]
+    \centering
+	\hspace*{-2cm}
+	\includegraphics[width=1.23\textwidth]{./confrontations.pdf}
+	\caption{The matrix $R$ given by \eqref{eq:def_R}}
+	\label{fig:confrontations}
 \end{figure}
 
 
