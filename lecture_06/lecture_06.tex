@@ -235,7 +235,7 @@ We first prove the theorem in the case $k=1$, when $P_{i,j} > 0$ for all $i,j$.
 				& x & \mapsto & Px
 	\end{array}
 	$$
-	is contracting for the $\ell_1$-norm: there exists $c \in (0,1)$ such that for all $x,y \in \Delta_n$:
+	is a contraction mapping for the $\ell_1$-norm: there exists $c \in (0,1)$ such that for all $x,y \in \Delta_n$:
 	$$
 	\| Px - Py \|_1 \leq c \| x-y\|_1.
 	$$
@@ -322,7 +322,7 @@ R_{i,j} = \ \text{<<\,number of wins of player $i$ against player $j$\,>>}.
 \end{equation}
 
 
-We will use the PageRank strategy of the previous section in order to rank the players. In our case, instead of a ``drunk surfer'' we will consider a ``drunk spectator''.
+We will use the approach of the previous section to rank the players. In our case, instead of a ``drunk surfer'' we will consider a ``drunk spectator''.
 At time $t$ the value $X_t \in \{1, \dots, n\}$ indicates which tennis player the spectator believes to be the best. At time $t+1$, the spectator picks uniformly at random a game played by its favorite player $X_t$ against one of the other players, $x$.
 If the game was won by $X_t$, then the spectator still believes that $X_t$ is the best: $X_{t+1} = X_t$. Otherwise the spectator changes his mind: $X_{t+1} = x$.
 
