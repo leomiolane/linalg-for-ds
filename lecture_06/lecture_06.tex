@@ -269,7 +269,29 @@ We first prove the theorem in the case $k=1$, when $P_{i,j} > 0$ for all $i,j$.
 	$$
 \end{proof}
 
-Using Lemma~\ref{lem:contract}, Banach fixed point Theorem tells us that $\varphi$ admits a unique fixed point $\mu$ on $\Delta_n$ (i.e.\ a unique $\mu \in \Delta_n$ such that $P\mu = \mu$) and that for all $x \in \Delta_n$, $P^t x \xrightarrow[t \to \infty]{} \mu$. This proves Theorem~\ref{th:perron_frobenius} in the case $k=1$.
+Let now $\mu$ be a minimizer of $x \mapsto \|Px-x\|_1$ on $\Delta_n$.
+\begin{itemize}
+	\item $P\mu = \mu$, because otherwise $\|P \mu - \mu\|_1 > 0$ and by Lemma \ref{lem:contract}
+		$$
+		\| P (P\mu) - P\mu \|_1 \leq c \|P\mu - \mu\|_1 < \|P \mu - \mu\|_1,
+		$$
+		which contradicts the optimality of $\mu$. This proves \ref{item:i}.
+	\item For all $x \in \Delta_n$, we have
+		$$
+		\|P^t x - \mu \|_1 = \| P^t x - P^t \mu \|_1 \leq c^t \|x-\mu\|_1 \xrightarrow[t\to \infty]{} 0,
+		$$
+		which proves \ref{item:iii}.
+	\item Let us now prove \ref{item:ii}. Let $x \in \R^n$ such that $Px = x$. Then for all $t \geq 1$:
+		\begin{align}
+		x = P^t x
+		&= x_1 P^t e_1 + \dots + x_n P^t e_n
+		\\
+		&\xrightarrow[t \to \infty]{} x_1 \mu + \dots + x_n \mu = (x_1 + \dots + x_n) \mu \in \Span(\mu),
+		\end{align}
+		which proves \ref{item:ii}.
+\end{itemize}
+%Using Lemma~\ref{lem:contract}, Banach fixed point Theorem tells us that $\varphi$ admits a unique fixed point $\mu$ on $\Delta_n$ (i.e.\ a unique $\mu \in \Delta_n$ such that $P\mu = \mu$) and that for all $x \in \Delta_n$, $P^t x \xrightarrow[t \to \infty]{} \mu$. 
+This proves Theorem~\ref{th:perron_frobenius} in the case $k=1$.
 \\
 
 In the case $k > 1$ we simply apply the result for $k=1$ to $P^k$.
