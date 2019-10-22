@@ -121,6 +121,7 @@ By multiplying by $P^{\sT}$ on both sides, we get $A P P^{\sT} = P D P^{\sT}$. R
 	$$
 	The columns $u_1, \dots, u_n$ of $U$ (respectively the columns $v_1, \dots, v_m$ of $V$) are called the left (resp.\ right) singular vectors of $A$. The non-negative numbers $\Sigma_{i,i}$ are the singular values of $A$. Moreover $\rank(A) = \# \{i \, | \, \Sigma_{i,i} \neq 0 \}$.
 \end{theorem}
+Theorem \ref{th:SVD} is proved at the end of these notes.
 
 Notice that the singular vectors (similarly to the eigenvectors) are not uniquely defined: if $A = U \Sigma V^{\sT}$ is a SVD of $A$, then $A = (-U) \Sigma (-V)^{\sT}$ is also a SVD of $A$. However, with a slight abuse of language, we will often refer $v_i$ as the $i^{\rm th}$ right singular vector of $A$.
 
@@ -171,7 +172,149 @@ The most important property of the singular vectors for us is the following:
 \end{proof}
 
 
-\subsection{Proof of Theorem \ref{th:SVD}}
+\section{Interpretation and applications of the SVD}
+
+\subsection{Geometric interpretation}
+
+\subsection{``Maximal variance'' interpretation}\label{sec:maximal_variance}
+Let $a_1, \dots, a_n \in \R^d$ be $n$ points in $d$ dimensions. We assume that these points are centered, meaning that 
+$$
+\sum_{i=1}^n a_i = 0.
+$$
+Let $A$ be the $n \times d$ matrix whose rows are $a_1, \dots, a_n$ and let $(v_1, \dots, v_n)$ be its right singular vectors.
+By Proposition \ref{prop:max_svd}, $v_1$, the first right singular vector of $A$, maximizes
+$$
+v \mapsto \|A v\|^2 =  \sum_{i=1}^n \langle a_i, v \rangle^2
+$$
+over the unit sphere $\mathbb{S}_n \defeq \{x \in \R^n \, | \, \|x\|=1 \}$.
+This quantity is the variance of the coordinates of the points $a_1, \dots, a_n$ along the direction $\Span(v)$.
+
+The first right singular vector $v_1$ gives therefore the direction along which the variance of the data is maximal. Proposition \ref{prop:max_svd} gives also that
+\begin{equation}
+	v_{k} = \argmax_{\|v\| = 1, \, v \perp v_1, \dots, v_{k-1}} \| A v \|^2.
+\end{equation}
+Hence $v_2$ gives the direction orthogonal to $v_1$ that maximizes the variance and so on...
+
+\subsection{Application: Principal Component Analysis (PCA)}
+
+The SVD is commonly used for dimensionality reduction. Assume that we are given a dataset of $n$ points $a_1, \dots, a_n \in \R^d$, with $d$ very large. We aim at representing this dataset in lower dimension, i.e.\ finding $\widetilde{a}_1, \dots, \widetilde{a}_n \in \R^k$ where $k$ is smaller than $d$, such that the points $(\widetilde{a}_1, \dots, \widetilde{a}_n)$ look like the original ones $(a_1, \dots, a_n)$. This could be for instance used
+\begin{itemize}
+	\item to reduce computing time.
+	\item to visualize an high-dimensional dataset in dimension $k=2$ or 3.
+\end{itemize}
+
+Assume that the dataset is centered (otherwise subtract the mean $\mu = \frac{1}{n} \sum_{i=1}^n a_i$ to all the points). As we have seen in Section \ref{sec:maximal_variance} above, the $k$ first right-singular vectors $v_1, \dots, v_k$ gives the $k$ first orthogonal direction along which the variance of the dataset is maximal. 
+
+Hence, it is very natural to project the original dataset $a_1, \dots, a_k$ on these directions $\Span(v_1, \dots, v_k)$: we are going to represent each point $a_i$ by the coordinates of its projection, in the basis $v_1, \dots, v_k$. 
+Since $(v_1, \dots, v_k)$ is orthonormal, the coordinate of $a_i$ along the vector $v_j$ is 
+$\langle a_i, v_j \rangle$. Consequently we take $$\widetilde{a}_i =(\langle v_1, a_i \rangle, \dots, \langle v_k, a_i \rangle) = V^{\sT}_{|k} a_i,$$
+where $V_{|k} = (v_1 | \cdots | v_k) \in \R^{d \times k}$.
+
+\paragraph{How do we chose $k$ ?}
+The dimension $k$ of the output space can be chosen by looking at the singular values of $A$. Let $\sigma_1 \geq \sigma_2 \geq \cdots \geq \sigma_{\min(n,d)}$ be the singular values of $A$. As seen in Section \ref{sec:maximal_variance}, the variance of the dataset along the direction $v_i$ is $\sigma_i^2$.
+
+\begin{figure}[h!]
+	\begin{center}
+	\includegraphics[width = 0.7\linewidth]{figures/elbow.pdf}
+	\end{center}
+	\caption{Singular values of $A$, ranked in decreasing order.}
+	\label{fig:elbow}
+\end{figure}
+
+A simple way to chose $k$ is therefore to plot the square singular values as on Figure \ref{fig:elbow} and look for a good cut-off ($k=4$ on Figure \ref{fig:elbow}). Doing so, one captures a fraction
+$$
+\frac{\sum_{i=1}^k \sigma_i^2}{\sum_{i=1}^{\min(n,d)} \sigma_i^2}
+$$
+of the total variance.
+
+\paragraph{Should we ``normalize'' the dataset?}
+It depends, but in general the answer is yes, especially if you have data from heterogeneous types.
+Imagine that you have measured the size and the weight of $n$ objects, and stored the information in vectors $a_i= (\text{size of object} \ i \ \text{in cm}, \ \text{weight of object} \ i \text{ in kg})$.
+If I change the weighting unit from kilograms to grams, this multiply the variance along the second coordinates by $10^6$, leading to very different principal components.
+Normalizing the dataset (i.e.\ dividing the columns of the data matrix by their standard deviation) allows to be unaffected by a change of units.
+
+However, this decreases a lot the variance of columns which high variance and amplify a lot the variance of columns with low variance. Hence you may not always want to normalize the columns.
+
+
+\subsection{Best-fitting subspace}
+Let $a_1, \dots, a_n \in \R^d$ be $n$ points in $d$ dimensions.
+We consider the problem of finding the $k$-dimensional subspace (for $k = 1, \dots, n$) that fits ``the best'' these $n$ data points. By ``best'', we mean here the $k$-dimensional subspace $S$ that minimize the sum of the square distances to the $n$ points:
+\begin{equation}\label{eq:fit}
+	\text{minimize} \ \ \sum_{i=1}^n d(a_i, S)^2 \ \ \text{with respect to} \ S \ \text{subspace of dimension} \ k.
+\end{equation}
+
+Recall that the distance of a vector $x$ to the subspace $S$ is defined as $d(x,S) = \|x - P_S x\|$.
+Let $A$ be the $n \times d$ matrix whose rows are $a_1, \dots, a_n$.
+The goal of this section is to prove:
+\begin{theorem}\label{th:approx_svd}
+	Let $v_1, \dots, v_n$ be right singular vectors of $A$. Then for all $k \in \{1, \dots, n\}$, the subspace $\Span(v_1, \dots, v_k)$ is a solution of \eqref{eq:fit}.
+\end{theorem}
+We start by noticing that for all $i \in \{1, \dots, n\}$,
+$$
+d(a_i, S)^2 = \| a_i - P_{S}(a_i) \|^2 = \|a_i\|^2 - \| P_{S}(a_i) \|^2,
+$$
+by Pythagorean Theorem (recall that $P_{S}(a_i) \perp (a_i - P_S(a_i))$). 
+Minimizing \eqref{eq:fit} is therefore equivalent to maximize
+\begin{equation}\label{eq:fit2}
+	\sum_{i=1}^n \| P_{S}(a_i) \|^2.
+\end{equation}
+Let us fix an orthonormal basis $(s_1, \dots, s_k)$ of $S$. Then for all $x \in \R^d$,
+$P_S(x)= \langle s_1, x \rangle s_1 + \cdots + \langle s_k, x \rangle s_k$, hence
+\begin{equation}\label{eq:fit3}
+	\sum_{i=1}^n \| P_{S}(a_i) \|^2 = \sum_{i=1}^n \sum_{j = 1}^k \langle a_i, s_j \rangle^2
+	= \| A s_1 \|^2 + \cdots + \| A s_k \|^2.
+\end{equation}
+Consequently, minimizing \eqref{eq:fit} is equivalent to maximizing \eqref{eq:fit3} over all orthonormal families $(s_1, \dots, s_k)$.
+\\
+
+For simplicity, we start by considering the case $k=1$, in which case $S = \Span(s_1)$.
+In this case, \eqref{eq:fit3} is simply:
+\begin{equation}\label{eq:fit4}
+	\sum_{i=1}^n \| P_{S}(a_i) \|^2 
+	= \| A s_1 \|^2.
+\end{equation}
+
+Proposition \ref{prop:max_svd} tells us that a subspace of dimension $1$ that maximizes \eqref{eq:fit4} and hence that minimizes \eqref{eq:fit} is $\Span(v_1)$ because
+\begin{equation}\label{eq:def_first_singular}
+	v_1 = \argmax_{\|v\| = 1} \|A v\|.
+\end{equation}
+If we now want to solve the problem for $k=2$, a natural candidate for the subspace $S$ would be $S = \Span(v_1, v_2)$ since by Proposition \ref{prop:max_svd}
+\begin{equation}\label{eq:def_second_singular}
+	v_2 = \argmax_{\|v\| = 1, \, v \perp v_1} \| A v \|.
+\end{equation}
+We can follow this greedy strategy for $k = 3, \dots, n$, $S = \Span(v_1, \dots, v_k)$ is a natural candidate for being solution of \eqref{eq:fit}.
+
+It is not a priori obvious (except for $k=1$) that $S = \Span(v_1, \dots, v_k)$ is a minimizer of \eqref{eq:fit} over all the subspaces of dimension $k$.
+We need the following lemma.
+
+\begin{lemma}\label{lem:svd_rec}
+	Let $k \in \{2, \dots, k\}$. Assume that $(v_1, \dots, v_{k-1})$ is an orthonormal family that maximizes \eqref{eq:fit3}.
+	Define 
+	$$
+	v_k = \argmax_{\|v\| = 1, \, v \perp \Span(v_1, \dots, v_{k-1})} \|Av\|.
+	$$
+	Then $(v_1, \dots, v_{k})$ is an orthonormal family and $\Span(v_1, \dots v_k)$ minimizes \eqref{eq:fit}, i.e.\ $(v_1, \dots, v_{k})$ maximizes \eqref{eq:fit3}.
+\end{lemma}
+\begin{proof}
+	Let $S$ be a subspace of dimension $k$. Let $(w_1, \dots, w_k)$ be an orthonormal basis of $S$ such that $w_{k} \perp \Span(v_1, \dots, v_{k-1})$. By definition of $v_k$,
+	we have $\|A w_k \| \leq \| A v_k\|$. 
+	We also assumed that $(v_1, \dots, v_k)$ maximizes \eqref{eq:fit3}, so
+	$$
+	\|A v_1\|^2 + \cdots + \| A v_{k-1} \|^2 \geq
+	\|A w_1\|^2 + \cdots+ \| A w_{k-1} \|^2.
+	$$
+	We conclude that
+	$$
+	\|A v_1\|^2 + \cdots + \| A v_{k} \|^2 \geq
+	\|A w_1\|^2 + \cdots + \| A w_{k} \|^2,
+	$$
+	so $(v_1, \dots, v_k)$ maximizes \eqref{eq:fit3}.
+\end{proof}
+\\
+
+Theorem \ref{th:approx_svd} follows then by induction.
+
+\section*{Proof of Theorem \ref{th:SVD}}
 We apply the Spectral Theorem (Theorem \ref{th:spectral}) to the $m \times m$ matrix $A^{\sT} A$: there exists an orthonormal basis $(v_1, \dots, v_m)$ of $\R^m$ of eigenvectors of $A^{\sT} A$ associated to eigenvalues $\lambda_1 \geq \cdots \geq \lambda_m$ that are all non-negative because $A^{\sT} A$ is non-negative.
 Let $V \in \R^{m \times m}$ be the orthogonal matrix whose columns are $(v_1, \dots, v_m)$.
 \\
@@ -248,144 +391,6 @@ It remains to show:
 	$$
 \end{proof}
 \\
-
-\section{Interpretation and applications of the SVD}
-
-\subsection{Geometric interpretation}
-
-\subsection{``Maximal variance'' interpretation}\label{sec:maximal_variance}
-Let $a_1, \dots, a_n \in \R^d$ be $n$ points in $d$ dimensions. We assume that this points are centered, meaning that 
-$$
-\sum_{i=1}^n a_i = 0.
-$$
-Let $A$ be the $n \times d$ matrix whose rows are $a_1, \dots, a_n$ and let $(v_1, \dots, v_n)$ be its right singular vectors.
-By Proposition \ref{prop:max_svd}, $v_1$, the first right singular vector of $A$, maximizes
-$$
-v \mapsto \|A v\|^2 =  \sum_{i=1}^n \langle a_i, v \rangle^2
-$$
-over the unit sphere.
-This quantity is the variance of the coordinates of the points $a_1, \dots, a_n$ along the direction $\Span(v)$.
-
-The first right singular vector $v_1$ gives therefore the direction along which the variance of the data is maximal. Proposition \ref{prop:max_svd} gives also that
-\begin{equation}
-	v_{k} = \argmax_{\|v\| = 1, \, v \perp v_1, \dots, v_{k-1}} \| A v \|^2.
-\end{equation}
-Hence $v_2$ gives the direction orthogonal to $v_1$ that maximizes the variance and so on...
-
-\subsection{Application: Principal Component Analysis (PCA)}
-
-The SVD is commonly used for dimensionality reduction. Assume that we are given a dataset of $n$ points $a_1, \dots, a_n \in \R^d$, with $d$ very large. We at reprensenting this dataset in lower dimension, i.e.\ finding $\widetilde{a}_1, \dots, \widetilde{a}_n \in \R^k$ with $k$ ``small'', such that the points $(\widetilde{a}_1, \dots, \widetilde{a}_n)$ look like the original ones $(a_1, \dots, a_n)$. This could be for instance used
-\begin{itemize}
-	\item to reduce computing time.
-	\item to visualize an high-dimensional dataset in dimension $k=2$ or 3.
-\end{itemize}
-
-Assume that the dataset is centered (otherwise substract the mean $\mu = \frac{1}{n} \sum_{i=1}^n a_i$ to all the points). As we have seen in Section \ref{sec:maximal_variance} above, the $k$ first right-singular vectors $v_1, \dots, v_k$ gives the $k$ first orthogonal direction along which the variance of the dataset is maximal. 
-
-Hence, it is very natural to poject the original dataset $a_1, \dots, a_k$ on these directions $\Span(v_1, \dots, v_k)$: we are going to represent each point $a_i$ by the coordinates of its projection, in the basis $v_1, \dots, v_k$. 
-Since $(v_1, \dots, v_k)$ is orthonormal, the coordinate of $a_i$ along the vector $v_j$ is 
-$\langle a_i, v_j \rangle$. Consequently we take $$\widetilde{a}_i =(\langle v_1, a_i \rangle, \dots, \langle v_k, a_i \rangle) = V^{\sT}_{|k} a_i,$$
-where $V_{|k} = (v_1 | \cdots | v_k) \in \R^{d \times k}$.
-
-\paragraph{How do we chose $k$ ?}
-The dimension $k$ of the ouput space can be chosen by looking at the singular values of $A$. Let $\sigma_1 \geq \sigma_2 \geq \cdots \geq \sigma_{\min(n,d)}$ be the singular values of $A$. As seen in Section \ref{sec:maximal_variance}, the variance of the dataset along the direction $v_i$ is $\sigma_i^2$.
-
-\begin{figure}[h!]
-	\begin{center}
-	\includegraphics[width = 0.7\linewidth]{figures/elbow.pdf}
-	\end{center}
-	\caption{Singular values of $A$, ranked in decreasing order.}
-	\label{fig:elbow}
-\end{figure}
-
-A simple way to chose $k$ is therefore to plot the square singular values as on Figure \ref{fig:elbow} and look for a good cut-off ($k=4$ on Figure \ref{fig:elbow}). Doing so, one captures a fraction
-$$
-\frac{\sum_{i=1}^k \sigma_i^2}{\sum_{i=1}^{\min(n,d)} \sigma_i^2}
-$$
-of the total variance.
-
-\paragraph{Should we normalize the dataset?}
-It depends, but in general the answer is yes, especially if you have data from eterogeneous types.
-Imagine that you have measured the size and the weight of $n$ objects, and stored the information in vectors $a_i= (\text{size of object} \ i \ \text{in cm}, \ \text{weight of object} \ i \text{ in kg})$.
-If I change the weighting unit from kilograms to grams, this multiply the variance along the second coordinates by $10^6$, leading to very different principal components.
-Normalizing the dataset (i.e.\ dividing the columns of the data matrix by their standard deviation) allows to be unafftected by a change of units.
-
-However, this decreases a lot the variance of that has an high variance and amplify a lot the variance of columns with low variance. Hence you may not always want to normalize the columns.
-
-
-\subsection{Best-fitting subspace}
-Let $a_1, \dots, a_n \in \R^d$ be $n$ points in $d$ dimensions.
-We consider the problem of finding the $k$-dimensional subspace (for $k = 1, \dots, n$) that fits ``the best'' these $n$ data points. By ``best'', we mean here the $k$-dimensional subspace $S$ that minimize the sum of the square distances to the $n$ points:
-\begin{equation}\label{eq:fit}
-	\text{minimize} \ \ \sum_{i=1}^n d(a_i, S)^2 \ \ \text{with respect to} \ S \ \text{subspace of dimension} \ k.
-\end{equation}
-
-Let $A$ be the $n \times d$ matrix whose rows are $a_1, \dots, a_n$.
-The goal of this section is to prove:
-\begin{theorem}\label{th:approx_svd}
-	Let $v_1, \dots, v_n$ be right singular vectors of $A$. Then for all $k \in \{1, \dots, n\}$, the subspace $\Span(v_1, \dots, v_k)$ is a solution of \eqref{eq:fit}.
-\end{theorem}
-In this case we have for all $i \in \{1, \dots, n\}$,
-$$
-d(a_i, S)^2 = \| a_i - P_{S}(a_i) \|^2 = \|a_i\|^2 - \| P_{S}(a_i) \|^2,
-$$
-by Pythagorean Theorem (recall that $P_{S}(a_i) \perp (a_i - P_S(a_i))$). Since $v_1$ is of unit norm, $P_{S}(a_i) = \langle v_1, a_i \rangle v_1$, hence:
-$$
-d(a_i, S)^2 =  \|a_i\|^2 - \langle v_1, a_i \rangle^2.
-$$
-Minimizing \eqref{eq:fit} is therefore equivalent to maximize
-\begin{equation}\label{eq:fit2}
-	\sum_{i=1}^n \| P_{S}(a_i) \|^2.
-\end{equation}
-Let us fix an orthonormal basis $(s_1, \dots, s_k)$ of $S$. Then for all $x \in \R^d$,
-$P_S(x)= \langle s_1, x \rangle s_1 + \cdots + \langle s_k, x \rangle s_k$, hence
-\begin{equation}\label{eq:fit3}
-	\sum_{i=1}^n \| P_{S}(a_i) \|^2 = \sum_{i=1}^n \sum_{j = 1}^k \langle a_i, s_j \rangle^2
-	= \| A s_1 \|^2 + \cdots + \| A s_k \|^2,
-\end{equation}
-Consequently, minimizing \eqref{eq:fit} is equivalent to maximizing \eqref{eq:fit3} over all orthonormal families $(s_1, \dots, s_k)$.
-\\
-
-For $k=1$, Proposition \ref{prop:max_svd} tells us that a subspace of dimension $1$ that minimizes \eqref{eq:fit} is $\Span(v_1)$ because
-\begin{equation}\label{eq:def_first_singular}
-	v_1 = \argmax_{\|v\| = 1} \|A v\|.
-\end{equation}
-If we now want to solve the problem for $k=2$, a natural candidate for the subspace $S$ would be $S = \Span(v_1, v_2)$ since by Proposition \ref{prop:max_svd}
-\begin{equation}\label{eq:def_second_singular}
-	v_2 = \argmax_{\|v\| = 1, \, v \perp v_1} \| A v \|.
-\end{equation}
-We can follow this greedy strategy for $k = 3, \dots, n$, $S = \Span(v_1, \dots, v_k)$ is a natural candidate for being solution of \eqref{eq:fit}.
-
-It is not a priori obvious (except for $k=1$) that $S = \Span(v_1, \dots, v_k)$ is a minimizer of \eqref{eq:fit} over all the subspaces of dimension $k$.
-We need the following lemma.
-
-\begin{lemma}\label{lem:svd_rec}
-	Let $k \in \{2, \dots, k\}$. Assume that $(v_1, \dots, v_{k-1})$ is an orthonormal family that maximizes \eqref{eq:fit3}.
-	Define 
-	$$
-	v_k = \argmax_{\|v\| = 1, \, v \perp \Span(v_1, \dots, v_{k-1})} \|Av\|.
-	$$
-	Then $(v_1, \dots, v_{k})$ is an orthonormal family and $\Span(v_1, \dots v_k)$ minimizes \eqref{eq:fit}, i.e.\ $(v_1, \dots, v_{k})$ maximizes \eqref{eq:fit3}.
-\end{lemma}
-\begin{proof}
-	Let $S$ be a subspace of dimension $k$. Let $(w_1, \dots, w_k)$ be an orthonormal basis of $S$ such that $w_{k} \perp \Span(v_1, \dots, v_{k-1})$. By definition of $v_k$,
-	we have $\|A w_k \| \leq \| A v_k\|$. 
-	We also assumed that $(v_1, \dots, v_k)$ maximizes \eqref{eq:fit3}, so
-	$$
-	\|A v_1\|^2 + \cdots + \| A v_{k-1} \|^2 \geq
-	\|A w_1\|^2 + \cdots+ \| A w_{k-1} \|^2.
-	$$
-	We conclude that
-	$$
-	\|A v_1\|^2 + \cdots + \| A v_{k} \|^2 \geq
-	\|A w_1\|^2 + \cdots + \| A w_{k} \|^2,
-	$$
-	so $(v_1, \dots, v_k)$ maximizes \eqref{eq:fit3}.
-\end{proof}
-\\
-
-Theorem \ref{th:approx_svd} follows then by induction.
-
 
 \vspace{1cm}
 \centerline{\pgfornament[width=7cm]{71}}
