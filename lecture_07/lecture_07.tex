@@ -174,7 +174,23 @@ The most important property of the singular vectors for us is the following:
 
 \section{Interpretation and applications of the SVD}
 
+
 \subsection{Geometric interpretation}
+
+The decomposition $M = U \Sigma V^{\sT}$ gives that the linear transformation associated to the matrix $M$ is the composition of three linear transformations:
+\begin{enumerate}
+	\item $V^{\sT}$ is a rotation/reflection: length, dot products, angles are preserved.
+	\item $\Sigma$ corresponds to a scaling.
+	\item $U$ is another rotation/reflection: length, dot products, angles are preserved.
+\end{enumerate}
+
+\begin{figure}[H]
+	\begin{center}
+	\includegraphics[width = 0.5\linewidth]{figures/svd.pdf}
+	\end{center}
+	\caption{Geometric interpretation of SVD}
+	\label{fig:svd}
+\end{figure}
 
 \subsection{``Maximal variance'' interpretation}\label{sec:maximal_variance}
 Let $a_1, \dots, a_n \in \R^d$ be $n$ points in $d$ dimensions. We assume that these points are centered, meaning that 
