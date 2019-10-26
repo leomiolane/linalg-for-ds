@@ -6,6 +6,7 @@
 \title{\vspace{-2.0cm}%
 	Optimization and Computational Linear Algebra for Data Science\\
 Homework 7: Principal component analysis}
+%\author{Léo \textsc{Miolane} \ $\cdot$ \ \texttt{leo.miolane@gmail.com}}
 \date{\vspace{-1cm}Due on November 5, 2019}
 \setcounter{section}{7}
 
@@ -13,6 +14,9 @@ Homework 7: Principal component analysis}
 \maketitle
 \input{./preamble_homeworks.tex}
 
+%DRAFT
+
+%\color{green}
 
 \begin{problem}[3 points]
 	Let $A \in \R^{n \times m}$. The Singular Values Decomposition (SVD) tells us that there exists two orthogonal matrices $U \in \R^{n \times n}$ and $V \in \R^{m \times m}$ and a matrix $\Sigma \in \R^{n \times m}$ such that $\Sigma_{1,1} \geq \Sigma_{2,2}  \geq \cdots \geq 0$ and $\Sigma_{i,j} = 0$ for $i\neq j$
@@ -47,7 +51,7 @@ Homework 7: Principal component analysis}
 	$$
 	x^{\sT} M x > 0.
 	$$
-	If a matrix $M$ is positive definite, then $M$ is also positive semi-definite, but the converse is not true. One of the goals of this problem is to prove a part of Proposition~1.2 in the notes (Lecture~7). You are of course not allowed to use this proposition to solve this problem.
+	If a matrix $M$ is positive definite, then $M$ is also positive semi-definite, but the converse is not true. One of the goals of this problem is to prove one of the implications of Proposition~1.2 of the notes (Lecture~7). You are of course not allowed to use this proposition to solve this problem.
 	\begin{enumerate}[label=\normalfont(\textbf{\alph*})]
 		\item Let $M \in \R^{n \times n}$ be a positive definite matrix. Show that its eigenvalues are all strictly positive and that $M$ is invertible. 
 		\item Let $M \in \R^{n \times n}$ be a symmetric matrix. Show that there exists $\alpha > 0$ such that the matrix $M + \alpha \Id_n$ is positive definite.
