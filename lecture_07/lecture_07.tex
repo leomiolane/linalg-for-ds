@@ -121,7 +121,7 @@ Assume that we are given a dataset of $n$ points $a_1, \dots, a_n \in \R^d$, wit
 \end{itemize}
 
 \subsection{Sample covariance matrix}
-Let $\mu = \frac{1}{n} \sum_{i=1}^n a_i$ be the mean of the dataset. The sample covariance matrix is then defined as:
+Let $\mu = \frac{1}{n} \sum_{i=1}^n a_i$ be the mean of the dataset. The sample covariance matrix is then defined\footnote{Stricty speaking, the sample coveriance matrix is $\frac{1}{n-1}S$. However, we chose for simplicity to remove the factor $\frac{1}{n-1}$ here, since it will not change the analysis.} as:
 $$
 S = \sum_{i=1}^n (a_i - \mu) (a_i-\mu)^{\sT} \in \R^{d \times d}.
 $$
@@ -272,6 +272,12 @@ Normalizing the dataset (i.e.\ dividing the columns of the data matrix by their 
 However, this decreases a lot the variance of columns which high variance and amplify a lot the variance of columns with low variance. Hence you may not always want to normalize the columns.
 
 \section{Singular value decomposition}
+
+Given a matrix $A$, we can follow the procedure of Section \ref{sec:maximal_variance} to compute the right-singular vectors $v_j$ and the associated singular values $\sigma_j$. When $\sigma_j \neq 0$ we can define $u_j$ the left-singular vector $u_j$ of $A$ by
+$$
+u_j = \frac{1}{\sigma_j} A v_j.
+$$
+It turns out that the vectors $u_j$, $v_j$ and the $\sigma_j$ allow to obtain a decomposition of the matrix $A$, called the singular value decomposition:
 
 \begin{theorem}[Singular value decomposition (SVD)]\label{th:SVD}
 	Let $A \in \R^{n \times m}$. Then there exists two orthogonal matrices $U \in \R^{n \times n}$ and $V \in \R^{m \times m}$ and a matrix $\Sigma \in \R^{n \times m}$ such that $\Sigma_{1,1} \geq \Sigma_{2,2}  \geq \cdots \geq 0$ and $\Sigma_{i,j} = 0$ for $i\neq j$
