@@ -121,7 +121,8 @@ Assume that we are given a dataset of $n$ points $a_1, \dots, a_n \in \R^d$, wit
 \end{itemize}
 
 \subsection{Sample covariance matrix}
-Let $\mu = \frac{1}{n} \sum_{i=1}^n a_i$ be the mean of the dataset. The sample covariance matrix is then defined\footnote{Stricty speaking, the sample coveriance matrix is $\frac{1}{n-1}S$. However, we chose for simplicity to remove the factor $\frac{1}{n-1}$ here, since it will not change the analysis.} as:
+
+Let $\mu = \frac{1}{n} \sum_{i=1}^n a_i$ be the mean of the dataset. The sample covariance matrix is then defined\footnote{Strictly speaking, the sample covariance matrix is $\frac{1}{n-1}S$. However, we chose for simplicity to remove the factor $\frac{1}{n-1}$ here, since it will not change the analysis.} as:
 $$
 S = \sum_{i=1}^n (a_i - \mu) (a_i-\mu)^{\sT} \in \R^{d \times d}.
 $$
@@ -176,6 +177,7 @@ $v_1$ is called the first (right) singular vector of $A$ and $\sigma_1 = \sqrt{\
 \\
 
 If we want to reduce the dimension of the dataset from $d$ to $1$, then we are basically done. The ``dimensionally reduced'' dataset will simply be the coordinates along $v_1$:$\langle v_1, a_1 \rangle, \langle v_1, a_2 \rangle, \dots, \langle v_1, a_n \rangle$.
+The inner-product $\langle v_1, a_i \rangle$ is called the first principal component of $a_i$.
 But in general, we might be interested to obtain a dataset of dimension $k >1$, so we need to find other directions of ``large variance''.
 \\
 
@@ -245,6 +247,7 @@ $$
 	\langle v_k, a_n \rangle \\
 \end{pmatrix}.
 $$
+The inner-product $\langle v_j, a_i \rangle$ is called the $j^{\rm th}$ principal component of the vector $a_i$.
 
 \paragraph{How do we chose $k$ ?}
 The dimension $k$ of the dimensionally-reduced data can be chosen by looking at the singular values of $A$. Let $\sigma_1 \geq \sigma_2 \geq \cdots \geq \sigma_{\min(n,d)}$ be the singular values of $A$. As we have seen above, the variance of the dataset along the direction $v_i$ is $\lambda_i = \sigma_i^2$.
