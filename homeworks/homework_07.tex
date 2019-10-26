@@ -1,0 +1,97 @@
+\documentclass[11pt,nocut]{article}
+
+\usepackage{../latex_style/packages}
+\usepackage{../latex_style/notations}
+
+\title{\vspace{-2.0cm}%
+	Optimization and Computational Linear Algebra for Data Science\\
+Homework 7: Principal component analysis}
+%\author{Léo \textsc{Miolane} \ $\cdot$ \ \texttt{leo.miolane@gmail.com}}
+\date{\vspace{-1cm}Due on November 5, 2019}
+\setcounter{section}{7}
+
+\begin{document}
+\maketitle
+\input{./preamble_homeworks.tex}
+
+%DRAFT
+
+%\color{green}
+
+\begin{problem}[3 points]
+	Let $A \in \R^{n \times m}$. The Singular Values Decomposition (SVD) tells us that there exists two orthogonal matrices $U \in \R^{n \times n}$ and $V \in \R^{m \times m}$ and a matrix $\Sigma \in \R^{n \times m}$ such that $\Sigma_{1,1} \geq \Sigma_{2,2}  \geq \cdots \geq 0$ and $\Sigma_{i,j} = 0$ for $i\neq j$
+	$$
+	A = U \Sigma V^{\sT}.
+	$$
+	The columns $u_1, \dots, u_n$ of $U$ (respectively the columns $v_1, \dots, v_m$ of $V$) are called the left (resp.\ right) singular vectors of $A$. The non-negative numbers $\sigma_i \defeq \Sigma_{i,i}$ are the singular values of $A$. Moreover we also know that $r \defeq \rank(A) = \# \{i \, | \, \Sigma_{i,i} \neq 0 \}$.
+	\begin{enumerate}[label=\normalfont(\textbf{\alph*})]
+		\item Let 
+			$\widetilde{U} = \!
+			{\small \begin{pmatrix}
+					| & & | \\
+					u_1 & \!\cdots\! & u_r \\
+					| & & | 
+			\end{pmatrix} } \! \in \! \R^{n \times r}$ ,
+			$\widetilde{V} = \!
+			{\small \begin{pmatrix}
+					| & & | \\
+					v_1 & \!\cdots\! & v_r \\
+					| & & | 
+			\end{pmatrix} } \! \in \! \R^{m \times r}$ and
+			$\widetilde{\Sigma} = \Diag(\sigma_1, \dots, \sigma_r) \in \R^{r \times r}$.
+			Show that $A = \widetilde{U}\widetilde{\Sigma}\widetilde{V}^{\sT}$.
+		\item Give orthonormal bases of $\Ker(A)$ and $\Im(A)$ in terms of the singular vectors $u_1, \dots, u_n, v_1, \dots , v_m$.
+	\end{enumerate}
+\end{problem}
+
+\vspace{1mm}
+
+\begin{problem}[3 points]
+	We say that a symmetric matrix $M \in \R^{n \times n}$ is positive definite if for all \textbf{non-zero} $x \in \R^n$,
+	$$
+	x^{\sT} M x > 0.
+	$$
+	If a matrix $M$ is positive definite, then $M$ is also positive semi-definite, but the converse is not true. One of the goals of this problem is to prove one of the implications of Proposition~1.2 of the notes (Lecture~7). You are of course not allowed to use this proposition to solve this problem.
+	\begin{enumerate}[label=\normalfont(\textbf{\alph*})]
+		\item Let $M \in \R^{n \times n}$ be a positive definite matrix. Show that its eigenvalues are all strictly positive and that $M$ is invertible. 
+		\item Let $M \in \R^{n \times n}$ be a symmetric matrix. Show that there exists $\alpha > 0$ such that the matrix $M + \alpha \Id_n$ is positive definite.
+	\end{enumerate}
+\end{problem}
+
+\vspace{1mm}
+
+
+\begin{problem}[4 points]
+	You have been given a mysterious dataset that may contain important informations! This dataset is a collection of $n=3000$ points of dimension $d=1000$.
+	Investigate the structure of this dataset using PCA/plots... , and find out if the dataset contains any information.
+	\\
+
+	The \texttt{zip} file \texttt{mysterious\_data.zip} contains a text file containing the $3000 \times 1000$ data matrix.
+	The \emph{Jupyter notebook} \texttt{mysterious\_data.ipynb} contains a function to read the text file.
+	The numpy function \texttt{numpy.linalg.eigh} is great to compute eigenvalues and eigenvectors of a symmetric matrix.	
+	\\
+
+	\textbf{It is intended that you code in Python and use the provided Jupyter Notebook. Please only submit a pdf version of your notebook (right-click $\to$ `print' $\to$ `Save as pdf').}
+\end{problem}
+
+
+\vspace{1mm}
+
+%\begin{problem}[3 points]
+%\end{problem}
+
+%\vspace{1mm}
+
+
+\begin{problem}[$\star$]
+	Let $M \in \R^{n \times n}$ be a symmetric matrix. Let $\lambda_1 \geq \dots \geq \lambda_n$ be the eigenvalues of $M$. Show that for all $d \leq n$:
+	$$
+	\max_{\substack{U \in \R^{n\times d} \\ U^{\sT} U = \Id_d}} \Tr(U^{\sT} M U) = \sum_{i=1}^d \lambda_i.
+	$$
+\end{problem}
+\vspace{1cm}
+\centerline{\pgfornament[width=7cm]{87}}
+
+%\bibliographystyle{plain}
+%\bibliography{./references.bib}
+\end{document}
