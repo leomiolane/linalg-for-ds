@@ -8,7 +8,7 @@
 
 \title{\vspace{-2.0cm}%
 	Optimization and Computational Linear Algebra for Data Science\\
-Lecture 7: Singular value decomposition}
+Lecture 7: The spectral theorem and PCA}
 \author{Léo \textsc{Miolane} \ $\cdot$ \ \texttt{leo.miolane@gmail.com}}
 \date{\today}
 
@@ -112,6 +112,165 @@ By multiplying by $P^{\sT}$ on both sides, we get $A P P^{\sT} = P D P^{\sT}$. R
 	\end{enumerate}
 \end{exercise}
 
+\section{Application: Principal Component Analysis (PCA)}
+
+Assume that we are given a dataset of $n$ points $a_1, \dots, a_n \in \R^d$, with $d$ very large. We aim at representing this dataset in lower dimension, i.e.\ finding $\widetilde{a}_1, \dots, \widetilde{a}_n \in \R^k$ where $k$ is smaller than $d$, such that the points $(\widetilde{a}_1, \dots, \widetilde{a}_n)$ look like the original ones $(a_1, \dots, a_n)$. This could be for instance used
+\begin{itemize}
+	\item to reduce computing time.
+	\item to visualize an high-dimensional dataset in dimension $k=2$ or 3.
+\end{itemize}
+
+\subsection{Sample covariance matrix}
+Let $\mu = \frac{1}{n} \sum_{i=1}^n a_i$ be the mean of the dataset. The sample covariance matrix is then defined as:
+$$
+S = \sum_{i=1}^n (a_i - \mu) (a_i-\mu)^{\sT} \in \R^{d \times d}.
+$$
+Assume now that the dataset is centered meaning that $\sum_{i=1}^n a_i = 0$ (otherwise subtract the mean $\mu$ to all the points). In that case, $S$ can be simply written as:
+$$
+S = \sum_{i=1}^n a_i a_i^{\sT}
+= A^{\sT} A.
+$$
+where $A$ is the $n\times d$ ``data matrix'':
+$$
+A =
+\begin{pmatrix}
+	- \ a_1 \ - \\
+	  \vdots  \\
+	- \ a_n \ -
+\end{pmatrix}
+.
+$$
+
+%As we have seen in Section \ref{sec:maximal_variance} above, the $k$ first right-singular vectors $v_1, \dots, v_k$ gives the $k$ first orthogonal direction along which the variance of the dataset is maximal. 
+
+\subsection{``Maximal variance'' directions}\label{sec:maximal_variance}
+
+
+We would like to find a direction, that is a vector $v \in \R^d$ of unit norm, such that the variance of the projections of the data points onto it is large. More precisely, given a point $a_i$, its projection onto $\Span(v)$ is
+$$
+P_{\Span(v)}(a_i) = 
+\langle v, a_i \rangle v.
+$$
+We aim at maximizing the variance of the coordinates $\big\{ \alpha_1 \defeq \langle v, a_1 \rangle, \dots , \alpha_n \defeq \langle v, a_n \rangle \big\}$ of the points of the dataset in the direction $v$. 
+The mean of the $\alpha_i$ is zero because the dataset is assumed to be centered:
+$$
+\sum_{i=1}^n \alpha_i 
+=
+\sum_{i=1}^n \langle v, a_i \rangle
+= \Big\langle v, \sum_{i=1}^n a_i \Big\rangle = \langle v,0 \rangle = 0.
+$$
+The variance of the $\alpha_i$ is then simply
+$$
+\sum_{i=1}^n \langle a_i, v \rangle^2
+=
+\sum_{i=1}^n (v^{\sT}a_i)(a_i^{\sT} v)
+=
+\sum_{i=1}^n v^{\sT} (a_i a_i^{\sT}) v
+=
+v^{\sT} \Big(\frac{1}{n}\sum_{i=1}^n a_i a_i^{\sT}\Big) v
+= v^{\sT} S v.
+$$
+
+Using Proposition \ref{prop:eigen_var} we get that the direction $v$ that maximizes the variance is simply the eigenvector $v_1$ associated to the largest eigenvalue $\lambda_1$ of $S = A^{\sT}A$. The variance along this direction is $\lambda_1 \geq 0$ (because $A^{\sT}A$ is positive semi-definite).
+$v_1$ is called the first (right) singular vector of $A$ and $\sigma_1 = \sqrt{\lambda_1}$ is called the first singular value of $A$.
+\\
+
+If we want to reduce the dimension of the dataset from $d$ to $1$, then we are basically done. The ``dimensionally reduced'' dataset will simply be the coordinates along $v_1$:$\langle v_1, a_1 \rangle, \langle v_1, a_2 \rangle, \dots, \langle v_1, a_n \rangle$.
+But in general, we might be interested to obtain a dataset of dimension $k >1$, so we need to find other directions of ``large variance''.
+\\
+
+In the spirit of what we did above, it is very natural to look for $v \in \R^d, \|v\| = 1$, orthogonal to $v_1$, along which the variance of the coordinates of the dataset is maximal.
+That is we want to 
+$$
+\text{maximize} \ \ v^{\sT} S v, \qquad \text{subject to} \ \ \|v\| = 1, \ \ v \perp v_1.
+$$
+Again, from Proposition \ref{prop:eigen_var}, we know that the solution of this problem is given by $v_2$, the eigenvector of $S = A^{\sT}A$ associated with the second largest eigenvalue $\lambda_2$.
+$v_2$ is called the second (right) singular vector of $A$ and $\sigma_2 = \sqrt{\lambda_2}$ is called the second singular value of $A$.
+\\
+
+If our goal was to reduce our dataset to $2$ dimensions, then we are done. The new data points with simply be
+$$
+\begin{pmatrix}
+	\langle v_1, a_1 \rangle \\
+	\langle v_2, a_1 \rangle
+\end{pmatrix}
+,
+\begin{pmatrix}
+	\langle v_1, a_2 \rangle \\
+	\langle v_2, a_2 \rangle
+\end{pmatrix}
+,
+\begin{pmatrix}
+	\langle v_1, a_3 \rangle \\
+	\langle v_2, a_3 \rangle
+\end{pmatrix}
+\dots
+\begin{pmatrix}
+	\langle v_1, a_n \rangle \\
+	\langle v_2, a_n \rangle
+\end{pmatrix}.
+$$
+Otherwise, we can continue the same process and construct $v_3, \dots, v_k$ such that for all $j \in \{3, \dots, k\}$, $v_j$ is solution of
+$$
+\text{maximize} \ \ v^{\sT} S v, \qquad \text{subject to} \ \ \|v\| = 1, \ \ v \perp v_1, v \perp v_2, \dots, v \perp v_{j-1}.
+$$
+From Proposition \ref{prop:eigen_var}, we know that $v_1, \dots, v_k$ will be eigenvectors of $S = A^{\sT}A$ associated with the $k$ largest eigenvalues $\lambda_1 \geq \lambda_2$ \geq \cdots \geq \lambda_k$. For $j \in \{1, \dots, k\}$ the vector $v_j$ is called the $j^{\rm th}$ (right) singular vector of $A$ and $\sigma_j = \sqrt{\lambda_j}$ is called the $j^{\rm th}$ singular value of $A$.
+The dimensionally reduced dataset is then
+$$
+\begin{pmatrix}
+	\langle v_1, a_1 \rangle \\
+	\langle v_2, a_1 \rangle \\
+	\vdots \\
+	\langle v_k, a_1 \rangle \\
+\end{pmatrix}
+,
+\begin{pmatrix}
+	\langle v_1, a_2 \rangle \\
+	\langle v_2, a_2 \rangle \\
+	\vdots \\
+	\langle v_k, a_2 \rangle \\
+\end{pmatrix}
+,
+\begin{pmatrix}
+	\langle v_1, a_3 \rangle \\
+	\langle v_2, a_3 \rangle \\
+	\vdots \\
+	\langle v_k, a_3 \rangle \\
+\end{pmatrix}
+\dots
+\begin{pmatrix}
+	\langle v_1, a_n \rangle \\
+	\langle v_2, a_n \rangle \\
+	\vdots \\
+	\langle v_k, a_n \rangle \\
+\end{pmatrix}.
+$$
+
+\paragraph{How do we chose $k$ ?}
+The dimension $k$ of the dimensionally-reduced data can be chosen by looking at the singular values of $A$. Let $\sigma_1 \geq \sigma_2 \geq \cdots \geq \sigma_{\min(n,d)}$ be the singular values of $A$. As we have seen above, the variance of the dataset along the direction $v_i$ is $\lambda_i = \sigma_i^2$.
+
+\begin{figure}[h!]
+	\begin{center}
+	\includegraphics[width = 0.7\linewidth]{figures/elbow.pdf}
+	\end{center}
+	\caption{Singular values of $A$, ranked in decreasing order.}
+	\label{fig:elbow}
+\end{figure}
+
+A simple way to chose $k$ is therefore to plot the square singular values as on Figure \ref{fig:elbow} and look for a good cut-off ($k=4$ on Figure \ref{fig:elbow}). Doing so, one captures a fraction
+$$
+\frac{\sum_{i=1}^k \sigma_i^2}{\sum_{i=1}^{\min(n,d)} \sigma_i^2}
+$$
+of the total variance.
+
+\paragraph{Should we ``normalize'' the dataset?}
+It depends, but in general the answer is yes, especially if you have data from heterogeneous types.
+Imagine that you have measured the size and the weight of $n$ objects, and stored the information in vectors $a_i= (\text{size of object} \ i \ \text{in cm}, \ \text{weight of object} \ i \text{ in kg})$.
+If I change the weighting unit from kilograms to grams, this multiply the variance along the second coordinates by $10^6$, leading to very different principal components.
+Normalizing the dataset (i.e.\ dividing the columns of the data matrix by their standard deviation) allows to be unaffected by a change of units.
+
+However, this decreases a lot the variance of columns which high variance and amplify a lot the variance of columns with low variance. Hence you may not always want to normalize the columns.
+
 \section{Singular value decomposition}
 
 \begin{theorem}[Singular value decomposition (SVD)]\label{th:SVD}
@@ -172,7 +331,7 @@ The most important property of the singular vectors for us is the following:
 \end{proof}
 
 
-\section{Interpretation and applications of the SVD}
+\section{Interpretations of the SVD}
 
 
 \subsection{Geometric interpretation}
@@ -192,64 +351,7 @@ The decomposition $M = U \Sigma V^{\sT}$ gives that the linear transformation as
 	\label{fig:svd}
 \end{figure}
 
-\subsection{``Maximal variance'' interpretation}\label{sec:maximal_variance}
-Let $a_1, \dots, a_n \in \R^d$ be $n$ points in $d$ dimensions. We assume that these points are centered, meaning that 
-$$
-\sum_{i=1}^n a_i = 0.
-$$
-Let $A$ be the $n \times d$ matrix whose rows are $a_1, \dots, a_n$ and let $(v_1, \dots, v_n)$ be its right singular vectors.
-By Proposition \ref{prop:max_svd}, $v_1$, the first right singular vector of $A$, maximizes
-$$
-v \mapsto \|A v\|^2 =  \sum_{i=1}^n \langle a_i, v \rangle^2
-$$
-over the unit sphere $\mathbb{S}_n \defeq \{x \in \R^n \, | \, \|x\|=1 \}$.
-This quantity is the variance of the coordinates of the points $a_1, \dots, a_n$ along the direction $\Span(v)$.
 
-The first right singular vector $v_1$ gives therefore the direction along which the variance of the data is maximal. Proposition \ref{prop:max_svd} gives also that
-\begin{equation}
-	v_{k} = \argmax_{\|v\| = 1, \, v \perp v_1, \dots, v_{k-1}} \| A v \|^2.
-\end{equation}
-Hence $v_2$ gives the direction orthogonal to $v_1$ that maximizes the variance and so on...
-
-\subsection{Application: Principal Component Analysis (PCA)}
-
-The SVD is commonly used for dimensionality reduction. Assume that we are given a dataset of $n$ points $a_1, \dots, a_n \in \R^d$, with $d$ very large. We aim at representing this dataset in lower dimension, i.e.\ finding $\widetilde{a}_1, \dots, \widetilde{a}_n \in \R^k$ where $k$ is smaller than $d$, such that the points $(\widetilde{a}_1, \dots, \widetilde{a}_n)$ look like the original ones $(a_1, \dots, a_n)$. This could be for instance used
-\begin{itemize}
-	\item to reduce computing time.
-	\item to visualize an high-dimensional dataset in dimension $k=2$ or 3.
-\end{itemize}
-
-Assume that the dataset is centered (otherwise subtract the mean $\mu = \frac{1}{n} \sum_{i=1}^n a_i$ to all the points). As we have seen in Section \ref{sec:maximal_variance} above, the $k$ first right-singular vectors $v_1, \dots, v_k$ gives the $k$ first orthogonal direction along which the variance of the dataset is maximal. 
-
-Hence, it is very natural to project the original dataset $a_1, \dots, a_k$ on these directions $\Span(v_1, \dots, v_k)$: we are going to represent each point $a_i$ by the coordinates of its projection, in the basis $v_1, \dots, v_k$. 
-Since $(v_1, \dots, v_k)$ is orthonormal, the coordinate of $a_i$ along the vector $v_j$ is 
-$\langle a_i, v_j \rangle$. Consequently we take $$\widetilde{a}_i =(\langle v_1, a_i \rangle, \dots, \langle v_k, a_i \rangle) = V^{\sT}_{|k} a_i,$$
-where $V_{|k} = (v_1 | \cdots | v_k) \in \R^{d \times k}$.
-
-\paragraph{How do we chose $k$ ?}
-The dimension $k$ of the output space can be chosen by looking at the singular values of $A$. Let $\sigma_1 \geq \sigma_2 \geq \cdots \geq \sigma_{\min(n,d)}$ be the singular values of $A$. As seen in Section \ref{sec:maximal_variance}, the variance of the dataset along the direction $v_i$ is $\sigma_i^2$.
-
-\begin{figure}[h!]
-	\begin{center}
-	\includegraphics[width = 0.7\linewidth]{figures/elbow.pdf}
-	\end{center}
-	\caption{Singular values of $A$, ranked in decreasing order.}
-	\label{fig:elbow}
-\end{figure}
-
-A simple way to chose $k$ is therefore to plot the square singular values as on Figure \ref{fig:elbow} and look for a good cut-off ($k=4$ on Figure \ref{fig:elbow}). Doing so, one captures a fraction
-$$
-\frac{\sum_{i=1}^k \sigma_i^2}{\sum_{i=1}^{\min(n,d)} \sigma_i^2}
-$$
-of the total variance.
-
-\paragraph{Should we ``normalize'' the dataset?}
-It depends, but in general the answer is yes, especially if you have data from heterogeneous types.
-Imagine that you have measured the size and the weight of $n$ objects, and stored the information in vectors $a_i= (\text{size of object} \ i \ \text{in cm}, \ \text{weight of object} \ i \text{ in kg})$.
-If I change the weighting unit from kilograms to grams, this multiply the variance along the second coordinates by $10^6$, leading to very different principal components.
-Normalizing the dataset (i.e.\ dividing the columns of the data matrix by their standard deviation) allows to be unaffected by a change of units.
-
-However, this decreases a lot the variance of columns which high variance and amplify a lot the variance of columns with low variance. Hence you may not always want to normalize the columns.
 
 
 \subsection{Best-fitting subspace}
