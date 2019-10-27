@@ -106,7 +106,7 @@ When $\Ker(A) \neq \emptyset$ the least squares problem \eqref{eq:least_squares}
 
 \subsection{Ridge regression}
 
-The Ridge regression adds a $\ell_2$ penalty to the least square problem, and minimizes
+The Ridge regression adds a $\ell_2$ penalty to the least square problem in order to ``select'' a solution of smaller norm, and minimizes
 \begin{equation}\label{eq:ridge}
 	\min_{x \in \R^d} \Big\{ \| Ax - y \|^2 + \lambda \|x\|^2 \Big\},
 \end{equation}
@@ -179,12 +179,44 @@ This formula confirms the intuition of Figure: the Lasso estimator translates th
 Before looking at low-rank matrix estimation and matrix completion, we need to look at different norms we can have for matrices. Recall that $\R^{n \times m}$, the set of $n \times m$ matrices, is a vector space (of dimension $nm$).
 \\
 
-The most obvious norm to consider is the equivalent of the $\ell_2$ norm, called the Frobenius norm:
+\paragraph{The Frobenius norm.} The most obvious norm to consider is the equivalent of the $\ell_2$ norm, called the Frobenius norm:
 \begin{definition}[Frobenius norm]
 	The Frobenius norm of a matrix $A \in \R^{n \times m}$ is defined as
 	$$
 	\|A\|_F = \sqrt{\sum_{i=1}^n \sum_{j=1}^m A_{i,j}^2}. 
 	$$
+\end{definition}
+
+\begin{remark}
+	The Frobenius norm is the norm induced by the following inner-product on matrices:
+	$$
+	\langle A,B \rangle = \Tr(A^{\sT}B) = \sum_{i=1}^n\sum_{j=1}^m A_{i,j} B_{i,j}, \qquad \text{for} \ \ A,B \in \R^{n \times m}.
+	$$
+\end{remark}
+
+\begin{proposition}
+	Let $A \in \R^{n \times n}$ and let $\sigma_1, \dots, \sigma_{\min(n,m)}$ be the singular values of $A$. Then
+	$$
+	\|A\|_F = \sqrt{\sum_{i=1}^{\min(n,m)} \sigma_i^2}.
+	$$
+\end{proposition}
+
+\paragraph{The spectral norm.} Another extremely common norm for matrices is the spectral norm, also called the operator norm:
+
+\begin{definition}[Spectral norm]
+	The spectral norm of a matrix $A \in \R^{n \times m}$ is defined as the maximal singular value of $A$:
+	$$
+	\|A\|_{\rm Sp} = \max_{\substack{x \in \R^m \\ \|x\|=1}} \|Ax\|.
+	$$
+\end{definition}
+
+\paragraph{The nuclear norm.} We have seen above that the Frobenius norm of a matrix correspond to the $\ell_2$ norm of its singular values and that the spectral norm correspond to the infinity norm of the singular values. The nuclear norm is simply the $\ell_1$ norm of its singular values:
+\begin{definition}[Nuclear norm]
+	Let $A \in \R^{n \times n}$ and let $\sigma_1, \dots, \sigma_{\min(n,m)}$ be the singular values of $A$. The nuclear norm of $A$ is defined as:
+	$$
+	\|A\|_* = \sum_{i=1}^{\min(n,m)} \sigma_i.
+	$$
+	
 \end{definition}
 
 \section{Low-rank matrix estimation and matrix completion}
