@@ -24,8 +24,10 @@ We start by a formal definition of a (simple non-oriented) graph:
 	Two vertices $i,j$ are connected by an edge if $\{i,j\} \in E$. In such case we write $i \sim j$ and say that $i$ and $j$ are neighbors.
 \end{definition}
 
+We say that $G$ is connected if it is possible to go from every vertex in the graph to every other vertex through a series of edges, called a path.
+
 \begin{definition}
-	The degree of a node $i \in V$ is the number of its neighbors.
+	The degree $\deg(i)$ of a node $i \in V$ is the number of its neighbors.
 \end{definition}
 
 In this lecture we will only consider finite graphs, where $V$ is finite. We let $n = \# V$. One can assume (up to renaming the vertices) that $V = \{1, \dots, n\}$.
@@ -62,15 +64,16 @@ Notice that $A$ is a symmetric matrix.
 	The matrix $L$ satisfies the following properties:
 	\begin{enumerate}
 		\item $L$ is symmetric and positive semi-definite.
-		\item The smallest eigenvalue of $L$ is $0$, the corresponding eigenvector is the constant one vector $(1,1, \dots, 1)$.
+		\item The smallest eigenvalue of $L$ is $0$, the corresponding eigenvector is the constant one vector $\1 \defeq (1,1, \dots, 1)$.
 		\item $L$ has $n$ non-negative eigenvalues $0 = \lambda_1 \leq \lambda_2 \leq \dots \leq \lambda_n$.
 	\end{enumerate}
 \end{proposition}
 
-We have the following key identity for all $x \in \R^n$:
+The proposition above follows from the following key identity: for all $x \in \R^n$,
 \begin{equation}\label{eq:lap}
-x^{\sT} L x = \sum_{i \sim j} (x_i - x_j)^2.
+x^{\sT} L x = \sum_{i \sim j} (x_i - x_j)^2,
 \end{equation}
+where the sum is over all the edges $i \sim j$ of the graph.
 Consequently we have $x^{\sT} L x = 0$ if and only if all the terms of the sum \eqref{eq:lap} are equal to zero, that is $x_i = x_j$ for all $i$ and $j$ that are connected by an edge. We conclude that
 \begin{center}
 	\emph{
@@ -99,7 +102,7 @@ Exercise: show that $\lambda_2$ increases when one adds edges to $G$.
 	\lambda_2 \leq v(G) \leq e(G).
 	$$
 \end{proposition}
-We will only prove the first inequality.
+We will only prove the first inequality, the second if a standard fact from graph theory.
 \begin{lemma}\label{lem:rem}
 	Let $G^{-}$ be a graph obtained from $G$ by removing one vertex (and all the edges linked to it). Then $\lambda_2(G^{-}) \geq \lambda_2(G) - 1$.
 \end{lemma}
@@ -156,6 +159,9 @@ Remember that we obtained $G^+$ by adding edges to $G$: $\lambda_2(G^+) \geq \la
 
 \section{Spectral clustering with the graph Laplacian}
 
+From now, we assume that $G$ is connected. We aim at clustering the nodes of $G$ into $k$ groups of nodes with as many intra-group edges as possible and as few inter-group edges as possible.
+
+
 \begin{algorithm}
 \caption{Spectral clustering with the Laplacian}
 \begin{algorithmic}[1]
@@ -176,7 +182,7 @@ S = \{ i \, | \, v_2(i) \geq \delta \} \qquad \text{and} \qquad
 S^c = \{ i \, | \, v_2(i) < \delta \},
 $$
 for some $\delta \in \R$.
-The next Proposition tells us that for $\delta = 0$, the cluster $C_1$ is connected.
+The next Proposition tells us that for $\delta = 0$, the cluster $S$ is connected.
 \begin{proposition}
 	Assume that $G$ is connected. Let $v_2$ be an eigenvector associated to $\lambda_2$, the second smallest eigenvalue of $L$. Let
 	$$
@@ -184,6 +190,8 @@ The next Proposition tells us that for $\delta = 0$, the cluster $C_1$ is connec
 	$$
 	Then the subgraph induced by $S$ is connected.
 \end{proposition}
+ 
+See \cite{spielman2012spectral} for a proof.
 
 \section{Spectral clustering as a relaxation}
 
@@ -205,13 +213,16 @@ $$
 {\rm cut}(S) = \frac{1}{4} \sum_{i \sim j} (x_i-x_j)^2
 =\frac{1}{4} x^{\sT} L x.
 $$
-However, ${\rm cut}(S)$ is minimal for $S = \emptyset$. Hence the cut is not a good metric, one should add some constraints on $S$.
-We can for instance force $S$ to be balanced ($\# S = \# S^c = n/2$) which is equivalent to say that $x$ is orthogonal to $\1$ the vector of all ones. Thus
-$$
-\min_{S \text{ balanced}} {\rm cut}(S)
-= \frac{1}{4} \min_{x \in \{\pm 1\}^n, \ x \perp \1} x^{\sT} L x.
-$$
-This problem is called ``minimum bisection'' problem and is known to be NP hard. This comes from the fact that optimizing over the hypercube $\{\pm 1\}$ makes the problem combinatorial and difficult to solve. A way around is to relax the constraint by only forcing $x$ to belong on the sphere of radius $\sqrt{n}$ and to solve:
+However, ${\rm cut}(S)$ is minimal for $S = \emptyset$ or $S = \{1, \dots, n\}$. Hence the cut is not a good metric, one should add some constraints on $S$.
+We can for instance force $S$ to be balanced ($\# S = \# S^c = n/2$, assuming here that $n$ is even) which is equivalent to say that $x$ is orthogonal to $\1$ the vector of all ones. Thus
+\begin{center}
+	minimize ${\rm cut}(S)$ subject to $S \subset \{1, \dots, S\}$, $S$ balanced,
+\end{center}
+is equivalent to
+\begin{center}
+	minimize $x^{\sT} L x$ subject to $x \in \{-1,1\}^n$, $x \perp \1$.
+\end{center}
+This problem is called the ``minimum bisection'' problem and is known to be NP hard. This comes from the fact that optimizing over the hypercube $\{\pm 1\}^n$ makes the problem combinatorial and difficult to solve. A way around is to relax the constraint by only forcing $x$ to belong on the sphere of radius $\sqrt{n}$ and to solve:
 $$
 \min_{\|x\| = \sqrt{n}, \ x \perp \1} x^{\sT} L x.
 $$
