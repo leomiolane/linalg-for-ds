@@ -13,7 +13,7 @@ You can download all the notes [here](https://github.com/leomiolane/linalg-for-d
 4. [Norm and inner product](https://github.com/leomiolane/linalg-for-ds/raw/master/lecture_04/lecture_04.pdf)
 5. [Matrices and orthogonality](https://github.com/leomiolane/linalg-for-ds/raw/master/lecture_05/lecture_05.pdf)
 6. [Eigenvalues, eigenvectors and Markov chains](https://github.com/leomiolane/linalg-for-ds/raw/master/lecture_06/lecture_06.pdf)
-7. [Singular value decomposition](https://github.com/leomiolane/linalg-for-ds/raw/master/lecture_07/lecture_07.pdf)
+7. [The spectral theorem and PCA](https://github.com/leomiolane/linalg-for-ds/raw/master/lecture_07/lecture_07.pdf)
 8. [Graphs and Linear Algebra](https://github.com/leomiolane/linalg-for-ds/raw/master/lecture_08/lecture_08.pdf)
 9. [Convex functions](https://github.com/leomiolane/linalg-for-ds/raw/master/lecture_09/lecture_09.pdf)
 10. [Optimality conditions](https://github.com/leomiolane/linalg-for-ds/raw/master/lecture_10/lecture_10.pdf)
