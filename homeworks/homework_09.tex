@@ -1,0 +1,106 @@
+\documentclass[11pt,nocut]{article}
+
+\usepackage{../latex_style/packages}
+\usepackage{../latex_style/notations}
+
+\title{\vspace{-2.0cm}%
+	Optimization and Computational Linear Algebra for Data Science\\
+Homework 9: Convex functions}
+%\author{Léo \textsc{Miolane} \ $\cdot$ \ \texttt{leo.miolane@gmail.com}}
+\date{\vspace{-1cm}Due on November 19, 2019}
+\setcounter{section}{9}
+
+\begin{document}
+\maketitle
+\input{./preamble_homeworks.tex}
+
+%DRAFT
+
+%\color{green}
+
+\begin{problem}[2 points]
+	Let $f: \R^n \to \R$ be a convex function. We assume that the minimum $m \defeq \min_{x \in \R^n} f(x)$ of $f$ on $\R^n$ is finite, and that the set of minimizers of $f$
+$$
+M \defeq \big\{ v \in \R^n \, \big| \, f(v) = m \big\}
+$$
+is non-empty.
+
+	\begin{enumerate}[label=\normalfont(\textbf{\alph*})]
+		\item Show that $M$ is a convex set.
+		\item Show that if $f$ is strictly convex, then $M$ has only one element.
+	\end{enumerate}
+
+\end{problem}
+
+\vspace{1mm}
+
+\begin{problem}[2 points]
+	Let $M \in \R^{n \times n}$ be a symmetric matrix, $b \in \R^n$ and $c \in \R$.
+	For $x \in \R^n$ we define
+	$$
+	f(x) = x^{\sT} M x + \langle x,b \rangle + c.
+	$$
+	$f$ is called a quadratic function.
+	\begin{enumerate}[label=\normalfont(\textbf{\alph*})]
+		\item Compute the gradient $\nabla f(x)$ and the Hessian $H_f(x)$ at all $x \in \R^m$. Show that $f$ is convex if and only if $M$ is positive semi-definite.
+		\item In this question, we assume $M$ to be positive semi-definite. Show that $f$ admits a minimizer if and only if $b \in \Im(A)$.
+	\end{enumerate}
+\end{problem}
+
+\vspace{1mm}
+\begin{problem}[3 points]\label{prob:strongly_convex}
+	We say that a function $f: \R^n \to \R$ is strongly convex if there exists $\alpha >0$ such that the function $x \mapsto f(x) - \frac{\alpha}{2} \|x\|^2$ is convex. In other words, $f$ is strongly convex if there exists $\alpha > 0$ and a convex function $g: \R^n \to \R$ such that 
+	$$
+	f(x) = g(x) + \frac{\alpha}{2} \|x\|^2.
+	$$
+	
+	\begin{enumerate}[label=\normalfont(\textbf{\alph*})]
+		\item Show that a strongly convex function is strictly convex.
+		\item Let $\varphi:\R^n \to \R$ be a twice differentiable function. Show that $g$ is strongly convex if and only if there exists $\alpha >0$ such that for all $x \in \R^n$ the eigenvalues of $H_{\varphi}(x)$ are greater or equal than $\alpha$.
+	\end{enumerate}
+\end{problem}
+
+
+\vspace{1mm}
+
+\begin{problem}[3 points]
+	Let $A \in \R^{n \times m}$ and $y \in \R^n$.
+	For $x \in \R^m$ we define
+	$$
+	f(x) = \|Ax-y\|^2.
+	$$
+	\begin{enumerate}[label=\normalfont(\textbf{\alph*})]
+		\item Compute the gradient $\nabla f(x)$ and the Hessian $H_f(x)$ at all $x \in \R^m$. Show that $f$ is convex.
+		\item Show that if $\rank(A)<m$, then $f$ is not strictly convex.
+		\item Show that is $\rank(A)=m$, then $f$ is strongly convex (use the definition and results of Problem \ref{prob:strongly_convex}).
+	\end{enumerate}
+\end{problem}
+
+\vspace{1mm}
+
+\begin{problem}[$\star$]
+	\textbf{Notation:} For a symmetric matrix $M \in \R^{n \times n}$ we denote respectively $\lambda_{\rm min}(M)$ and $\lambda_{\rm max}(M)$ the smallest and largest eigenvalue of $M$.
+	\\
+
+	Let $f: \R^n \to \R$ a convex function that is twice differentiable. We assume that 
+	$$
+	\gamma \defeq \inf_{x \in \R^n} \lambda_{\rm min}(H_f(x))
+	\qquad \text{and} \qquad
+	L \defeq \sup_{x \in \R^n} \lambda_{\rm max}(H_f(x))
+	$$
+	are both finite. Show that for all $x,v \in \R^n$:
+	$$
+	f(x) + \langle \nabla f(x), h \rangle + \frac{\gamma}{2} \|h\|^2
+	\leq f(x+h)
+	\leq
+	f(x) + \langle \nabla f(x), h \rangle + \frac{L}{2} \|h\|^2.
+	$$
+
+\end{problem}
+
+\vspace{1cm}
+\centerline{\pgfornament[width=7cm]{87}}
+
+%\bibliographystyle{plain}
+%\bibliography{./references.bib}
+\end{document}

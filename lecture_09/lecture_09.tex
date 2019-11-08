@@ -25,6 +25,10 @@ Lecture 9: Convex functions}
 	$$
 \end{definition}
 
+\begin{remark}
+	Subspaces of $\R^n$ are convex sets.
+\end{remark}
+
 \begin{figure}[h!]
 	\begin{center}
 	\includegraphics[width=0.4\textwidth]{figures/convex.pdf}
@@ -62,7 +66,7 @@ A function $f$ is concave (respectively strictly concave) if $-f$ is convex (res
 	\caption{A convex function.}
 \end{figure}
 
-Notice that a linear function is also a convex function since it verifies \eqref{eq:def_convex} with equality.
+Notice that a linear function is also a convex function since it verifies \eqref{eq:def_convex} with equality, but is not strictly convex.
 
 
 \begin{exercise}
@@ -98,7 +102,7 @@ Notice that a linear function is also a convex function since it verifies \eqref
 \end{proposition}
 When $f: \R \to \R$ is twice differentiable, we get that $f$ is convex if and only if $f'' \geq 0$.
 
-It can be complicated to check that a function $f$ is convex using Proposition \ref{prop:hessian} when $n \geq 2$. The next proposition shows that we can always reduce to the unidimensional case, by checking that the restriction of $f$ on every line is convex:
+It can be complicated to check that a function $f$ is convex using Proposition \ref{prop:hessian} when $f$ is a function of multiple variables ($n \geq 2$). The next proposition shows that we can always reduce to the unidimensional case, by checking that the restriction of $f$ on every line is convex:
 
 \begin{proposition}
 	A function $f: \R^n \to \R$ is convex if and only if the function
@@ -162,7 +166,7 @@ It can be complicated to check that a function $f$ is convex using Proposition \
 	Let $f: \R^n \to \R$ be a convex function, $A \in \R^{n \times m}$ and $b\in\R^n$.
 	Then the function $g: \R^m \to \R$ defined by
 	$$
-	g(x) = f(Ax + x)
+	g(x) = f(Ax + b)
 	$$
 	is convex.
 \end{proposition}
