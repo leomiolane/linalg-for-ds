@@ -17,22 +17,23 @@ Homework 9: Convex functions}
 %DRAFT
 
 %\color{green}
+\vspace{4mm}
 
 \begin{problem}[2 points]
 	Let $f: \R^n \to \R$ be a convex function. We assume that the minimum $m \defeq \min_{x \in \R^n} f(x)$ of $f$ on $\R^n$ is finite, and that the set of minimizers of $f$
 $$
-M \defeq \big\{ v \in \R^n \, \big| \, f(v) = m \big\}
+\mathcal{M} \defeq \big\{ v \in \R^n \, \big| \, f(v) = m \big\}
 $$
 is non-empty.
 
 	\begin{enumerate}[label=\normalfont(\textbf{\alph*})]
-		\item Show that $M$ is a convex set.
-		\item Show that if $f$ is strictly convex, then $M$ has only one element.
+		\item Show that $\mathcal{M}$ is a convex set.
+		\item Show that if $f$ is strictly convex, then $\mathcal{M}$ has only one element.
 	\end{enumerate}
 
 \end{problem}
 
-\vspace{1mm}
+\vspace{4mm}
 
 \begin{problem}[2 points]
 	Let $M \in \R^{n \times n}$ be a symmetric matrix, $b \in \R^n$ and $c \in \R$.
@@ -47,7 +48,8 @@ is non-empty.
 	\end{enumerate}
 \end{problem}
 
-\vspace{1mm}
+\newpage
+
 \begin{problem}[3 points]\label{prob:strongly_convex}
 	We say that a function $f: \R^n \to \R$ is strongly convex if there exists $\alpha >0$ such that the function $x \mapsto f(x) - \frac{\alpha}{2} \|x\|^2$ is convex. In other words, $f$ is strongly convex if there exists $\alpha > 0$ and a convex function $g: \R^n \to \R$ such that 
 	$$
@@ -55,13 +57,13 @@ is non-empty.
 	$$
 	
 	\begin{enumerate}[label=\normalfont(\textbf{\alph*})]
-		\item Show that a strongly convex function is strictly convex.
-		\item Let $\varphi:\R^n \to \R$ be a twice differentiable function. Show that $g$ is strongly convex if and only if there exists $\alpha >0$ such that for all $x \in \R^n$ the eigenvalues of $H_{\varphi}(x)$ are greater or equal than $\alpha$.
+		\item Show that a strongly convex function is strictly convex. (Hint: start by showing that $x \mapsto \|x\|^2$ is strictly convex).
+		\item Let $\varphi:\R^n \to \R$ be a twice differentiable function. Show that $\varphi$ is strongly convex if and only if there exists $\alpha >0$ such that for all $x \in \R^n$ the eigenvalues of $H_{\varphi}(x)$ are greater or equal than $\alpha$.
 	\end{enumerate}
 \end{problem}
 
 
-\vspace{1mm}
+\vspace{4mm}
 
 \begin{problem}[3 points]
 	Let $A \in \R^{n \times m}$ and $y \in \R^n$.
@@ -76,19 +78,19 @@ is non-empty.
 	\end{enumerate}
 \end{problem}
 
-\vspace{1mm}
+\vspace{4mm}
 
 \begin{problem}[$\star$]
 	\textbf{Notation:} For a symmetric matrix $M \in \R^{n \times n}$ we denote respectively $\lambda_{\rm min}(M)$ and $\lambda_{\rm max}(M)$ the smallest and largest eigenvalue of $M$.
 	\\
 
-	Let $f: \R^n \to \R$ a convex function that is twice differentiable. We assume that 
+	Let $f: \R^n \to \R$ a convex function that is twice continuously differentiable. We assume that 
 	$$
 	\gamma \defeq \inf_{x \in \R^n} \lambda_{\rm min}(H_f(x))
 	\qquad \text{and} \qquad
 	L \defeq \sup_{x \in \R^n} \lambda_{\rm max}(H_f(x))
 	$$
-	are both finite. Show that for all $x,v \in \R^n$:
+	are both finite. Show that for all $x,h \in \R^n$:
 	$$
 	f(x) + \langle \nabla f(x), h \rangle + \frac{\gamma}{2} \|h\|^2
 	\leq f(x+h)
