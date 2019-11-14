@@ -44,7 +44,7 @@ is non-empty.
 	$f$ is called a quadratic function.
 	\begin{enumerate}[label=\normalfont(\textbf{\alph*})]
 		\item Compute the gradient $\nabla f(x)$ and the Hessian $H_f(x)$ at all $x \in \R^m$. Show that $f$ is convex if and only if $M$ is positive semi-definite.
-		\item In this question, we assume $M$ to be positive semi-definite. Show that $f$ admits a minimizer if and only if $b \in \Im(A)$.
+		\item In this question, we assume $M$ to be positive semi-definite. Show that $f$ admits a minimizer if and only if $b \in \Im(M)$.
 	\end{enumerate}
 \end{problem}
 
@@ -84,7 +84,7 @@ is non-empty.
 	\textbf{Notation:} For a symmetric matrix $M \in \R^{n \times n}$ we denote respectively $\lambda_{\rm min}(M)$ and $\lambda_{\rm max}(M)$ the smallest and largest eigenvalue of $M$.
 	\\
 
-	Let $f: \R^n \to \R$ a convex function that is twice continuously differentiable. We assume that 
+	Let $f: \R^n \to \R$ be a function that is twice continuously differentiable. We assume that 
 	$$
 	\gamma \defeq \inf_{x \in \R^n} \lambda_{\rm min}(H_f(x))
 	\qquad \text{and} \qquad
