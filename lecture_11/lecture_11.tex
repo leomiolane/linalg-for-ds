@@ -8,7 +8,7 @@
 
 \title{\vspace{-2.0cm}%
 	Optimization and Computational Linear Algebra for Data Science\\
-Lecture 11: Linear regression, matrix completion}
+Lecture 11: Linear regression}
 \author{Léo \textsc{Miolane} \ $\cdot$ \ \texttt{leo.miolane@gmail.com}}
 \date{\today}
 
@@ -24,50 +24,13 @@ $$
 y_i \simeq \langle a_i, x \rangle = \sum_{j=1}^d a_{i,j} x_j, \qquad \text{for} \ \ i=1 \dots n.
 $$
 If we denote by $A$ the $n \times d$ matrix whose rows are $a_1, \dots, a_n$, i.e.\ $A_{i,j} = a_{i,j}$, we are looking for some $x$ such that $Ax \simeq y$.
-
-\subsection{Solving the system $Ax=y$}
-
-As we have seen in Lecture 2, we can distinguish two cases:
-\begin{itemize}
-	\item If $y \not\in \Im(A)$ then the equation $Ax=y$ does not admit any solution (by definition of $\Im(A)$).
-	\item If $y \in \Im(A)$ then the equation $Ax=y$ admits at least a solution $x_0$ (by definition of $\Im(A)$). Moreover, the set of (all) solutions is
-		$$
-		x_0 + \Ker(A) = \{x_0 + v \, | \, v \in \Ker(A) \}.
-		$$
-		In particular, if $\Ker(A) = \{0\}$ then the equation admits a unique solution.
-\end{itemize}
-
-In the second case, one can obtain an expression for a particular solution $x_0$ using the SVD of $A$.
-Let $r = \rank(A)$, $\sigma_1, \sigma_2, \dots, \sigma_r >0$ be the non-zero singular values of $A$ and $\Sigma = \Diag(\sigma_1, \dots, \sigma_r)$. Finally, let $A = U \Sigma V^{\sT}$ be the SVD of $A$, where $V \in \R^{n \times r}$ and $U \in \R^{d \times r}$ are matrices that have orthonormal columns. 
 \\
 
-Notice that $V^{\sT} V = \Id$ and that $U U^{\sT}$ is the orthogonal projection on $\Im(A)$. Hence, if we let $x_0 = V \Sigma^{-1} U^{\sT} y$, we have
-$$
-A x_0 =U \Sigma V^{\sT}V \Sigma^{-1} U^{\sT} y
-= U U^{\sT} y = y
-$$
-because we assumed that $y \in \Im(A)$.
-This motivates the following definition:
-\begin{definition}[Moore-Penrose pseudo-inverse]
-	The matrix $A^{\dagger} \defeq V \Sigma^{-1} U^{\sT}$ is called the (Moore-Penrose) pseudo-inverse of $A$.
-\end{definition}
-
-Notice that in the case where $A$ is invertible, $A^{\dagger} = A^{-1}$.
-From the analysis above, we deduce:
-\begin{proposition}\label{prop:linear_system}
-	The set of solution of the linear system $Ax = y$ is
-	\begin{itemize}
-		\item $\emptyset$ if $y \not\in \Im(A)$.
-		\item $A^{\dagger}y + \Ker(A)$ otherwise.
-	\end{itemize}
-\end{proposition}
-
-\subsection{Least squares}
-
-In general, there is no reason for $y$ to belong to $\Im(A)$, especially when $n > d$. (Exercise: why?)
+In general, solutions to $Ax=y$ may not exist: there is no reason for $y$ to belong to $\Im(A)$, especially when $n > d$. (Exercise: why?)
+Moreover, the measurements may contain some noise.
 Therefore one is rather interested by solving
 \begin{equation}\label{eq:least_squares}
-\min_{x \in \R^d} \| Ax - y \|^2.
+	\text{minimize} \quad \| Ax - y \|^2, \quad \text{with respect to} \quad x \in \R^d.
 \end{equation}
 The function $f: x \mapsto \|Ax - y\|^2$ is convex (Exercise: why?) and differentiable. Hence
 $x$ is solution of \eqref{eq:least_squares} if and only if $\nabla f (x) = 0$. Compute
@@ -81,17 +44,37 @@ x \ \ \text{is solution of} \ \ \eqref{eq:least_squares} \qquad
 \qquad A^{\sT} A x = A^{\sT} y.
 $$
 If $A^{\sT} A$ is invertible there is a unique minimizer $x^* = (A^{\sT} A)^{-1} A^{\sT} y$.
-In the general case, we see that the solutions of \eqref{eq:least_squares} are the solutions of the linear system $A^{\sT} A x = A^{\sT} y$. From Proposition \ref{prop:linear_system} we get that the solutions of \eqref{eq:least_squares} are
+In the general case, we see that the solutions of \eqref{eq:least_squares} are the solutions of the linear system $A^{\sT} A x = A^{\sT} y$. 
+Let $A=U\Sigma V^{\sT}$ be the singular value decomposition of $A$. Using the SVD, the linear system can be rewritten as
+\begin{equation}\label{eq:simpSVD}
+V \Sigma^{\sT} \Sigma V^{\sT} x = V \Sigma^{\sT} U^{\sT} y
+\qquad
+\text{which is equivalent to}
+\qquad
+\Sigma^{\sT} \Sigma V^{\sT} x = \Sigma^{\sT} U^{\sT} y
+\end{equation}
+because $V$ is invertible (recall that $V$ is orthogonal). We will now introduce:
+
+\begin{definition}[Moore-Penrose pseudo-inverse]
+	The matrix $A^{\dagger} \defeq V \Sigma' U^{\sT}$ is called the (Moore-Penrose) pseudo-inverse of $A$, where $\Sigma'$ is the $d \times n$ matrix given by 
+	$$
+	\Sigma'_{i,i} =
+	\begin{cases}
+		1 / \Sigma_{i,i} & \text{if} \ \Sigma_{i,i} \neq 0, \\
+		0 & \text{otherwise},
+	\end{cases}
+	$$
+	and $\Sigma'_{i,j} = 0$ for $i \neq j$.
+\end{definition}
+
+Now, one can check that $x = A^{\dagger}y$ is a solution of \eqref{eq:simpSVD}:
 $$
-(A^{\sT}A)^{\dagger} A^{\sT}y + \Ker(A^{\sT} A).
+\Sigma^{\sT} \Sigma V^{\sT} A^{\dagger} y =
+\Sigma^{\sT} \Sigma \Sigma' U^{\sT} y =
+\Sigma^{\sT} U^{\sT} y.
 $$
-This expression simplifies a lot. First (exercise!) we have $\Ker(A^{\sT} A) = \Ker(A)$.
-Then if we let $A = U \Sigma V^{\sT}$ be the SVD of $A$, we have
-$$
-A^{\sT} A = V \Sigma^2 V^{\sT}.
-$$
-$V \Sigma^2 V^{\sT}$ is therefore the SVD of $A^{\sT} A$. Hence $(A^{\sT} A)^{\dagger} = V \Sigma^{-2} V^{\sT}$.
-This gives $(A^{\sT}A)^{\dagger} A^{\sT} = V \Sigma^{-2} V^{\sT}V \Sigma U^{\sT} = A^{\dagger}$. We conclude:
+Hence, the set of solutions of the linear system $A^{\sT} A x = A^{\sT} y$ is $A^{\dagger} y + \Ker(A^{\sT}A)$. Notice now that (exercise!) we have $\Ker(A^{\sT} A) = \Ker(A)$.
+We conclude:
 
 \begin{proposition}[Least squares]\label{prop:least_squares}
 	The set of solution of the minimization problem $\min_{x \in \R^n} \|Ax - y\|^2$ is
@@ -100,9 +83,19 @@ This gives $(A^{\sT}A)^{\dagger} A^{\sT} = V \Sigma^{-2} V^{\sT}V \Sigma U^{\sT}
 	$$
 \end{proposition}
 
+We deduce:
+\begin{corollary}\label{cor:linear_system}
+	The set of solution of the linear system $Ax = y$ is
+	\begin{itemize}
+		\item $\emptyset$ if $y \not\in \Im(A)$.
+		\item $A^{\dagger}y + \Ker(A)$ otherwise.
+	\end{itemize}
+\end{corollary}
+
+
 \section{Penalized least squares: Ridge regression and Lasso}
 
-When $\Ker(A) \neq \emptyset$ the least squares problem \eqref{eq:least_squares} has an infinite number of solutions: which one should we pick?
+When $\Ker(A) \neq \{0\}$ the least squares problem \eqref{eq:least_squares} has an infinite number of solutions: which one should we pick?
 
 \subsection{Ridge regression}
 
@@ -122,19 +115,51 @@ for some penalization parameter $\lambda >0$.
 
 The Lasso adds a $\ell_1$ penalty to the least square problem, and minimizes
 \begin{equation}\label{eq:lasso}
-	\min_{x \in \R^d} \Big\{ \frac{1}{2} \| Ax - y \|^2 + \lambda \|x\|_1 \Big\},
+\frac{1}{2} \| Ax - y \|^2 + \lambda \|x\|_1,
 \end{equation}
 for some penalization parameter $\lambda >0$.
-The Lasso has the wonderful property of \emph{feature selection}: the solution $x^*$ of \eqref{eq:lasso} is likely to be \emph{sparse} (many coordinates $x^*_j$ will be set to $0$).
+Here, the cost function is not strictly convex in general, hence there may be multiple minimizers. However, in many situations (for instance if the entries of $A$ are drawn from a continuous probability distribution) the minimizer $x^{\rm Lasso}$ will be unique \cite{tibshirani2013lasso}.
+\\
+
+The Lasso has the wonderful property of \emph{feature selection}: the solution $x^{\rm Lasso}$ of \eqref{eq:lasso} is likely to be \emph{sparse} (many coordinates $x^{\rm Lasso}_j$ will be set to $0$).
 In words, the Lasso estimator discards the ``useless features'' by setting its corresponding coefficient to $0$. 
 This is particularly nice for the interpretability of the results: in many application, each data point $a_i$ has an enormous number of features ($d$ very large), but only a small number of them are useful to predict the label $y_i$.
 \\
 
-We can gain some intuition on this phenomena on Figure.
+We will now give some intuition on this phenomena. First, we have the following
 
+\begin{lemma}\label{lem:ball}
+	Let $x^{\rm Lasso}$ be a minimizer of the Lasso cost function \eqref{eq:lasso} and let $r=\|x^{\rm Lasso}\|_1$. Then $x^{\rm Lasso}$ is a solution to
+	$$
+	\text{minimize} \quad \frac{1}{2} \|Ax-y\|^2 \quad
+	\text{subject to} \quad \|x\|_1 \leq r.
+	$$
+\end{lemma}
+\begin{proof}
+	By contradiction, assume that there exists $x \in \R^d$ such that $\|Ax -y\|^2 < \|Ax^{\rm Lasso}-y\|^2$ and $\|x\|_1 \leq r = \|x^{\rm Lasso}\|_1$. Then
+	$$
+\frac{1}{2} \| Ax - y \|^2 + \lambda \|x\|_1 
+< 
+\frac{1}{2} \| Ax^{\rm Lasso} - y \|^2 + \lambda \|x^{\rm Lasso}\|_1,
+$$
+which contradicts the fact that $x^{\rm Lasso}$ is a minimizer of \eqref{eq:lasso}.
+\end{proof}
 \\
 
-\paragraph{Lasso for orthonormal design}
+Lemma \ref{lem:ball} tells us that a solution $x^{\rm Lasso}$ of the Lasso problem is a minimizer of the quadratic function $\|Ax-y\|^2$ on the $\ell_1$-ball $B_{\ell_1}(r) = \{x \, | \, \|x\|_1 \leq r\}$.
+
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[width=0.6\linewidth]{lasso.pdf}
+	\end{center}
+	\caption{}
+	\label{fig:lasso}
+\end{figure}
+This is illustrated on Figure~\ref{fig:lasso} above. The Lasso solution $x^{\rm Lasso}$ is the first point at which the elliptical contour lines of the function $\frac{1}{2}\|Ax-y\|^2$ hit the $\ell_1$-ball $B_{\ell_1}(r)$. Observe that the $\ell_1$-ball has corners: $x^{\rm Lasso}$ is therefore very likely to be at one of these corners which is a point where many coordinates are set to zero. Hence, the $\ell_1$ penalization tends to produce sparse solutions.
+\\
+
+\paragraph{Lasso for orthonormal design.}
+We will show by a computation below that the $\ell_1$ penalization induces sparsity, on a toy example.
 In general there is no closed form formula for the Lasso estimator. It is however possible to derive one in the case where the matrix $A$ has orthonormal columns: $A^{\sT} A = \Id$. 
 The least square estimator is then given by $x^{\rm LS} = A^{\sT} y$ and the Lasso cost function becomes
 \begin{equation}\label{eq:lasso_o}
@@ -172,7 +197,8 @@ We conclude that the Lasso estimator is given by
 $$
 x^{\rm Lasso}_{j} = \eta\big(x_j^{\rm LS}; \lambda\big) \qquad \text{for} \quad j=1, \dots, d.
 $$
-This formula confirms the intuition of Figure: the Lasso estimator translates the coefficients of the least-square solution by $\lambda$, truncating at $0$.
+This formula confirms the intuition given by Figure \ref{fig:lasso}: the Lasso estimator translates the coefficients of the least-square solution by $\lambda$, truncating at $0$.
+
 
 \section{Norms for matrices}
 
@@ -188,9 +214,9 @@ Before looking at low-rank matrix estimation and matrix completion, we need to l
 \end{definition}
 
 \begin{remark}
-	The Frobenius norm is the norm induced by the following inner-product on matrices:
+	The Frobenius norm is the norm induced by the following inner-product:
 	$$
-	\langle A,B \rangle = \Tr(A^{\sT}B) = \sum_{i=1}^n\sum_{j=1}^m A_{i,j} B_{i,j}, \qquad \text{for} \ \ A,B \in \R^{n \times m}.
+	\langle A,B \rangle_{F} = \Tr(A^{\sT}B) = \sum_{i=1}^n\sum_{j=1}^m A_{i,j} B_{i,j}, \qquad \text{for} \ \ A,B \in \R^{n \times m}.
 	$$
 \end{remark}
 
@@ -201,6 +227,7 @@ Before looking at low-rank matrix estimation and matrix completion, we need to l
 	$$
 \end{proposition}
 
+
 \paragraph{The spectral norm.} Another extremely common norm for matrices is the spectral norm, also called the operator norm:
 
 \begin{definition}[Spectral norm]
@@ -209,10 +236,16 @@ Before looking at low-rank matrix estimation and matrix completion, we need to l
 	\|A\|_{\rm Sp} = \max_{\substack{x \in \R^m \\ \|x\|=1}} \|Ax\|.
 	$$
 \end{definition}
+\begin{proposition}
+	$$
+	\|A\|_{\rm Sp} = \sigma_1(A),
+	$$
+	where $\sigma_1(A)$ denotes the largest singular value of $A$.
+\end{proposition}
 
 \paragraph{The nuclear norm.} We have seen above that the Frobenius norm of a matrix correspond to the $\ell_2$ norm of its singular values and that the spectral norm correspond to the infinity norm of the singular values. The nuclear norm is simply the $\ell_1$ norm of its singular values:
 \begin{definition}[Nuclear norm]
-	Let $A \in \R^{n \times n}$ and let $\sigma_1, \dots, \sigma_{\min(n,m)}$ be the singular values of $A$. The nuclear norm of $A$ is defined as:
+	Let $A \in \R^{n \times m}$ and let $\sigma_1, \dots, \sigma_{\min(n,m)}$ be the singular values of $A$. The nuclear norm of $A$ is defined as:
 	$$
 	\|A\|_* = \sum_{i=1}^{\min(n,m)} \sigma_i.
 	$$
@@ -225,6 +258,7 @@ Before looking at low-rank matrix estimation and matrix completion, we need to l
 
 \section*{Further reading}
 
+Chapter 3 of \cite{friedman2001elements} is an excellent reference for linear regression.
 
 \vspace{1cm}
 \centerline{\pgfornament[width=7cm]{71}}
