@@ -16,6 +16,6 @@ You can download all the notes [here](https://github.com/leomiolane/linalg-for-d
 7. [The spectral theorem and PCA](https://github.com/leomiolane/linalg-for-ds/raw/master/lecture_07/lecture_07.pdf)
 8. [Graphs and Linear Algebra](https://github.com/leomiolane/linalg-for-ds/raw/master/lecture_08/lecture_08.pdf)
 9. [Convex functions](https://github.com/leomiolane/linalg-for-ds/raw/master/lecture_09/lecture_09.pdf)
-10. [Optimality conditions](https://github.com/leomiolane/linalg-for-ds/raw/master/lecture_10/lecture_10.pdf)
-11. [Linear regression, matrix completion](https://github.com/leomiolane/linalg-for-ds/raw/master/lecture_11/lecture_11.pdf)
+10. [Linear regression](https://github.com/leomiolane/linalg-for-ds/raw/master/lecture_10/lecture_10.pdf)
+11. [Optimality conditions](https://github.com/leomiolane/linalg-for-ds/raw/master/lecture_11/lecture_11.pdf)
 12. [Gradient descent](https://github.com/leomiolane/linalg-for-ds/raw/master/lecture_12/lecture_12.pdf)
