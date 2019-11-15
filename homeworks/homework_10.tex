@@ -1,0 +1,64 @@
+\documentclass[11pt,nocut]{article}
+
+\usepackage{../latex_style/packages}
+\usepackage{../latex_style/notations}
+
+\title{\vspace{-2.0cm}%
+	Optimization and Computational Linear Algebra for Data Science\\
+Homework 10: Regression}
+%\author{Léo \textsc{Miolane} \ $\cdot$ \ \texttt{leo.miolane@gmail.com}}
+\date{\vspace{-1cm}Due on November 26, 2019}
+\setcounter{section}{10}
+
+\begin{document}
+\maketitle
+\input{./preamble_homeworks.tex}
+
+DRAFT
+
+\color{green}
+\vspace{4mm}
+
+\begin{problem}[2 points]
+	Let $A \in \R^{n \times m}$. Show that if $A$ has linearly independent columns, then $A^{\dagger} = (A^{\sT}A)^{-1} A^{\sT}$.
+\end{problem}
+
+\vspace{4mm}
+
+\begin{problem}[2 points]
+	Let $A \in \R^{n \times d}$ and $y \in \R^n$.
+	The Ridge regression adds a $\ell_2$ penalty to the least square problem in order to ``select'' a solution of smaller norm. The Ridge regression problem is then:
+	\begin{equation}\label{eq:ridge}
+		\text{minimize} \qquad
+		\| Ax - y \|^2 + \lambda \|x\|^2 \qquad \text{with respect to} \ x \in \R^d,
+	\end{equation}
+	for some penalization parameter $\lambda >0$.
+	Show that \eqref{eq:ridge} admits a unique solution given by
+	$$
+	x^{\rm Ridge} = (A^{\sT} A + \lambda \Id)^{-1} A^{\sT} y.
+	$$
+\end{problem}
+
+\newpage
+
+\begin{problem}[3 points]\label{prob:strongly_convex}
+\end{problem}
+
+\vspace{4mm}
+
+\begin{problem}[3 points]
+	\begin{enumerate}[label=\normalfont(\textbf{\alph*})]
+	\end{enumerate}
+\end{problem}
+
+\vspace{4mm}
+
+\begin{problem}[$\star$]
+\end{problem}
+
+\vspace{1cm}
+\centerline{\pgfornament[width=7cm]{87}}
+
+%\bibliographystyle{plain}
+%\bibliography{./references.bib}
+\end{document}

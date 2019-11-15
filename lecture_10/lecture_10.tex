@@ -111,7 +111,7 @@ for some penalization parameter $\lambda >0$.
 	$$
 \end{exercise}
 
-\subsection{Lasso}
+\subsection{Lasso}\label{sec:lasso}
 
 The Lasso adds a $\ell_1$ penalty to the least square problem, and minimizes
 \begin{equation}\label{eq:lasso}
@@ -200,10 +200,11 @@ $$
 This formula confirms the intuition given by Figure \ref{fig:lasso}: the Lasso estimator translates the coefficients of the least-square solution by $\lambda$, truncating at $0$.
 
 
-\section{Norms for matrices}
+\section{Norms for matrices, application to matrix completion}
 
 Before looking at low-rank matrix estimation and matrix completion, we need to look at different norms we can have for matrices. Recall that $\R^{n \times m}$, the set of $n \times m$ matrices, is a vector space (of dimension $nm$).
-\\
+
+\subsection{Matrix norms}
 
 \paragraph{The Frobenius norm.} The most obvious norm to consider is the equivalent of the $\ell_2$ norm, called the Frobenius norm:
 \begin{definition}[Frobenius norm]
@@ -245,20 +246,59 @@ Before looking at low-rank matrix estimation and matrix completion, we need to l
 
 \paragraph{The nuclear norm.} We have seen above that the Frobenius norm of a matrix correspond to the $\ell_2$ norm of its singular values and that the spectral norm correspond to the infinity norm of the singular values. The nuclear norm is simply the $\ell_1$ norm of its singular values:
 \begin{definition}[Nuclear norm]
-	Let $A \in \R^{n \times m}$ and let $\sigma_1, \dots, \sigma_{\min(n,m)}$ be the singular values of $A$. The nuclear norm of $A$ is defined as:
+	Let $A \in \R^{n \times m}$ and let $\sigma_1(A), \dots, \sigma_{\min(n,m)}(A)$ be the singular values of $A$. The nuclear norm of $A$ is defined as:
 	$$
-	\|A\|_* = \sum_{i=1}^{\min(n,m)} \sigma_i.
+	\|A\|_* = \sum_{i=1}^{\min(n,m)} \sigma_i(A).
 	$$
 	
 \end{definition}
 
-\section{Low-rank matrix estimation and matrix completion}
+\subsection{Application to matrix completion}
 
+The matrix completion problem can be formulated as follows.
+We have a data matrix $M \in \R^{n \times m}$ that we only observe partially. That is we only have access to 
+$$
+M_{i,j} \quad \text{for} \ (i,j) \in \Omega,
+$$
+where $\Omega \subset \{1, \dots, n\} \times \{1, \dots m\}$ is a subset of the complete set of the entries.
+The goal of matrix completion is to recover the matrix $M$ entirely.
+\\
+
+Such problems appears for instance in the context of movie recommendation systems, where there are $n$ users and $m$ movies, and $M_{i,j}$ represent the rating of movie $j$ by the user $i$. Of course, we do not have access to the entire matrix $M$ since each user has seen/rated only a fraction of all the movies. 
+One would like therefore to complete the entries of $M$ in order to predict if a given user will like or not a movie, which would allow to make recommendation to users.
+\\
+
+A very natural assumption is to assume that $M$ has a small rank. 
+This makes a lot of sense for recommendation systems, since it is reasonable to assume that only a few factors influence the preference of an user.
+\\
+
+Hence, one would be interested to solve:
+\begin{equation}\label{eq:pb_rank}
+	\text{minimize} \quad \rank(X) \quad \text{subject to } \ X \in \R^{n \times m} \ \text{and} \ X_{i,j} = M_{i,j} \ \text{for all} \ (i,j) \in \Omega.
+\end{equation}
+
+However, the above minimization problem is in general NP-hard, making it impossible to solve in reasonable time.
+\\
+
+The paper \cite{candes2009exact} proposed to replace the problem \eqref{eq:pb_rank}
+by the following convex minimization problem.
+\begin{equation}\label{eq:pb_nuclear}
+	\text{minimize} \quad \|X\|_* \quad \text{subject to } \ X \in \R^{n \times m} \ \text{and} \ X_{i,j} = M_{i,j} \ \text{for all} \ (i,j) \in \Omega.
+\end{equation}
+This problem can be solved efficiently, since we have here to minimize a convex function over a convex set. However, it is a priori not clear if the solution of this new optimization problem will have a small rank.
+
+We have seen in Section \ref{sec:lasso} that the $\ell_1$-penalization encourages sparsity.
+In the same spirit, penalization by the nuclear norm $\| \cdot \|_*$ will tend to produce low-rank solutions. Indeed, the nuclear norm of a matrix $X$ is by definition the $\ell_1$-norm of the singular values of $X$:
+$$
+\|X\|_* = \sum_{i=1}^{\min(n,m)} \sigma_i(X).
+$$
+Heuristically, nuclear norm minimization will therefore encourage the vector of singular values $(\sigma_1(X), \dots,\sigma_{\min(n,m)}(X))$ to be sparse. Recall now that the rank of $X$ is equal to the number of non-zero singular values, we see that nuclear norm minimization tend to produce low-rank solutions.
 
 
 \section*{Further reading}
 
 Chapter 3 of \cite{friedman2001elements} is an excellent reference for linear regression.
+See \cite{candes2009exact,candes2010matrix} for further developments on nuclear norm minimization for matrix completion.
 
 \vspace{1cm}
 \centerline{\pgfornament[width=7cm]{71}}
