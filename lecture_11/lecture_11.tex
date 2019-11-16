@@ -18,12 +18,14 @@ Lecture 11: Optimality conditions}
 
 \section{Local and global minimizers}
 
-We aim at minimizing a function $f: \R^n \to \R$.
+We aim at minimizing a differentiable function $f: \R^n \to \R$.
 We say that $x^* \in \R^n$ is
 \begin{itemize}
-	\item a \emph{global} minimizer of $f$ if for all $x \in \R^n$, $f(x^*) \leq f(x)$.
-	\item a \emph{local} minimizer of $f$ if there exists $\delta > 0$ such that for all $x \in B(x^*,\delta)$, $f(x^*) \leq f(x)$.
+	\item a critical point of $f$ if $\nabla f(x) = 0$,
+	\item a \emph{global} minimizer of $f$ if for all $x \in \R^n$, $f(x^*) \leq f(x)$,
+	\item a \emph{local} minimizer of $f$ if there exists $\delta > 0$ such that for all $x \in B(x^*,\delta)$, $f(x^*) \leq f(x)$,
 \end{itemize}
+where $B(x^*,\delta) = \{x \, | \, \|x-x^*\| \leq \delta \}$ denotes the ball a radius $\delta$ centered at $x^*$.
 Of course, a global minimizer if also a local minimizer but the converse is not true.
 
 \begin{proposition}\label{prop:zero_grad}
@@ -41,8 +43,17 @@ If $f$ is convex then the converse is true:
 	Let $x \in \R^n$ be a point at which $f$ is differentiable. 
 	Then
 	$$
-	\nabla f(x) = 0 \ \implies \ x \ \text{is a global minimizer of} \ f.
+	\nabla f(x) = 0 \ \Longleftrightarrow \ x \ \text{is a global minimizer of} \ f.
 	$$
+\end{proposition}
+
+\begin{proposition}
+	Let $f:\R^n \to \R$ be a twice differentiable function. Let $x \in \R^n$ be a critical point of $f$, i.e.\ $\nabla f(x) = 0$. Then
+	\begin{itemize}
+		\item If $H_f(x)$ is positive definite (that is, if all the eigenvalues of $H_f(x)$ are strictly positive), then $x$ is a local minimizer of $f$.
+		\item If $H_f(x)$ is negative definite (that is, if all the eigenvalues of $H_f(x)$ are strictly negative), then $x$ is a local maximizer of $f$.
+		\item If $H_f(x)$ admits strictly positive eigenvalues and strictly negative eigenvalues, then $x$ is neither a local maximum nor a local minimum. We call $x$ a saddle point.
+	\end{itemize}
 \end{proposition}
 
 \section{Constrained optimization}
