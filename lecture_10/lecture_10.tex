@@ -18,7 +18,7 @@ Lecture 10: Linear regression}
 
 \section{Least squares}
 
-Assume that we are given point $a_i = (a_{i,1}, \dots, a_{i,d}) \in \R^d$ with labels $y_i \in \R$ for $i=1 \dots n$.
+Assume that we are given points $a_i = (a_{i,1}, \dots, a_{i,d}) \in \R^d$ with labels $y_i \in \R$ for $i=1 \dots n$.
 We aim at finding a vector $x\in\R^d$ such that
 $$
 y_i \simeq \langle a_i, x \rangle = \sum_{j=1}^d a_{i,j} x_j, \qquad \text{for} \ \ i=1 \dots n.
@@ -44,7 +44,7 @@ x \ \ \text{is solution of} \ \ \eqref{eq:least_squares} \qquad
 \qquad A^{\sT} A x = A^{\sT} y.
 $$
 If $A^{\sT} A$ is invertible there is a unique minimizer $x^* = (A^{\sT} A)^{-1} A^{\sT} y$.
-In the general case, we see that the solutions of \eqref{eq:least_squares} are the solutions of the linear system $A^{\sT} A x = A^{\sT} y$. 
+In general $A^{\sT} A$ may not be invertible. We see that the solutions of \eqref{eq:least_squares} are the solutions of the linear system $A^{\sT} A x = A^{\sT} y$. 
 Let $A=U\Sigma V^{\sT}$ be the singular value decomposition of $A$. Using the SVD, the linear system can be rewritten as
 \begin{equation}\label{eq:simpSVD}
 V \Sigma^{\sT} \Sigma V^{\sT} x = V \Sigma^{\sT} U^{\sT} y
@@ -83,7 +83,7 @@ We conclude:
 	$$
 \end{proposition}
 
-We deduce:
+As a byproduct of our analysis, we deduce:
 \begin{corollary}\label{cor:linear_system}
 	The set of solution of the linear system $Ax = y$ is
 	\begin{itemize}
@@ -122,14 +122,14 @@ Here, the cost function is not strictly convex in general, hence there may be mu
 \\
 
 The Lasso has the wonderful property of \emph{feature selection}: the solution $x^{\rm Lasso}$ of \eqref{eq:lasso} is likely to be \emph{sparse} (many coordinates $x^{\rm Lasso}_j$ will be set to $0$).
-In words, the Lasso estimator discards the ``useless features'' by setting its corresponding coefficient to $0$. 
+In words, the Lasso estimator discards the ``useless features'' by setting their corresponding coefficient to $0$. 
 This is particularly nice for the interpretability of the results: in many application, each data point $a_i$ has an enormous number of features ($d$ very large), but only a small number of them are useful to predict the label $y_i$.
 \\
 
 We will now give some intuition on this phenomena. First, we have the following
 
 \begin{lemma}\label{lem:ball}
-	Let $x^{\rm Lasso}$ be a minimizer of the Lasso cost function \eqref{eq:lasso} and let $r=\|x^{\rm Lasso}\|_1$. Then $x^{\rm Lasso}$ is a solution to
+	Let $x^{\rm Lasso}$ be a minimizer of the Lasso cost function \eqref{eq:lasso} and let $r=\|x^{\rm Lasso}\|_1$. Then $x^{\rm Lasso}$ is a solution to the constrained optimization problem:
 	$$
 	\text{minimize} \quad \frac{1}{2} \|Ax-y\|^2 \quad
 	\text{subject to} \quad \|x\|_1 \leq r.
@@ -161,7 +161,7 @@ This is illustrated on Figure~\ref{fig:lasso} above. The Lasso solution $x^{\rm 
 \paragraph{Lasso for orthonormal design.}
 We will show by a computation below that the $\ell_1$ penalization induces sparsity, on a toy example.
 In general there is no closed form formula for the Lasso estimator. It is however possible to derive one in the case where the matrix $A$ has orthonormal columns: $A^{\sT} A = \Id$. 
-The least square estimator is then given by $x^{\rm LS} = A^{\sT} y$ and the Lasso cost function becomes
+The least square estimator is then given by $x^{\rm LS} = A^{\dagger}y = A^{\sT} y$ and the Lasso cost function becomes
 \begin{equation}\label{eq:lasso_o}
 \frac{1}{2} \| Ax - y \|^2 + \lambda \|x\|_1 
 = \frac{1}{2} \|x\|^2 - \langle x^{\rm LS}, x \rangle + \frac{1}{2} \|y\|^2 + \lambda \|x\|_1.
