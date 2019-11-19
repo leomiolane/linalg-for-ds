@@ -28,10 +28,10 @@ Homework 10: Regression}
 	\begin{equation}\label{eq:LS}
 		\text{minimize} \quad \|Ax-y\|^2 \quad \text{with respect to} \ x \in \R^m.
 	\end{equation}
-	We know from the lecture that $x_0 = A^{\dagger}y$ is a solution of \eqref{eq:LS}. 
+	We know from the lecture that $x^{\rm LS} \defeq A^{\dagger}y$ is a solution of \eqref{eq:LS}. 
 	\begin{enumerate}[label=\normalfont(\textbf{\alph*})]
-		\item Show that $x_0 \perp \Ker(A)$.
-		\item Deduce that $x_0$ is the solution of \eqref{eq:LS} that has the smallest (Euclidean) norm.
+		\item Show that $x^{\rm LS} \perp \Ker(A)$.
+		\item Deduce that $x^{\rm LS}$ is the solution of \eqref{eq:LS} that has the smallest (Euclidean) norm.
 	\end{enumerate}
 \end{problem}
 
@@ -47,7 +47,7 @@ Homework 10: Regression}
 	for some penalization parameter $\lambda >0$.
 	Show that \eqref{eq:ridge} admits a unique solution given by
 	$$
-	x^{\rm Ridge} = (A^{\sT} A + \lambda \Id)^{-1} A^{\sT} y.
+	x^{\rm Ridge} = (A^{\sT} A + \lambda \Id_d)^{-1} A^{\sT} y.
 	$$
 \end{problem}
 
@@ -65,7 +65,7 @@ Homework 10: Regression}
 			$$
 			\|AB\|_{\rm Sp} \leq \|A\|_{\rm Sp} \|B\|_{\rm Sp}.
 			$$
-		\item Is it true that for all $A \in \R^{n \times m}$ and $B\in \R^{m \times k}$:
+		\item Is it true that for all $n,m,k \geq 1$, all $A \in \R^{n \times m}$ and $B\in \R^{m \times k}$:
 			$$
 			\|AB\|_{F} \leq \|A\|_{F} \|B\|_{F} \ {\rm ?}
 			$$
@@ -75,7 +75,7 @@ Homework 10: Regression}
 
 \newpage
 
-\begin{problem}
+\begin{problem}[3 points]
  Consider the $5 \times 4$ matrix $A$ and $y \in \R^5$ given by:
 $$
 A=
