@@ -19,3 +19,4 @@ You can download all the notes [here](https://github.com/leomiolane/linalg-for-d
 10. [Linear regression](https://github.com/leomiolane/linalg-for-ds/raw/master/lecture_10/lecture_10.pdf)
 11. [Optimality conditions](https://github.com/leomiolane/linalg-for-ds/raw/master/lecture_11/lecture_11.pdf)
 12. [Gradient descent](https://github.com/leomiolane/linalg-for-ds/raw/master/lecture_12/lecture_12.pdf)
+13. [Stochastic gradient descent](https://github.com/leomiolane/linalg-for-ds/raw/master/lecture_13/lecture_13.pdf)
