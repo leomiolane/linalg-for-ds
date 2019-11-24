@@ -2,8 +2,6 @@
 
 \usepackage{../latex_style/packages}
 \usepackage{../latex_style/notations}
-%\externaldocument{../lecture_02/lecture_02}
-\externaldocument{../lecture_07/lecture_07}
 
 
 \title{\vspace{-2.0cm}%
@@ -16,16 +14,16 @@ Lecture 11: Optimality conditions}
 \maketitle
 \input{../preamble.tex}
 
-\section{Local and global minimizers}
+\section{Local and global minimizers}\label{sec:min}
 
 We aim at minimizing a differentiable function $f: \R^n \to \R$.
-We say that $x^* \in \R^n$ is
+We say that $x \in \R^n$ is
 \begin{itemize}
 	\item a critical point of $f$ if $\nabla f(x) = 0$,
-	\item a \emph{global} minimizer of $f$ if for all $x \in \R^n$, $f(x^*) \leq f(x)$,
-	\item a \emph{local} minimizer of $f$ if there exists $\delta > 0$ such that for all $x \in B(x^*,\delta)$, $f(x^*) \leq f(x)$,
+	\item a \emph{global} minimizer of $f$ if for all $x' \in \R^n$, $f(x) \leq f(x')$,
+	\item a \emph{local} minimizer of $f$ if there exists $\delta > 0$ such that for all $x' \in B(x,\delta)$, $f(x) \leq f(x')$,
 \end{itemize}
-where $B(x^*,\delta) = \{x \, | \, \|x-x^*\| \leq \delta \}$ denotes the ball a radius $\delta$ centered at $x^*$.
+where $B(x,\delta) = \{x' \, | \, \|x'-x\| \leq \delta \}$ denotes the ball a radius $\delta$ centered at $x$.
 Of course, a global minimizer if also a local minimizer but the converse is not true.
 
 \begin{proposition}\label{prop:zero_grad}
@@ -36,7 +34,7 @@ Of course, a global minimizer if also a local minimizer but the converse is not 
 	$$
 \end{proposition}
 
-If $f$ is convex then the converse is true:
+As we saw in Lecture~9, if $f$ is convex then the converse is true:
 
 \begin{proposition}\label{prop:zero_grad_convex}
 	Assume that $f$ is convex.
@@ -79,7 +77,7 @@ Here we have $m$ inequality constraints $g_1(x) \leq 0, \dots, g_m(x)\leq  0$ an
 We denote by $p^* \in \R \cup \{\pm \infty\}$ the optimal value of \eqref{eq:problem}.
 
 \begin{definition}[Feasible point]
-	A point $x \in \R^n$ is \emph{feasible} if it satisfies all the constraints: $g_1(x) \leq 0, \dots, g_m(x)\leq  0$ and $h_1(x) = 0, \dots, h_p(x) = 0$. We will denote by $F$ the set of feasible points.
+	A point $x \in \R^n$ is \emph{feasible} if it satisfies all the constraints: $g_1(x) \leq 0, \dots, g_m(x)\leq  0$ and $h_1(x) = 0, \dots, h_p(x) = 0$. We will denote by $F$ the set of feasible points. $F$ is called the feasible set.
 \end{definition}
 
 \begin{definition}[Active constraints]
@@ -97,17 +95,17 @@ For simplicity, we first assume to have only one inequality constraint $g(x) \le
 Let $x$ be a solution of \eqref{eq:problem2}, i.e.\ $g(x) \leq 0$ and $f(x) \leq f(x')$ for all $x'$ such that $g(x')\leq0$
 We distinguish two cases:
 
-\paragraph{Case 1: the constraint is not active at $x$; $g(x) <0$.} In that case $x$ is in the interior of $F$: one can find $\delta > 0$ such that $B(x,\delta) \subset F$. Since $x$ is a solution of \eqref{eq:problem2} we have for all $x' \in B(0,\delta)$, $f(x) \leq f(x')$. One can therefore apply Proposition \ref{prop:zero_grad} to get that $\nabla f(x) = 0$.
+\paragraph{Case 1: the constraint is not active at $x\,$; $g(x) <0$.} In that case $x$ is in the interior of $F$: one can find $\delta > 0$ such that $B(x,\delta) \subset F$. Since $x$ is a solution of \eqref{eq:problem2} we have for all $x' \in B(0,\delta)$, $f(x) \leq f(x')$. One can therefore apply Proposition \ref{prop:zero_grad} to get that $\nabla f(x) = 0$.
 
 We conclude that in the case where the constraint is not active, the constraint does not play any role and one gets the same optimality condition as in the unconstrained setting.
 
-\paragraph{Case 2: the constraint is active at $x$; $g(x) = 0$.}
+\paragraph{Case 2: the constraint is active at $x\,$; $g(x) = 0$.}
 In that case, there exists $\lambda \geq 0$ such that 
 \begin{equation}\label{eq:grad_active}
 	\nabla f(x) = - \lambda \nabla g(x).
 \end{equation}
 To see that, assume that \eqref{eq:grad_active} does not hold. Then we are in the following situation:
-\begin{figure}[h!]
+\begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.8\linewidth]{figures/absurd.pdf}
 	\end{center}
@@ -133,9 +131,9 @@ $$
 \nabla f(x) + \lambda \nabla g(x) = 0.
 $$
 
-We will only cover the case where the equality constraints are linear, i.e. $h_i(x) = \langle a_i, x \rangle + b_i$ for from $a_i \in \R^n$ and $b_i \in \R$.
+%We will only cover the case where the equality constraints are linear, i.e. $h_i(x) = \langle a_i, x \rangle + b_i$ for from $a_i \in \R^n$ and $b_i \in \R$.
 
-This generalize to the case \eqref{eq:problem} where we have multiple constraints:
+This can be generalized to the case \eqref{eq:problem} where we have multiple constraints.
 
 \begin{definition}[LICQ]
 	Let $x$ be a feasible point. We say that the \emph{linear independence constraint qualification} (LICQ) holds at $x$ if the set of gradients
@@ -148,12 +146,12 @@ This generalize to the case \eqref{eq:problem} where we have multiple constraint
 \end{definition}
 
 \begin{theorem}[First-order optimality conditions]\label{th:first_order}
-	Assume that the functions $f$, $g_1, \dots, g_m$ are continuously differentiable and that $h_1, \dots, h_p$ are linear. If $x$ is solution of \eqref{eq:problem} and if LICQ holds at $x$
+	Assume that the functions $f$, $g_1, \dots, g_m, h_1, \dots, h_p$ are continuously differentiable. If $x$ is solution of \eqref{eq:problem} and if LICQ holds at $x$
 	then there exists $\lambda_1, \dots, \lambda_m \geq 0$ and $\nu_1, \dots, \nu_p \in \R$ such that:
-	\begin{equation}\label{eq:kkt}
+	\begin{equation}\label{eq:kkt1}
 		\nabla f(x) + \sum_{i=1}^m \lambda_i \nabla g_i(x) + \sum_{i=1}^p \nu_i \nabla h_i(x) = 0.
 	\end{equation}
-	Moreover $\lambda_i = 0$ if $g_i(x) < 0$.
+	Moreover, for all  $i\in \{1, \dots, m\}$, $\lambda_i = 0$ if $g_i(x) < 0$.
 \end{theorem}
 
 The scalars $\lambda_i, \nu_i$ are called \emph{Lagrange multipliers}.
@@ -169,7 +167,7 @@ The terms ``primal'' and ``dual'' will be explained in the next section.
 
 \section{The Lagrangian and the dual problem}
 
-We define the Lagrange dual function $L$ associated with the problem \eqref{eq:problem} by
+We define the Lagrangian $L$ associated with the problem \eqref{eq:problem} by
 \begin{equation}
 	L(x,\lambda,\nu) = 
 	f(x) + \sum_{i=1}^m \lambda_i g_i(x) + \sum_{i=1}^p \nu_i h_i(x),
@@ -202,7 +200,7 @@ We would like to make the lower bound \eqref{eq:dual_lower_bound} as tight as po
 						  & \nu_i \in \R, & i=1, \dots, p.
 	\end{array}
 \end{equation}
-Notice that the Lagrange dual function is always concave, as an infimum of linear functions. Hence, the dual problem might be easier to solve than the original problem.
+Notice that the Lagrange dual function is always concave, as an infimum of affine functions. Hence, the dual problem might be easier to solve than the original problem.
 \\
 
 We denote by $d^*$ the optimal value of the dual problem \eqref{eq:dual_problem}.
@@ -226,18 +224,17 @@ Hence, the weak duality inequality can be rewritten as:
 	\sup_{\lambda \geq 0, \nu} \inf_{x \in \R^n} L(x,\lambda,\nu) \leq \inf_{x \in \R^n} \sup_{\lambda \geq 0, \nu} L(x,\lambda,\nu).
 \end{equation}
 
-When there is equality in \eqref{eq:weak_duality} (or equivalently in \eqref{eq:sup_inf}) we say that there is \emph{strong duality}. We will see in the next section that strong duality holds for convex problems under mild assumptions.
-
+When there is equality in \eqref{eq:weak_duality} (or equivalently in \eqref{eq:sup_inf}) we say that there is \emph{strong duality}. We will see in Section \ref{sec:kuhn_tucker} that strong duality holds for convex problems under mild assumptions.
 
 \subsection{Saddle-points}
 \begin{definition}[Saddle-point]
-	We say that $(x; \lambda,\nu) \in \R^n \times \R_{\geq 0}^m \times \R^p$ is a \emph{saddle-point} of $L$ if
+We say that $(x; \lambda,\nu) \in \R^n \times \R_{\geq 0}^m \times \R^p$ is a \emph{saddle-point}\footnotemark of $L$ if
 	\begin{equation}\label{eq:def_saddle}
 	\forall (\lambda',\nu') \in \R_{\geq 0}^m \times \R^p \quad
 	L(x,\lambda',\nu') \leq L(x,\lambda,\nu) \leq L(x',\lambda,\nu) \quad \forall x' \in \R^n.
 \end{equation}
 \end{definition}
-
+\footnotetext{Unfortunately, ``saddle-point'' has multiple meanings in maths: the one of Section \ref{sec:min} and the one of this definition.}
 Notice that if $(x; \lambda,\nu)$ is a saddle-point of $L$, then $x$ is solution of \eqref{eq:problem}. Indeed, by taking the supremum over $(\lambda',\nu')$ in \eqref{eq:def_saddle} we get:
 $$
 F(x) \leq L(x,\lambda,\nu) \leq L(x',\lambda,\nu) \leq F(x')
@@ -299,7 +296,7 @@ x^* \quad \text{is solution of the primal problem} \quad
 \end{array}
 \right.
 $$
-Notice that $(\lambda^*,\nu^*)$ maximizes the linear function $L(x^*, \cdot,\cdot)$ if and only if $x^*$ is feasible. We obtain:
+Notice that $(\lambda^*,\nu^*)$ maximizes the affine function $L(x^*, \cdot,\cdot)$ if and only if $x^*$ is feasible. We obtain:
 $$
 x^* \quad \text{is solution of the primal problem} \quad
 \Longleftrightarrow
@@ -314,7 +311,7 @@ This is particularly useful, because the dual problem might be easier to solve t
 Assume for simplicity that $x \mapsto L(x,\lambda^*,\nu^*)$ admits a unique minimizer $x^*$. Then if $x^*$ is feasible then it is a solution of the problem \eqref{eq:problem}. 
 If $x^*$ is not feasible then the minimum of \eqref{eq:problem} can not be attained.
 
-\section{Kuhn Tucker Theorem}
+\section{Kuhn Tucker Theorem}\label{sec:kuhn_tucker}
 
 In this section, we assume that the functions $f$, $g_1, \dots, g_m$ are \textbf{convex} and that $h_1, \dots, h_p$ are \textbf{affine}, that is $h_i(x) = \langle a_i,x \rangle + b_i$ for some $a_i \in \R^n$, $b_i \in \R$. We say then that the optimization problem \eqref{eq:problem} is convex.
 Notice in that case that the set of feasible points is convex, as the intersection of the convex sets $\{x | g_i(x) \leq 0 \}$ and $\{x|h_i(x) =0\}$.
