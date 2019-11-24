@@ -316,7 +316,7 @@ If $x^*$ is not feasible then the minimum of \eqref{eq:problem} can not be attai
 
 \section{Kuhn Tucker Theorem}
 
-In this section, we assume that the functions $f$, $g_1, \dots, g_m$ are convex and that $h_1, \dots, h_p$ are linear. We say then that the optimization problem \eqref{eq:problem} is convex.
+In this section, we assume that the functions $f$, $g_1, \dots, g_m$ are \textbf{convex} and that $h_1, \dots, h_p$ are \textbf{affine}, that is $h_i(x) = \langle a_i,x \rangle + b_i$ for some $a_i \in \R^n$, $b_i \in \R$. We say then that the optimization problem \eqref{eq:problem} is convex.
 Notice in that case that the set of feasible points is convex, as the intersection of the convex sets $\{x | g_i(x) \leq 0 \}$ and $\{x|h_i(x) =0\}$.
 \\
 
@@ -336,7 +336,7 @@ We refer to Section~5.2.3 of~\cite{boyd2004convex} for a proof of Proposition \r
 
 
 \begin{theorem}[Kuhn Tucker]\label{th:kuhn_tucker}
-	Assume that the functions $f$, $g_1, \dots, g_m$ are \textbf{convex}, differentiable and that $h_1, \dots, h_p$ are linear. Assume that strong duality holds, that $p^*=d^*$ is finite, and that the optimal value of the dual problem is attained at some $(\lambda,\nu) \in \R_{\geq 0}^m \times \R^p$. (This is for instance the case under Slater's condition).
+	Assume that the functions $f$, $g_1, \dots, g_m$ are \textbf{convex}, differentiable and that $h_1, \dots, h_p$ are affine. Assume that strong duality holds, that $p^*=d^*$ is finite, and that the optimal value of the dual problem is attained at some $(\lambda,\nu) \in \R_{\geq 0}^m \times \R^p$. (This is for instance the case under Slater's condition).
 	\\
 
 	Then $x \in \R^n$ is solution of \eqref{eq:problem} if and only if $x$ is feasible and

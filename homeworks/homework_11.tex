@@ -1,0 +1,153 @@
+\documentclass[11pt,nocut]{article}
+
+\usepackage{../latex_style/packages}
+\usepackage{../latex_style/notations}
+
+\title{\vspace{-2.0cm}%
+	Optimization and Computational Linear Algebra for Data Science\\
+Homework 11: Optimality conditions}
+%\author{Léo \textsc{Miolane} \ $\cdot$ \ \texttt{leo.miolane@gmail.com}}
+\date{\vspace{-1cm}Due on December 6, 2019}
+\setcounter{section}{11}
+
+\begin{document}
+\maketitle
+\input{./preamble_homeworks.tex}
+
+\vspace{1mm}
+
+\begin{problem}[2 points]
+	Let $f,g: \R^3 \to \R$ be the functions defined by
+	$$
+	f(x,y,z) = 2x^2 + y^2 + \frac{1}{2} z^2 + 4x - 6y - z + 1
+	\quad \text{and} \quad
+	g(x,y,z) = xyz + x+y+z .
+	$$
+	Compute the critical points of $f$ and $g$ and determine if they are local maxima, local minima or saddle point.
+\end{problem}
+
+\vspace{5mm}
+
+\begin{problem}[3 points]
+	We consider the following constrained optimization problem:
+	\begin{equation}\label{eq:p}
+	\text{minimize} \quad x-y+z \quad \text{subject to} \quad x^2 + y^2 + z^2=1 \quad \text{and} \quad x+y+z=1.
+	\end{equation}
+	We admit that this minimization problem has (at least) one solution (this comes from the fact that a continuous function on a compact set attains its minimum).
+	\\
+
+		Using Lagrange multipliers, show that \eqref{eq:p} has a unique solution and compute its coordinates.
+\end{problem}
+
+\vspace{5mm}
+
+\begin{problem}[2 points]
+	Let $u \in \R^n$ be a vector whose coordinates are all distinct. We consider the constrained optimization problem
+	$$
+	\text{maximize} \quad \langle u ,x \rangle \quad \text{subject to} \quad \|x\|_1 \leq 1.
+	$$
+	\begin{enumerate}[label=\normalfont(\textbf{\alph*})]
+		\item Show that this problem has a unique solution $x^*$ and give the expression of $x^*$ in terms of $u$ (Lagrange multipliers are not needed here).
+		\item Give a graphical interpretation.
+	\end{enumerate}
+\end{problem}
+
+\newpage
+
+\begin{problem}[3 points]
+	\emph{\textbf{We will prove the spectral theorem in this problem: you are therefore not allowed to use the spectral theorem and its consequences to solve this exercise.}}
+
+	Let $A$ be an $n \times n$ symmetric matrix. We consider the following optimization problem
+	\begin{equation}\label{eq:eig1}
+		\text{maximize} \quad x^{\sT} A x \quad \text{subject to} \quad \|x\| = 1.
+	\end{equation}
+	This optimization problem admits a solution (this comes from the fact that a continuous function on a compact set achieved its maximum) that we denote by $v_1$.
+	\begin{enumerate}[label=\normalfont(\textbf{\alph*})]
+		\item Using Lagrange multipliers, show that $v_1$ is an eigenvector of $A$.
+		\item We now consider the optimization problem
+	\begin{equation}\label{eq:eig2}
+		\text{maximize} \quad x^{\sT} A x \quad \text{subject to} \quad \|x\| = 1
+		\quad \text{and} \quad \langle x,v_1 \rangle = 0.
+	\end{equation}
+	For the same reason as above, this problem admits a solution that we denote by $v_2$. Show that $v_2$ is an eigenvector of $A$ that is orthogonal to $v_1$.
+		\item We now consider the optimization problem
+	\begin{equation}\label{eq:eig3}
+		\text{maximize} \quad x^{\sT} A x \quad \text{subject to} \quad \|x\| = 1
+		\quad \text{and} \quad \langle x,v_1 \rangle = 0
+		\quad \text{and} \quad \langle x,v_2 \rangle = 0.
+	\end{equation}
+	Again, this problem admits a solution that we denote by $v_3$. Show that $v_3$ is an eigenvector of $A$ that is orthogonal to $v_1$ and $v_2$.
+	\end{enumerate}
+	\emph{
+		\textbf{Conclusion}: by repeating this procedure, we obtain an orthonormal family $v_1, \dots, v_n$ of eigenvectors of $A$. This proves the spectral theorem (without using any linear algebra result!).
+	}
+\end{problem}
+
+
+\vspace{5mm}
+
+\begin{problem}[$\star$]
+	We consider here a simple portfolio optimization problem.
+	Assume that we can invest in $n$ financial assets. Each asset $i$ has a return of $X_i$ ($X_i$ is a random variable) meaning that investing $w$\$ in the asset $i$ will generate a return of $w \times X_i$ \$. We introduce
+	\begin{align*}
+		r_i &= \E[X_i], \\
+		\Sigma &= \Cov(X,X) = \E\big[(X-r) (X-r)^{\sT}\big]
+	\end{align*}
+	that are respectively the average return and the covariance matrix of the returns. 
+	We assume that the covariance matrix $\Sigma$ is invertible. We represent a portfolio (an investement strategy) by a vector $w = (w_1, \dots, w_n) \in \R^n$, where each coordinate $w_i$ represent the amount invested on the asset $i$. 
+	We allow $w_i$ to be negative, which means that it is possible to ``short'' a security (i.e.\ ``bet against'' asset $i$).
+	The expected return of the portfolio is then
+	$$
+	R(w) = \E \left[\sum_{i=1}^n w_i X_i\right] = \sum_{i=1}^n w_i r_i
+	$$
+	and its variance is
+	\begin{align*}
+	V(w) 
+	&= \Var \left(\sum_{i=1}^n w_i X_i\right) 
+	= \E \left[\left(\sum_{i=1}^n w_i (X_i -r_i)\right)^2\right]
+	= \E \left[\sum_{i=1}^n\sum_{j=1}^n w_iw_j (X_i -r_i)(X_j -r_j)\right]
+	\\
+	&= w^{\sT} \Sigma w.
+	\end{align*}
+	We want here to invest a total amount of $m$ on the assets. 
+	Given an targeted expected return $\mu$, we would like to find a portfolio $w$ such that $R(w)=\mu$ and $\sum_{i=1}^n w_i = m$ that has a minimum variance $V(w)$.
+	That is, we aim at solving the following problem:
+	\begin{equation}\label{mar}
+		\text{minimize} \quad
+		V(w) \quad \text{subject to} \quad
+		R(w) = \mu \quad \text{and} \quad \sum_{i=1}^n w_i = m.
+	\end{equation}
+	Let $\1$ denotes the all-ones vector of dimension $n$. We assume that $r \not\in \Span(\1)$.
+	We also assume that $m \min_i r_i \leq \mu \leq m \max_i r_i$, so that there exists a feasible $w$ to the problem \eqref{mar}.
+	Show that the matrix
+	$$
+	M = 
+	\begin{pmatrix}
+		\1^{\sT} \Sigma^{-1} \1 & \1^{\sT} \Sigma^{-1} r \\
+		\1^{\sT} \Sigma^{-1} r & r^{\sT} \Sigma^{-1} r
+	\end{pmatrix}
+	$$
+	is invertible and that the unique solution to \eqref{mar} is
+	$$
+	w^* = \Sigma^{-1} 
+	\begin{pmatrix}
+		| & | \\
+		\1 & r \\
+		| & |
+	\end{pmatrix}
+	M^{-1} 
+	\begin{pmatrix}
+		m \\
+		\mu
+	\end{pmatrix}.
+	$$
+\end{problem}
+
+
+
+\vspace{1cm}
+\centerline{\pgfornament[width=7cm]{87}}
+
+%\bibliographystyle{plain}
+%\bibliography{./references.bib}
+\end{document}

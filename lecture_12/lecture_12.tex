@@ -112,6 +112,7 @@ update $\alpha =\beta \alpha$. Then choose $\alpha_t = \alpha$.
 
 \section{Newton's method}
 
+\subsection{Newton's method}
 We assume here that $f$ is $\gamma$-strongly convex and $L$-smooth.
 Newton's method performs updates according to
 \begin{equation}\label{eq:newton}
@@ -129,13 +130,28 @@ It can be shown (see for instance \cite{boyd2004convex}) that for $t$ large enou
 \|x^{(t)} - x^* \|^2 \leq C e^{-\rho 2^t},
 \end{equation}
 where $C,\rho$ are constants depending on $f$ and $x^{(0)}$. We say that Newton's method converges \emph{quadratically} to the minimizer $x^*$. Newton's method is much faster than gradient descent, whose speed (given by Theorem \ref{th:gradient2}) is of order $C' e^{-\rho' t}$.
-\\
+
+\subsection{Quasi-Newton methods}
 
 The main drawback of Newton's method is its computational complexity. Each step of the method require to compute the inverse of the $n \times n$ Hessian matrix of $f$ at $x^{(t)}$, which require $O(n^3)$ operations. This makes Newton's method unpractical for large scale applications.
+\\
+
+Quasi-Newton methods have been developed to face these limitations. 
+The idea behind quasi-Newton methods is to try to mimic the inverse Hessian $H_f(x^{(t)})^{-1}$ by a sequence of symmetric positive semidefinite matrices $(Q_t)_{t \geq 0}$ that are recursively computed in an efficient way. We refer to Chapter 6 of \cite{nocedal2006numerical} for a detailed introduction to this topic.
+%\\
+
+%A starting point is to say that when $x^{(t)}$ and $x^{(t-1)}$ are close,
+%$$
+%\nabla f(x^{(t)}) \simeq \nabla f(x^{(t-1)}) + H_f(x^{(t)})(x^{(t)} - x^{(t-1)}).
+%$$
+%Hence, writing $\Delta x = x^{(t)} - x^{(t-1)}$ and $\Delta g = \nabla f(x^{(t)}) - \nabla f(x^{(t-1)})$, we have $\Delta g \simeq H_f(x^{(t)})\Delta x$. Hence it is natural to impose that $Q_{t}$ verifies $Q_{t} \Delta x = \Delta g$.
+%The BFGS method choses
 
 
 \section*{Further reading}
 
+See chapter 9 of \cite{boyd2004convex} for more background on gradient descent and Newton's method.
+%See chapter 6 of \cite{nocedal2006numerical} for a detailed introduction to quasi-Newton methods.
 
 \vspace{1cm}
 \centerline{\pgfornament[width=7cm]{71}}
