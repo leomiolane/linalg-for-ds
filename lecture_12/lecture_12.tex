@@ -72,6 +72,9 @@ Then, one can check (exercise!) that when $x$ is fixed, the minimum of the right
 	$$
 \end{theorem}
 \begin{remark}
+	The ratio $\frac{\gamma}{L} \in (0,1]$ is called the condition number. The larger the condition number, the faster the convergence.
+\end{remark}
+\begin{remark}
 	The $\gamma$-strong convexity of $f$ implies that for all $x \in \R^n$,
 	$$
 	\frac{\gamma}{2} \|x - x^* \|^2 \leq f(x)-f(x^*).
@@ -110,6 +113,25 @@ f\big(x^{(t)} - \alpha \nabla f (x^{(t)}) \big) > f(x^{(t)}) - \frac{\alpha}{2} 
 $$
 update $\alpha =\beta \alpha$. Then choose $\alpha_t = \alpha$.
 
+\subsection{Accelerated gradient method}
+
+\paragraph{Gradient descent with momentum}
+
+\begin{align*}
+	x^{(t+1)} = x^{(t)} + v^{(t)}
+	\quad \text{where} \quad
+	v^{(t)} = \alpha_t v^{(t-1)} - \beta_t \nabla f(x^{(t-1)})
+\end{align*}
+
+\paragraph{Nesterov accelerated gradient}
+
+\begin{align*}
+	x^{(t+1)} = x^{(t)} + v^{(t)}
+	\quad \text{where} \quad
+	v^{(t)} = \alpha_t v^{(t-1)} - \beta_t \nabla f(x^{(t-1)} + \alpha_t v^{(t)})
+\end{align*}
+
+
 \section{Newton's method}
 
 \subsection{Newton's method}
@@ -130,6 +152,7 @@ It can be shown (see for instance \cite{boyd2004convex}) that for $t$ large enou
 \|x^{(t)} - x^* \|^2 \leq C e^{-\rho 2^t},
 \end{equation}
 where $C,\rho$ are constants depending on $f$ and $x^{(0)}$. We say that Newton's method converges \emph{quadratically} to the minimizer $x^*$. Newton's method is much faster than gradient descent, whose speed (given by Theorem \ref{th:gradient2}) is of order $C' e^{-\rho' t}$.
+
 
 \subsection{Quasi-Newton methods}
 
