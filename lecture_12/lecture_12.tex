@@ -22,40 +22,41 @@ In these notes, $f$ denotes a twice differentiable \textbf{convex} function from
 
 \section{Gradient descent}
 
-Given an initial point $x^{(0)} \in \R^n$, the gradient descent algorithm follows the updates:
+Given an initial point $x_0 \in \R^n$, the gradient descent algorithm follows the updates:
 \begin{equation}\label{eq:gradient_step}
-x^{(t+1)} = x^{(t)} - \alpha_t \nabla f(x^{(t)}),
+x_{t+1} = x_t - \alpha_t \nabla f(x_t),
 \end{equation}
 where the step-size $\alpha_t$ remains to be determined.
 The step \eqref{eq:gradient_step} is a very natural strategy to minimize $f$, since $-\nabla f(x)$ is the direction of steepest descent at $x$. Since $f(x+h) = f(x) + \langle \nabla f(x), h \rangle + o(\|h\|)$ we have
 \begin{align*}
-f(x^{(t+1)}) 
-&= f(x^{(t)}) - \alpha_t \| \nabla f(x^{(t)}) \|^2 + o(\alpha_t) \\
-&< f(x^{(t)}) 
+f(x_{t+1}) 
+&= f(x_t) - \alpha_t \| \nabla f(x_t) \|^2 + o(\alpha_t) \\
+&< f(x_t) 
 \end{align*}
-for $\alpha_t$ small enough (provided that $\nabla f(x^{(t)}) \neq 0$).
-Hence is the step-sizes $\alpha_t$ are chosen very small, the sequence $(f(x^{(t)}))_{k \geq 0}$ is decreasing!
+for $\alpha_t$ small enough (provided that $\nabla f(x_t) \neq 0$).
+Hence is the step-sizes $\alpha_t$ are chosen very small, the sequence $(f(x_t))_{k \geq 0}$ is decreasing!
 However, if $\alpha_t$ are too small, the algorithm may never converge.
 
 \subsection{Convergence analysis}
 
 \textbf{Notation}: Given a symmetric matrix $M$ we will denote by $\lambda_{\rm min}(M)$ and $\lambda_{\rm max}(M)$ the smallest and largest eigenvalues of $M$. 
 \begin{definition}
-	For $L,\gamma >0$, we say that a twice-differentiable convex function $f: \R^n \to \R$ is
+	For $L,\mu >0$, we say that a twice-differentiable convex function $f: \R^n \to \R$ is
 	\begin{itemize}
 		\item $L$-smooth if for all $x \in \R^n$, $\lambda_{\rm max}(H_f(x)) \leq L$.
-		\item $\gamma$-strongly convex if for all $x \in \R^n$, $\lambda_{\rm min}(H_f(x)) \geq \gamma$.
+		\item $\mu$-strongly convex if for all $x \in \R^n$, $\lambda_{\rm min}(H_f(x)) \geq \mu$.
 	\end{itemize}
 \end{definition}
 
 
-\begin{theorem}
+\begin{theorem}\label{th:gradient1}
 	Assume that $f$ is $L$-smooth and that $f$ admits a (global) minimizer $x^* \in \R^n$. Then
 	the gradient descent iterates \eqref{eq:gradient_step} with constant step-size $\alpha_k = 1/L$ verify
 	$$
-	f(x^{(t)}) - f(x^*) \leq \frac{2 L \| x^{(0)} - x^* \|^2}{t+4}.
+	f(x_t) - f(x^*) \leq \frac{2 L \| x_0 - x^* \|^2}{t+4}.
 	$$
 \end{theorem}
+See Section 2.1.5 from \cite{nesterov2018lectures} for a proof.
 
 \paragraph{Why did we used step sizes of $1/L$ ?} If $f$ is $L$-smooth one can prove (see Homework~9) that for all $x,h \in \R^n$:
 \begin{equation}\label{eq:upperL}
@@ -64,41 +65,41 @@ f(x+h) \leq f(x) + \langle \nabla f(x) , h \rangle + \frac{L}{2} \|h\|^2.
 Then, one can check (exercise!) that when $x$ is fixed, the minimum of the right-hand side is minimum for $h = - \frac{1}{L} \nabla f(x)$.
 
 \begin{theorem}\label{th:gradient2}
-	Assume that $f$ is $L$-smooth and $\gamma$-strongly convex. 
+	Assume that $f$ is $L$-smooth and $\mu$-strongly convex. 
 	Then $f$ admits a unique minimizer global $x^*$ and
 	the gradient descent iterates \eqref{eq:gradient_step} with constant step-size $\alpha_k = 1/L$ verify
 	$$
-	f(x^{(t)}) - f(x^*) \leq \Big(1-\frac{\gamma}{L}\Big)^t (f(x^{(0)}) - f(x^*)).
+	f(x_t) - f(x^*) \leq \Big(1-\frac{\mu}{L}\Big)^t (f(x_0) - f(x^*)).
 	$$
 \end{theorem}
 \begin{remark}
-	The ratio $\frac{\gamma}{L} \in (0,1]$ is called the condition number. The larger the condition number, the faster the convergence.
+	The ratio $\kappa = \frac{L}{\mu} \in (0,1]$ is called the condition number. The smaller the condition number, the faster the convergence.
 \end{remark}
 \begin{remark}
-	The $\gamma$-strong convexity of $f$ implies that for all $x \in \R^n$,
+	The $\mu$-strong convexity of $f$ implies that for all $x \in \R^n$,
 	$$
-	\frac{\gamma}{2} \|x - x^* \|^2 \leq f(x)-f(x^*).
+	\frac{\mu}{2} \|x - x^* \|^2 \leq f(x)-f(x^*).
 	$$
 	Combining this with Theorem \ref{th:gradient2} gives a bound of the distance to the minimizer $x^*$:
 	$$
-	\|x^{(t)} - x^* \|^2 \leq \frac{2}{\gamma}\Big(1-\frac{\gamma}{L}\Big)^t (f(x^{(0)}) - f(x^*)).
+	\|x_t - x^* \|^2 \leq \frac{2}{\mu}\Big(1-\frac{\mu}{L}\Big)^t (f(x_0) - f(x^*)).
 	$$
 \end{remark}
 
 \begin{proof}
-	Let $t \geq 0$. Applying \eqref{eq:upperL} for $x=x^{(t)}$ and $h=x^{(t)} - L^{-1} \nabla f(x^{(t)})$, we get
+	Let $t \geq 0$. Applying \eqref{eq:upperL} for $x=x_t$ and $h=x_t - L^{-1} \nabla f(x_t)$, we get
 	$$
-	f(x^{(t+1)}) 
-	\leq f(x^{(t)}) - \frac{1}{L} \|\nabla f(x^{(t)}) \|^2 + \frac{1}{2L}\|\nabla f(x^{(t)}) \|^2
-	= f(x^{(t)}) - \frac{1}{2L} \|\nabla f(x^{(t)}) \|^2.
+	f(x_{t+1}) 
+	\leq f(x_t) - \frac{1}{L} \|\nabla f(x_t) \|^2 + \frac{1}{2L}\|\nabla f(x_t) \|^2
+	= f(x_t) - \frac{1}{2L} \|\nabla f(x_t) \|^2.
 	$$
-Now, since $f$ is $\gamma$-strongly convex, we have for all $x \in \R^n$
+Now, since $f$ is $\mu$-strongly convex, we have for all $x \in \R^n$
 $$
-f(x) - f(x^*) \leq 2 \gamma \|\nabla f(x)\|^2.
+f(x) - f(x^*) \leq 2 \mu \|\nabla f(x)\|^2.
 $$
-We get that $f(x^{(t+1)}) \leq f(x^{(t)}) - \frac{\gamma}{L}(f(x^{(t)}) - f(x^*))$, hence
+We get that $f(x_{t+1}) \leq f(x_t) - \frac{\mu}{L}(f(x_t) - f(x^*))$, hence
 $$
-f(x^{(t+1)}) - f(x^*) \leq (1 - \frac{\gamma}{L})(f(x^{(t)}) - f(x^*)),
+f(x_{t+1}) - f(x^*) \leq (1 - \frac{\mu}{L})(f(x_t) - f(x^*)),
 $$
 from which the theorem follows.
 \end{proof}
@@ -109,65 +110,82 @@ In practice, one may not have access to $L$ and need hence to choose the step si
 Fix a parameter $\beta \in (0,1)$.
 Start with $\alpha = 1$ and while
 $$
-f\big(x^{(t)} - \alpha \nabla f (x^{(t)}) \big) > f(x^{(t)}) - \frac{\alpha}{2} \|\nabla f(x^{(t)}) \|^2,
+f\big(x_t - \alpha \nabla f (x_t) \big) > f(x_t) - \frac{\alpha}{2} \|\nabla f(x_t) \|^2,
 $$
 update $\alpha =\beta \alpha$. Then choose $\alpha_t = \alpha$.
 
 \subsection{Accelerated gradient method}
 
-\paragraph{Gradient descent with momentum}
+\paragraph{Gradient descent with momentum.}
 
+Also known as ``heavy ball'' method, this scheme was introduced by Polyak in 1964.
+This is a way to prevent zigzagging trajectories when doing gradient descent by adding a momentum term:
 \begin{align*}
-	x^{(t+1)} = x^{(t)} + v^{(t)}
+	x_{t+1} = x_t + v_t
 	\quad \text{where} \quad
-	v^{(t)} = \alpha_t v^{(t-1)} - \beta_t \nabla f(x^{(t-1)})
+	v_t = \alpha_t v_{t-1} - \beta_t \nabla f(x_{t-1}),
+\end{align*}
+for some $\alpha_t,\beta_t$. The idea is that the 
+
+\paragraph{Nesterov's accelerated gradient descent.}
+
+Nesterov's accelerated gradient descent is an amelioration of idea of momentum.
+\begin{align*}
+	x_{t+1} = x_t + v_t
+	\quad \text{where} \quad
+	v_t = \alpha_t v_{t-1} - \beta_t \nabla f(x_{t-1} + \alpha_t v_t)
 \end{align*}
 
-\paragraph{Nesterov accelerated gradient}
-
-\begin{align*}
-	x^{(t+1)} = x^{(t)} + v^{(t)}
-	\quad \text{where} \quad
-	v^{(t)} = \alpha_t v^{(t-1)} - \beta_t \nabla f(x^{(t-1)} + \alpha_t v^{(t)})
-\end{align*}
+When $\alpha_t,\beta_t$ are properly chosen, it improves on the convergence rates of gradient descent (given by Theorems~\ref{th:gradient1}-\ref{th:gradient2}). Namely:
+\begin{itemize}
+	\item if $f$ is $L$-smooth and if its minimum is attained at some $x^*$, then for $\alpha_t = \frac{t-1}{t+2}$ and $\beta_t = 1/L$ we have
+		$$
+		f(x_t) - f(x^*) \leq \frac{2L \|x_0-x^*\|^2}{(t+1)^2}.
+		$$
+	\item if $f$ is $L$-smooth and $\mu$-strongly convex, then for $\alpha_t = \frac{1-\sqrt{\mu/L}}{1+\sqrt{\mu/L}}$ and $\beta_t = 1/L$ we have
+		$$
+		f(x_t) - f(x^*) \leq L \|x_0-x^*\|^2 \Big(1-\sqrt{\mu/L}\Big)^t.
+		$$
+\end{itemize}
+See for instance \cite{schmidt2011convergence} for proofs of these results.
 
 
 \section{Newton's method}
 
 \subsection{Newton's method}
-We assume here that $f$ is $\gamma$-strongly convex and $L$-smooth.
+We assume here that $f$ is $\mu$-strongly convex and $L$-smooth.
 Newton's method performs updates according to
 \begin{equation}\label{eq:newton}
-	x^{(t+1)} = x^{(t)} - H_f(x^{(t)})^{-1} \nabla f(x^{(t)}).
+	x_{t+1} = x_t - H_f(x_t)^{-1} \nabla f(x_t).
 \end{equation}
-The (important!) difference with gradient descent is that the step-size $\alpha_k$ is now replaced by the inverse\footnote{The Hessian of $f$ if indeed invertible at all $x$ since its smallest eigenvalue is always greater than $\gamma >0$.} of the Hessian of $f$. The idea begin Newton's method is to minimize the second order approximation of $f$ at $x^{(t)}$ :
+The (important!) difference with gradient descent is that the step-size $\alpha_k$ is now replaced by the inverse\footnote{The Hessian of $f$ if indeed invertible at all $x$ since its smallest eigenvalue is always greater than $\mu >0$.} of the Hessian of $f$. The idea begin Newton's method is to minimize the second order approximation of $f$ at $x_t$ :
 \begin{equation}\label{eq:sec}
-	f(x^{(t)}+h) \simeq f(x^{(t)}) + \langle \nabla f(x^{(t)}), h \rangle + \frac{1}{2} h^{\sT} H_f(x^{(t)}) h
+	f(x_t+h) \simeq f(x_t) + \langle \nabla f(x_t), h \rangle + \frac{1}{2} h^{\sT} H_f(x_t) h
 \end{equation}
-with respect to $h$ and then choose $x^{(t+1)} = x^{(t)} + h$. It is an easy exercise to see that the minimizer of the right-hand side of \eqref{eq:sec} is $h=- H_f(x^{(t)})^{-1} \nabla f(x^{(t)})$, leading to the recursion \eqref{eq:newton}.
+with respect to $h$ and then choose $x_{t+1} = x_t + h$. It is an easy exercise to see that the minimizer of the right-hand side of \eqref{eq:sec} is $h=- H_f(x_t)^{-1} \nabla f(x_t)$, leading to the recursion \eqref{eq:newton}.
 \\
 
 It can be shown (see for instance \cite{boyd2004convex}) that for $t$ large enough
 \begin{equation}\label{eq:newton}
-\|x^{(t)} - x^* \|^2 \leq C e^{-\rho 2^t},
+\|x_t - x^* \|^2 \leq C e^{-\rho 2^t},
 \end{equation}
-where $C,\rho$ are constants depending on $f$ and $x^{(0)}$. We say that Newton's method converges \emph{quadratically} to the minimizer $x^*$. Newton's method is much faster than gradient descent, whose speed (given by Theorem \ref{th:gradient2}) is of order $C' e^{-\rho' t}$.
+where $C,\rho$ are constants depending on $f$ and $x_0$. We say that Newton's method converges \emph{quadratically} to the minimizer $x^*$. Newton's method is much faster than gradient descent, whose speed (given by Theorem \ref{th:gradient2}) is of order $C' e^{-\sqrt{\mu/L} \, t}$.
 
 
 \subsection{Quasi-Newton methods}
 
-The main drawback of Newton's method is its computational complexity. Each step of the method require to compute the inverse of the $n \times n$ Hessian matrix of $f$ at $x^{(t)}$, which require $O(n^3)$ operations. This makes Newton's method unpractical for large scale applications.
+The main drawback of Newton's method is its computational complexity. Each step of the method require to compute the inverse of the $n \times n$ Hessian matrix of $f$ at $x_t$, which require $O(n^3)$ operations. This makes Newton's method unpractical for large scale applications.
 \\
 
 Quasi-Newton methods have been developed to face these limitations. 
-The idea behind quasi-Newton methods is to try to mimic the inverse Hessian $H_f(x^{(t)})^{-1}$ by a sequence of symmetric positive semidefinite matrices $(Q_t)_{t \geq 0}$ that are recursively computed in an efficient way. We refer to Chapter 6 of \cite{nocedal2006numerical} for a detailed introduction to this topic.
+The idea behind quasi-Newton methods is to try to mimic the inverse Hessian $H_f(x_t)^{-1}$ by a sequence of symmetric positive semidefinite matrices $(Q_t)_{t \geq 0}$ that are recursively computed in an efficient way. We refer to Chapter 6 of \cite{nocedal2006numerical} for a detailed introduction to this topic.
 %\\
 
-%A starting point is to say that when $x^{(t)}$ and $x^{(t-1)}$ are close,
+%A starting point is to say that when $x_t$ and $x_{t-1}$ are close,
 %$$
-%\nabla f(x^{(t)}) \simeq \nabla f(x^{(t-1)}) + H_f(x^{(t)})(x^{(t)} - x^{(t-1)}).
+%\nabla f(x_t) \simeq \nabla f(x_{t-1}) + H_f(x_t)(x_t - x_{t-1}).
 %$$
-%Hence, writing $\Delta x = x^{(t)} - x^{(t-1)}$ and $\Delta g = \nabla f(x^{(t)}) - \nabla f(x^{(t-1)})$, we have $\Delta g \simeq H_f(x^{(t)})\Delta x$. Hence it is natural to impose that $Q_{t}$ verifies $Q_{t} \Delta x = \Delta g$.
+%Hence, writing $\Delta x = x_t - x_{t-1}$ and $\Delta g = \nabla f(x_t) - \nabla f(x_{t-1})$, we have $\Delta g \simeq H_f(x_t)\Delta x$. Hence it is natural to impose that $Q_{t}$ verifies $Q_{t} \Delta x = \Delta g$.
 %The BFGS method choses
 
 
