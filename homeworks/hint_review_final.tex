@@ -1,0 +1,92 @@
+\documentclass[11pt,nocut]{article}
+
+\usepackage{../latex_style/packages}
+\usepackage{../latex_style/notations}
+
+\title{\vspace{-2.0cm}%
+	Optimization and Computational Linear Algebra for Data Science\\
+Hints for the review exercises}
+%\author{Léo \textsc{Miolane} \ $\cdot$ \ \texttt{leo.miolane@gmail.com}}
+\date{}
+%\setcounter{section}{*}
+
+\begin{document}
+\maketitle
+%\input{./preamble_homeworks.tex}
+\section{Last year's review exercises}
+
+\begin{enumerate}
+	\item Show that for all $x \in \R^n$, $ABx=BAx$. (You can decompose such $x$ in the given basis)
+	\item (a) See homework 10. (b) Use (a).
+	\item Use the definition of eigenvectors/eigenvalues.
+	\item Using the spectral Theorem there exists an orthonormal basis $(v_1, \dots, v_n)$ of $\R^n$ consisting of eigenvectors of $A$. Decompose $x$ in such a basis and compute $Ax$.
+	\item If $f: \R^2 \to \R$ is convex, and if $(\alpha^*,\beta^*)$ is a minimizer of $f$ then $\nabla f(\alpha^*,\beta^*) = 0$.
+	\item Use the definition of $\|x\|_{\infty}$ and $\|x\|$.
+	\item By the spectral theorem, you can decompose $x$ in an orthonormal basis of $\R^n$ made of eigenvectors of $A$.
+	\item Many possible ways to do this. (a) Show that $\Ker(A^{\sT}) = \Ker(AA^{\sT})$, and then use the rank-nullity theorem and the fact that $\rank(A) = \rank(A^{\sT})$. (b) Compute $AA^{\sT}$ using the SVD of $A$: $A = U \Sigma V^{\sT}$.
+	\item (a) Use Lagrange multipliers. (b)  The set of solution of $Ax=b$ is $A^+ b + \Ker(A)$. The result follow from the same arguments than problem 1 of homework 10. 
+	\item False.
+	\item Show that $\|x+y\|^2 = \|x\|^2 + 2 \langle x,y \rangle + \|y\|^2$.
+	\item Show that $\sum_{i=1}^n \langle x,u_i \rangle^2 = \|x\|^2$.
+	\item Compute $AA^{\sT}$.
+	\item Show that if $\lambda$ is an eigenvalue of $A$ associated with the eigenvector $u$ if and only if $Qu$ is an eigenvector of $B$ with eigenvalue $\lambda$.
+	\item Justify that $x = \sum_{i=1}^m \langle x,v_i\rangle v_i$. Then expand $\| \sum \langle x,v_i \rangle v_i \|^2$ and make simplifications.
+	\item Use the SVD of $A$.
+	\item (a) See Homework 3. (b) Let $V \in \R^{n \times n}$ be the matrix whose columns are $v_1, \dots, v_n$. Show that $\Tr(V^T A v) = \sum_{i=1}^n v_i^{\sT} A v_i$. Then use (a). (c) Use the spectral theorem and (a).
+	\item Use Problem 1.b from homework 7.
+	\item Expand the right-hand side.
+	\item (a). $A^2 = 0$. (b) Take for instance
+		$$
+		\begin{pmatrix}
+			0 & 1 \\
+			0 & 0
+		\end{pmatrix}
+		$$
+	\item (a) convex, (b) not convex (c) not convex (d) convex. One can verify these points by computing the Hessian.
+	\item (a) ... (b) There is a unique global minima.
+	\item $V$ is of dimension $2$, hence $\dim(V^{\perp}) = 4-2 = 2$. $v_1 = (1,-1,0,0)$ and $v_2 = (0, 0, 1,-1)$ work.
+	\item (a) Yes. (b) The derivative of a sum is equal to the sum of the derivaties, and the derivatives of $\lambda p$ (for some $\lamdba \in \R$) is equal to $\lambda p'$.
+		(c) $\Ker(\mathcal{D})$ is the set of polynomials $p$ that are constant (i.e.\ there exists $a\in\R$ such that $p(x) =a$ for all $x \in \R$).
+		(d) $\Im(\mathcal{D}) = \mathcal{P}_{d-1}$.
+		(e) (i) check the usual conditions (ii) For polynomial of degree $\leq d$, Taylor formula of order $d$ is exact:
+		$$
+		T_s(p)(x) = p(x+s) = \sum_{k=0}^d \frac{p^{(k)}(x)}{k!}s^k = \sum_{k=0}^d \frac{\mathcal{D}^k(p)(x)}{k!}s^k.
+		$$
+	(iii) The matrix has $0$ below the diagonal and for $j \geq i$, $M_{i,j} = \binom{j-1}{i-1}$.
+\item (a) Let $B$ be a rank $1$ matrix. One can therefore write $B = u v^T$ for some $u \in \R^m$ and $v \in \R^n$.
+	$$
+	\|A-B\|_F^2 = \|A\|^2_F - 2 u^T A v + \|u\|^2 \|v\|^2.
+	$$
+	Now, $u^T Av \leq \|u\| \|v\| \sigma_1$. Hence, writing $r=\|u\|\|v\|$
+	$$
+	\|A-B\|_F^2 \geq \sum_{i=1}^{\min(n,m)} \sigma_i^2 - 2 \sigma_1 r + r^2
+	= \sum_{i=2}^{\min(n,m)} \sigma_i^2 + (\sigma_1 -r)^2
+	= \|A-A'\|_{F}^2 + (\sigma_1 - r)^2
+	$$
+	(b) Let $B = u v^T$ be a rank 1 matrix. Let $v_1, v_2$ be the first two right-singular vectors of $A$. $Span(v)^{\perp}$ has dimension $n-1$, hence one can find a vector of unit norm $z$ in $Span(v)^{\perp} \cap \Span(v_1,v_2)$. We write $z = \alpha_1 v_1 + \alpha_2 v_2$. Since $\|z\|=1$ and $v_1, v_2$ orthogonal, we have $\alpha_1^2 + \alpha_2^2 = 1$. By definition of the spectral norm
+	$$
+	\|A-B\|_{\rm Sp} \geq \|(A-B)z\| = \|Az\| = \sqrt{\alpha_1^2 \sigma_1^2 + \alpha_2^2 \sigma_2^2} \geq \sigma_2 =  \|A-A'\|_{\rm Sp}.
+	$$
+\item $xx^T$ is rank $1$ and has two distinct eigenvalues $0$ and $1$. Hence $H$ has two distinct eigenvalues $-1$ and $1$.
+\item The vector $(1,1, \dots,1)$ is an eigenvector associated with the eigenvalue $d$. By contradiction let $x$ be an eigenvector associated with the eigenvalue $\lambda >d$. Let $i$ such that $|x_i| = \|x\|_{\infty} >0$. Then
+	$$
+	|x_i| \lambda 
+	= |\sum_{j=1}^n G_{i,j} x_j|
+	\leq \sum_{j=1}^n G_{i,j} |x_j|
+	\leq |x_i| \sum_{j=1}^n G_{i,j} = d |x_i|.
+	$$
+	We get a contradiction.
+\item Use the matrix product formula.
+\item (a) convex but not subspace (b) not convex (c) subspace (hence convex)
+\item (a) convex but not strictly convex (b) convex but not strictly convex (c) convex but not strictly convex (d) not convex (e) not convex
+\item Cauchy-Schwarz.
+\item Apply the spectral theorem to $A$.
+\end{enumerate}
+
+
+\vspace{1cm}
+\centerline{\pgfornament[width=7cm]{87}}
+
+%\bibliographystyle{plain}
+%\bibliography{./references.bib}
+\end{document}
