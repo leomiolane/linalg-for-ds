@@ -162,6 +162,32 @@ Final review problems}
 	When running stochastic gradient descent, what are upsides and downsides of having a rapidly decaying learning rate?
 \end{problem}
 
+\newpage
+
+\begin{center}
+	{\Large
+	Hints. Please only look at the hints if you have spent a reasonable time thinking about the problems!
+	}
+\end{center}
+\begin{enumerate}
+	\item Use the fact that $\|Ax\|^2 = x^{\sT} A^{\sT} A x$ and then use the SVD decomposition of $A$ to rewrite $A^{\sT} A$.
+	\item Use the SVD of $A$.
+	\item (a) True (b) False (c) False (eigenvalues can be negative but singular values can not. The singular values of a symmetric matrix are the absolute value of its eigenvalues).
+	\item Use the definitions of kernel and image.
+	\item Convex, convex, not convex.
+	\item Convex, not convex, convex.
+	\item Express the columns of $B$ using the left-singular vectors of the matrix $A$ whose rows are the $a_i$.
+	\item False. False. True.
+	\item Show that $(x+y)/2$ is a global minimizer of $f$.
+	\item Normalizing the dataset is useless for ordinary least-squares, but can be useful for Lasso.
+	\item Compute gradient and Hessian. 
+	\item Use Lagrange multipliers.
+	\item If the columns of $A$ are linearly dependent, then $f$ will be $L$-smooth but not strongly convex, hence the speed of gradient descent will be $O(1/t)$.
+		If the columns of $A$ are linearly independent then you can show that $f(x)$ is $\mu$-strongly convex and $L$-smooth, for some $\mu,L>0$. Hence the error of gradient descent will be $O(e^{-\rho t})$ after $t$ steps, for some constant $\rho>0$. 
+	\item 1 step.
+	\item See lecture notes.
+\end{enumerate}
+
 \vspace{1cm}
 \centerline{\pgfornament[width=7cm]{87}}
 
