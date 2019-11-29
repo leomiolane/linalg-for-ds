@@ -52,37 +52,62 @@ Hints for the review exercises}
 		$$
 		T_s(p)(x) = p(x+s) = \sum_{k=0}^d \frac{p^{(k)}(x)}{k!}s^k = \sum_{k=0}^d \frac{\mathcal{D}^k(p)(x)}{k!}s^k.
 		$$
-	(iii) The matrix has $0$ below the diagonal and for $j \geq i$, $M_{i,j} = \binom{j-1}{i-1}$.
-\item (a) Let $B$ be a rank $1$ matrix. One can therefore write $B = u v^T$ for some $u \in \R^m$ and $v \in \R^n$.
-	$$
-	\|A-B\|_F^2 = \|A\|^2_F - 2 u^T A v + \|u\|^2 \|v\|^2.
-	$$
-	Now, $u^T Av \leq \|u\| \|v\| \sigma_1$. Hence, writing $r=\|u\|\|v\|$
-	$$
-	\|A-B\|_F^2 \geq \sum_{i=1}^{\min(n,m)} \sigma_i^2 - 2 \sigma_1 r + r^2
-	= \sum_{i=2}^{\min(n,m)} \sigma_i^2 + (\sigma_1 -r)^2
-	= \|A-A'\|_{F}^2 + (\sigma_1 - r)^2
-	$$
-	(b) Let $B = u v^T$ be a rank 1 matrix. Let $v_1, v_2$ be the first two right-singular vectors of $A$. $Span(v)^{\perp}$ has dimension $n-1$, hence one can find a vector of unit norm $z$ in $Span(v)^{\perp} \cap \Span(v_1,v_2)$. We write $z = \alpha_1 v_1 + \alpha_2 v_2$. Since $\|z\|=1$ and $v_1, v_2$ orthogonal, we have $\alpha_1^2 + \alpha_2^2 = 1$. By definition of the spectral norm
-	$$
-	\|A-B\|_{\rm Sp} \geq \|(A-B)z\| = \|Az\| = \sqrt{\alpha_1^2 \sigma_1^2 + \alpha_2^2 \sigma_2^2} \geq \sigma_2 =  \|A-A'\|_{\rm Sp}.
-	$$
-\item $xx^T$ is rank $1$ and has two distinct eigenvalues $0$ and $1$. Hence $H$ has two distinct eigenvalues $-1$ and $1$.
-\item The vector $(1,1, \dots,1)$ is an eigenvector associated with the eigenvalue $d$. By contradiction let $x$ be an eigenvector associated with the eigenvalue $\lambda >d$. Let $i$ such that $|x_i| = \|x\|_{\infty} >0$. Then
-	$$
-	|x_i| \lambda 
-	= |\sum_{j=1}^n G_{i,j} x_j|
-	\leq \sum_{j=1}^n G_{i,j} |x_j|
-	\leq |x_i| \sum_{j=1}^n G_{i,j} = d |x_i|.
-	$$
-	We get a contradiction.
-\item Use the matrix product formula.
-\item (a) convex but not subspace (b) not convex (c) subspace (hence convex)
-\item (a) convex but not strictly convex (b) convex but not strictly convex (c) convex but not strictly convex (d) not convex (e) not convex
-\item Cauchy-Schwarz.
-\item Apply the spectral theorem to $A$.
+		(iii) The matrix has $0$ below the diagonal and for $j \geq i$, $M_{i,j} = \binom{j-1}{i-1}$.
+	\item (a) Let $B$ be a rank $1$ matrix. One can therefore write $B = u v^T$ for some $u \in \R^m$ and $v \in \R^n$.
+		$$
+		\|A-B\|_F^2 = \|A\|^2_F - 2 u^T A v + \|u\|^2 \|v\|^2.
+		$$
+		Now, $u^T Av \leq \|u\| \|v\| \sigma_1$. Hence, writing $r=\|u\|\|v\|$
+		$$
+		\|A-B\|_F^2 \geq \sum_{i=1}^{\min(n,m)} \sigma_i^2 - 2 \sigma_1 r + r^2
+		= \sum_{i=2}^{\min(n,m)} \sigma_i^2 + (\sigma_1 -r)^2
+		= \|A-A'\|_{F}^2 + (\sigma_1 - r)^2
+		$$
+		(b) Let $B = u v^T$ be a rank 1 matrix. Let $v_1, v_2$ be the first two right-singular vectors of $A$. $Span(v)^{\perp}$ has dimension $n-1$, hence one can find a vector of unit norm $z$ in $Span(v)^{\perp} \cap \Span(v_1,v_2)$. We write $z = \alpha_1 v_1 + \alpha_2 v_2$. Since $\|z\|=1$ and $v_1, v_2$ orthogonal, we have $\alpha_1^2 + \alpha_2^2 = 1$. By definition of the spectral norm
+		$$
+		\|A-B\|_{\rm Sp} \geq \|(A-B)z\| = \|Az\| = \sqrt{\alpha_1^2 \sigma_1^2 + \alpha_2^2 \sigma_2^2} \geq \sigma_2 =  \|A-A'\|_{\rm Sp}.
+		$$
+	\item $xx^T$ is rank $1$ and has two distinct eigenvalues $0$ and $1$. Hence $H$ has two distinct eigenvalues $-1$ and $1$.
+	\item The vector $(1,1, \dots,1)$ is an eigenvector associated with the eigenvalue $d$. By contradiction let $x$ be an eigenvector associated with the eigenvalue $\lambda >d$. Let $i$ such that $|x_i| = \|x\|_{\infty} >0$. Then
+		$$
+		|x_i| \lambda 
+		= |\sum_{j=1}^n G_{i,j} x_j|
+		\leq \sum_{j=1}^n G_{i,j} |x_j|
+		\leq |x_i| \sum_{j=1}^n G_{i,j} = d |x_i|.
+		$$
+		We get a contradiction.
+	\item Use the matrix product formula.
+	\item (a) convex but not subspace (b) not convex (c) subspace (hence convex)
+	\item (a) convex but not strictly convex (b) convex but not strictly convex (c) convex but not strictly convex (d) not convex (e) not convex
+	\item Cauchy-Schwarz.
+	\item Apply the spectral theorem to $A$.
 \end{enumerate}
 
+\section{Last year's review exercises}
+
+\begin{enumerate}
+	\item (a) Show that $w \defeq u-v \neq 0$ belongs to $\Ker(A)$ and then that $x=u+tw$ is a solution to $Ax=b$ for all $t \in \R$. (b) Use the $w$ defined in (a).
+	\item (a). Prove that $\rank(A^T A) = n$. Then use the fact that $\rank(A^T A) \leq \rank(A) \leq \min(n,m)$. (b) Show that $\rank(A) = n$, then use the rank-nullity theorem to get $\dim \Ker(A) = 0$. (c) Use the fact that for any $v \in \R^n$, $\|Av\|^2 = v^{\sT} A^T A v$.
+	\item (a) $\rank(U) = n$. This comes from the fact that $\rank(U) \leq n$ (because $U$ is $n \times m$) and $\rank(U) \geq \rank(U^T U) \leq \rank(\Id_n) = n$. (b) Use the rank-nullity theorem.
+		(c) Expand and simplify $\|y-Ux\|^2$.
+		(d) Write $f(x) = \|y-Ux\|^2$ and solve $\nabla f(x) = 0$.
+	\item (a) Convex set ($\Ker(A)$)
+		(b) Convex set
+		(c) Not always convex (take for instance for $A=\Id$)
+		(d) Not convex.
+		(e) Convex.
+	\item (a)(e)(d)(f)
+	\item (a) $f$ is convex (compute its Hessian).
+		(b) $h$ is not convex (compute the Hessian)
+		(c) Solve the equations $->$ Global minimum
+		(d) Solve the equations $->$ Saddle point
+	\item (a) By contradiction if for all $j$ we have $|v_i^T u_1| < \frac{1}{\sqrt{n}}$ then we get (since $v_1, \dots, v_n$ orthonormal basis)
+		$$
+		\|u_1\|^2 = \sum_{i=1}^n (v_i^T u_1)^2 < 1,
+		$$
+		which is a contradiction.
+		(b) Take $u_1=(1,0)$, $u_2=(0,1)$, $v_1 = (1/\sqrt{2}, 1/\sqrt{2})$, $v_2 = (1/\sqrt{2},-1/\sqrt{2})$.
+\end{enumerate}
 
 \vspace{1cm}
 \centerline{\pgfornament[width=7cm]{87}}
