@@ -95,7 +95,7 @@ For simplicity, we first assume to have only one inequality constraint $g(x) \le
 Let $x$ be a solution of \eqref{eq:problem2}, i.e.\ $g(x) \leq 0$ and $f(x) \leq f(x')$ for all $x'$ such that $g(x')\leq0$
 We distinguish two cases:
 
-\paragraph{Case 1: the constraint is not active at $x\,$; $g(x) <0$.} In that case $x$ is in the interior of $F$: one can find $\delta > 0$ such that $B(x,\delta) \subset F$. Since $x$ is a solution of \eqref{eq:problem2} we have for all $x' \in B(0,\delta)$, $f(x) \leq f(x')$. One can therefore apply Proposition \ref{prop:zero_grad} to get that $\nabla f(x) = 0$.
+\paragraph{Case 1: the constraint is not active at $x\,$; $g(x) <0$.} In that case $x$ is in the interior of $F$: one can find $\delta > 0$ such that $B(x,\delta) \subset F$. Since $x$ is a solution of \eqref{eq:problem2} we have for all $x' \in B(x,\delta)$, $f(x) \leq f(x')$. One can therefore apply Proposition \ref{prop:zero_grad} to get that $\nabla f(x) = 0$.
 
 We conclude that in the case where the constraint is not active, the constraint does not play any role and one gets the same optimality condition as in the unconstrained setting.
 
