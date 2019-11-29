@@ -48,6 +48,15 @@ However, if $\alpha_t$ are too small, the algorithm may never converge.
 	\end{itemize}
 \end{definition}
 
+\begin{remark}\label{rem:sandwich}
+	$L$-smooth and $\mu$-strongly convex functions are very convenient since they can be ``sandwiched'' as follows (see homework 9 for a proof):
+	$$
+	f(x) + \langle h ,\nabla f(x) \rangle + \frac{\mu}{2} \|h\|^2 
+	\leq f(x+h) \leq
+	f(x) + \langle h ,\nabla f(x) \rangle + \frac{L}{2} \|h\|^2,
+	$$
+	for all $x,h \in\R^n$.
+\end{remark}
 
 \begin{theorem}\label{th:gradient1}
 	Assume that $f$ is $L$-smooth and that $f$ admits a (global) minimizer $x^* \in \R^n$. Then
@@ -58,7 +67,7 @@ However, if $\alpha_t$ are too small, the algorithm may never converge.
 \end{theorem}
 See Section 2.1.5 from \cite{nesterov2018lectures} for a proof.
 
-\paragraph{Why did we used step sizes of $1/L$ ?} If $f$ is $L$-smooth one can prove (see Homework~9) that for all $x,h \in \R^n$:
+\paragraph{Why did we used step sizes of $1/L$ ?} $f$ is $L$-smooth, hence (see Remark \ref{rem:sandwich}) for all $x,h \in \R^n$:
 \begin{equation}\label{eq:upperL}
 f(x+h) \leq f(x) + \langle \nabla f(x) , h \rangle + \frac{L}{2} \|h\|^2.
 \end{equation}
@@ -76,13 +85,13 @@ Then, one can check (exercise!) that when $x$ is fixed, the minimum of the right
 	The ratio $\kappa = \frac{L}{\mu} \in (0,1]$ is called the condition number. The smaller the condition number, the faster the convergence.
 \end{remark}
 \begin{remark}
-	The $\mu$-strong convexity of $f$ implies that for all $x \in \R^n$,
+	The $\mu$-strong convexity of $f$ implies (using Remark \ref{rem:sandwich}) that for all $x \in \R^n$,
 	$$
 	\frac{\mu}{2} \|x - x^* \|^2 \leq f(x)-f(x^*).
 	$$
 	Combining this with Theorem \ref{th:gradient2} gives a bound of the distance to the minimizer $x^*$:
 	$$
-	\|x_t - x^* \|^2 \leq \frac{2}{\mu}\Big(1-\frac{\mu}{L}\Big)^t (f(x_0) - f(x^*)).
+	\|x_t - x^* \|^2 \leq \frac{2}{\mu}\Big(1-\frac{\mu}{L}\Big)^{\! t} (f(x_0) - f(x^*)).
 	$$
 \end{remark}
 
@@ -93,10 +102,10 @@ Then, one can check (exercise!) that when $x$ is fixed, the minimum of the right
 	\leq f(x_t) - \frac{1}{L} \|\nabla f(x_t) \|^2 + \frac{1}{2L}\|\nabla f(x_t) \|^2
 	= f(x_t) - \frac{1}{2L} \|\nabla f(x_t) \|^2.
 	$$
-Now, since $f$ is $\mu$-strongly convex, we have for all $x \in \R^n$
-$$
+	Now, since $f$ is $\mu$-strongly convex, we have (exercise!) for all $x \in \R^n$
+	\begin{equation}\label{eq:boundG}
 f(x) - f(x^*) \leq 2 \mu \|\nabla f(x)\|^2.
-$$
+	\end{equation}
 We get that $f(x_{t+1}) \leq f(x_t) - \frac{\mu}{L}(f(x_t) - f(x^*))$, hence
 $$
 f(x_{t+1}) - f(x^*) \leq (1 - \frac{\mu}{L})(f(x_t) - f(x^*)),
@@ -123,17 +132,17 @@ This is a way to prevent zigzagging trajectories when doing gradient descent by 
 \begin{align*}
 	x_{t+1} = x_t + v_t
 	\quad \text{where} \quad
-	v_t = \alpha_t v_{t-1} - \beta_t \nabla f(x_{t-1}),
+	v_t = \alpha_t v_{t-1} - \beta_t \nabla f(x_{t}),
 \end{align*}
-for some $\alpha_t,\beta_t$. The idea is that the 
+for some $\alpha_t,\beta_t$. The idea is to keep momentum from past iterations in order to avoid zigzagging.
 
 \paragraph{Nesterov's accelerated gradient descent.}
 
-Nesterov's accelerated gradient descent is an amelioration of idea of momentum.
+Nesterov's accelerated gradient descent is a amelioration of idea of momentum.
 \begin{align*}
 	x_{t+1} = x_t + v_t
 	\quad \text{where} \quad
-	v_t = \alpha_t v_{t-1} - \beta_t \nabla f(x_{t-1} + \alpha_t v_t)
+	v_t = \alpha_t v_{t-1} - \beta_t \nabla f(x_{t} + \alpha_t v_{t-1})
 \end{align*}
 
 When $\alpha_t,\beta_t$ are properly chosen, it improves on the convergence rates of gradient descent (given by Theorems~\ref{th:gradient1}-\ref{th:gradient2}). Namely:
@@ -187,12 +196,124 @@ The idea behind quasi-Newton methods is to try to mimic the inverse Hessian $H_f
 %$$
 %Hence, writing $\Delta x = x_t - x_{t-1}$ and $\Delta g = \nabla f(x_t) - \nabla f(x_{t-1})$, we have $\Delta g \simeq H_f(x_t)\Delta x$. Hence it is natural to impose that $Q_{t}$ verifies $Q_{t} \Delta x = \Delta g$.
 %The BFGS method choses
+\section{Stochastic gradient descent}
+
+\subsection{Setting}
+
+A lot of machine learning problems fall in the following framework.
+Assume that there is a probability distribution $P_0$ on $\R^k \times \R^{\ell}$ and for $(X,Y) \sim P_0$ we would like to be able to estimate $Y$ using $X$. To do so, we define a model depending on parameters $\theta \in \R^n$ that takes the form of a function
+$$
+	\varphi_{\theta}:  \R^k  \to  \R^{\ell}.
+$$
+Our estimate for $Y$ will then be $\varphi_{\theta}(X)$. It remains then to find ``good parameters'' $\theta$ so that $\varphi_{\theta}(X) \simeq Y$. Hence we would like to find $\theta$ that minimize the risk
+\begin{equation}
+R(\theta) = \E \left[L(Y,\varphi_{\theta}(X))\right],
+\end{equation}
+where $L:\R^{\ell} \times \R^{\ell} \to \R$ is some loss function, for instance $L(y,y') = \|y-y'\|^2$.
+\\
+
+However we do not have access to the function $R$ in general, because we do not know the distribution $P_0$. Instead, we usually have access to $N$ samples $(X_i,Y_i) \iid P_0$ and minimize then the \emph{empirical risk}:
+$$
+R_N(\theta) = \frac{1}{N} \sum_{i=1}^N L\big(Y_i, \varphi_{\theta}(X_i)\big) = \frac{1}{N} \sum_{i=1}^N f_i(\theta),
+$$
+where we write $f_i(\theta) = L(Y_i,\varphi_{\theta}(X_i))$ for simplicity. In many cases, one minimizes $R_N(\theta)$ by gradient descent, following the opposite direction of the gradients:
+$$
+\nabla R_N (\theta) = \frac{1}{N} \sum_{i=1}^N \nabla f_i(\theta).
+$$
+However, when $N$ (the number of training examples) and $n$ (the number of parameters) are large, gradient descent becomes intractable since computing the gradient at a single point requires at least $N \times n$ computer operations.
+
+\subsection{Stochastic gradient descent}
+
+In order to face this issue, stochastic gradient descent (SGD) uses a single gradient $\nabla f_i(\theta)$ instead of the full-gradient $\nabla R_N(\theta) = \frac{1}{N} \sum_{i=1}^N \nabla f_i(\theta)$ to move:
+\begin{align*}
+	&\text{Pick} \quad i \quad \text{uniformly at random in} \quad \{1, \dots, N\}, \\
+	&\text{Update} \quad \theta_{t+1} = \theta_t - \alpha_t \nabla f_i(\theta_t),
+\end{align*}
+where $\alpha_t$ is a step-size that has to be determined.
+\\
+
+The direction of $\nabla f_i(\theta)$ is of course less accurate than the full gradient $\nabla R_N(\theta)$ and can hence be seen as a \emph{noisy observation} of the full gradient.
+Hence, if we want SGD to converge we need that $\alpha_t \xrightarrow[t \to \infty]{} 0$. However, the step sizes should not decrease to fast, otherwise we may stay forever near the initial position $\theta_0$ which will not perform well (because usually chosen at random).
+We have to make a trade-off:
+\begin{itemize}
+	\item slowly decaying step-sizes: the gradient iterates $\theta_t$ moves fast, but keep a high variance.
+	\item rapidly decaying step-sizes: the variance is reduced, but the iterates may move to slow to ``forget'' the initial condition $\theta_0$.
+\end{itemize}
+
+\subsection{Convergence analysis}
+
+In this section we assume $N$ to be very large, and typically larger than the total number of steps of SGD that we are going to make. This allows us to never use at each time $t$ a different gradient $\nabla f_{i_t}(\theta_t)$.
+
+
+We start by rewriting SGD can be rewritten as
+\begin{equation}\label{eq:sgd_noise}
+\theta_{t+1} = \theta_t - \alpha_t \big(\nabla R(\theta_t) + \eps_t \big)
+\end{equation}
+where $\eps_t \defeq \nabla f_{i_t}(\theta_t) - \nabla R(\theta_t)$. 
+We use this notation to make clear that $\nabla f_{i_t}(\theta_t)$ is a noisy observation of $\nabla R(\theta_t)$, where $\eps_t$ denotes the error.
+Notice that $\E\big[\nabla f_{i_t}(\theta_t)| \theta_t\big] = \nabla R(\theta_t)$, thus $\E[\eps_t|\theta_t] = 0$.
+We make the following additional assumptions:
+\begin{itemize}
+	\item There exists $\sigma>0$ such that $\E\big[\|\eps_t\|^2\big|\theta_t\big] \leq \sigma^2$ for all $t \geq 0$.
+	\item $R$ is $\mu$-strongly convex and $L$-smooth.
+	\item $\min_{\theta \in \R^n} R(\theta) =0$. (This can be easily verified by shifting $R$ by a constant.)
+\end{itemize}
+\vspace{2mm}
+Applying $R$ on both sides of \eqref{eq:sgd_noise} and using the $L$-smoothness of $L$, we get
+\begin{align*}
+	R(\theta_{t+1}) \leq R(\theta_t) - \alpha_t \big\langle \nabla R(\theta_t), \nabla R(\theta_t) + \eps_t \big\rangle + \frac{L}{2} \alpha_t \| \nabla R(\theta_t) + \eps_t \|^2.
+\end{align*}
+Taking expectations on both sides gives:
+\begin{align*}
+\E R(\theta_{t+1}) 
+&\leq \E R(\theta_t) - \alpha_t \E \big\| \nabla R(\theta_t)\big\|^2 + \frac{L}{2}\alpha_t^2 \left( \E \| \nabla R(\theta_t) \|^2 + \sigma^2 \right).
+\\
+&\leq \E R(\theta_t) - \frac{\alpha_t}{2} \E \big\| \nabla R(\theta_t)\big\|^2 + \frac{L}{2}\alpha_t^2 \sigma^2,
+\end{align*}
+assuming $\alpha_t \leq 1/L$.
+By strong convexity we have (as in \eqref{eq:boundG}): $R(\theta) \leq 2 \mu \|\nabla R(\theta)\|^2$. Hence:
+$$
+\E R(\theta_{t+1}) \leq \left(1 - \mu \alpha_t\right)\E R(\theta_t)  + \frac{L}{2}\alpha_t^2  \sigma^2 .
+$$
+Using this inequalities, assuming that $(\alpha_t)_{t \geq 0}$ is non-increasing and less that $1/L$, one can prove that for all $0 \leq t \leq T$:
+$$
+\E [R(\theta_{T})] \leq \E \big[R(\theta_0)\big] \prod_{t=1}^T (1-\mu \alpha_t) 
++ \frac{L \sigma^2}{2} \exp\Big(-\mu \sum_{s=t+1}^T \alpha_t\Big) \sum_{t=1}^T \alpha_t^2 + \frac{\alpha_t}{\mu}.
+$$
+
+\paragraph{Analysis of the first term.}
+When $\alpha_t \to 0$, 
+$$\log \prod_{t=1}^T (1-\mu \alpha_t) =\sum_{t=1}^T \log (1-\mu \alpha_t) \sim - \mu \sum_{t=0}^{T} \alpha_t.$$
+Hence, we need that $\sum_{t \geq 0} \alpha_t = +\infty$ in order to make the first term go to zero.
+\\
+
+One can for instance take $\alpha_t = 1/t$, in which case one gets
+$$
+\E[R(\theta_T)] = O(1/T).
+$$
+
+\subsection{Conclusion}
+
+We summarize below the performances of gradient descent and stochastic gradient descent for optimizing $R$, when it is $L$-smooth and $\mu$-strongly convex: 
+\begin{center}
+\begin{tabular}{ |c|c|c|c|c| } 
+ \hline
+ & Cost per step & Error after $t$ steps & Number of steps to get $\eps$-error
+ & Cost to get $\eps$-error\\
+ \hline
+	GD & $Nn$ & $O(e^{-\rho t})$ & $O(\log(1/\eps))$ & $O(Nn\log(1/\eps))$\\ 
+	SGD & $n$ & $O(1/t)$ & $O(1/\eps)$ & $O(n/\eps)$\\ 
+ \hline
+\end{tabular}
+\end{center}
+
+
+
 
 
 \section*{Further reading}
 
 See chapter 9 of \cite{boyd2004convex} for more background on gradient descent and Newton's method.
-%See chapter 6 of \cite{nocedal2006numerical} for a detailed introduction to quasi-Newton methods.
 
 \vspace{1cm}
 \centerline{\pgfornament[width=7cm]{71}}
