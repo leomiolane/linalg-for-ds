@@ -40,13 +40,21 @@ However, if $\alpha_t$ are too small, the algorithm may never converge.
 \subsection{Convergence analysis}
 
 \textbf{Notation}: Given a symmetric matrix $M$ we will denote by $\lambda_{\rm min}(M)$ and $\lambda_{\rm max}(M)$ the smallest and largest eigenvalues of $M$. 
-\begin{definition}
+\begin{definition}\label{def:strong}
 	For $L,\mu >0$, we say that a twice-differentiable convex function $f: \R^n \to \R$ is
 	\begin{itemize}
 		\item $L$-smooth if for all $x \in \R^n$, $\lambda_{\rm max}(H_f(x)) \leq L$.
 		\item $\mu$-strongly convex if for all $x \in \R^n$, $\lambda_{\rm min}(H_f(x)) \geq \mu$.
 	\end{itemize}
 \end{definition}
+\begin{remark}
+	Smoothness and strong convexity are usually defined as follows. We say that $f$ is
+	\begin{itemize}
+		\item $L$-smooth if $f$ is differentiable and if its gradient is $L$-Lipschitz meaning that for all $x,y \in \R^n$, $\| \nabla f(x) - \nabla f(y) \| \leq L \|x-y\|$.
+		\item $\mu$-strongly convex if the function $x \mapsto f(x) - \frac{\mu}{2} \|x\|^2$ is convex.
+	\end{itemize}
+	These definitions are more general since they do not require $f$ to be twice differentiable (for smoothness) or differentiable (for strong convexity). However, one can check that they are equivalent to Definition~\ref{def:strong} when $f$ is twice differentiable. In these notes, we will prefer to use Definition~\ref{def:strong} because it makes clear that these two assumptions are related to the eigenvalues of the Hessian of $f$.
+\end{remark}
 
 \begin{remark}\label{rem:sandwich}
 	$L$-smooth and $\mu$-strongly convex functions are very convenient since they can be ``sandwiched'' as follows (see homework 9 for a proof):
@@ -84,16 +92,16 @@ Then, one can check (exercise!) that when $x$ is fixed, the minimum of the right
 \begin{remark}
 	The ratio $\kappa = \frac{L}{\mu} \in (0,1]$ is called the condition number. The smaller the condition number, the faster the convergence.
 \end{remark}
-\begin{remark}
-	The $\mu$-strong convexity of $f$ implies (using Remark \ref{rem:sandwich}) that for all $x \in \R^n$,
-	$$
-	\frac{\mu}{2} \|x - x^* \|^2 \leq f(x)-f(x^*).
-	$$
-	Combining this with Theorem \ref{th:gradient2} gives a bound of the distance to the minimizer $x^*$:
-	$$
-	\|x_t - x^* \|^2 \leq \frac{2}{\mu}\Big(1-\frac{\mu}{L}\Big)^{\! t} (f(x_0) - f(x^*)).
-	$$
-\end{remark}
+%\begin{remark}
+	%The $\mu$-strong convexity of $f$ implies (using Remark \ref{rem:sandwich}) that for all $x \in \R^n$,
+	%$$
+	%\frac{\mu}{2} \|x - x^* \|^2 \leq f(x)-f(x^*).
+	%$$
+	%Combining this with Theorem \ref{th:gradient2} gives a bound of the distance to the minimizer $x^*$:
+	%$$
+	%\|x_t - x^* \|^2 \leq \frac{2}{\mu}\Big(1-\frac{\mu}{L}\Big)^{\! t} (f(x_0) - f(x^*)).
+	%$$
+%\end{remark}
 
 \begin{proof}
 	Let $t \geq 0$. Applying \eqref{eq:upperL} for $x=x_t$ and $h=x_t - L^{-1} \nabla f(x_t)$, we get
@@ -108,7 +116,7 @@ f(x) - f(x^*) \leq 2 \mu \|\nabla f(x)\|^2.
 	\end{equation}
 We get that $f(x_{t+1}) \leq f(x_t) - \frac{\mu}{L}(f(x_t) - f(x^*))$, hence
 $$
-f(x_{t+1}) - f(x^*) \leq (1 - \frac{\mu}{L})(f(x_t) - f(x^*)),
+f(x_{t+1}) - f(x^*) \leq \Big(1 - \frac{\mu}{L}\Big)(f(x_t) - f(x^*)),
 $$
 from which the theorem follows.
 \end{proof}
@@ -125,6 +133,14 @@ update $\alpha =\beta \alpha$. Then choose $\alpha_t = \alpha$.
 
 \subsection{Accelerated gradient method}
 
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=0.47\textwidth]{figures/gd.pdf}
+		\hspace{7mm}
+		\includegraphics[width=0.47\textwidth]{figures/momentum.pdf}
+		\caption{\emph{Left}: gradient descent may oscillate in narrow valleys. \emph{Right}: gradient descent with momentum accumulate momentum in the horizontal direction, while damping the oscillations on the vertical axis.}
+	\end{center}
+\end{figure}
 \paragraph{Gradient descent with momentum.}
 
 Also known as ``heavy ball'' method, this scheme was introduced by Polyak in 1964.
@@ -134,11 +150,16 @@ This is a way to prevent zigzagging trajectories when doing gradient descent by 
 	\quad \text{where} \quad
 	v_t = \alpha_t v_{t-1} - \beta_t \nabla f(x_{t}),
 \end{align*}
-for some $\alpha_t,\beta_t$. The idea is to keep momentum from past iterations in order to avoid zigzagging.
+for some $\alpha_t,\beta_t$. The idea is to keep momentum from past iterations in order to avoid zigzagging. It is possible to show that adding the momentum term leads to a better rate when $f$ is twice differentiable, $L$-smooth and $\mu$-strongly convex:
+$$
+\|x_t - x^*\| \leq \left(\frac{\sqrt{L}-\sqrt{\mu}}{\sqrt{L} + \sqrt{\mu}}\right)^{\! t} \|x_0 - x^*\|,
+$$
+when $\alpha_t$ and $\beta_t$ are appropriately chosen.
+
 
 \paragraph{Nesterov's accelerated gradient descent.}
 
-Nesterov's accelerated gradient descent is a amelioration of idea of momentum.
+Nesterov's accelerated gradient descent uses the idea of momentum, but evaluate the gradient at a different point that $x_t$:
 \begin{align*}
 	x_{t+1} = x_t + v_t
 	\quad \text{where} \quad
