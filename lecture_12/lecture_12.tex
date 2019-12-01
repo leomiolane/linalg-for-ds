@@ -90,7 +90,10 @@ Then, one can check (exercise!) that when $x$ is fixed, the minimum of the right
 	$$
 \end{theorem}
 \begin{remark}
-	The ratio $\kappa = \frac{L}{\mu} \in (0,1]$ is called the condition number. The smaller the condition number, the faster the convergence.
+	Theorems~\ref{th:gradient1}-\ref{th:gradient2} show that gradient descent is adaptive to strong convexity of $f$.
+\end{remark}
+\begin{remark}
+	The ratio $\kappa = \frac{L}{\mu} \geq 1$ is called the condition number. The smaller the condition number, the faster the convergence.
 \end{remark}
 %\begin{remark}
 	%The $\mu$-strong convexity of $f$ implies (using Remark \ref{rem:sandwich}) that for all $x \in \R^n$,
@@ -261,6 +264,14 @@ We have to make a trade-off:
 	\item rapidly decaying step-sizes: the variance is reduced, but the iterates may move to slow to ``forget'' the initial condition $\theta_0$.
 \end{itemize}
 
+
+In order to move in more accurate direction than $\nabla f_i$, one often uses mini-batches of $m$ gradients:
+\begin{align*}
+	&\text{Pick} \quad i_1, \dots, i_m \quad \text{uniformly at random in} \quad \{1, \dots, N\}, \\
+	&\text{Update} \quad \theta_{t+1} = \theta_t - \frac{\alpha_t}{m} \sum_{k=1}^m \nabla f_{i_k}(\theta_t).
+\end{align*}
+Using mini-batches is computationally more expensive than using a single gradient, but leads to much accurate steps.
+
 \subsection{Convergence analysis}
 
 In this section we assume $N$ to be very large, and typically larger than the total number of steps of SGD that we are going to make. This allows us to never use at each time $t$ a different gradient $\nabla f_{i_t}(\theta_t)$.
@@ -299,7 +310,7 @@ $$
 Using this inequalities, assuming that $(\alpha_t)_{t \geq 0}$ is non-increasing and less that $1/L$, one can prove that for all $0 \leq t \leq T$:
 $$
 \E [R(\theta_{T})] \leq \E \big[R(\theta_0)\big] \prod_{t=1}^T (1-\mu \alpha_t) 
-+ \frac{L \sigma^2}{2} \exp\Big(-\mu \sum_{s=t+1}^T \alpha_t\Big) \sum_{t=1}^T \alpha_t^2 + \frac{\alpha_t}{\mu}.
++ \frac{L \sigma^2}{2} \exp\Big(-\mu \sum_{s=t+1}^T \alpha_t\Big) \sum_{t=1}^T \alpha_t^2 + \frac{L\sigma^2\alpha_t}{2\mu}.
 $$
 
 \paragraph{Analysis of the first term.}
@@ -308,33 +319,47 @@ $$\log \prod_{t=1}^T (1-\mu \alpha_t) =\sum_{t=1}^T \log (1-\mu \alpha_t) \sim -
 Hence, we need that $\sum_{t \geq 0} \alpha_t = +\infty$ in order to make the first term go to zero.
 \\
 
-One can for instance take $\alpha_t = 1/t$, in which case one gets
+\paragraph{Conclusion.}
+Taking $\alpha_t = 1/(\mu t)$, we get:
 $$
 \E[R(\theta_T)] = O(1/T).
 $$
 
-\subsection{Conclusion}
 
-We summarize below the performances of gradient descent and stochastic gradient descent for optimizing $R$, when it is $L$-smooth and $\mu$-strongly convex: 
+
+\subsection{Concluding remarks}\label{sec:concluding}
+
+We summarize below the performances of gradient descent and stochastic gradient descent for optimizing $R$, when it is $L$-smooth and $\mu$-strongly convex. Recall that $N$ is the number of training examples and $n$ is the number of parameters.
 \begin{center}
-\begin{tabular}{ |c|c|c|c|c| } 
+\begin{tabular}{ |c|c|c|c| } 
  \hline
- & Cost per step & Error after $t$ steps & Number of steps to get $\eps$-error
- & Cost to get $\eps$-error\\
+ & Time per step & Error after $t$ steps & $\log$-error after $\tau$ time units \\
  \hline
-	GD & $Nn$ & $O(e^{-\rho t})$ & $O(\log(1/\eps))$ & $O(Nn\log(1/\eps))$\\ 
-	SGD & $n$ & $O(1/t)$ & $O(1/\eps)$ & $O(n/\eps)$\\ 
+	GD & $Nn$ & $O(e^{-\rho t})$ & $-\rho \tau / (Nn)$ + {\rm Cste}\\ 
+	SGD & $n$ & $O(1/t)$ & $-\log(\tau / n)$ + {\rm Cste}\\ 
  \hline
 \end{tabular}
 \end{center}
 
+We plot the log-error as a function of time below:
 
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=0.6\textwidth]{figures/gd_sgd.pdf}
+	\end{center}
+\end{figure}
+
+We see on the figure above that SGD obtains a decent solution reasonably fast. However, if one needs an high-accuracy solution, then standard gradient descent is more suitable.
+
+In machine learning, objective functions are usually noisy because they depend on (noisy) data. That is, $R_N$ is equal to the true risk $R$, plus some errors.
+Hence, there is no need to optimize $R_N$ with an accuracy below the noise level, which makes SGD particularly suitable for large-scale machine learning problems.
 
 
 
 \section*{Further reading}
 
 See chapter 9 of \cite{boyd2004convex} for more background on gradient descent and Newton's method.
+See \cite{bottou2008tradeoffs} for a more in-depth analysis of the tradeoffs discussed in Section \ref{sec:concluding}.
 
 \vspace{1cm}
 \centerline{\pgfornament[width=7cm]{71}}
