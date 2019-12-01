@@ -30,7 +30,7 @@ Homework 12: Gradient descent}
 
 \vspace{5mm}
 
-\begin{problem}[3 points]\label{p:grad}
+\begin{problem}[5 points]\label{p:grad}
 	Let $M \in \R^{d \times d}$ be a positive semidefinite matrix, $b \in \R^d$ and $c \in \R$. We aim at minimizing the quadratic function
 	$$
 	f(x) = \frac{1}{2} x^{\sT} M x - \langle x,b \rangle + c
@@ -91,21 +91,22 @@ $$
 \vspace{5mm}
 
 \begin{problem}[$\star$]
-	We take exactly the same setting of Problem~\ref{p:grad}, but we now consider gradient descent with momentum: $x_1 = x_0 = 0$ (we take them equal to zero to simplify the computations) and for $t \geq 1$:
+	We take exactly the same setting of Problem~\ref{p:grad}, but we now consider gradient descent with momentum:
 $$
-x_{t+1} = x_t - \beta \nabla f(x_t) + \gamma(x_t -x_{t-1})
+x_{t+1} = x_t - \beta \nabla f(x_t) + \gamma(x_t -x_{t-1}),
 $$
+for $t \geq 1$,
 where we take
 $$
 \beta = \frac{4}{(\sqrt{L} + \sqrt{\gamma})^2}
 \qquad \text{and} \qquad
 \gamma = \left(\frac{\sqrt{L}-\sqrt{\mu}}{\sqrt{L}+\sqrt{\mu}}\right)^{\! 2}.
 $$
-Show now that the $\alpha_i(t) \defeq \langle v_i, x_t - x^* \rangle$ satisfy a second order linear recurrence relation (as a sequence indexed by $t$). Solve this equation to obtain that for all $t \geq 0$
+Show now that the $\alpha_i(t) \defeq \langle v_i, x_t - x^* \rangle$ satisfy a second order linear recurrence relation (as a sequence indexed by $t$). Using this relation, show that for all $t \geq 0$
 $$
-\alpha_i(t) \leq C_i \left(\frac{\sqrt{L}-\sqrt{\mu}}{\sqrt{L} + \sqrt{\mu}}\right)^{\! t}
+|\alpha_i(t)| \leq C_i \left(\frac{\sqrt{L}-\sqrt{\mu}}{\sqrt{L} + \sqrt{\mu}}\right)^{\! t}
 $$
-where $C_i$ is a constant that does not depend on $t$. Deduce that for all $t \geq 0$
+where $C_i$ is a constant that does not depend on $t$, but that may depend on $x_0,x_1, \mu$ and $L$ (a precise expression of $C_i$ is not expected). Deduce that for all $t \geq 0$
 $$
 \|x_t - x^*\| \leq C \left(\frac{\sqrt{L}-\sqrt{\mu}}{\sqrt{L} + \sqrt{\mu}}\right)^{\! t}
 $$
