@@ -39,6 +39,7 @@ However, if $\alpha_t$ are too small, the algorithm may never converge.
 
 \subsection{Convergence analysis}
 
+
 \textbf{Notation}: Given a symmetric matrix $M$ we will denote by $\lambda_{\rm min}(M)$ and $\lambda_{\rm max}(M)$ the smallest and largest eigenvalues of $M$. 
 \begin{definition}\label{def:strong}
 	For $L,\mu >0$, we say that a twice-differentiable convex function $f: \R^n \to \R$ is
@@ -207,7 +208,7 @@ where $C,\rho$ are constants depending on $f$ and $x_0$. We say that Newton's me
 
 \subsection{Quasi-Newton methods}
 
-The main drawback of Newton's method is its computational complexity. Each step of the method require to compute the inverse of the $n \times n$ Hessian matrix of $f$ at $x_t$, which require $O(n^3)$ operations. This makes Newton's method unpractical for large scale applications.
+The main drawback of Newton's method is its computational complexity. Each step of the method requires to compute the inverse of the $n \times n$ Hessian matrix of $f$ at $x_t$, which requires $O(n^3)$ operations. This makes Newton's method unpractical for large scale applications.
 \\
 
 Quasi-Newton methods have been developed to face these limitations. 
@@ -225,7 +226,7 @@ The idea behind quasi-Newton methods is to try to mimic the inverse Hessian $H_f
 \subsection{Setting}
 
 A lot of machine learning problems fall in the following framework.
-Assume that there is a probability distribution $P_0$ on $\R^k \times \R^{\ell}$ and for $(X,Y) \sim P_0$ we would like to be able to estimate $Y$ using $X$. To do so, we define a model depending on parameters $\theta \in \R^n$ that takes the form of a function
+Assume that there is a probability distribution $P_0$ on $\R^k \times \R^{\ell}$ and for $(X,Y) \sim P_0$ we would like to be able to estimate $Y$ from $X$. To do so, we define a model depending on parameters $\theta \in \R^n$ that takes the form of a function
 $$
 	\varphi_{\theta}:  \R^k  \to  \R^{\ell}.
 $$
@@ -257,7 +258,7 @@ where $\alpha_t$ is a step-size that has to be determined.
 \\
 
 The direction of $\nabla f_i(\theta)$ is of course less accurate than the full gradient $\nabla R_N(\theta)$ and can hence be seen as a \emph{noisy observation} of the full gradient.
-Hence, if we want SGD to converge we need that $\alpha_t \xrightarrow[t \to \infty]{} 0$. However, the step sizes should not decrease to fast, otherwise we may stay forever near the initial position $\theta_0$ which will not perform well (because usually chosen at random).
+Hence, if we want SGD to converge we need that $\alpha_t \xrightarrow[t \to \infty]{} 0$. However, the step sizes should not decrease too fast, otherwise we may stay forever near the initial position $\theta_0$ which will not perform well (because usually chosen at random).
 We have to make a trade-off:
 \begin{itemize}
 	\item slowly decaying step-sizes: the gradient iterates $\theta_t$ moves fast, but keep a high variance.
@@ -272,7 +273,64 @@ In order to move in more accurate direction than $\nabla f_i$, one often uses mi
 \end{align*}
 Using mini-batches is computationally more expensive than using a single gradient, but leads to much accurate steps.
 
-\subsection{Convergence analysis}
+\subsection{Convergence rate}
+
+A is usually recommended to take step-sizes $\alpha_t$ such that
+$$
+\sum_{t =0}^{\+\infty} \alpha_t = + \infty.
+$$
+If this condition is not met, SGD may remains to close from its initialization which will lead to bad performances.
+Classical results on stochastic gradient descent show that
+\begin{itemize}
+	\item if the $f_i$ are $\mu$-strongly convex and smooth, then SGD with step sizes $\alpha_t = 1/(\mu t)$ achieves after $t$ steps an error of $O(1/t)$.
+	\item if the $f_i$ convex and smooth, then SGD with step sizes $\alpha_t = 1/\sqrt{t}$ achieves after $t$ steps an error of $O(1/\sqrt{t})$.
+\end{itemize}
+
+We give a proof in Appendix for the strongly convex case.
+
+\subsection{Concluding remarks}\label{sec:concluding}
+
+We summarize below the performances of gradient descent and stochastic gradient descent for optimizing $R$, when it is $L$-smooth and $\mu$-strongly convex. Recall that $N$ is the number of training examples and $n$ is the number of parameters.
+\begin{center}
+\begin{tabular}{ |c|c|c|c| } 
+ \hline
+ & Time per step & Error after $t$ steps & $\log$-error after $\tau$ time units \\
+ \hline
+	GD & $Nn$ & $O(e^{-\rho t})$ & $-\rho \tau / (Nn)$ + {\rm Cste}\\ 
+	SGD & $n$ & $O(1/t)$ & $-\log(\tau / n)$ + {\rm Cste}\\ 
+ \hline
+\end{tabular}
+\end{center}
+
+We plot the log-error as a function of time below:
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=0.6\textwidth]{figures/gd_sgd.pdf}
+	\end{center}
+\end{figure}
+
+We see on the figure above that SGD obtains a decent solution reasonably fast. However, if one needs an high-accuracy solution, then standard gradient descent is more suitable.
+
+In machine learning, objective functions are usually noisy because they depend on (noisy) data. That is, $R_N$ is equal to the true risk $R$, plus some errors.
+Hence, there is no need to optimize $R_N$ with an accuracy below the noise level, which makes SGD particularly suitable for large-scale machine learning problems.
+
+
+
+\section*{Further reading}
+
+See chapter 9 of \cite{boyd2004convex} for more background on gradient descent and Newton's method.
+See \cite{bottou2008tradeoffs} for a more in-depth analysis of the tradeoffs discussed in Section \ref{sec:concluding}.
+See chapter 8 of \cite{goodfellow2016deep} for a discussion on the optimization of large neural nets.
+
+\vspace{1cm}
+\centerline{\pgfornament[width=7cm]{71}}
+
+
+\bibliographystyle{plain}
+\bibliography{../references.bib}
+
+\section*{Appendix: Analysis of SGD for strongly convex objective functions}
 
 In this section we assume $N$ to be very large, and typically larger than the total number of steps of SGD that we are going to make. This allows us to never use at each time $t$ a different gradient $\nabla f_{i_t}(\theta_t)$.
 
@@ -326,45 +384,4 @@ $$
 $$
 
 
-
-\subsection{Concluding remarks}\label{sec:concluding}
-
-We summarize below the performances of gradient descent and stochastic gradient descent for optimizing $R$, when it is $L$-smooth and $\mu$-strongly convex. Recall that $N$ is the number of training examples and $n$ is the number of parameters.
-\begin{center}
-\begin{tabular}{ |c|c|c|c| } 
- \hline
- & Time per step & Error after $t$ steps & $\log$-error after $\tau$ time units \\
- \hline
-	GD & $Nn$ & $O(e^{-\rho t})$ & $-\rho \tau / (Nn)$ + {\rm Cste}\\ 
-	SGD & $n$ & $O(1/t)$ & $-\log(\tau / n)$ + {\rm Cste}\\ 
- \hline
-\end{tabular}
-\end{center}
-
-We plot the log-error as a function of time below:
-
-\begin{figure}[H]
-	\begin{center}
-		\includegraphics[width=0.6\textwidth]{figures/gd_sgd.pdf}
-	\end{center}
-\end{figure}
-
-We see on the figure above that SGD obtains a decent solution reasonably fast. However, if one needs an high-accuracy solution, then standard gradient descent is more suitable.
-
-In machine learning, objective functions are usually noisy because they depend on (noisy) data. That is, $R_N$ is equal to the true risk $R$, plus some errors.
-Hence, there is no need to optimize $R_N$ with an accuracy below the noise level, which makes SGD particularly suitable for large-scale machine learning problems.
-
-
-
-\section*{Further reading}
-
-See chapter 9 of \cite{boyd2004convex} for more background on gradient descent and Newton's method.
-See \cite{bottou2008tradeoffs} for a more in-depth analysis of the tradeoffs discussed in Section \ref{sec:concluding}.
-
-\vspace{1cm}
-\centerline{\pgfornament[width=7cm]{71}}
-
-
-\bibliographystyle{plain}
-\bibliography{../references.bib}
 \end{document}
