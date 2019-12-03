@@ -68,8 +68,8 @@ However, if $\alpha_t$ are too small, the algorithm may never converge.
 \end{remark}
 
 \begin{theorem}\label{th:gradient1}
-	Assume that $f$ is $L$-smooth and that $f$ admits a (global) minimizer $x^* \in \R^n$. Then
-	the gradient descent iterates \eqref{eq:gradient_step} with constant step-size $\alpha_k = 1/L$ verify
+	Assume that $f$ is convex, $L$-smooth and that $f$ admits a (global) minimizer $x^* \in \R^n$. Then
+	the gradient descent iterates \eqref{eq:gradient_step} with constant step-size $\alpha_t = 1/L$ verify
 	$$
 	f(x_t) - f(x^*) \leq \frac{2 L \| x_0 - x^* \|^2}{t+4}.
 	$$
@@ -85,7 +85,7 @@ Then, one can check (exercise!) that when $x$ is fixed, the minimum of the right
 \begin{theorem}\label{th:gradient2}
 	Assume that $f$ is $L$-smooth and $\mu$-strongly convex. 
 	Then $f$ admits a unique minimizer global $x^*$ and
-	the gradient descent iterates \eqref{eq:gradient_step} with constant step-size $\alpha_k = 1/L$ verify
+	the gradient descent iterates \eqref{eq:gradient_step} with constant step-size $\alpha_t = 1/L$ verify
 	$$
 	f(x_t) - f(x^*) \leq \Big(1-\frac{\mu}{L}\Big)^t (f(x_0) - f(x^*)).
 	$$
@@ -108,7 +108,7 @@ Then, one can check (exercise!) that when $x$ is fixed, the minimum of the right
 %\end{remark}
 
 \begin{proof}
-	Let $t \geq 0$. Applying \eqref{eq:upperL} for $x=x_t$ and $h=x_t - L^{-1} \nabla f(x_t)$, we get
+	Let $t \geq 0$. Applying \eqref{eq:upperL} for $x=x_t$ and $h=- L^{-1} \nabla f(x_t)$, we get
 	$$
 	f(x_{t+1}) 
 	\leq f(x_t) - \frac{1}{L} \|\nabla f(x_t) \|^2 + \frac{1}{2L}\|\nabla f(x_t) \|^2
@@ -116,7 +116,7 @@ Then, one can check (exercise!) that when $x$ is fixed, the minimum of the right
 	$$
 	Now, since $f$ is $\mu$-strongly convex, we have (exercise!) for all $x \in \R^n$
 	\begin{equation}\label{eq:boundG}
-f(x) - f(x^*) \leq 2 \mu \|\nabla f(x)\|^2.
+		f(x) - f(x^*) \leq \frac{1}{2 \mu} \|\nabla f(x)\|^2.
 	\end{equation}
 We get that $f(x_{t+1}) \leq f(x_t) - \frac{\mu}{L}(f(x_t) - f(x^*))$, hence
 $$
@@ -192,7 +192,7 @@ Newton's method performs updates according to
 \begin{equation}\label{eq:newton}
 	x_{t+1} = x_t - H_f(x_t)^{-1} \nabla f(x_t).
 \end{equation}
-The (important!) difference with gradient descent is that the step-size $\alpha_k$ is now replaced by the inverse\footnote{The Hessian of $f$ if indeed invertible at all $x$ since its smallest eigenvalue is always greater than $\mu >0$.} of the Hessian of $f$. The idea begin Newton's method is to minimize the second order approximation of $f$ at $x_t$ :
+The (important!) difference with gradient descent is that the step-size $\alpha_t$ is now replaced by the inverse\footnote{The Hessian of $f$ if indeed invertible at all $x$ since its smallest eigenvalue is always greater than $\mu >0$.} of the Hessian of $f$. The idea begin Newton's method is to minimize the second order approximation of $f$ at $x_t$ :
 \begin{equation}\label{eq:sec}
 	f(x_t+h) \simeq f(x_t) + \langle \nabla f(x_t), h \rangle + \frac{1}{2} h^{\sT} H_f(x_t) h
 \end{equation}
