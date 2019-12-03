@@ -106,7 +106,6 @@ Then, one can check (exercise!) that when $x$ is fixed, the minimum of the right
 	%\|x_t - x^* \|^2 \leq \frac{2}{\mu}\Big(1-\frac{\mu}{L}\Big)^{\! t} (f(x_0) - f(x^*)).
 	%$$
 %\end{remark}
-
 \begin{proof}
 	Let $t \geq 0$. Applying \eqref{eq:upperL} for $x=x_t$ and $h=- L^{-1} \nabla f(x_t)$, we get
 	$$
@@ -200,11 +199,10 @@ with respect to $h$ and then choose $x_{t+1} = x_t + h$. It is an easy exercise 
 \\
 
 It can be shown (see for instance \cite{boyd2004convex}) that for $t$ large enough
-\begin{equation}\label{eq:newton}
+\begin{equation}\label{eq:newton_conv}
 \|x_t - x^* \|^2 \leq C e^{-\rho 2^t},
 \end{equation}
 where $C,\rho$ are constants depending on $f$ and $x_0$. We say that Newton's method converges \emph{quadratically} to the minimizer $x^*$. Newton's method is much faster than gradient descent, whose speed (given by Theorem \ref{th:gradient2}) is of order $C' e^{-\sqrt{\mu/L} \, t}$.
-
 
 \subsection{Quasi-Newton methods}
 
