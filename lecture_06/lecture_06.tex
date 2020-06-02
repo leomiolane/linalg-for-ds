@@ -39,6 +39,42 @@ Lecture 6: Eigenvalues, eigenvectors and Markov chains}
 	However in this course, we only consider \textbf{real eigenvalues and eigenvectors}. 
 \end{remark}
 
+\begin{example}
+For $\lambda_1, \dots, \lambda_n \in \R$, we introduce the notation
+$$
+\Diag(\lambda_1, \dots, \lambda_n) \defeq
+\begin{pmatrix}
+	\lambda_1 & 0 & \cdots & 0 \\
+	0 & \lambda_2 & & \vdots \\
+	\vdots & & \ddots & \vdots \\
+	0 & \cdots &  \cdots & \lambda_n
+\end{pmatrix} \in \R^{n\times n}.
+$$
+Let $(e_1, e_2, \dots, e_n)$ be the canonical basis of $\R^n$. Then, for all $i \in \{1, \dots, n\}$ 
+$$
+\Diag(\lambda_1, \dots, \lambda_n) \, e_i = 
+\begin{pmatrix}
+	\lambda_1 & 0 & \cdots& \cdots & 0 \\
+	0 & \ddots & & & \vdots \\
+	\vdots & & \lambda_i & & \vdots \\
+	\vdots & & & \ddots & 0 \\
+	0 & \cdots &  \cdots & 0 & \lambda_n
+\end{pmatrix} 
+\begin{pmatrix}
+	0 \\
+	 \vdots \\
+	0 \\
+	1 \\
+	0 \\
+	 \vdots \\
+	0
+\end{pmatrix} 
+= \lambda_i e_i.
+$$
+Hence the vector $e_i$ is an eigenvector of the matrix $\Diag(\lambda_1, \dots, \lambda_n)$
+associated with the eigenvalue $\lambda_i$.
+\end{example}
+
 \begin{proposition}
 	Let $A \in \R^{n \times n}$. 
 	Suppose that $A$ has an eigenvalue $\lambda \in \R$ and let $x \in \R^n$ be an eigenvector associated to $\lambda$.
@@ -66,41 +102,42 @@ It follows from Proposition~\ref{prop:eigen_indep}:
 	A $n \times n$ matrix $A$ admits at most $n$ different eigenvalues: $\# \Sp(A) \leq n$.
 \end{corollary}
 
-\section{Diagonalizable matrices}
 
-\begin{definition}[Diagonalizable matrix]
-	A matrix $A \in \R^{n \times n}$ is said to be \emph{diagonalizable} if there exists a basis $(v_1, \dots, v_n)$ of $\R^n$ consisting of eigenvectors of $A$, i.e.\ such that there exists $\lambda_1, \dots, \lambda_n \in \R$ such that $Av_i = \lambda_i v_i$.
-\end{definition}
+%\section{Diagonalizable matrices}
 
-For $\lambda_1, \dots, \lambda_n \in \R$, we introduce the notation
-$$
-\Diag(\lambda_1, \dots, \lambda_n) \defeq
-\begin{pmatrix}
-	\lambda_1 & 0 & \cdots & 0 \\
-	0 & \lambda_2 & & \vdots \\
-	\vdots & & \ddots & \vdots \\
-	0 & \cdots &  \cdots & \lambda_n
-\end{pmatrix} \in \R^{n\times n}.
-$$
-Notice that $\Diag(\lambda_1, \dots, \lambda_n)$ is diagonalizable, since the canonical basis $(e_1, \dots, e_n)$ is a basis of $\R^n$ consisting of eigenvectors of $\Diag(\lambda_1, \dots, \lambda_n)$.
+%\begin{definition}[Diagonalizable matrix]
+	%A matrix $A \in \R^{n \times n}$ is said to be \emph{diagonalizable} if there exists a basis $(v_1, \dots, v_n)$ of $\R^n$ consisting of eigenvectors of $A$, i.e.\ such that there exists $\lambda_1, \dots, \lambda_n \in \R$ such that $Av_i = \lambda_i v_i$.
+%\end{definition}
 
-\begin{proposition}\label{prop:diag}
-	A matrix $A \in \R^{n \times n}$ is diagonalizable if and only if there exists an invertible $n \times n$ matrix $P$ and a diagonal matrix $D = \Diag(\lambda_1, \dots, \lambda_n)$ such that
-	$$
-	A = P D P^{-1}.
-	$$
-	In this case, the $i^{\rm th}$ column of $P$ is an eigenvector of $A$ associated with the eigenvalue $\lambda_i$.
-\end{proposition}
+%For $\lambda_1, \dots, \lambda_n \in \R$, we introduce the notation
+%$$
+%\Diag(\lambda_1, \dots, \lambda_n) \defeq
+%\begin{pmatrix}
+	%\lambda_1 & 0 & \cdots & 0 \\
+	%0 & \lambda_2 & & \vdots \\
+	%\vdots & & \ddots & \vdots \\
+	%0 & \cdots &  \cdots & \lambda_n
+%\end{pmatrix} \in \R^{n\times n}.
+%$$
+%Notice that $\Diag(\lambda_1, \dots, \lambda_n)$ is diagonalizable, since the canonical basis $(e_1, \dots, e_n)$ is a basis of $\R^n$ consisting of eigenvectors of $\Diag(\lambda_1, \dots, \lambda_n)$.
 
-\begin{proposition}
-	Let $A = P \Diag(\lambda_1,\dots,\lambda_n) P^{-1}$ (where $P \in \R^{n \times n}$ is invertible) be a diagonalizable matrix. Then
-$$
-\Tr(A) = \sum_{i=1}^n \lambda_i
-\qquad \text{and} \qquad
-\rank(A) = \# \{ i \, | \, \lambda_i \neq 0 \}.
-$$
-Consequently, $A$ is invertible if and only if $\lambda_i \neq 0$ for all $i$. In such case, $A^{-1} = P \Diag(\lambda_1^{-1}, \dots, \lambda_n^{-1}) P^{-1}$.
-\end{proposition}
+%\begin{proposition}\label{prop:diag}
+	%A matrix $A \in \R^{n \times n}$ is diagonalizable if and only if there exists an invertible $n \times n$ matrix $P$ and a diagonal matrix $D = \Diag(\lambda_1, \dots, \lambda_n)$ such that
+	%$$
+	%A = P D P^{-1}.
+	%$$
+	%In this case, the $i^{\rm th}$ column of $P$ is an eigenvector of $A$ associated with the eigenvalue $\lambda_i$.
+%\end{proposition}
+
+%\begin{proposition}
+	%Let $A = P \Diag(\lambda_1,\dots,\lambda_n) P^{-1}$ (where $P \in \R^{n \times n}$ is invertible) be a diagonalizable matrix. Then
+%$$
+%\Tr(A) = \sum_{i=1}^n \lambda_i
+%\qquad \text{and} \qquad
+%\rank(A) = \# \{ i \, | \, \lambda_i \neq 0 \}.
+%$$
+%Consequently, $A$ is invertible if and only if $\lambda_i \neq 0$ for all $i$. In such case, $A^{-1} = P \Diag(\lambda_1^{-1}, \dots, \lambda_n^{-1}) P^{-1}$.
+%\end{proposition}
 
 \section{Application to Markov chains}
 
