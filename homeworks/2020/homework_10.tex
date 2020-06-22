@@ -1,0 +1,137 @@
+\documentclass[11pt,nocut]{article}
+
+\usepackage{../latex_style/packages}
+\usepackage{../latex_style/notations}
+
+\title{\vspace{-2.0cm}%
+	Optimization and Computational Linear Algebra for Data Science\\
+Homework 10: Regression}
+%\author{Léo \textsc{Miolane} \ $\cdot$ \ \texttt{leo.miolane@gmail.com}}
+\date{\vspace{-1cm}Due on November 26, 2019}
+\setcounter{section}{10}
+
+\begin{document}
+\maketitle
+\input{./preamble_homeworks.tex}
+
+%\color{green}
+\vspace{1mm}
+
+%\begin{problem}[2 points]
+	%Let $A \in \R^{n \times m}$. Show that if $A$ has linearly independent columns, then $A^{\dagger} = (A^{\sT}A)^{-1} A^{\sT}$.
+%\end{problem}
+
+%\vspace{4mm}
+
+\begin{problem}[2 points]
+	Let $A \in \R^{n \times m}$ and $y \in \R^n$. We consider the least square problem:
+	\begin{equation}\label{eq:LS}
+		\text{minimize} \quad \|Ax-y\|^2 \quad \text{with respect to} \ x \in \R^m.
+	\end{equation}
+	We know from the lecture that $x^{\rm LS} \defeq A^{\dagger}y$ is a solution of \eqref{eq:LS}. 
+	\begin{enumerate}[label=\normalfont(\textbf{\alph*})]
+		\item Show that $x^{\rm LS} \perp \Ker(A)$.
+		\item Deduce that $x^{\rm LS}$ is the solution of \eqref{eq:LS} that has the smallest (Euclidean) norm.
+	\end{enumerate}
+\end{problem}
+
+\vspace{4mm}
+
+\begin{problem}[2 points]
+	Let $A \in \R^{n \times d}$ and $y \in \R^n$.
+	The Ridge regression adds a $\ell_2$ penalty to the least square problem:
+	\begin{equation}\label{eq:ridge}
+		\text{minimize} \qquad
+		\| Ax - y \|^2 + \lambda \|x\|^2 \qquad \text{with respect to} \ x \in \R^d,
+	\end{equation}
+	for some penalization parameter $\lambda >0$.
+	Show that \eqref{eq:ridge} admits a unique solution given by
+	$$
+	x^{\rm Ridge} = (A^{\sT} A + \lambda \Id_d)^{-1} A^{\sT} y.
+	$$
+\end{problem}
+
+
+\vspace{4mm}
+
+\begin{problem}[3 points]
+	Recall that $\|M\|_{\rm Sp}$ denotes the spectral norm of a matrix $M$.
+	\begin{enumerate}[label=\normalfont(\textbf{\alph*})]
+		\item Let $A\in \R^{n \times m}.$ Show that for all $x \in \R^m$,
+			$$
+			\|Ax\| \leq \|A\|_{\rm Sp} \|x\|.
+			$$
+		\item Show that for all $A \in \R^{n \times m}$ and $B\in \R^{m \times k}$:
+			$$
+			\|AB\|_{\rm Sp} \leq \|A\|_{\rm Sp} \|B\|_{\rm Sp}.
+			$$
+		\item Is it true that for all $n,m,k \geq 1$, all $A \in \R^{n \times m}$ and $B\in \R^{m \times k}$:
+			$$
+			\|AB\|_{F} \leq \|A\|_{F} \|B\|_{F} \ {\rm ?}
+			$$
+			Give a proof or a counter-example.
+	\end{enumerate}
+\end{problem}
+
+\newpage
+
+\begin{problem}[3 points]
+ Consider the $5 \times 4$ matrix $A$ and $y \in \R^5$ given by:
+$$
+A=
+\begin{pmatrix}
+	1.1 & -2.3 & 1.7 &  4.5\\
+	1.7  & 1.6  & 3.8  & 0.3 \\
+	1  &  0.1 & 1.3&  0.2\\
+	-0.5 & -0.4  & 0 &  -1.3 \\
+	-0.5  & 2.9 & -0.3 &  2
+\end{pmatrix}
+\quad \text{and} \quad
+y=
+\begin{pmatrix}
+	-13.8\\
+	-2.7 \\
+	9.6 \\
+	-2.4 \\
+	3.9
+\end{pmatrix}
+.
+$$
+In each of the following questions, it is intended that you solve the problem using the programming language of your choice and only report the numerical answer to 3 decimal places, without including your code files in your submission.
+\begin{enumerate}[label=\normalfont(\textbf{\alph*})]
+	\item Compute the minimizer $x^* \in \R^4$ of 
+		$$
+		\|Ax-y\|.
+		$$
+	\item Find a vector $v \in\R^5$ with $v_1 > 0$ and $\|v\|=1$ such that the minimizer of 
+		$$
+		\|Ax - (y+v)\|
+		$$
+		is also $x^*$.
+	\item Find a vector $w \in \R^5$ with $w_1 >0$ and $\|w\|=1$ such that the minimizer $x'$ of 
+		$$
+		\|Ax - (y+w)\|
+		$$
+		maximizes the error $\|x^* - x'\|$ and also	give the resulting error.
+		That is, we are trying to corrupt the vector $y$ with a fixed amount of noise $w$ that maximally modifies the least squares solution.
+\end{enumerate}
+\end{problem}
+
+
+\vspace{4mm}
+
+\begin{problem}[$\star$]
+	Let $A \in \R^{n \times n}$ be an orthogonal matrix, and $y \in \R^n$. We fix $\alpha,\lambda> 0$ and consider the so-called ``elastic net'' problem:
+	\begin{equation}\label{eq:EL}
+	\text{minimize} \quad
+	\frac{1}{2} \|Ax - y\|^2 + \frac{\alpha}{2}\|x\|^2 + \lambda \|x\|_1 \quad \text{with respect to} \ x \in \R^n.
+	\end{equation}
+	Give the expression of the solution $x^*$ of \eqref{eq:EL} in term of $A,y,\lambda$ and $\alpha$.
+\end{problem}
+
+\vspace{1cm}
+\centerline{\pgfornament[width=7cm]{87}}
+
+%\bibliographystyle{plain}
+%\bibliography{./references.bib}
+\end{document}

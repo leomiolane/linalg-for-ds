@@ -1,0 +1,91 @@
+\documentclass[11pt,nocut]{article}
+
+\usepackage{../latex_style/packages}
+\usepackage{../latex_style/notations}
+
+\title{\vspace{-3.0cm}%
+	Optimization and Computational Linear Algebra for Data Science\\
+Homework 4: Norm and inner product}
+%\author{Léo \textsc{Miolane} \ $\cdot$ \ \texttt{leo.miolane@gmail.com}}
+\date{\vspace{-1cm}Due on October 1$^{\rm st}$, 2019}
+\setcounter{section}{4}
+
+\begin{document}
+\maketitle
+\input{./preamble_homeworks.tex}
+
+
+
+\begin{problem}[2 points]
+	Let $\| \cdot \|$ be the usual Euclidean norm on $\R^n$.
+	For $x \in \R^n$ compute (and justify your result):
+	$$
+	\max \Big\{ v^{\sT} x \, \Big| \, v \in \R^n, \|v\|=1 \Big\}.
+$$
+\end{problem}
+
+\vspace{1mm} 
+
+\begin{problem}[2 points]
+	Show that for all $x \in \R^n$,
+	$$
+	\frac{1}{\sqrt{n}} \|x\|_1 \leq \|x\|_2 \leq \|x\|_1.
+	$$
+\end{problem}
+
+\vspace{1mm}
+
+\begin{problem}[2 points]
+	Let $\langle \cdot, \cdot \rangle$ be an inner product on $\R^n$, and let $\| \cdot \|$ be the induced norm by $\langle \cdot, \cdot \rangle$.
+	\begin{enumerate}[label=\normalfont(\textbf{\alph*})]
+		\item Show that for all $x,y \in \R^n$ we have
+			$$
+			\|x+y\|^2 + \|x-y\|^2 = 2 \|x\|^2 + 2 \|y\|^2.
+			$$
+		\item Deduce from the previous question that the $\ell_1$ norm $\| \cdot \|_1$ and the infinity norm $\| \cdot \|_{\infty}$ are \textbf{not} induced by an inner product.
+	\end{enumerate}
+\end{problem}
+
+\vspace{1mm}
+
+\begin{problem}[4 points]
+	Let $S$ be a subspace of $\R^n$. We define the orthogonal complement of $S$ by
+	$$
+	S^{\perp} \defeq 
+	\big\{ x \in \R^n \, \big| \, x \perp S \big\} = 
+	\big\{ x \in \R^n \, \big| \, \forall y \in S, \, \langle x,y \rangle = 0 \big\}.
+	$$
+	\begin{enumerate}[label=\normalfont(\textbf{\alph*})]
+		\item Show that $S^{\perp}$ is a subspace of $\R^n$.
+		\item Show that $\dim(S^{\perp}) = n - \dim(S)$. \textit{Hint: use the rank-nullity theorem}.
+	\end{enumerate}
+	Let $v = (1,1,1) \in \R^3$ and define
+	$$
+	H = 
+	\big\{ x \in \R^3 \, \big| \, x \perp v \big\} = \Span(v)^{\perp}.
+	$$
+	\begin{enumerate}[label=\normalfont(\textbf{\alph*})]
+		\item[\normalfont(\textbf{c})] Find an orthonormal basis of $H$ and an orthonormal basis of $H^{\perp}$.
+		\item[\normalfont(\textbf{d})] Write the matrix of $P_H$, the orthogonal projection on $H$.
+	\end{enumerate}
+\end{problem}
+
+\vspace{1mm}
+
+
+\begin{problem}[$\star$]
+	Let $P$ be an $n \times n$ matrix such that
+	$$
+	\begin{cases}
+		P^2 = P \\
+		P^{\sT} = P.
+	\end{cases}
+	$$
+	Show that $P$ is the matrix of the orthogonal projection on some subspace $V$ of $\R^n$.
+\end{problem}
+\vspace{1cm}
+\centerline{\pgfornament[width=7cm]{87}}
+
+%\bibliographystyle{plain}
+%\bibliography{./references.bib}
+\end{document}

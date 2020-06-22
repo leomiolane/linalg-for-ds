@@ -1,0 +1,62 @@
+\documentclass[11pt,nocut]{article}
+
+\usepackage{../latex_style/packages}
+\usepackage{../latex_style/notations}
+
+\title{\vspace{-2.0cm}%
+	Optimization and Computational Linear Algebra for Data Science\\
+Homework 1: Vector spaces}
+%\author{Léo \textsc{Miolane} \ $\cdot$ \ \texttt{leo.miolane@gmail.com}}
+\date{\vspace{-1cm}Due on September 10, 2019}
+\setcounter{section}{1}
+
+\begin{document}
+\maketitle
+\input{./preamble_homeworks.tex}
+
+
+\begin{problem}[2 points]
+	Let $u,v$ be two vectors of $\R^2$. Show that either they are linearly dependent or that they span the whole of $\R^2$.
+\end{problem}
+
+\vspace{1mm}
+
+\begin{problem}[3 points]
+	Are the following sets subspaces of $\R^3$? Justify your answer.
+	\begin{enumerate}[label=\normalfont(\textbf{\alph*})]
+		\item $E_1= \big\{ (x,y,z) \in \R^3 \, \big| \, x - 2y + z= 0 \big\}$.
+		\item $E_2= \big\{ (x,y,z) \in \R^3 \, \big| \, x - 2y + z= 3 \big\}$.
+		\item $E_3= \big\{ (x,y,z) \in \R^3 \, \big| \, 5x + y^2 + z= 0 \big\}$.
+	\end{enumerate}
+\end{problem}
+
+\vspace{1mm}
+
+\begin{problem}[3 points]\label{prob:add_vector}
+	Suppose that $v_1, \dots, v_k \in \R^n$ are linearly independent. Let $x \in \R^n$ and assume that $x \not\in \Span(v_1,\dots, v_k)$.
+	Show that $(v_1,\dots,v_k,x)$ are linearly independent.
+\end{problem}
+
+\vspace{1mm}
+
+\begin{problem}[2 points]
+	Let $S$ be a subspace of $\R^n$ and $v_1, \dots, v_k \in S$.
+	We assume that $v_1, \dots, v_k$ are linearly independent.
+	Show (using the result of Problem~\ref{prob:add_vector}) that one can find vectors $v_{k+1}, \dots, v_{k+m}$ in $S$ such that $(v_1, \dots, v_{k+m})$ is a basis of $S$.
+\end{problem}
+
+\vspace{1mm}
+
+\begin{problem}[$\star$]
+	Let $U$ and $V$ be two subspaces of $\R^n$. Show that if
+	$$
+	\dim(U) + \dim(V) > n,
+	$$
+	then there must exist a non-zero vector in their intersection, i.e.\ $U \cap V \neq \{0\}$.
+\end{problem}
+\vspace{1cm}
+\centerline{\pgfornament[width=7cm]{87}}
+
+%\bibliographystyle{plain}
+%\bibliography{./references.bib}
+\end{document}

@@ -1,0 +1,197 @@
+\documentclass[11pt,nocut]{article}
+
+\usepackage{../latex_style/packages}
+\usepackage{../latex_style/notations}
+
+\title{\vspace{-2.0cm}%
+	Optimization and Computational Linear Algebra for Data Science\\
+Final review problems}
+%\author{Léo \textsc{Miolane} \ $\cdot$ \ \texttt{leo.miolane@gmail.com}}
+\date{}
+%\setcounter{section}{*}
+
+\begin{document}
+\maketitle
+%\input{./preamble_homeworks.tex}
+\begin{center}
+	{\Large
+		For review exercises on linear algebra, look at last year's final review exercises (available the course's website).
+	}
+\end{center}
+
+\vspace{1mm}
+
+\begin{problem}
+	Let $A \in \R^{n \times m}$. Let $\sigma_1(A)$ be the largest singular value of $A$.
+	Show that
+	$$
+	\sigma_1(A) = \max_{\|x\|=1} \|Ax\|.
+	$$
+\end{problem}
+
+\vspace{2mm}
+
+\begin{problem}
+	Let $A \in \R^{n \times m}$. Show that $A^{\sT} A$  and $A A^{\sT}$ have the same non-zero eigenvalues.
+\end{problem}
+
+\vspace{2mm}
+
+\begin{problem}[True or false?]
+	For each of the following statement, say if they are true or false and justify your answer.
+	\begin{itemize}
+		\item For all $A \in \R^{n \times n}$, if $\lambda$ is an eigenvalue of $A$ then $\lambda^2$ is an eigenvalue of $A^2$.
+		\item For all $A \in \R^{n \times n}$, if $\sigma$ is a singular value of $A$ then $\sigma^2$ is a singular value of $A^2$.
+		\item For all symmetric matrix $A \in \R^{n \times n}$ the eigenvalues of $A$ are singular values of $A$.
+	\end{itemize}
+\end{problem}
+
+\begin{problem}
+	Let $A \in \R^{n \times m}$. Show that for all $u \in \Im(A)$ and for all $v \in \Ker(A^{\sT})$ we have
+	$$
+	\langle u,v \rangle = 0.
+	$$
+\end{problem}
+
+%\begin{problem}
+	%Recall that the infinity norm of $x \in \R^n$ is defined by $\|x\|_{\infty} = \max(|x_1|, \dots, |x_n|)$. Show that
+	%$$
+	%\|x\|_{\infty} \leq \|x\|_2 \leq \sqrt{n} \|x\|_{\infty}.
+	%$$
+%\end{problem}
+
+%\begin{problem}
+	%Let $A=U \Sigma V^{\sT}$ denote the singular value decomsition of $A \in \R^{n \times n}$. Using this decomposition, construct the matrix of the orthogonal projection onto $\Im(A)$.
+%\end{problem}
+
+\begin{problem}
+	Let $A \in \R^{n \times m}$. Show that if $A$ has linearly independent columns, then $A^{\dagger} = (A^{\sT}A)^{-1} A^{\sT}$.
+\end{problem}
+
+\begin{problem}
+	Which of the following functions $f: \R^n \to \R^n$ are convex? Justify your answer
+	\begin{itemize}
+		\item $f(x) = \|x\|^2$.
+		\item $f(x) = Ax$, for some $A \in \R^{n \times n}$.
+		\item $f(x) = \sum_{i=1}^n x_i^3$.
+	\end{itemize}
+\end{problem}
+
+\begin{problem}
+	Which of the following subset $S$ of $\R^n$ are convex? Justify your answer
+	\begin{itemize}
+		\item $S = \{x \in \R^n \, | \, \|x\|_{\infty} \leq 1\}$.
+		\item $S = \{x \in \R^n \, | \, \|x\|_{1} \geq 1\}$.
+		\item $S = \{x \in \R^n \, | \, \|Ax\| < 1\}$, for some $A \in \R^{n \times n}$.
+	\end{itemize}
+\end{problem}
+
+
+\begin{problem}
+	Show that we are performing PCA on $n$ data points $a_1, \dots, a_n \in \R^d$ and keep only the first $k < d$ principal components of each point. We store the dimensionally reduced dataset in a $n \times k$ matrix $B$, where $B_{i,j}$ is the $j^{\rm th}$ principal component of the point $a_i$. Show that the columns of $B$ are orthogonal.
+\end{problem}
+
+\newpage
+\begin{problem}[True of false?]
+	For each of the following statement, say if they are true or false and justify your answer.
+	\begin{itemize}
+		\item If a continuous function $f:\R \to \R$ has a unique minimizer then $f$ is convex.
+		\item If a continuous function $f:\R \to \R$ is such that there exists $x_0$ such that $f$ is decreasing on $(-\infty,x_0]$ and increasing on $[x_0, + \infty)$ then $f$ is convex.
+		\item A twice differentiable function $f: \R \to \R$ whose derivative $f'$ is non-decreasing is convex.
+	\end{itemize}
+\end{problem}
+
+
+\begin{problem}
+	Let $f: \R^n \to \R$ be a convex, differentiable function. Assume that there exist $x,y \in \R^n$ such that $\nabla f(x) = \nabla f(y) = 0$. Show that $\nabla f(\frac{1}{2}(x+y)) = 0$.
+\end{problem}
+
+
+\begin{problem}
+	Assume that we are doing linear regression with the least-squares cost
+	$$
+	f(x) = \|Ax - y\|^2
+	$$
+	where $A \in \R^{n \times d}$ and $y \in \R^n$. Should you normalize the dataset $A$ (that is, should we divide each column of $A$ by its norm) to get better results (smaller training error or smaller test error on new data points)?
+	\\
+
+	Suppose that we now want to use the lasso and minimize
+	$$
+	f(x) = \|Ax - y\|^2 + \lambda \|x\|_1
+	$$
+	for some $\lambda > 0$. Is there any reason why you might want to normalize the dataset in that case?
+\end{problem}
+
+
+\begin{problem}
+	Compute the critical points of the following function and say if they are local minimizers, local maximizers or saddle points.
+	$$
+	f(x,y,z) = x^2 + y^2 - z^2
+	\quad \text{and} \quad g(x,y) = 3x^2 + y^2 - 6x -4y - 10.
+	$$
+\end{problem}
+\begin{problem}
+	Solve the following constrained minimization problem (find all the solutions to these problems).
+	\begin{enumerate}
+		\item Minimize $x + y + z$ subject to $e^{-x} + e^{-y} + e^{-z} = 1$.
+		\item Minimize $x^2 + y^2 + z^2$ subject to $xyz=1$.
+	\end{enumerate}
+\end{problem}
+
+\begin{problem}
+	Assume that we are doing standard gradient descent to minimize the least-square cost
+	$$
+	f(x) = \|Ax-y\|^2.
+	$$
+	Assume that the columns of  $A$ are linearly dependent, meaning that $\Ker(A) \neq \{0\}$. At which speed should gradient descent converge to the minimum?
+	If now $\Ker(A) = \{0\}$, at which speed should gradient descent converge?
+	By speed, we only ask about the dependence in $t$, the number of iterations, of the gap 
+	$f(x_t) - \min f$, where $x_t$ is the position of gradient descent after $t$ iterations.
+\end{problem}
+
+\begin{problem}
+	Let $A \in \R^{n \times d}$. Assume that the columns of $A$ are linearly independent. How many steps of Newton's method do you need to minimize
+	$$
+	\|Ax - y\|^2 \ ?
+	$$
+	($y \in \R^n$ is a fixed vector). Justify your answer.
+\end{problem}
+
+
+\begin{problem}
+	When running stochastic gradient descent, what are upsides and downsides of having a rapidly decaying learning rate?
+\end{problem}
+
+\newpage
+
+\begin{center}
+	{\Large
+	Hints. Please only look at the hints if you have spent a reasonable time thinking about the problems!
+	}
+\end{center}
+\begin{enumerate}
+	\item Use the fact that $\|Ax\|^2 = x^{\sT} A^{\sT} A x$ and then use the SVD decomposition of $A$ to rewrite $A^{\sT} A$.
+	\item Use the SVD of $A$.
+	\item (a) True (b) False (c) False (eigenvalues can be negative but singular values can not. The singular values of a symmetric matrix are the absolute value of its eigenvalues).
+	\item Use the definitions of kernel and image.
+	\item Use the SVD decomposition of $A$ to compute $(A^{\sT}A)^{-1}A^{\sT}$ and see that it corresponds to the definition of $\A^{\dagger}$.
+	\item Convex, convex, not convex.
+	\item Convex, not convex, convex.
+	\item Express the columns of $B$ using the left-singular vectors of the matrix $A$ whose rows are the $a_i$.
+	\item False. False. True.
+	\item Show that $(x+y)/2$ is a global minimizer of $f$.
+	\item Normalizing the dataset is useless for ordinary least-squares, but can be useful for Lasso.
+	\item Compute gradient and Hessian. 
+	\item Use Lagrange multipliers.
+	\item If the columns of $A$ are linearly dependent, then $f$ will be $L$-smooth but not strongly convex, hence the speed of gradient descent will be $O(1/t)$.
+		If the columns of $A$ are linearly independent then you can show that $f(x)$ is $\mu$-strongly convex and $L$-smooth, for some $\mu,L>0$. Hence the error of gradient descent will be $O(e^{-\rho t})$ after $t$ steps, for some constant $\rho>0$. 
+	\item 1 step.
+	\item See lecture notes.
+\end{enumerate}
+
+\vspace{1cm}
+\centerline{\pgfornament[width=7cm]{87}}
+
+%\bibliographystyle{plain}
+%\bibliography{./references.bib}
+\end{document}
