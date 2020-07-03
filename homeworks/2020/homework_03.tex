@@ -1,7 +1,8 @@
 \documentclass[11pt,nocut]{article}
 
-\usepackage{../latex_style/packages}
-\usepackage{../latex_style/notations}
+
+\usepackage{../../latex_style/packages}
+\usepackage{../../latex_style/notations}
 
 \title{\vspace{-2.0cm}%
 	Optimization and Computational Linear Algebra for Data Science\\
@@ -65,7 +66,7 @@ Let $A \in \R^{n \times m}$.
 \end{problem}
 
 
-\begin{problem}[$\star$]
+\begin{problem}
 	The trace $\Tr(M)$ of a $k \times k$ matrix $M$ is defined as the sum of its diagonal coefficients, i.e.
 	$$
 	\Tr(M) = \sum_{i=1}^k M_{i,i}.
@@ -75,6 +76,37 @@ Let $A \in \R^{n \times m}$.
 	\Tr(AB) = \Tr(BA).
 	$$
 \end{problem}
+
+%\begin{problem}[*]
+	%Given two points in the plane of coordinates $(x_1,y_1)$ and $(x_2,y_2)$ such that $x_1 \neq x_2$, it is well known that there exists a unique line passing through these two points. This means that there exists a unique couple of number $(a,b)$ such that
+	%$$
+	%\begin{cases}
+		%ax_1 + b = y_1 \\
+		%ax_2 + b = y_2.
+	%\end{cases}
+	%$$
+
+	%This problem aims at generalizing this to: 
+	%Given $n \geq 2$ points $(x_i,y_i)_{i=1, \dots, n}$ points in the plane such that $x_i \neq x_j$ for all $i \neq j$, there exists a unique polynomial of degree at most $n-1$ pssing through all these points. That is, there exists a unique $(a_0, a_1, \dots, a_{n-1})$ such that for all $i \in \{1, \dots, n\}$,
+	%$$
+	%a_0 + a_1 x_i + a_2 x_i^2 + \cdots + a_{n-1} x_i^{n-1} = y_i.
+	%$$
+
+	%We consider the $n \times n$ matrix
+	%$$
+	%M = 
+	%\begin{pmatrix}
+		%1 & x_1 & x_1^2 & \cdots & x_1^{n-1} \\
+		%1 & x_2 & x_2^2 & \cdots & x_2^{n-1} \\
+		%\vdots & & &  & \vdots \\
+		%1 & x_n & x_n^2 & \cdots & x_n^{n-1} \\
+	%\end{pmatrix}.
+	%$$
+	%\begin{enumerate}[label=\normalfont(\textbf{\alph*})]
+		%\item Show that $M$ is invertible. (\textbf{Hint}: )
+		%\item Prove the theorem.
+%\end{enumerate}
+%\end{problem}
 \vspace{1cm}
 \centerline{\pgfornament[width=7cm]{87}}
 

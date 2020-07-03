@@ -1,7 +1,7 @@
 \documentclass[11pt,nocut]{article}
 
-\usepackage{../latex_style/packages}
-\usepackage{../latex_style/notations}
+\usepackage{../../latex_style/packages}
+\usepackage{../../latex_style/notations}
 
 \title{\vspace{-3.0cm}%
 	Optimization and Computational Linear Algebra for Data Science\\
@@ -35,18 +35,7 @@ $$
 
 \vspace{1mm}
 
-\begin{problem}[2 points]
-	Let $\langle \cdot, \cdot \rangle$ be an inner product on $\R^n$, and let $\| \cdot \|$ be the induced norm by $\langle \cdot, \cdot \rangle$.
-	\begin{enumerate}[label=\normalfont(\textbf{\alph*})]
-		\item Show that for all $x,y \in \R^n$ we have
-			$$
-			\|x+y\|^2 + \|x-y\|^2 = 2 \|x\|^2 + 2 \|y\|^2.
-			$$
-		\item Deduce from the previous question that the $\ell_1$ norm $\| \cdot \|_1$ and the infinity norm $\| \cdot \|_{\infty}$ are \textbf{not} induced by an inner product.
-	\end{enumerate}
-\end{problem}
 
-\vspace{1mm}
 
 \begin{problem}[4 points]
 	Let $S$ be a subspace of $\R^n$. We define the orthogonal complement of $S$ by
@@ -72,6 +61,22 @@ $$
 
 \vspace{1mm}
 
+\begin{problem}[4 points]
+
+	In this problem, we will see how to compress (using a method similar to the one used in the \texttt{jpeg} standard) and denoise images, by using a particular orthonormal basis called a ``wavelet basis''.
+\\
+
+All the questions are in the jupyter notebook \texttt{wavelets.ipynb} and have to be answered directly in the notebook. (Submit only a pdf export of your notebook: Print $\to$ Save as pdf)
+\\
+
+The notebook may look long, however the questions are all very short: most of them only require to do a matrix product or a plot.
+You have to use \texttt{Python} and its library \texttt{numpy}. A useful commands:
+\texttt{ A @ B }: performs the matrix product of the matrix \texttt{A} with the matrix \texttt{B}.
+
+
+\end{problem}
+
+\vspace{1mm}
 
 \begin{problem}[$\star$]
 	Let $P$ be an $n \times n$ matrix such that

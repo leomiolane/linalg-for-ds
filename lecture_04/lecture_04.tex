@@ -62,6 +62,23 @@ Lecture 4: Norm and inner product}
 	If $\langle \cdot, \cdot \rangle$ is an inner product on $V$ then $\| v \| \defeq \sqrt{\langle v, v \rangle}$ is a norm on $V$. We say  that the norm $\| \cdot \|$ is induced by the inner product $\langle \cdot, \cdot \rangle$.
 \end{proposition}
 
+\begin{remark}
+	The Euclidean norm $\| \cdot \|_2$ on $V=\R^n$ is induced by the Euclidean inner product $x \cdot y = \sum_{i=1}^n x_i y_i$. Indeed, for $x \in \R^n$,
+	$$
+	\|x\|_2 = \sqrt{\sum_{i=1}^n x_i^2} = \sqrt{x \cdot x}.
+	$$
+\end{remark}
+\begin{exercise}
+	Let $\langle \cdot, \cdot \rangle$ be an inner product on $\R^n$, and let $\| \cdot \|$ be the induced norm by $\langle \cdot, \cdot \rangle$.
+	\begin{enumerate}[label=\normalfont(\textbf{\alph*})]
+		\item Show that for all $x,y \in \R^n$ we have
+			$$
+			\|x+y\|^2 + \|x-y\|^2 = 2 \|x\|^2 + 2 \|y\|^2.
+			$$
+		\item Deduce from the previous question that the $\ell_1$ norm $\| \cdot \|_1$ and the infinity norm $\| \cdot \|_{\infty}$ are \textbf{not} induced by an inner product.
+	\end{enumerate}
+\end{exercise}
+
 \begin{theorem}[Cauchy-Schwarz inequality]
 	Let $\| \cdot \|$ be the norm induced by the inner product $\langle \cdot , \cdot \rangle$ on the vector space $V$. Then for all $x,y \in V$:
 	\begin{equation}\label{eq:cauchy_schwarz}
