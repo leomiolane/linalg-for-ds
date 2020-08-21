@@ -23,80 +23,66 @@
 %\usepackage{zref}
 %\usepackage[mono=false]{libertine}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%   TEST IF BEAMER   %%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\makeatletter%
-\@ifclassloaded{beamer}%
-{%
-	% Special beamer packages
-	%Bilio
-	\usepackage[backend=bibtex,natbib=true, bibstyle=authoryear, citestyle=authoryear-comp, maxcitenames=2]{biblatex}
-	\defbibheading{bibliography}[\bibname]{}
-}%
-{%
-	% Special article packages
-	\usepackage[a4paper,vmargin={2.4cm,2.8cm},hmargin={2.4cm,2.4cm}]{geometry}
-	\usepackage[labelfont={bf}, margin=1cm]{caption}
-	% Hyperrefs
-	\usepackage[pdfpagemode=UseNone,bookmarksopen=false,colorlinks=true,urlcolor=blue,citecolor=magenta,citebordercolor=blue,linkcolor=blue]{hyperref}
-	% Biblio
-	\usepackage[nottoc, notlof, notlot]{tocbibind}
-	% Theorems
-	\usepackage{lipsum,etoolbox}
-	\usepackage{thmtools}
-	\@ifpackagewith{babel}{french}{%
-		\declaretheorem[thmbox=L,name=Théorème]{theorem}
-		\declaretheorem[name=Proposition,thmbox=M]{proposition}
-		\declaretheorem[name=Lemme,thmbox=S]{lemma}
-		\declaretheorem[name=Définition,thmbox=M]{definition}
-		\declaretheorem[name=Corollaire,thmbox=M]{corollary}
-		\declaretheorem[name=Conjecture,thmbox=S]{conjecture}
-		\declaretheorem[name=Remarque]{remark}
-		% Proofs
-		\renewenvironment{proof}[1][\unskip]{\noindent\textbf{Preuve #1.} }{\hfill$\square$}
-		}{%
-		\declaretheorem[thmbox=L,name=Theorem]{theorem}
-		\declaretheorem[name=Proposition,thmbox=M]{proposition}
-		\declaretheorem[name=Lemma,thmbox=S]{lemma}
-		\declaretheorem[name=Definition,thmbox=M]{definition}
-		\declaretheorem[name=Corollary,thmbox=M]{corollary}
-		\declaretheorem[name=Conjecture,thmbox=S]{conjecture}
-		\declaretheorem[name=Remark]{remark}
-		\declaretheorem[name=Example,style=remark]{example}
-		\declaretheorem[name=Exercise]{exercise}
-		\declaretheorem[name=Problem]{problem}
-		% Proofs
-		\renewenvironment{proof}[1][\unskip]{\noindent\textbf{Proof #1.} }{\hfill$\square$}
-	}
-	%Extra space around theorems
-	\BeforeBeginEnvironment{theorem}{\vspace{6pt}}
-	\AfterEndEnvironment{theorem}{\vspace{6pt}}
+% Special article packages
+\usepackage[a4paper,vmargin={2.4cm,2.8cm},hmargin={2.4cm,2.4cm}]{geometry}
+\usepackage[labelfont={bf}, margin=1cm]{caption}
+% Hyperrefs
+\usepackage[pdfpagemode=UseNone,bookmarksopen=false,colorlinks=true,urlcolor=blue,citecolor=magenta,citebordercolor=blue,linkcolor=blue]{hyperref}
+% Biblio
+\usepackage[nottoc, notlof, notlot]{tocbibind}
+% Theorems
+\usepackage{lipsum,etoolbox}
+\usepackage{thmtools}
+\@ifpackagewith{babel}{french}{%
+	\declaretheorem[thmbox=L,name=Théorème]{theorem}
+	\declaretheorem[name=Proposition,thmbox=M]{proposition}
+	\declaretheorem[name=Lemme,thmbox=S]{lemma}
+	\declaretheorem[name=Définition,thmbox=M]{definition}
+	\declaretheorem[name=Corollaire,thmbox=M]{corollary}
+	\declaretheorem[name=Conjecture,thmbox=S]{conjecture}
+	\declaretheorem[name=Remarque]{remark}
+	% Proofs
+	\renewenvironment{proof}[1][\unskip]{\noindent\textbf{Preuve #1.} }{\hfill$\square$}
+	}{%
+	\declaretheorem[thmbox=L,name=Theorem]{theorem}
+	\declaretheorem[name=Proposition,thmbox=M]{proposition}
+	\declaretheorem[name=Lemma,thmbox=S]{lemma}
+	\declaretheorem[name=Definition,thmbox=M]{definition}
+	\declaretheorem[name=Corollary,thmbox=M]{corollary}
+	\declaretheorem[name=Conjecture,thmbox=S]{conjecture}
+	\declaretheorem[name=Remark]{remark}
+	\declaretheorem[name=Example,style=remark]{example}
+	\declaretheorem[name=Exercise]{exercise}
+	\declaretheorem[name=Problem]{problem}
+	% Proofs
+	\renewenvironment{proof}[1][\unskip]{\noindent\textbf{Proof #1.} }{\hfill$\square$}
+}
+%Extra space around theorems
+\BeforeBeginEnvironment{theorem}{\vspace{6pt}}
+\AfterEndEnvironment{theorem}{\vspace{6pt}}
 
-	%Thm numbering
-	\numberwithin{theorem}{section}
-	\numberwithin{proposition}{section}
-	\numberwithin{lemma}{section}
-	\numberwithin{definition}{section}
-	\numberwithin{corollary}{section}
-	\numberwithin{conjecture}{section}
-	\numberwithin{remark}{section}
-	\numberwithin{example}{section}
-	\numberwithin{exercise}{section}
-	\numberwithin{problem}{section}
+%Thm numbering
+\numberwithin{theorem}{section}
+\numberwithin{proposition}{section}
+\numberwithin{lemma}{section}
+\numberwithin{definition}{section}
+\numberwithin{corollary}{section}
+\numberwithin{conjecture}{section}
+\numberwithin{remark}{section}
+\numberwithin{example}{section}
+\numberwithin{exercise}{section}
+\numberwithin{problem}{section}
 
-	%Appendices
-	\usepackage{titlesec}
-	\makeatletter
-	\newcommand{\setappendix}{Appendix~\thesection:~~}
-	\newcommand{\setsection}{\thesection~~}
-	\titleformat{\section}{\bfseries\LARGE}{%
-		\ifnum\pdfstrcmp{\@currenvir}{appendices}=0
-			\setappendix
-		\else
-			\setsection
-	\fi}{0em}{}
-	\makeatother
-	\usepackage[titletoc]{appendix}
-}%
-\makeatother%
+%Appendices
+\usepackage{titlesec}
+\makeatletter
+\newcommand{\setappendix}{Appendix~\thesection:~~}
+\newcommand{\setsection}{\thesection~~}
+\titleformat{\section}{\bfseries\LARGE}{%
+	\ifnum\pdfstrcmp{\@currenvir}{appendices}=0
+		\setappendix
+	\else
+		\setsection
+\fi}{0em}{}
+\makeatother
+\usepackage[titletoc]{appendix}

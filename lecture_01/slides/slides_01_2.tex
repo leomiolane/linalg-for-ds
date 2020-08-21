@@ -1,0 +1,208 @@
+\documentclass{beamer}
+
+%\usetheme{Execushares}
+\usepackage{../../latex_style/beamerthemeExecushares}
+\usepackage{../../latex_style/notations}
+
+\title{Lecture 1.2: Vector Spaces}
+\subtitle{Optimization and Computational Linear Algebra for Data Science}
+\author{Léo Miolane}
+\date{}
+
+\setcounter{showSlideNumbers}{1}
+
+\begin{document}
+\setcounter{showProgressBar}{0}
+\setcounter{showSlideNumbers}{0}
+
+\frame{\titlepage}
+
+\begin{frame}
+	\frametitle{Contents}
+	\begin{enumerate}
+		\item Introduction: vectors \\ \textcolor{ExecusharesGrey}{\footnotesize\hspace{1em} Back to high-school}
+		\item Vector spaces  \\ \textcolor{ExecusharesGrey}{\footnotesize\hspace{1em} Definition and examples}
+		\item Subspaces \\ \textcolor{ExecusharesGrey}{\footnotesize\hspace{1em} Vector spaces inside other vector spaces}
+	\end{enumerate}
+\end{frame}
+
+
+\setcounter{framenumber}{0}
+\setcounter{showSlideNumbers}{1}
+
+\section{Introduction}
+
+\begin{frame}[t]{Vectors}
+	\begin{center}
+		<< Vectors = arrows >>
+	\end{center}
+	\noindent Two fundamental operations:
+	\vspace{0.1cm}
+	\begin{enumerate}
+		\item Add two vectors $\vec{u}$ and $\vec{v}$ to obtain another vector $\vec{u} + \vec{v}$
+			\vspace{2.2cm}
+		\item Multiply a vector $\vec{u}$ by a <<scalar>> (= a real number) $\lambda$ to get another vector $\lambda \cdot \vec{u}$
+			\vspace{2.2cm}
+	\end{enumerate}
+\end{frame}
+
+
+\begin{frame}{Coordinate representation}
+	\begin{itemize}
+		\item One often represents vectors using coordinates
+		\item 2D vectors in the plane $\vec{u} = (u_1,u_2) \in \R^2$
+		\item 3D vectors in space $\vec{u} = (u_1,u_2,u_3) \in \R^3$
+		\item $n$-dimensional vectors  $\vec{u} = (u_1,u_2,\dots, u_n) \in \R^n$
+	\end{itemize}
+	\vspace{1cm}
+	\begin{itemize}
+		\item $\vec{u} + \vec{v} = (u_1 + v_1,u_2 + v_2,\dots, u_n + v_n)$
+		\item $\lambda \cdot \vec{u}= (\lambda u_1,\lambda u_2,\dots, \lambda u_n)$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[t]{General vectors}
+	\begin{center}
+		<< The $n$-dimensional arrows are not the only `objects' that we can add and multiply by scalars. >>
+	\end{center}
+
+	For instance, one can add two functions together:
+\end{frame}
+
+\begin{frame}[t]{General vectors}
+	\dots or multiply a function by a scalar:
+\end{frame}
+
+\section{Vector Spaces}
+
+\begin{frame}{Abstract definition}
+	\begin{block}{Definition (simplified)}
+		A vector space consists of a set $V$ (whose elements are called vectors) and two operations $+$ and $\cdot$ such that
+		\begin{itemize}
+			\item The sum of two vectors is a vector: for $\vec{x}, \vec{y} \in V$, the sum $\vec{x}+\vec{y}$ is a vector, i.e.\ $\vec{x} + \vec{y} \in V$.
+			\item Multiplying a vector $\vec{x} \in V$ by a scalar $\lambda \in \R$ gives a vector $\lambda \cdot \vec{x} \in V$.
+			\item The operations $+$ and $\cdot$ are ``nice and compatible''.
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}{<< Nice and compatible >> ?}
+	\vspace{-0.6cm}
+	{\small
+		\begin{enumerate}
+			%\setlength{\itemindent}{-0.5cm}
+			\item The vector sum is commutative and associative. For all $\vec{x},\vec{y},\vec{z} \in V$:
+				$$
+				\vec{x}+\vec{y} = \vec{y} + \vec{x} \qquad \text{and} \qquad \vec{x} + (\vec{y} + \vec{z}) = (\vec{x}+\vec{y}) + \vec{z}.
+				$$
+			\item There exists a zero vector $\vec{0} \in V$ that verifies $\vec{x} + \vec{0} = \vec{x}$ for all $\vec{x} \in V$.
+			\item For all $\vec{x} \in V$, there exists $\vec{y} \in V$ such that $\vec{x} + \vec{y} = \vec{0}$. Such $\vec{y}$ is called the additive inverse of $\vec{x}$ and is written $- \vec{x}$.
+			\item Identity element for scalar multiplication: $1 \cdot \vec{x} = \vec{x}$ for all $\vec{x} \in V$.
+			\item Distributivity: for all $\alpha,\beta \in \R$ and all $\vec{x},\vec{y} \in V$,
+				$$
+				(\alpha + \beta) \cdot \vec{x} = \alpha \cdot \vec{x} + \beta \cdot \vec{y}
+				\qquad \text{and} \qquad
+				\alpha \cdot (\vec{x} + \vec{y}) = \alpha \cdot \vec{x} + \alpha \cdot \vec{y}.
+				$$
+			\item Compatibility between scalar multiplication and the usual multiplication: for all $\alpha,\beta \in \R$ and all $\vec{x} \in V$, we have
+				$$
+				\alpha \cdot(\beta \cdot \vec{x}) = (\alpha \beta) \cdot \vec{x}.
+				$$
+		\end{enumerate}
+	}
+\end{frame}
+
+\begin{frame}{Example 1: $\R^n$}
+	The set $V = \R^n$ endowed with the usual vector addition $+$
+	$$
+	(x_1, \dots, x_n) + (y_1, \dots, y_n) = (x_1 + y_1, \dots, x_n + y_n)
+	$$
+	and the usual scalar multiplication $\cdot$
+	$$
+	\alpha \cdot (x_1, \dots, x_n)= (\alpha x_1, \dots, \alpha x_n)
+	$$
+	is a vector space.
+
+	\vspace{0.4cm}
+	\begin{center}
+	\textbf{We will work in $\R^n$ 99\% ot the time !}
+	\end{center}
+
+\end{frame}
+
+\begin{frame}{Example 2: functions}
+The set $V = \cF(\R,\R) \defeq \{ f \, | \, f: \R \to \R \}$ of all functions from $\R$ to itself endowed with the addition $+$ and the scalar multiplication $\cdot$ defined by
+	$$
+	\begin{array}{rlll}
+		f+g :& \R & \to & \R \\
+			 &t & \mapsto & f(t) + g(t)
+	\end{array}
+	\qquad
+	\text{and}
+	\qquad
+	\begin{array}{rlll}
+		\alpha \cdot f :& \R & \to & \R \\
+						&t & \mapsto & \alpha f(t)
+	\end{array}
+	$$
+	is a vector space.
+	\vspace{0.4cm}
+	\begin{center}
+	\textbf{Useful in signal processing.}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Example 3: random variables}
+The set of random variables on a given probability space $\Omega$ is a vector space: if $X$ and $Y$ are two random variables and $\alpha \in \R$, $X+Y$ and $\alpha X$ are also random variables.
+
+	\vspace{0.8cm}
+	\begin{center}
+	\textbf{Important to have this in mind when doing stats/probabilities!}
+	\end{center}
+	In particular, we should see later that the notion of variance if deeply connected to the notion of length of a vector \dots
+\end{frame}
+
+\begin{frame}{Why do we need all this?}
+	\begin{itemize}
+		\item Get geometric intuition. 
+		\item Save time. When we prove a theorem that applies to abstract vector space, it will in particular be true for all the examples we listed above.
+	\end{itemize}
+\end{frame}
+
+\section{Subspaces}
+
+\begin{frame}[t]{Definition}
+	\begin{block}{Definition}
+	We say that a non-empty subset $S$ of a vector space $V$ is a \emph{subspace} if it is closed under addition and multiplication by a scalar, that is if
+	\begin{enumerate}
+		\item for all $x,y \in S$ we have $x + y \in S$,
+		\item for all $x \in S$ and all $\alpha \in \R$ we have $\alpha x \in S$.
+	\end{enumerate}
+	\end{block}
+	\vspace{4cm}
+	\textbf{Remark:} a subspace is a also vector space.
+\end{frame}
+
+\begin{frame}[t]{Exercises}
+	\vspace{-0.5cm}
+	\begin{exampleblock}{}
+		\begin{enumerate}
+			\item Show that every subspace $S$ of a vector space $V$ contains the zero vector $0$.
+			\item Is $\R^2$ a subspace of $\R^3$ ?
+		\end{enumerate}
+	\end{exampleblock}
+\end{frame}
+
+\begin{frame}[t]{Subspaces of $\R^2$}
+	What are the possible subspaces of $\R^2$ ?
+\end{frame}
+
+%\appendix
+%\backupbegin
+%\begin{frame}
+	%\frametitle{Backup slide 1}
+	%Hello
+%\end{frame}
+%\backupend
+
+\end{document}
