@@ -1,69 +1,114 @@
 \documentclass{beamer}
 
-%\usetheme{Execushares}
 \usepackage{../../latex_style/beamerthemeExecushares}
+\usepackage{../../latex_style/notations}
 
 \title{Lecture 1.1: Introduction}
 \subtitle{Optimization and Computational Linear Algebra for Data Science}
 \author{Léo Miolane}
 \date{}
 
+\newcommand{\below}[1]{\\ \textcolor{ExecusharesGrey}{\footnotesize\hspace{1em} #1}}
 \setcounter{showSlideNumbers}{1}
 
 \begin{document}
-	\setcounter{showProgressBar}{0}
-	\setcounter{showSlideNumbers}{0}
+\setcounter{showProgressBar}{0}
+\setcounter{showSlideNumbers}{0}
 
-	\frame{\titlepage}
+\frame{\titlepage}
 
-	\begin{frame}
-		\frametitle{Contents}
-		\begin{enumerate}
-			\item Introduction \\ \textcolor{ExecusharesGrey}{\footnotesize\hspace{1em} The reasoning and background behind this theme}
-			\item Lorem Text  \\ \textcolor{ExecusharesGrey}{\footnotesize\hspace{1em} Just some Lorem Ipsum for filler}
-			\item Conclusions \\ \textcolor{ExecusharesGrey}{\footnotesize\hspace{1em} Some closing thoughts}
-		\end{enumerate}
-	\end{frame}
-
-
-	\setcounter{framenumber}{0}
-	%\setcounter{showProgressBar}{1}
-	\setcounter{showSlideNumbers}{1}
-	\section{Introduction}
-		\begin{frame}
-			\frametitle{Why Beamer?}
-			\begin{block}{\bf Theorem}
-				Let $v \in \mathbb{R}^n$. Then, there exists $w \perp v$, that is
-				$$
-				\sum_{i=1}^n v_i w_i =0.
-				$$
-			\end{block}
-		\end{frame}
-
-		\begin{frame}
-			\frametitle{Why Custom Themes?}
-			\begin{itemize}
-				\item The default Beamer themes are outdated and visually displeasing
-				\item There aren't many Beamer themes readily available online
-				\item Making custom Beamer themes is easy!
-			\end{itemize}
-		\end{frame}
+\begin{frame}
+	\frametitle{Contents}
+	\begin{enumerate}
+		\item Linear algebra \\ \textcolor{ExecusharesGrey}{\footnotesize\hspace{1em} About 2/3 of the lectures}
+		\item Convex optimization  \\ \textcolor{ExecusharesGrey}{\footnotesize\hspace{1em} About 1/3 of the lectures}
+		\item Overview of the lectures \\ \textcolor{ExecusharesGrey}{\footnotesize\hspace{1em} A quick look at the menu}
+	\end{enumerate}
+\end{frame}
 
 
-	\section{Conclusions}
-		\begin{frame}
-			\frametitle{Closing Thoughts}
-			\begin{itemize}
-				\item Woo, Beamer!
-			\end{itemize}
-		\end{frame}
-	
-	\appendix
-	\backupbegin
-	  \begin{frame}
-	    \frametitle{Backup slide 1}
-		Hello
-	  \end{frame}
-	\backupend
+\setcounter{framenumber}{0}
+%\setcounter{showProgressBar}{1}
+\setcounter{showSlideNumbers}{1}
+\section{Linear algebra}
+\begin{frame}[t]{Why linear algebra?}
+	\vspace{-0.5cm}
+	\begin{center}
+		<< Linear algebra $\simeq$ geometry in arbitrary dimension >>
+	\end{center}
+
+
+	\begin{block}{Why do we need to do geometry ?}
+		\begin{itemize}
+			\item In many case, our data is a collection of << data points >> that are points $(x_1, \dots, x_n)$
+			\item To understand the structure of our data, we have to investigate the geometry of our data points: are they divided into clusters? are they <<aligned>> ?
+			\item When $n =1,2,3$, one can easily plot our data, but what about $n=10000$ ?
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}{Applications}
+	You will learn linear algebra, while studying applications for data science such as:
+	\vspace{0.5cm}
+	\begin{itemize}
+		\item Data compression \below{You will compress images using wavelets}
+		\item Principal component analysis \below{Find directions along which the variance of the data is maximal}
+		\item Dimensionality reduction \below{Reduce the dimension of a dataset while preserving its structure}
+		\item Linear regression 
+		\item Google's Page Rank and Markov chains \below{Ranking any objects that can be compared!}
+		\item Clustering on networks
+		\item Matrix completion
+	\end{itemize}
+\end{frame}
+
+
+\section{Optimization}
+\begin{frame}[t]{Optimization}
+	In machine learning, we often have to minimize functions
+	$$
+	f(\theta) = {\rm Loss}\big( {\rm data}, {\rm model}_{\theta}\big)
+	\quad \text{with respect to} \quad \theta \in \R^n.
+	$$
+	\begin{itemize}
+		\item For $n=1,2$, one could plot $f$ to find the minimizer.
+		\item This is intractable for larger dimension.
+	\end{itemize}
+
+	\vspace{0.2cm}
+	\begin{block}{We will}
+		\begin{itemize}
+			\item focus on convex cost functions $f$.
+			\item study gradient descent algorithms to minimize $f$.
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\section{Overview of the lectures}
+\begin{frame}{Outline}
+	\begin{enumerate}
+		\item Vectors and vector spaces
+		\item Linear transformations and matrices
+		\item The rank
+		\item Norm and inner product
+		\item Eigenvalues, eigenvectors and Markov chains
+		\item The spectral theorem and PCA
+		\item Graphs and Linear Algebra
+		\item Convex functions
+		\item Linear regression
+		\item Optimality conditions
+		\item Gradient descent
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}{Further informations}
+
+
+	Course's webpage:
+	\vspace{0.3cm}
+	\begin{center}
+		\href{https://leomiolane.github.io/linalg-for-ds.html}{\large \texttt{leomiolane.github.io/linalg-for-ds.html}}
+	\end{center}
+
+\end{frame}
 
 \end{document}
