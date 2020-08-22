@@ -1,7 +1,7 @@
 \documentclass[11pt,nocut]{article}
 
-\usepackage{../latex_style/packages}
-\usepackage{../latex_style/notations}
+\usepackage{../../latex_style/packages}
+\usepackage{../../latex_style/notations}
 
 \title{\vspace{-2.0cm}%
 	Optimization and Computational Linear Algebra for Data Science\\
@@ -14,13 +14,6 @@ Homework 1: Vector spaces}
 \maketitle
 \input{./preamble_homeworks.tex}
 
-
-\begin{problem}[2 points]
-	Let $u,v$ be two vectors of $\R^2$. Show that either they are linearly dependent or that they span the whole of $\R^2$.
-\end{problem}
-
-\vspace{1mm}
-
 \begin{problem}[3 points]
 	Are the following sets subspaces of $\R^3$? Justify your answer.
 	\begin{enumerate}[label=\normalfont(\textbf{\alph*})]
@@ -32,17 +25,28 @@ Homework 1: Vector spaces}
 
 \vspace{1mm}
 
-\begin{problem}[3 points]\label{prob:add_vector}
+\begin{problem}[2 points]\label{prob:rem_vector}
+	Let $x_1, \dots, x_k \in \R^n$, for some $k \geq 2$. Assume that $x_1 \in \Span(x_2, \dots, x_k)$. Show that
+	$$
+	\Span(x_1, \dots, x_k) = \Span(x_2, \dots, x_k).
+	$$
+\end{problem}
+
+\vspace{1mm}
+
+\begin{problem}[2 points]\label{prob:add_vector}
 	Suppose that $v_1, \dots, v_k \in \R^n$ are linearly independent. Let $x \in \R^n$ and assume that $x \not\in \Span(v_1,\dots, v_k)$.
 	Show that $(v_1,\dots,v_k,x)$ are linearly independent.
 \end{problem}
 
 \vspace{1mm}
 
-\begin{problem}[2 points]
-	Let $S$ be a subspace of $\R^n$ and $v_1, \dots, v_k \in S$.
-	We assume that $v_1, \dots, v_k$ are linearly independent.
-	Show (using the result of Problem~\ref{prob:add_vector}) that one can find vectors $v_{k+1}, \dots, v_{k+m}$ in $S$ such that $(v_1, \dots, v_{k+m})$ is a basis of $S$.
+\begin{problem}[3 points]
+	Let $S$ be a subspace of $\R^n$ of dimension $k$ and let $x_1, \dots, x_k \in S$.
+	\begin{enumerate}[label=\normalfont(\textbf{\alph*})]
+		\item Show that if $x_1, \dots, x_k$ are linearly independent, then $(x_1, \dots, x_k)$ is a basis of $S$.
+		\item Show that if $\Span(x_1, \dots, x_k) = S$, then $(x_1, \dots, x_k)$ is a basis of $S$.
+	\end{enumerate}
 \end{problem}
 
 \vspace{1mm}
