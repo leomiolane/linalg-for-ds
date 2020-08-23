@@ -23,13 +23,12 @@
 		\item Linear dependency
 		\item Properties of the dimension
 		\item Coordinates
-		\item Why do we care about all these things ? \below{Application to data science}
+		\item Why do we care about all these things ? \below{Application to data science: image compression}
 	\end{enumerate}
 \end{frame}
 
 
 \setcounter{framenumber}{0}
-%\setcounter{showProgressBar}{1}
 \setcounter{showSlideNumbers}{1}
 
 \section{Questions ?}
@@ -91,11 +90,11 @@
 \begin{frame}[t]{Properties of the dimension}
 	\vspace{-0.3cm}
 	\begin{block}{\bf Proposition}
-	Let $V$ be a vector space of dimension $n$ and let $x_1, \dots, x_n \in V$.
-	\begin{enumerate}
-		\item If $x_1, \dots, x_n$ are linearly independent, then $(x_1, \dots, x_n)$ is a basis of $V$.
-		\item If $\Span(x_1, \dots, x_n) = V$, then $(x_1, \dots, x_n)$ is a basis of $V$.
-	\end{enumerate}
+		Let $V$ be a vector space of dimension $n$ and let $x_1, \dots, x_n \in V$.
+		\begin{enumerate}
+			\item If $x_1, \dots, x_n$ are linearly independent, then $(x_1, \dots, x_n)$ is a basis of $V$.
+			\item If $\Span(x_1, \dots, x_n) = V$, then $(x_1, \dots, x_n)$ is a basis of $V$.
+		\end{enumerate}
 	\end{block}
 
 	\vspace{0.5cm}
@@ -139,28 +138,112 @@
 		$$
 		We say that $(\alpha_1, \dots, \alpha_n)$ are the coordinates of $x$ in the basis $(v_1, \dots, v_n)$.
 	\end{block}
-\begin{proof}
-	\vspace{2.5cm}
-	\vfill
-\end{proof}
+	\begin{proof}
+		\vspace{2.5cm}
+		\vfill
+	\end{proof}
 \end{frame}
 
 \begin{frame}[t]{Exercise}
 	\vspace{-0.8cm}
 	\begin{exampleblock}{}
 		\begin{enumerate}
-	\item Show that the vectors $v_1 = (1,1)$ and $v_2=(1,-1)$ form a basis of $\R^2$.
-	\item Express the coordinates of $u=(x,y)$ in the basis $(v_1,v_2)$ in terms of $x$ and $y$.
+			\item Show that the vectors $v_1 = (1,1)$ and $v_2=(1,-1)$ form a basis of $\R^2$.
+			\item Express the coordinates of $u=(x,y)$ in the basis $(v_1,v_2)$ in terms of $x$ and $y$.
 		\end{enumerate}
 	\end{exampleblock}
 	\pause
 \end{frame}
 
 \section{Why do we care about this ?}
-\begin{frame}[t]{Application to image compression}
-	\begin{itemize}
-	\item Image = grid of pixels
-\end{itemize}
+\begin{frame}{Application to image compression}
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			\begin{itemize}
+				\item Image = Grid of pixels
+				\item Represented as a vector $v \in \R^n$, for some large $n$.
+				\item One need to store $n$ numbers.
+			\end{itemize}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{center}
+				\begin{image}
+					\includegraphics[width=5.5cm]{./homer1.jpg}
+					\caption{$n=44 \times 55 = 2420$}
+				\end{image}
+			\end{center}
+		\end{column}
+	\end{columns}
 \end{frame}
+
+\begin{frame}{Can we do better?}
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			\begin{itemize}
+				\visible<1->{
+			\item If we were storing an arbitrary image, NO!}
+				\visible<2->{
+					\vspace{0.2cm}
+				\item However, we are mainly storing images coming from the << real world >>
+					\vspace{0.2cm}
+				\item These images have some \emph{structure}.
+				}
+		\end{itemize}
+	\end{column}
+	\begin{column}{0.5\textwidth}
+		\begin{center}
+			\begin{image}
+				\only<1-2>{\includegraphics[width=5.5cm]{./random_image-crop.pdf}
+				\caption{<<Random>> image}}
+				\only<3>{\includegraphics[width=5.5cm]{./homer1.jpg}
+				\caption{<<Real>> image}}
+			\end{image}
+		\end{center}
+	\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{What do we mean by << structure >> ?}
+	\begin{center}
+		Neighboring pixels are very likely to have similar colors.
+	\end{center}
+	\pause
+	\begin{exampleblock}{}
+		\begin{itemize}
+			\item There exists a basis $(w_1, \dots, w_n)$ of $\R^n$ in which <<real>> images $v \in \R^n$ are (approximately) \textbf{sparse}. 
+
+			\item This means that the coordinates $(\alpha_1, \dots, \alpha_n)$ of $v$ in the basis $(w_1, \dots, w_n)$ contains a lot of zeros.
+		\end{itemize}
+	\end{exampleblock}
+	\vspace{0.2cm}
+	\pause
+	\begin{center}
+	Store only the $k \ll n$ non-zero coordinates of $v$ (in the $w_i$'s basis') !
+	\end{center}
+\end{frame}
+
+\begin{frame}[t]{A toy example}
+	Consider $n = 2$, that is images $v\in\R^2$ with only $2$ pixels.
+\end{frame}
+
+\begin{frame}[t]{Examples of good bases}
+	\begin{itemize}
+		\item \textbf{Fourier bases} (used in \texttt{.jpeg}, \texttt{.mp3})
+			\begin{figure}
+	\includegraphics[height=4cm]{./fourier.jpeg}
+	\hspace{1cm}
+	\includegraphics[height=4cm]{./fourier_dec.jpg}
+			\end{figure}
+
+		\item \texttt{JPEG2000} uses \textbf{wavelet bases}, and achieves better performance than \texttt{JPEG}.
+		\item In \textbf{Homework 4}, you will use wavelets to compress/denoise images.
+	\end{itemize}
+\end{frame}
+\appendix
+\backupbegin
+\begin{frame}
+	\frametitle{Questions?}
+\end{frame}
+\backupend
 
 \end{document}
