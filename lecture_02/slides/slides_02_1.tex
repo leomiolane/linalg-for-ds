@@ -1,0 +1,140 @@
+\documentclass{beamer}
+
+\usepackage{../../latex_style/beamerthemeExecushares}
+\usepackage{../../latex_style/notations}
+
+\title{Lecture 2.1: Linear transformations}
+\subtitle{Optimization and Computational Linear Algebra for Data Science}
+\author{Léo Miolane}
+\date{}
+
+\setcounter{showSlideNumbers}{1}
+
+\begin{document}
+\setcounter{showProgressBar}{0}
+\setcounter{showSlideNumbers}{0}
+
+\frame{\titlepage}
+
+\begin{frame}
+	\frametitle{Contents}
+	\begin{enumerate}
+		\item Definition of a linear transformation
+		\item Properties of linear transformations
+	\end{enumerate}
+\end{frame}
+
+
+\setcounter{framenumber}{0}
+\setcounter{showSlideNumbers}{1}
+\section{Definition}
+\begin{frame}[t]{Examples}
+	You already know some linear transformations from high-school !
+
+	\vspace{0.6cm}
+	\begin{columns}
+		%\hspace{-2cm}
+		\begin{column}{0.47\textwidth}
+			\vspace{-0.25cm}
+			\begin{center}
+				\textbf{Symmetry}
+			\end{center}
+			\vspace{5cm}
+		\end{column}
+		\vrule
+		\vrule
+		\begin{column}{0.53\textwidth}
+			\vspace{-0.5cm}
+			\begin{center}
+				\textbf{Rotation}
+				\vspace{5cm}
+			\end{center}
+		\end{column}
+	\end{columns}
+
+
+\end{frame}
+
+\begin{frame}[t]{Definition}
+	Symmetries (about a line passing through the origin) and rotations (about the origin) are mappings
+	$$
+	\begin{array}{cccc}
+		L: & \R^2 & \to & \R^2 \\
+		   & v & \mapsto & L(v),
+	\end{array}
+	$$
+	that are ``linear'':
+	\vspace{0.3cm}
+	\begin{block}{\bf Definition}
+		A function $L: \R^m \to \R^n$ is linear if
+		\begin{enumerate}
+			\item for all $v \in \R^m$ and all $\alpha \in \R$ we have $L(\alpha v) = \alpha L(v)$ and
+			\item for all $v,w \in \R^m$ we have $L(v + w) = L(v) + L(w)$.
+		\end{enumerate}
+	\end{block}
+\end{frame}
+
+
+\begin{frame}[t]{Examples of linear maps}
+	\begin{itemize}
+		\item $\displaystyle
+			\begin{array}{cccc}
+				L: & \R^2 & \to & \R^2 \\
+				   & (x,y) & \mapsto & (2x,2y)
+			\end{array}
+			$
+			\ is linear
+			\vspace{2cm}
+		\item
+			$\displaystyle
+			\begin{array}{cccc}
+				M: & \R^3 & \to & \R^2 \\
+				   & (x,y,z) & \mapsto & (x+y+z,z)
+			\end{array}
+			$
+			\ is linear
+	\end{itemize}
+\end{frame}
+\begin{frame}[t]{An example of a non-linear map}
+		The function \quad $\displaystyle
+			\begin{array}{cccc}
+				F: & \R & \to & \R \\
+				   & x & \mapsto & x^2
+			\end{array}
+			$
+			\quad is \textbf{not} linear.
+\end{frame}
+
+\section{Properties}
+
+\begin{frame}[t]{Composition of linear maps}
+	\begin{block}{Proposition}
+		If $L: R^m \to \R^n$ and $M: \R^n \to \R^k$ are both linear, then the composite function
+		$$
+			\begin{array}{cccc}
+				M \circ L: & \R^m & \to & \R^k \\
+						   & v & \mapsto & M(L(v))
+			\end{array}
+			$$
+			is also linear.
+	\end{block}
+	\begin{proof}
+		\vfill
+		\vspace{2cm}
+	\end{proof}
+\end{frame}
+\begin{frame}[t]{Elementary property}
+	\begin{block}{Proposition}
+		If $L: \R^m \to \R^n$ is linear, then
+		\begin{itemize}
+			\item $L(0) = 0$.
+			\item $\displaystyle L\Big(\sum_{i=1}^k \alpha_i v_i \Big) = \sum_{i=1}^k \alpha_i L(v_i)$, for all $\alpha_i \in \R$, $v_i \in \R^m$.
+		\end{itemize}
+	\end{block}
+	\begin{proof}
+		\vfill
+		\vspace{2cm}
+	\end{proof}
+\end{frame}
+
+\end{document}

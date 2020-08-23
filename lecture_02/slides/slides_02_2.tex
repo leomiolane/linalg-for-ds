@@ -1,0 +1,179 @@
+\documentclass{beamer}
+
+\usepackage{../../latex_style/beamerthemeExecushares}
+\usepackage{../../latex_style/notations}
+
+\title{Lecture 2.2: Matrices}
+\subtitle{Optimization and Computational Linear Algebra for Data Science}
+\author{Léo Miolane}
+\date{}
+
+\setcounter{showSlideNumbers}{1}
+
+\begin{document}
+\setcounter{showProgressBar}{0}
+\setcounter{showSlideNumbers}{0}
+
+\frame{\titlepage}
+
+\begin{frame}
+	\frametitle{Contents}
+	\begin{enumerate}
+		\item Matrix associated to a linear transformation
+		\item Matrix product
+	\end{enumerate}
+\end{frame}
+
+
+\setcounter{framenumber}{0}
+\setcounter{showSlideNumbers}{1}
+\section{Matrix associated to a linear map}
+\begin{frame}[t]{The key observation}
+
+	\begin{itemize}
+		\item Let $L: \R^m \to \R^n$ be a linear transformation.
+		\item Let $(e_1, \dots, e_m)$ be the canonical basis of $\R^m$.
+	\end{itemize}
+	\vspace{0.2cm}
+
+Then, for all $x = (x_1, \dots, x_m) \in \R^m$:
+$$
+L(x) = 
+L\Big( \sum_{i=1}^m x_i e_i \Big) = \sum_{i=1}^m x_i L(e_i).
+$$
+\pause
+\textbf{Conclusion}: if you give me the vectors $L(e_1), \dots, L(e_m) \in \R^n$ then, I can compute $L(x)$ for any $x \in \R^m$.
+
+\vspace{1cm}
+\begin{center}
+<< One needs $n \times m$ numbers to store a the linear map $L$ on a computer >>
+\end{center}
+
+\end{frame}
+
+\begin{frame}[t]{Matrices}
+	\begin{block}{\bf Definition}
+	A $n \times m$ matrix is an array (of real numbers) with $n$ rows and $m$ columns.
+	We denote by $\R^{n \times m}$ the set of all $n \times m$ matrices.
+\end{block}
+
+\end{frame}
+\begin{frame}{Canonical matrix of a linear map}
+We can encode a linear map $L: \R^m \to \R^n$ by a $n \times m$ matrix.
+\begin{block}{\bf Definition}
+	The canonical matrix of $L$ is the $n \times m$ matrix (that we will write also $L$) whose columns are $L(e_1), \dots, L(e_m)$:
+$$
+L =
+\begin{pmatrix}
+	| & | & & | \\
+	L(e_1) & L(e_2) & \cdots& L(e_m) \\
+	| & | & & |
+\end{pmatrix}
+= 
+\begin{pmatrix}
+	L_{1,1} & L_{1,2} & \cdots & L_{1,m} \\
+	L_{2,1} & L_{2,2} & \cdots & L_{2,m} \\
+	\vdots & \vdots & \ddots & \vdots \\
+	L_{n,1} & L_{n,2} & \cdots & L_{n,m} \\
+\end{pmatrix}
+$$
+where we write $L(e_j) = 
+\begin{pmatrix}
+	L_{1,j} \\
+	L_{2,j}\\
+	\vdots \\
+	L_{n,j}
+\end{pmatrix}$.
+\end{block}
+
+\end{frame}
+
+
+\begin{frame}[t]{Example \#1: identity matrix}
+		The Identity map \quad $\displaystyle
+			\begin{array}{cccc}
+				\Id: & \R^n & \to & \R^n \\
+				   & x & \mapsto & x
+			\end{array}
+			$
+			\quad is linear.
+			\\
+			\vspace{0.3cm}
+			\textbf{Exercise}: what is the canonical matrix of $\Id$ ?
+\end{frame}
+\begin{frame}[t]{Example \#2: Homothety}
+	Let $\lambda \in \R$.
+		The homothety map of ratio $\lambda$: 
+		 $$
+			\begin{array}{cccc}
+				H_{\lambda}: & \R^n & \to & \R^n \\
+				   & x & \mapsto & \lambda x
+			\end{array}
+			$$
+			is linear.
+			\\
+			\vspace{0.3cm}
+			\textbf{Exercise}: what is the canonical matrix of $H_{\lambda}$ ?
+\end{frame}
+\begin{frame}[t]{Example \#3: rotations in $\R^2$}
+	Let $\theta \in \R$.
+	The rotation $R_{\theta}: \R^2 \to \R^2$ of angle $\theta$ about the origin is linear.
+			\\
+			\vspace{0.3cm}
+			\textbf{Exercise}: what is the canonical matrix of $R_{\theta}$ ?
+\end{frame}
+
+\section{Matrix product}
+
+\begin{frame}[t]{Matrix-vector product}
+	\begin{itemize}
+		\item We have seen: \quad linear map $\to$ matrix
+		\item We will see now: \quad matrix $\to$ linear map
+	\end{itemize}
+
+\begin{block}{\bf Definition}
+	The linear transformation associated to a matrix $L \in \R^{n \times m}$ is the map
+	$$
+	\begin{array}{cccc}
+		L:& \R^m & \to & \R^n \\
+		  & x & \mapsto & Lx
+	\end{array}
+	$$
+	where the ``matrix-vector'' product $Lx \in \R^n$ is defined by
+	$$
+	(Lx)_i = \sum_{j=1}^m L_{i,j} x_j \qquad \text{for all} \ i \in \{1, \dots, n\}.
+	$$
+\end{block}
+\end{frame}
+\begin{frame}[t]{Visualizing the formula}
+	\vspace{-0.8cm}
+	\begin{exampleblock}{}
+	$$
+	(Lx)_i = \sum_{j=1}^m L_{i,j} \, x_j
+	$$
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}[t]{Matrix product}
+	Let $L \in \R^{n \times m}$ and $M \in \R^{m \times k}$. 
+	\vspace{2cm}
+\begin{definition}[Matrix product]
+	The matrix product $LM$ is the $n \times k$ matrix of the linear map $L \circ M$.
+	His coefficients are given by the formula:
+	$$
+	(LM)_{i,j} = \sum_{\ell=1}^m L_{i,\ell} M_{\ell,j} \quad \text{for all} \quad 1 \leq i \leq n, \quad 1 \leq j \leq k.
+	$$
+\end{definition}
+\end{frame}
+\begin{frame}[t]{Visualizing the formula}
+	\vspace{-0.8cm}
+	\begin{exampleblock}{}
+	\vspace{-0.3cm}
+	$$
+	(LM)_{i,j} = \sum_{\ell=1}^m L_{i,\ell} \, M_{\ell,j} 
+	$$
+	\vspace{-0.1cm}
+\end{exampleblock}
+\end{frame}
+
+\end{document}
