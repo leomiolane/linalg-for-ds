@@ -150,7 +150,8 @@ then $\alpha_1 x_1 + \cdots + \alpha_{i-1} x_{i-1} - x_i + \alpha_{i+1} x_{i+1} 
 
 \section{Basis, dimension}
 
-\begin{definition}[Basis]
+\subsection{Definitions}
+\begin{definition}[Basis]\label{def:basis}
 	A family $(x_1, \dots, x_n)$ of vectors of $V$ is a basis of $V$ if
 	\begin{enumerate}[label=(\roman*)]
 		\item $x_1, \dots, x_n$ are linearly independent,
@@ -194,7 +195,17 @@ In this course we are going to focus mostly on finite dimensional spaces and $\R
 	\end{align*}
 	One can verify (exercise!) that the family $(e_1, \dots, e_n)$ is a basis of $\R^n$. This basis is called the ``canonical basis'' of $\R^n$. We conclude that $\R^n$ has dimension $n$.
 \end{example}
-\vspace{2mm}
+\vspace{0.5cm}
+
+\begin{definition}[Lines, hyperplanes]
+	Let $S$ be a subspace of $\R^n$.
+	\begin{itemize}
+		\item We call $S$ a \emph{line} if $\dim(S) = 1$.
+		\item We call $S$ an \emph{hyperplane} if $\dim(S) = n-1$.
+	\end{itemize}
+\end{definition}
+
+\subsection{Some useful properties}
 
 \begin{proposition}\label{prop:cara}
 	Let $V$ be a vector space that has dimension $\dim(V) = n$. Then
@@ -207,22 +218,28 @@ In this course we are going to focus mostly on finite dimensional spaces and $\R
 	Prove Proposition \ref{prop:cara} using Lemma \ref{lem:lin_dep}.
 \end{exercise}
 
+The next proposition is very useful for proving that a family $(x_1, \dots, x_n)$ is a basis of a vector space $V$ of dimension $n$:
+\begin{proposition}\label{prop:card}
+		Let $V$ be a vector space of dimension $n$ and let $x_1, \dots, x_n \in V$.
+		\begin{enumerate}
+			\item If $x_1, \dots, x_n$ are linearly independent, then $(x_1, \dots, x_n)$ is a basis of $V$.
+			\item If $\Span(x_1, \dots, x_n) = V$, then $(x_1, \dots, x_n)$ is a basis of $V$.
+		\end{enumerate}
+	\end{proposition}
 
-\begin{proposition}
+	In words, if the family we consider has as many vectors as the dimension of $V$ then we only have to check one of the two points of Definition \ref{def:basis}!
+
+	\begin{proposition}\label{prop:ineq_dim}
 	Let	$U$ and $V$ be two subspaces of $\R^n$. Assume that $U \subset V$. Then
 	$$
 	\dim(U) \leq \dim(V) \leq n.
 	$$
 	If \textbf{moreover} $\dim(U) = \dim(V)$, then $U = V$.
 \end{proposition}
+\begin{exercise}
+	Prove Proposition \ref{prop:ineq_dim} using Propositions \ref{prop:cara} and \ref{prop:card}.
+\end{exercise}
 
-\begin{definition}[Lines, hyperplanes]
-	Let $S$ be a subspace of $\R^n$.
-	\begin{itemize}
-		\item We call $S$ a \emph{line} if $\dim(S) = 1$.
-		\item We call $S$ an \emph{hyperplane} if $\dim(S) = n-1$.
-	\end{itemize}
-\end{definition}
 
 \begin{proposition}[Coordinates]
 	Let $(v_1, \dots, v_n)$ be a basis of $V$. Then for every $x \in V$ there exists a unique vector $(\alpha_1, \dots, \alpha_n) \in \R^n$ such that

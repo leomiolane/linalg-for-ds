@@ -19,8 +19,7 @@
 \begin{frame}
 	\frametitle{Contents}
 	\begin{enumerate}
-		\item Subspaces
-		\item Linear dependency
+		\item Subspaces \& Linear dependency
 		\item Properties of the dimension
 		\item Coordinates
 		\item Why do we care about all these things ? \below{Application to data science: image compression}
@@ -119,14 +118,15 @@
 \end{frame}
 
 \section{Subspaces}
+
 \begin{frame}{What are the subspaces of $\R^2$ ?}
 \end{frame}
 
-\begin{frame}[t]{The span is always a subspace}
-	\begin{block}{\bf Proposition}
-		Let $x_1, \dots, x_k \in V$. Then, $\Span(x_1, \dots, x_k)$ is a subspace of $V$.
-	\end{block}
-\end{frame}
+%\begin{frame}[t]{The span is always a subspace}
+	%\begin{block}{\bf Proposition}
+		%Let $x_1, \dots, x_k \in V$. Then, $\Span(x_1, \dots, x_k)$ is a subspace of $V$.
+	%\end{block}
+%\end{frame}
 
 \section{Linear dependency}
 \begin{frame}[t]{A useful lemma}
@@ -142,6 +142,13 @@
 \end{frame}
 
 \section{Basis, dimension}
+
+\begin{frame}[t]{Dimension =  degrees of freedom}
+	\begin{block}{\bf Definition}
+		We say that a vector space $V$ has dimension $n$ if it admits a basis $(v_1, \dots, v_n)$ with $n$ vectors.
+	\end{block}
+\end{frame}
+
 \begin{frame}[t]{The dimension is well defined!}
 	\begin{block}{\bf Theorem}
 		If $V$ admits a basis $(v_1, \dots, v_n)$, then every basis of $V$ has also $n$ vectors. We say that $V$ has dimension $n$ and write $\dim(V) = n$.
@@ -151,6 +158,7 @@
 		\vfill
 	\end{proof}
 \end{frame}
+
 \begin{frame}[t]{Properties of the dimension}
 	\vspace{-0.3cm}
 	\begin{block}{\bf Proposition}
@@ -168,6 +176,7 @@
 	\end{proof}
 	\pause
 \end{frame}
+
 
 \begin{frame}[t]{Properties of the dimension}
 	\vspace{-0.3cm}
@@ -198,6 +207,10 @@
 		$$
 		If \textbf{moreover} $\dim(U) = \dim(V)$, then $U = V$.
 	\end{block}
+	\begin{proof}
+		\vspace{3.5cm}
+		\vfill
+	\end{proof}
 \end{frame}
 
 \begin{frame}[t]{A bit of vocabulary}
@@ -239,6 +252,7 @@
 
 \section{Why do we care about this ?}
 \begin{frame}{Application to image compression}
+	\vspace{-0.6cm}
 	\begin{columns}
 		\begin{column}{0.5\textwidth}
 			\begin{itemize}
@@ -259,11 +273,12 @@
 \end{frame}
 
 \begin{frame}{Can we do better?}
+	\vspace{-0.6cm}
 	\begin{columns}
 		\begin{column}{0.5\textwidth}
 			\begin{itemize}
 				\visible<1->{
-			\item If we were storing an arbitrary image, NO!}
+			\item If we want to store an arbitrary image, NO!}
 				\visible<2->{
 					\vspace{0.2cm}
 				\item However, we are mainly storing images coming from the << real world >>
