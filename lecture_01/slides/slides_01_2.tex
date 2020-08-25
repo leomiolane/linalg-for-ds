@@ -20,7 +20,9 @@
 	\frametitle{Contents}
 	\begin{enumerate}
 		\item Introduction: vectors \\ \textcolor{ExecusharesGrey}{\footnotesize\hspace{1em} Back to high-school}
+			\vspace{0.3cm}
 		\item Vector spaces  \\ \textcolor{ExecusharesGrey}{\footnotesize\hspace{1em} Definition and examples}
+			\vspace{0.3cm}
 		\item Subspaces \\ \textcolor{ExecusharesGrey}{\footnotesize\hspace{1em} Vector spaces inside other vector spaces}
 	\end{enumerate}
 \end{frame}
@@ -31,29 +33,26 @@
 
 \section{Introduction}
 
-\begin{frame}[t]{Vectors}
-	\begin{center}
-		<< Vectors = arrows >>
-	\end{center}
+\begin{frame}[t]{So far, << Vectors = arrows >>}
 	\noindent Two fundamental operations:
 	\vspace{0.1cm}
 	\begin{enumerate}
 		\item Add two vectors $\vec{u}$ and $\vec{v}$ to obtain another vector $\vec{u} + \vec{v}$
-			\vspace{2.2cm}
+			\vspace{2.8cm}
 		\item Multiply a vector $\vec{u}$ by a <<scalar>> (= a real number) $\lambda$ to get another vector $\lambda \cdot \vec{u}$
-			\vspace{2.2cm}
+			\vspace{2.3cm}
 	\end{enumerate}
 \end{frame}
 
 
-\begin{frame}{Coordinate representation}
+\begin{frame}[t]{Coordinate representation}
 	\begin{itemize}
-		\item One often represents vectors using coordinates
+		\item One can represent vectors using coordinates
 		\item 2D vectors in the plane $\vec{u} = (u_1,u_2) \in \R^2$
 		\item 3D vectors in space $\vec{u} = (u_1,u_2,u_3) \in \R^3$
 		\item $n$-dimensional vectors  $\vec{u} = (u_1,u_2,\dots, u_n) \in \R^n$
 	\end{itemize}
-	\vspace{1cm}
+	\vspace{3.5cm}
 	\begin{itemize}
 		\item $\vec{u} + \vec{v} = (u_1 + v_1,u_2 + v_2,\dots, u_n + v_n)$
 		\item $\lambda \cdot \vec{u}= (\lambda u_1,\lambda u_2,\dots, \lambda u_n)$
@@ -124,13 +123,13 @@
 
 	\vspace{0.4cm}
 	\begin{center}
-	\textbf{We will work in $\R^n$ 99\% ot the time !}
+		\textbf{We will work in $\R^n$ 99\% ot the time !}
 	\end{center}
 
 \end{frame}
 
 \begin{frame}{Example 2: functions}
-The set $V = \cF(\R,\R) \defeq \{ f \, | \, f: \R \to \R \}$ of all functions from $\R$ to itself endowed with the addition $+$ and the scalar multiplication $\cdot$ defined by
+	The set $V \defeq \{ f \, | \, f: \R \to \R \}$ of all functions from $\R$ to itself endowed with the addition $+$ and the scalar multiplication $\cdot$ defined by
 	$$
 	\begin{array}{rlll}
 		f+g :& \R & \to & \R \\
@@ -147,36 +146,42 @@ The set $V = \cF(\R,\R) \defeq \{ f \, | \, f: \R \to \R \}$ of all functions fr
 	is a vector space.
 	\vspace{0.4cm}
 	\begin{center}
-	\textbf{Useful in signal processing.}
+		\textbf{Useful in signal processing.}
 	\end{center}
 \end{frame}
 
 \begin{frame}{Example 3: random variables}
-The set of random variables on a given probability space $\Omega$ is a vector space: if $X$ and $Y$ are two random variables and $\alpha \in \R$, $X+Y$ and $\alpha X$ are also random variables.
+	The set of random variables on a given probability space $\Omega$ is a vector space: 
+	\\
+	If $X$ and $Y$ are two random variables and $\alpha \in \R$, $X+Y$ and $\alpha X$ are also random variables.
 
 	\vspace{0.8cm}
 	\begin{center}
-	\textbf{Important to have this in mind when doing stats/probabilities!}
+		\textbf{Important to have this in mind when doing stats/probabilities!}
 	\end{center}
-	In particular, we should see later that the notion of variance if deeply connected to the notion of length of a vector \dots
 \end{frame}
 
-\begin{frame}{Why do we need all this?}
+\begin{frame}[t]{Why do we need all this?}
 	\begin{itemize}
 		\item Get geometric intuition. 
-		\item Save time. When we prove a theorem that applies to abstract vector space, it will in particular be true for all the examples we listed above.
+			\vspace{0.2cm}
+		\item Save time. 
+			\\
+			A theorem that applies to vector spaces will in particular be true for all the examples we listed before.
 	\end{itemize}
+	\vspace{0.2cm}
+	\textbf{Example:}
 \end{frame}
 
 \section{Subspaces}
 
 \begin{frame}[t]{Definition}
 	\begin{block}{Definition}
-	We say that a non-empty subset $S$ of a vector space $V$ is a \emph{subspace} if it is closed under addition and multiplication by a scalar, that is if
-	\begin{enumerate}
-		\item for all $x,y \in S$ we have $x + y \in S$,
-		\item for all $x \in S$ and all $\alpha \in \R$ we have $\alpha x \in S$.
-	\end{enumerate}
+		We say that a non-empty subset $S$ of a vector space $V$ is a \emph{subspace} if it is closed under addition and multiplication by a scalar, that is if
+		\begin{enumerate}
+			\item for all $x,y \in S$ we have $x + y \in S$,
+			\item for all $x \in S$ and all $\alpha \in \R$ we have $\alpha x \in S$.
+		\end{enumerate}
 	\end{block}
 	\vspace{4cm}
 	\textbf{Remark:} a subspace is a also vector space.
@@ -190,17 +195,19 @@ The set of random variables on a given probability space $\Omega$ is a vector sp
 			\item Is $\R^2$ a subspace of $\R^3$ ?
 		\end{enumerate}
 	\end{exampleblock}
+	\pause
+	\pause
 \end{frame}
 
 %\begin{frame}[t]{Subspaces of $\R^2$}
-	%What are the possible subspaces of $\R^2$ ?
+%What are the possible subspaces of $\R^2$ ?
 %\end{frame}
 
 %\appendix
 %\backupbegin
 %\begin{frame}
-	%\frametitle{Backup slide 1}
-	%Hello
+%\frametitle{Backup slide 1}
+%Hello
 %\end{frame}
 %\backupend
 

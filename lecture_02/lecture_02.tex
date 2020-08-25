@@ -5,8 +5,8 @@
 
 \title{\vspace{-2.0cm}%
 	Optimization and Computational Linear Algebra for Data Science\\
-	Lecture 2: Linear transformations}
-	\author{Léo \textsc{Miolane} \ $\cdot$ \ \texttt{leo.miolane@gmail.com}}
+Lecture 2: Linear transformations}
+\author{Léo \textsc{Miolane} \ $\cdot$ \ \texttt{leo.miolane@gmail.com}}
 \date{\today}
 
 \begin{document}
@@ -14,10 +14,6 @@
 \input{../preamble.tex}
 \section{Linear transformations}
 
-%\begin{center}
-%From now, we will always work with vector spaces of the form $\R^k$ for $k \in \N^*$.
-%\end{center}
-%\vspace{1.5mm}
 
 \begin{definition}[Linear transformation]
 	A function $L: \R^m \to \R^n$ is linear if
@@ -29,9 +25,6 @@
 
 Notice that $L: \R^m \to \R^n$ is linear if and only if $L(\alpha v + w) = \alpha L(v) + L(w)$ for all $v,w \in \R^m$ and all $\alpha \in \R$.
 
-%\begin{proposition}
-	%The set $\mathcal{L}(\R^m, \R^n)$ of all linear transformations from $\R^m$ to $\R^n$ is a vector space.
-%\end{proposition}
 
 \begin{proposition}
 	If $L: \R^m \to \R^n$ and $M: \R^n \to \R^k$ are two linear transformations, then the composite function $M \circ L: \R^m \to \R^k$ is also linear.
@@ -53,12 +46,12 @@ $$
 This means that a linear transformation $L: \R^m \to \R^n$ is uniquely characterized by the vectors $L(e_1), \dots, L(e_m) \in \R^n$.
 
 %\begin{theorem}[Equality on a basis implies equality everywhere]\label{th:basis_cara}
-	%Let $L$ and $M$ be two linear transformations from $\R^m$ to $\R^n$.
-	%Let $(v_1, \dots, v_m)$ be a basis of $\R^m$ and suppose that for all $i \in \{1, \dots,m\}$ we have
-	%$$
-	%L(v_i) = M(v_i).
-	%$$
-	%Then $L = M$, i.e.\ $L(v) = M(v)$ for all $v \in \R^m$.
+%Let $L$ and $M$ be two linear transformations from $\R^m$ to $\R^n$.
+%Let $(v_1, \dots, v_m)$ be a basis of $\R^m$ and suppose that for all $i \in \{1, \dots,m\}$ we have
+%$$
+%L(v_i) = M(v_i).
+%$$
+%Then $L = M$, i.e.\ $L(v) = M(v)$ for all $v \in \R^m$.
 %\end{theorem}
 
 \section{Matrix representation}
@@ -73,28 +66,28 @@ We can encode a linear transformation $L: \R^m \to \R^n$ by a $n \times m$ matri
 \begin{definition}\label{def:canonical_matrix}
 	Let $L: \R^m \to \R^n$ be a linear transformation.
 	The canonical matrix of $L$ is the $n \times m$ matrix (that we will write also $L$) whose columns are $L(e_1), \dots, L(e_m)$:
-$$
-L =
-\begin{pmatrix}
-	| & | & & | \\
-	L(e_1) & L(e_2) & \cdots& L(e_m) \\
-	| & | & & |
-\end{pmatrix}
-= 
-\begin{pmatrix}
-	L_{1,1} & L_{1,2} & \cdots & L_{1,m} \\
-	L_{2,1} & L_{2,2} & \cdots & L_{2,m} \\
-	\vdots & \vdots & \ddots & \vdots \\
-	L_{n,1} & L_{n,2} & \cdots & L_{n,m} \\
-\end{pmatrix}
-$$
-where we write $L(e_j) = 
-\begin{pmatrix}
-	L_{1,j} \\
-	L_{2,j}\\
-	\vdots \\
-	L_{n,j}
-\end{pmatrix}$.
+	$$
+	L =
+	\begin{pmatrix}
+		| & | & & | \\
+		L(e_1) & L(e_2) & \cdots& L(e_m) \\
+		| & | & & |
+	\end{pmatrix}
+	= 
+	\begin{pmatrix}
+		L_{1,1} & L_{1,2} & \cdots & L_{1,m} \\
+		L_{2,1} & L_{2,2} & \cdots & L_{2,m} \\
+		\vdots & \vdots & \ddots & \vdots \\
+		L_{n,1} & L_{n,2} & \cdots & L_{n,m} \\
+	\end{pmatrix}
+	$$
+	where we write $L(e_j) = 
+	\begin{pmatrix}
+		L_{1,j} \\
+		L_{2,j}\\
+		\vdots \\
+		L_{n,j}
+	\end{pmatrix}$.
 \end{definition}
 
 \begin{example}[Homothety]
@@ -194,10 +187,10 @@ We are interested into solving the system of equations in $x = (x_1, \dots, x_m)
 \begin{equation}\label{eq:system}
 	\left\{
 		\begin{array}{ccccccccc}
-		a_{1,1} x_1 &+& a_{1,2} x_2 &+& \dots &+& a_{1,m} x_m &=& y_1 \\
-		\vdots &&&&&&&& \\
-		a_{n,1} x_1 &+& a_{n,2} x_2 &+& \dots &+& a_{n,m} x_m &=& y_n
-	\end{array}
+			a_{1,1} x_1 &+& a_{1,2} x_2 &+& \dots &+& a_{1,m} x_m &=& y_1 \\
+			\vdots &&&&&&&& \\
+			a_{n,1} x_1 &+& a_{n,2} x_2 &+& \dots &+& a_{n,m} x_m &=& y_n
+		\end{array}
 	\right.
 \end{equation}
 where $a_{i,j} \in \R$ and $y = (y_1, \dots, y_n) \in \R^n$. If we define the matrix $A \in \R^{n \times m}$ by $A_{i,j} = a_{i,j}$ the system \eqref{eq:system} can be rewritten as
@@ -220,8 +213,8 @@ In particular, \textbf{$x_0$ is the unique solution if and only if $\Ker(A) = \{
 
 
 
-	\vspace{1cm}
-	\centerline{\pgfornament[width=7cm]{71}}
+\vspace{1cm}
+\centerline{\pgfornament[width=7cm]{71}}
 
 %\bibliographystyle{plain}
 %\bibliography{./references.bib}

@@ -19,10 +19,10 @@
 \begin{frame}
 	\frametitle{Contents}
 	\begin{enumerate}
-		\item Linear maps = matrices
-		\item Properties of the dimension
+		\item Linear maps \& matrices
+		\item Operation on matrices
 		\item Kernel and Image
-		\item Why do we care about all these things ? \below{Application to data science: image compression}
+		\item Why do we care about all these things ? \below{Solving linear systems}
 	\end{enumerate}
 \end{frame}
 
@@ -30,9 +30,161 @@
 \setcounter{framenumber}{0}
 \setcounter{showSlideNumbers}{1}
 
-\section{Logistics}
+\section{Linear maps \& matrices}
 
-\begin{frame}[t]{The teaching team}
+\begin{frame}[t]{Rotations in $\R^2$}
+	Let $\theta \in \R$.
+	The rotation $R_{\theta}: \R^2 \to \R^2$ of angle $\theta$ about the origin is linear.
+			\\
+			\vspace{0.3cm}
+			\textbf{Exercise}: what is the canonical matrix of $R_{\theta}$ ?
+\end{frame}
+
+\begin{frame}[t]{Two sides of the same coin}
+	\begin{columns}
+		\hspace{-0.85cm}
+		\begin{column}{0.5\textwidth}
+			\vspace{-0.5cm}
+			\begin{center}
+				\bf Linear map
+			\end{center}
+			$$
+			L: \R^m \to \R^n
+			$$
+			\vspace{6cm}
+		\end{column}
+		\vrule
+		\begin{column}{0.5\textwidth}
+			\vspace{-0.5cm}
+			\begin{center}
+			\bf Matrix
+			\end{center}
+			$$
+			L \in \R^{n \times m}
+			$$
+			\vspace{6cm}
+		\end{column}
+	\end{columns}
+	\pause
+\end{frame}
+
+\section{Operations on matrices}
+
+\begin{frame}[t]{Addition and scalar multiplication}
+	Sum of two matrices of the \textbf{same} dimensions:
+	{\small
+		$$
+		\!\!\!\!\!\!\!\!\!\!\!\!
+		\begin{pmatrix}
+			a_{1,1}  & \cdots & a_{1,m} \\
+			\vdots & \ddots & \vdots \\
+			a_{n,1} & \cdots & a_{n,m} \\
+		\end{pmatrix}
+		+
+		\begin{pmatrix}
+			b_{1,1}  & \cdots & b_{1,m} \\
+			\vdots & \ddots & \vdots \\
+			b_{n,1} & \cdots & b_{n,m} \\
+		\end{pmatrix}
+		=
+		\begin{pmatrix}
+			a_{1,1} + b_{1,1}  & \cdots & a_{1,m} + b_{1,m} \\
+			\vdots & \ddots & \vdots \\
+			a_{n,1} + b_{n,1} & \cdots & a_{n,m} + b_{n,m} \\
+		\end{pmatrix}
+		$$
+	}
+
+	\vspace{2cm}
+	{
+		Multiplication by a scalar $\lambda$:
+		$$
+		\lambda
+		\begin{pmatrix}
+			a_{1,1}  & \cdots & a_{1,m} \\
+			\vdots & \ddots & \vdots \\
+			a_{n,1} & \cdots & a_{n,m} \\
+		\end{pmatrix}
+		=
+		\begin{pmatrix}
+			\lambda a_{1,1}  & \cdots & \lambda a_{1,m} \\
+			\vdots & \ddots & \vdots \\
+			\lambda a_{n,1} & \cdots & \lambda a_{n,m} \\
+		\end{pmatrix}
+		$$
+	}
+\end{frame}
+\begin{frame}[t]{Product of two matrices}
+	\textbf{Warning:}
+	{\small
+		$$
+		\!\!\!\!\!\!\!\!\!\!\!\!
+		\begin{pmatrix}
+			a_{1,1}  & \cdots & a_{1,m} \\
+			\vdots & \ddots & \vdots \\
+			a_{n,1} & \cdots & a_{n,m} \\
+		\end{pmatrix}
+		\times
+		\begin{pmatrix}
+			b_{1,1}  & \cdots & b_{1,m} \\
+			\vdots & \ddots & \vdots \\
+			b_{n,1} & \cdots & b_{n,m} \\
+		\end{pmatrix}
+		\neq
+		\begin{pmatrix}
+			a_{1,1} \times b_{1,1}  & \cdots & a_{1,m} \times b_{1,m} \\
+			\vdots & \ddots & \vdots \\
+			a_{n,1} \times b_{n,1} & \cdots & a_{n,m} \times b_{n,m} \\
+		\end{pmatrix}
+		$$
+	}
+\end{frame}
+
+\begin{frame}[t]{Matrix product}
+	Let $L \in \R^{n \times m}$ and $M \in \R^{m \times k}$. 
+	%\vspace{2cm}
+\begin{definition}[Matrix product]
+	The matrix product $LM$ is the $n \times k$ matrix of the linear map $L \circ M$.
+\end{definition}
+\end{frame}
+\begin{frame}[t]{Matrix product properties}
+\end{frame}
+
+\section{Kernel and image}
+
+\begin{frame}[t]{Definitions}
+	Let \quad $L: \R^m \to \R^n$ \quad be a linear transformation .
+\begin{definition}[Kernel]
+	The kernel $\Ker(L)$ (or nullspace) of $L$ is defined as the set of all vectors $v \in \R^m$ such that $L(v) = 0$, i.e.
+	$$
+	\Ker(L) \defeq \big\{ v \in \R^m \, \big| \, L(v) = 0 \big\}.
+	$$
+\end{definition}
+
+\begin{definition}[Image]
+	The image $\Im(L)$ (or column space) of $L$ is defined as the set of all vectors $u \in \R^n$ such that there exists $v \in \R^m$ such that $L(v) = u$. 
+\end{definition}
+\textbf{Remark:} $\Im(L)$ is also the Span of the columns of the matrix representation of $L$.
+\end{frame}
+
+
+
+\begin{frame}{Picture}
+\end{frame}
+
+
+\begin{frame}[t]{Example: orthogonal projection}
+	Consider \quad $L: \R^2 \to \R^2$ \quad to be the orthogonal projection onto the $x$-axis.
+\end{frame}
+
+
+\section{Why do we care about this ?}
+
+\begin{frame}[t]{Linear systems}
+
+
+\end{frame}
+
 \appendix
 \backupbegin
 \begin{frame}
