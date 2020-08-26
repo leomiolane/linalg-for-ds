@@ -69,31 +69,31 @@
 	\begin{block}{\bf Definition}
 		A function $L: \R^m \to \R^n$ is linear if
 		\begin{enumerate}
-			\item for all $v \in \R^m$ and all $\alpha \in \R$ we have $L(\alpha v) = \alpha L(v)$ and
-			\item for all $v,w \in \R^m$ we have $L(v + w) = L(v) + L(w)$.
+			\item for all $v,w \in \R^m$ we have $L(v + w) = L(v) + L(w)$ and
+			\item for all $v \in \R^m$ and all $\alpha \in \R$ we have $L(\alpha v) = \alpha L(v).
 		\end{enumerate}
 	\end{block}
 \end{frame}
 
 
-\begin{frame}[t]{Examples of linear maps}
+\begin{frame}[t]{An example}
 	\begin{itemize}
 		\item $\displaystyle
 			\begin{array}{cccc}
-				L: & \R^2 & \to & \R^2 \\
-				   & (x_1,x_2) & \mapsto & (2 x_1,x_2)
+				L: & \R^2 & \to & \R^3 \\
+				   & (v_1,v_2) & \mapsto & (5 v_1, \ 0 , \ v_1 + v_2)
 			\end{array}
 			$
-			\ is linear
+			\ \ is linear
 			\vspace{2cm}
-		\item
-			$\displaystyle
-			\begin{array}{cccc}
-				M: & \R^3 & \to & \R^2 \\
-				   & (x_1,x_2,x_3) & \mapsto & (x_1+x_3,2x_2)
-			\end{array}
-			$
-			\ is linear
+		%\item
+			%$\displaystyle
+			%\begin{array}{cccc}
+				%M: & \R^3 & \to & \R^2 \\
+				   %& (x_1,x_2,x_3) & \mapsto & (x_1+x_3,2x_2)
+			%\end{array}
+			%$
+			%\ is linear
 	\end{itemize}
 \end{frame}
 \begin{frame}[t]{An example of a non-linear map}
@@ -109,19 +109,22 @@
 \section{Properties}
 
 \begin{frame}[t]{Composition of linear maps}
+		\vspace{0.5cm}
 	\begin{block}{Proposition}
 		If $L: \R^m \to \R^n$ and $M: \R^n \to \R^k$ are both linear, then the composite function
+			\vspace{-0.2cm}
 		$$
 			\begin{array}{cccc}
 				M \circ L: & \R^m & \to & \R^k \\
 						   & v & \mapsto & M(L(v))
 			\end{array}
+			\vspace{-0.4cm}
 			$$
 			is also linear.
 	\end{block}
 	\begin{proof}
 		\vfill
-		\vspace{2cm}
+		\vspace{2.5cm}
 	\end{proof}
 \end{frame}
 \begin{frame}[t]{Basic properties}
