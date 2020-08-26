@@ -16,18 +16,10 @@
 
 \frame{\titlepage}
 
-\begin{frame}
-	\frametitle{Contents}
-	\begin{enumerate}
-		\item Matrix associated to a linear transformation
-		\item Matrix product
-	\end{enumerate}
-\end{frame}
-
 
 \setcounter{framenumber}{0}
 \setcounter{showSlideNumbers}{1}
-\section{Matrix associated to a linear map}
+
 \begin{frame}[t]{The key observation}
 
 	\begin{itemize}
@@ -42,11 +34,13 @@ L(x) =
 L\Big( \sum_{i=1}^m x_i e_i \Big) = \sum_{i=1}^m x_i L(e_i).
 $$
 \pause
-\textbf{Conclusion}: if you give me the vectors $L(e_1), \dots, L(e_m) \in \R^n$ then, I can compute $L(x)$ for any $x \in \R^m$.
+\\
 
-\vspace{1cm}
+\textbf{Conclusion}: if you give me the vectors $L(e_1), \dots, L(e_m) \in \R^n$ then, I am able to compute $L(x)$ for any $x \in \R^m$.
+
+\vspace{0.7cm}
 \begin{center}
-<< One needs $n \times m$ numbers to store a the linear map $L$ on a computer >>
+<< One needs $n \times m$ numbers to store\\ the linear map $L$ on a computer >>
 \end{center}
 
 \end{frame}
@@ -121,59 +115,6 @@ where we write $L(e_j) =
 			\\
 			\vspace{0.3cm}
 			\textbf{Exercise}: what is the canonical matrix of $R_{\theta}$ ?
-\end{frame}
-
-\section{Matrix product}
-
-\begin{frame}[t]{Matrix-vector product}
-	\begin{itemize}
-		\item We have seen: \quad linear map $\to$ matrix
-		\item We will see now: \quad matrix $\to$ linear map
-	\end{itemize}
-
-\begin{block}{\bf Definition}
-	The linear transformation associated to a matrix $L \in \R^{n \times m}$ is the map
-	$$
-	\begin{array}{cccc}
-		L:& \R^m & \to & \R^n \\
-		  & x & \mapsto & Lx
-	\end{array}
-	$$
-	where the ``matrix-vector'' product $Lx \in \R^n$ is defined by
-	$$
-	(Lx)_i = \sum_{j=1}^m L_{i,j} x_j \qquad \text{for all} \ i \in \{1, \dots, n\}.
-	$$
-\end{block}
-\end{frame}
-\begin{frame}[t]{Visualizing the formula}
-	\vspace{-0.8cm}
-	\begin{exampleblock}{}
-	$$
-	(Lx)_i = \sum_{j=1}^m L_{i,j} \, x_j
-	$$
-\end{exampleblock}
-\end{frame}
-
-\begin{frame}[t]{Matrix product}
-	Let $L \in \R^{n \times m}$ and $M \in \R^{m \times k}$. 
-	\vspace{2cm}
-\begin{definition}[Matrix product]
-	The matrix product $LM$ is the $n \times k$ matrix of the linear map $L \circ M$.
-	His coefficients are given by the formula:
-	$$
-	(LM)_{i,j} = \sum_{\ell=1}^m L_{i,\ell} M_{\ell,j} \quad \text{for all} \quad 1 \leq i \leq n, \quad 1 \leq j \leq k.
-	$$
-\end{definition}
-\end{frame}
-\begin{frame}[t]{Visualizing the formula}
-	\vspace{-0.8cm}
-	\begin{exampleblock}{}
-	\vspace{-0.3cm}
-	$$
-	(LM)_{i,j} = \sum_{\ell=1}^m L_{i,\ell} \, M_{\ell,j} 
-	$$
-	\vspace{-0.1cm}
-\end{exampleblock}
 \end{frame}
 
 \end{document}

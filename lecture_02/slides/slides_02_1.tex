@@ -20,6 +20,7 @@
 	\frametitle{Contents}
 	\begin{enumerate}
 		\item Definition of a linear transformation
+			\vspace{1cm}
 		\item Properties of linear transformations
 	\end{enumerate}
 \end{frame}
@@ -80,7 +81,7 @@
 		\item $\displaystyle
 			\begin{array}{cccc}
 				L: & \R^2 & \to & \R^2 \\
-				   & (x,y) & \mapsto & (2x,2y)
+				   & (x_1,x_2) & \mapsto & (2 x_1,x_2)
 			\end{array}
 			$
 			\ is linear
@@ -89,7 +90,7 @@
 			$\displaystyle
 			\begin{array}{cccc}
 				M: & \R^3 & \to & \R^2 \\
-				   & (x,y,z) & \mapsto & (x+y+z,z)
+				   & (x_1,x_2,x_3) & \mapsto & (x_1+x_3,2x_2)
 			\end{array}
 			$
 			\ is linear
@@ -109,7 +110,7 @@
 
 \begin{frame}[t]{Composition of linear maps}
 	\begin{block}{Proposition}
-		If $L: R^m \to \R^n$ and $M: \R^n \to \R^k$ are both linear, then the composite function
+		If $L: \R^m \to \R^n$ and $M: \R^n \to \R^k$ are both linear, then the composite function
 		$$
 			\begin{array}{cccc}
 				M \circ L: & \R^m & \to & \R^k \\
@@ -123,7 +124,7 @@
 		\vspace{2cm}
 	\end{proof}
 \end{frame}
-\begin{frame}[t]{Elementary property}
+\begin{frame}[t]{Basic properties}
 	\begin{block}{Proposition}
 		If $L: \R^m \to \R^n$ is linear, then
 		\begin{itemize}

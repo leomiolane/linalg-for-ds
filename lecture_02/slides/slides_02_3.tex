@@ -1,0 +1,99 @@
+\documentclass{beamer}
+
+\usepackage{../../latex_style/beamerthemeExecushares}
+\usepackage{../../latex_style/notations}
+
+\title{Lecture 2.3: Matrix product}
+\subtitle{Optimization and Computational Linear Algebra for Data Science}
+\author{Léo Miolane}
+\date{}
+
+\setcounter{showSlideNumbers}{1}
+
+\begin{document}
+\setcounter{showProgressBar}{0}
+\setcounter{showSlideNumbers}{0}
+
+\frame{\titlepage}
+
+
+\setcounter{framenumber}{0}
+\setcounter{showSlideNumbers}{1}
+
+\begin{frame}[t]{Matrix-vector product}
+	Consider a linear map $L:\R^m \to \R^n$ and its associated matrix $\widetilde{L} \in \R^{n \times m}$.
+	\\
+	\vspace{0.3cm}
+	\textbf{Question:} Can we use the matrix $\widetilde{L}$ to compute the image $L(x)$ of a vector $x\in\R^m$ ?
+	\vspace{0.3cm}
+
+	\begin{block}{Proposition}
+		For all $x\in\R^m$ coordinates of $L(x) \in \R^n$ are given by the formula:
+		$$
+		\big(L(x)\big)_i = \sum_{j=1}^m \widetilde{L}_{i,j} \, x_j \qquad \text{for all} \ \ i \in \{1, \dots, n\}.
+		$$
+	\end{block}
+\end{frame}
+\begin{frame}[t]{Visualizing the formula}
+	\vspace{-0.9cm}
+	\begin{exampleblock}{}
+		\vspace{-0.4cm}
+		$$
+		\big(L(x)\big)_i = \sum_{j=1}^m \widetilde{L}_{i,j} \, x_j
+		$$
+		\vspace{-0.4cm}
+	\end{exampleblock}
+\end{frame}
+
+\begin{frame}[t]{Matrix-vector product}
+	\begin{itemize}
+		\item We have seen: \quad linear map $\to$ matrix
+		\item We will see now: \quad matrix $\to$ linear map
+	\end{itemize}
+
+	\begin{block}{\bf Definition}
+		The linear map associated to a matrix $\widetilde{L} \in \R^{n \times m}$ is the map
+		$$
+		\begin{array}{cccc}
+			L:& \R^m & \to & \R^n \\
+			  & x & \mapsto & \widetilde{L}x
+		\end{array}
+		$$
+		where the ``matrix-vector'' product $\widetilde{L}x \in \R^n$ is defined by
+		$$
+		\big(\widetilde{L}x\big)_i = \sum_{j=1}^m \widetilde{L}_{i,j} \, x_j \qquad \text{for all} \ i \in \{1, \dots, n\}.
+		$$
+		\vspace{-0.5cm}
+	\end{block}
+	\vspace{0.2cm}
+	\textbf{Remark:} for all $x\in\R^m$, \ $L(x) = \widetilde{L}x$.
+\end{frame}
+
+\begin{frame}[t]{Matrix product}
+	Let $L \in \R^{n \times m}$ and $M \in \R^{m \times k}$. 
+	\vspace{1.5cm}
+	\begin{block}{Definition - Proposition}
+		\begin{itemize}
+			\item The matrix product $LM$ is the $n \times k$ matrix of the linear map $L \circ M$.
+				\vspace{0.1cm}
+			\item Its coefficients are given by the formula:
+		\vspace{-0.2cm}
+				$$
+				(LM)_{i,j} = \sum_{\ell=1}^m L_{i,\ell} M_{\ell,j} \quad \text{for all} \quad 1 \leq i \leq n, \quad 1 \leq j \leq k.
+				$$
+		\end{itemize}
+		\vspace{-0.4cm}
+	\end{block}
+\end{frame}
+\begin{frame}[t]{Visualizing the formula}
+	\vspace{-0.9cm}
+	\begin{exampleblock}{}
+		\vspace{-0.4cm}
+		$$
+		(LM)_{i,j} = \sum_{\ell=1}^m L_{i,\ell} \, M_{\ell,j} 
+		$$
+		\vspace{-0.3cm}
+	\end{exampleblock}
+\end{frame}
+
+\end{document}
