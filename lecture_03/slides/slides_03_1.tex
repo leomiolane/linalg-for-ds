@@ -54,8 +54,25 @@
 	\end{block}
 \end{frame}
 
-\begin{frame}{Computing the rank in practice}
-	\pause
+\begin{frame}[t]{The rank in Data Science}
+	\vspace{-0.3cm}
+	Consider a matrix $M$ of size $1000 \times 500$:
+	$$
+	M=
+	\begin{pmatrix}
+		- & r_1 & - \\
+		  & \vdots & \\
+		-  & r_{1000} & -
+	\end{pmatrix}
+	$$
+\end{frame}
+\begin{frame}[t]{The rank in Data Science}
+	Assume now that
+	\begin{itemize}
+		\item The rows of $M$ corresponds to Netfilx's users.
+		\item The columns of $M$ corresponds to Netfilx's movies.
+		\item The entry $M_{i,j}$ is rating of the movie $j$ by the user $i$.
+	\end{itemize}
 \end{frame}
 
 
