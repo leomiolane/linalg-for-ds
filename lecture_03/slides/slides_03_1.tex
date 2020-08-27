@@ -74,8 +74,17 @@
 		\item The columns of $M$ corresponds to Netflix's movies.
 		\item The entry $M_{i,j}$ is rating of the movie $j$ by the user $i$, assuming that all the users have rated all the movies.
 	\end{itemize}
-	\vspace{0.3cm}
-	\textbf{Claim:} the rank $r$ of $M$ is "small".
+	\vspace{0.5cm}
+
+	\begin{center}
+	\textbf{Claim:} the rank of $M$ is "small".
+	\end{center}
+	\vspace{0.5cm}
+
+	\begin{itemize}
+		\item The ratings of a user can be obtained as a linear combination of a small number of << profiles >>.
+		\item In practice, we do not have access to the full matrix, so we can use this assumption to predict the missing entries.
+	\end{itemize}
 \end{frame}
 
 
