@@ -1,0 +1,51 @@
+\documentclass{beamer}
+
+\usepackage{../../latex_style/beamerthemeExecushares}
+\usepackage{../../latex_style/notations}
+
+\title{Lecture 3.2: Some properties of the rank}
+\subtitle{Optimization and Computational Linear Algebra for Data Science}
+\author{Léo Miolane}
+\date{}
+
+\setcounter{showSlideNumbers}{1}
+
+\begin{document}
+\setcounter{showProgressBar}{0}
+\setcounter{showSlideNumbers}{0}
+
+\frame{\titlepage}
+
+
+
+\setcounter{framenumber}{0}
+%\setcounter{showProgressBar}{1}
+\setcounter{showSlideNumbers}{1}
+
+\begin{frame}[t]{Inequalities}
+	\vspace{-0.3cm}
+	\begin{block}{Proposition}
+		Let $A \in \R^{n \times m}$ and $B \in \R^{m \times k}$. Then the following holds
+		\begin{enumerate}
+			\item $\rank(A) \leq \min(n,m)$.
+			\item $\rank(AB) \leq \min(\rank(A),\rank(B))$.
+		\end{enumerate}
+	\end{block}
+	\begin{proof}
+		\vfill
+		\vspace{3.5cm}
+	\end{proof}
+	\pause
+\end{frame}
+
+\begin{frame}[t]{The rank-nullity theorem}
+	\begin{theorem}
+		Let $L: \R^m \to \R^n$ be a linear transformation. Then
+		$$
+		\rank(L) + \dim(\Ker(L)) = m.
+		$$
+	\end{theorem}
+\end{frame}
+
+
+\end{document}

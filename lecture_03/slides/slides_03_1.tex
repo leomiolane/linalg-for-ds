@@ -1,0 +1,62 @@
+\documentclass{beamer}
+
+\usepackage{../../latex_style/beamerthemeExecushares}
+\usepackage{../../latex_style/notations}
+
+\title{Lecture 3.1: The rank}
+\subtitle{Optimization and Computational Linear Algebra for Data Science}
+\author{Léo Miolane}
+\date{}
+
+\setcounter{showSlideNumbers}{1}
+
+\begin{document}
+\setcounter{showProgressBar}{0}
+\setcounter{showSlideNumbers}{0}
+
+\frame{\titlepage}
+
+
+\setcounter{framenumber}{0}
+%\setcounter{showProgressBar}{1}
+\setcounter{showSlideNumbers}{1}
+
+
+\begin{frame}[t]{Rank of a family of vectors}
+	\begin{definition}
+		We define the rank of a family $x_1, \dots, x_k$ of vectors of $\R^n$ as the dimension of its span:
+		$$
+		\rank(x_1, \dots, x_k) \defeq \dim (\Span(x_1, \dots, x_k)).
+		$$
+	\end{definition}
+\end{frame}
+
+\begin{frame}[t]{Rank of a matrix}
+	\begin{definition}
+		Let $M \in \R^{n \times m}$. Let $c_1, \dots, c_m \in \R^n$ be its columns.
+		We define
+		$$
+		\rank(M) \defeq \rank(c_1, \dots, c_m) = \dim(\Im(M)).
+		$$
+	\end{definition}
+\end{frame}
+
+\begin{frame}{Example}
+\end{frame}
+
+\begin{frame}[t]{<< Rank of columns = rank of rows >>}
+	\begin{block}{Proposition}
+		Let $M \in \R^{n \times m}$. Let $r_1, \dots, r_n \in \R^m$ be the rows of $M$ and $c_1, \dots, c_m \in \R^n$ be its columns.
+		Then we have
+		$$
+		\rank(r_1, \dots, r_n) = \rank(c_1, \dots, c_m) = \rank(M).
+		$$
+	\end{block}
+\end{frame}
+
+\begin{frame}{Computing the rank in practice}
+	\pause
+\end{frame}
+
+
+\end{document}
