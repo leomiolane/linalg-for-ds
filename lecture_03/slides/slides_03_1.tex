@@ -65,14 +65,17 @@
 		-  & r_{1000} & -
 	\end{pmatrix}
 	$$
+	What does it mean to say that << $\rank(M)=5$ >> ?
 \end{frame}
 \begin{frame}[t]{The rank in Data Science}
-	Assume now that
+	Imagine now that
 	\begin{itemize}
-		\item The rows of $M$ corresponds to Netfilx's users.
-		\item The columns of $M$ corresponds to Netfilx's movies.
-		\item The entry $M_{i,j}$ is rating of the movie $j$ by the user $i$.
+		\item The rows of $M$ corresponds to Netflix's users.
+		\item The columns of $M$ corresponds to Netflix's movies.
+		\item The entry $M_{i,j}$ is rating of the movie $j$ by the user $i$, assuming that all the users have rated all the movies.
 	\end{itemize}
+	\vspace{0.3cm}
+	\textbf{Claim:} the rank $r$ of $M$ is "small".
 \end{frame}
 
 
