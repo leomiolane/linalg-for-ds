@@ -1,0 +1,66 @@
+\documentclass{beamer}
+
+\usepackage{../../latex_style/beamerthemeExecushares}
+\usepackage{../../latex_style/notations}
+
+\title{Lecture 4.1: Norms}
+\subtitle{Optimization and Computational Linear Algebra for Data Science}
+\author{Léo Miolane}
+\date{}
+
+\setcounter{showSlideNumbers}{1}
+
+\begin{document}
+\setcounter{showProgressBar}{0}
+\setcounter{showSlideNumbers}{0}
+
+\frame{\titlepage}
+
+\setcounter{framenumber}{0}
+\setcounter{showSlideNumbers}{1}
+\begin{frame}[t]{Introduction: the Euclidean norm}
+	\begin{definition}
+		We define the Euclidean norm of $x=(x_1, \dots, x_n) \in \R^n$ as:
+		$$
+		\| x\|_2 = \sqrt{x_1^2 + \cdots + x_n^2}.
+		$$
+	\end{definition}
+
+
+\end{frame}
+
+\begin{frame}[t]{General norms}
+	Let $V$ be a vector space.
+\begin{definition}
+	A norm $\| \cdot \|$ on $V$ is a function from $V$ to $\R_{\geq 0}$ that verifies the following points:
+	\begin{enumerate}
+		\item \emph{Homogeneity}: $\| \alpha v \| = |\alpha|\times \| v\|$ for all $\alpha \in \R$ and  $v \in V$.
+		\item \emph{Triangular inequality}: $\|u + v\| \leq \|u\| + \|v\|$ for all $u,v \in V$.
+		\item \emph{Positive definiteness}: if $\|v\| = 0$ for some $v \in V$, then $v=0$.
+	\end{enumerate}
+\end{definition}
+\end{frame}
+
+
+\begin{frame}[t]{Other examples}
+	\begin{itemize}
+\item The $\ell_1$ norm 
+	\end{itemize}
+		$$\|x\|_1 \ \defeq \ \sum_{i=1}^n |x_i| \ = \  |x_1| + \cdots + |x_n|.
+\end{frame}
+\begin{frame}[t]{Other examples}
+	\begin{itemize}
+\item The $\ell_p$ norm, for $p \geq 1$
+	$$\|x\|_p \ \defeq \ \Big( |x_1|^p + \cdots + |x_n|^p \Big)^{1/p}.$$
+		\item The infinity-norm 
+			$$\|x \|_{\infty} \defeq \max(|x_1|, \dots, |x_n|).$$
+	\end{itemize}
+\end{frame}
+\begin{frame}[t]{Balls}
+	For each of the norms $\| \cdot \|_2$, $\| \cdot \|_1$ and $\| \cdot \|_{\infty}$, draw the <<ball>>:
+	$$
+	B = \big\{ x \in \R^2 \, \big| \, \|x\| \leq 1 \big\}.
+	$$
+\end{frame}
+
+\end{document}
