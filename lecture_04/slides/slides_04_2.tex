@@ -24,12 +24,10 @@
 		We define the Euclidean dot product of two vectors $x$ and $y$ of $\R^n$ as:
 		\vspace{-0.3cm}
 		$$
-		x \cdot y = \sum_{i=1}^n x_i \, y_i.
+		x \cdot y  \ = \ \sum_{i=1}^n x_i \, y_i \ = \ x_1 y_1 + \cdots + x_n y_n.
 		\vspace{-0.3cm}
 		$$
 	\end{definition}
-
-
 \end{frame}
 
 \begin{frame}[t]{Inner product}
@@ -50,6 +48,7 @@
 	$$\langle X, Y \rangle \ \defeq  \ \E[XY]$$
 	is an inner product on $V$.
 \end{frame}
+
 \begin{frame}[t]{Norm induced by an inner product}
 	\vspace{-0.3cm}
 	\begin{block}{Proposition}
@@ -59,6 +58,11 @@
 		$$ 
 		is a norm on $V$. We say  that the norm $\| \cdot \|$ is induced by the inner product $\langle \cdot, \cdot \rangle$.
 	\end{block}
+\end{frame}
+
+\begin{frame}[t]{Example}
+	Consider again the set $V$ of all random variables (on a probability space $\Omega$) that have a finite second moment, with the inner product:
+	$$\langle X, Y \rangle \ \defeq  \ \E[XY].$$
 \end{frame}
 
 \begin{frame}[t]{Cauchy Schwarz inequality}
