@@ -19,8 +19,8 @@
 \begin{frame}
 	\frametitle{Contents}
 	\begin{enumerate}
-		\item Subspaces \& Linear dependency
-		\item Properties of the dimension
+		\item Recap of the videos
+		\item More about the dimension
 		\item Coordinates
 		\item Why do we care about all these things ? \below{Application to data science: image compression}
 	\end{enumerate}
@@ -37,8 +37,8 @@
 	\begin{itemize}
 		\item \textbf{Lecturer}: \quad Léo Miolane \  -- \ \emph{lm4271\@nyu.edu}
 			\below{\href{https://leomiolane.github.io/linalg-for-ds.html}{\texttt{leomiolane.github.io/linalg-for-ds.html}}}
-\vspace{0.3cm}
-		%\item \textbf{Course assistant}: \quad Chen Li
+			\vspace{0.3cm}
+			%\item \textbf{Course assistant}: \quad Chen Li
 			\vspace{0.3cm}
 			\pause
 		\item \textbf{Sections leaders}:
@@ -50,6 +50,8 @@
 						\\
 						\vspace*{0.2cm}
 						\includegraphics[height=2.7cm]{./alex.jpeg}
+						\\
+						In person
 					\end{center}
 				\end{column}
 				\begin{column}{0.3\textwidth}
@@ -58,6 +60,7 @@
 						\\
 						\vspace*{0.2cm}
 						\includegraphics[height=2.7cm]{./irina.jpeg}
+						Remote
 					\end{center}
 				\end{column}
 				\begin{column}{0.3\textwidth}
@@ -66,6 +69,7 @@
 						\\
 						\vspace*{0.2cm}
 						\includegraphics[height=2.7cm]{./carles.jpeg}
+						Remote
 					\end{center}
 				\end{column}
 			\end{columns}
@@ -97,38 +101,100 @@
 	\end{center}
 \end{frame}
 
-\begin{frame}{Grading}
+\begin{frame}[t]{Grading}
 	\begin{itemize}
-		\item Quizzes have to be answered on \textbf{WebAssign}.
-		\item Homeworks questions are available on the \textbf{course's webpage} and have to be submitted on \textbf{WebAssign}.
+		\item Quizzes have to be answered on \textbf{Gradescope}.
+		\item Homeworks questions are available on the \textbf{course's webpage} and have to be submitted on \textbf{Gradescope}.
 			\pause
 		\item I encourage you to type your homeworks using \texttt{LaTeX}.
-			\below{Help and template available on the course's webpage.}
+			\below{Some instructions and template available on the course's webpage.}
 		\item Otherwise, you can scan (using dedicated app) your handwritten work.
 			{\bf It has to be legible!!!}
 			\pause
 		\item Midterm ($\sim$ mid-October) and Final will be <<take-home exams>>.
 		\item Limited time: after downloading the Midterm/Final questions, you will have to upload your work within few hours.
 	\end{itemize}
+	\vspace{0.6cm}
+	\begin{center}
+		Check out the syllabus on the course webpage!
+	\end{center}
 \end{frame}
 
-\section{Questions ?}
-\begin{frame}[t]{Questions ?}
-	\pause
+\begin{frame}[t]{Questions on logistics ?}
 \end{frame}
 
-\section{Subspaces}
+\section{Vector spaces and subspaces}
 
-\begin{frame}{What are the subspaces of $\R^2$ ?}
+\begin{frame}[t]{Quick recap of video 1.2}
+	\vspace{-0.7cm}
+	\begin{exampleblock}{}
+		A \textbf{vector space} is a set $V$ endowed with two 'nice and compatible' operations $+$ and $\cdot$ that verify:
+		\begin{itemize}
+			\item For all $u,v \in V$, $u+v \in V$.
+			\item For all $u \in V$ and all $\lambda \in \R$, $\lambda \cdot u \in V$.
+		\end{itemize}
+	\end{exampleblock}
+	\textbf{Example}: $V = \R^n$, with the usual vector addition $+$ and scalar multiplication $\cdot$ is a vector space.
 \end{frame}
 
-%\begin{frame}[t]{The span is always a subspace}
-	%\begin{block}{\bf Proposition}
-		%Let $x_1, \dots, x_k \in V$. Then, $\Span(x_1, \dots, x_k)$ is a subspace of $V$.
-	%\end{block}
+
+\begin{frame}[t]{Quick recap of video 1.2}
+	\vspace{-0.7cm}
+	\begin{exampleblock}{}
+		A subset $S$ of a vector space $V$ is called a \textbf{subspace} if it is closed under addition and multiplication by a scalar.
+	\end{exampleblock}
+	\textbf{Example}: For all $v \in \R^n$, 
+	$$
+	\Span(v) = \big\{ \lambda v \, \big| \lambda \in \R \big\}
+	$$
+	is a subspace of $\R^n$.
+\end{frame}
+
+
+\begin{frame}{Question ?}
+\end{frame}
+
+%\begin{frame}{What are the subspaces of $\R^2$ ?}
 %\end{frame}
 
-\section{Linear dependency}
+%\begin{frame}[t]{The span is always a subspace}
+%\begin{block}{\bf Proposition}
+%Let $x_1, \dots, x_k \in V$. Then, $\Span(x_1, \dots, x_k)$ is a subspace of $V$.
+%\end{block}
+%\end{frame}
+\section{Review of Span and linear dependency}
+
+\begin{frame}[t]{Span}
+	\vspace{-0.5cm}
+	\begin{exampleblock}{}
+		The \emph{linear span} of vectors $x_1, \dots, x_k$ as the set of all linear combinations of these vectors.
+	\end{exampleblock}
+\end{frame}
+
+\begin{frame}[t]{Linear dependency}
+	\vspace{-0.5cm}
+	\begin{exampleblock}{}
+		\begin{itemize}
+			\item Vectors $x_1, \dots x_k$ are \emph{linearly dependent} if one of them can be expressed as a linear combination of the others.
+			\item They are said to be \emph{linearly independent} otherwise.
+		\end{itemize}
+	\end{exampleblock}
+	\textbf{Abuse of language:} Instead of saying <<$x_1, \dots, x_k$ are linearly dependent>>, we should say <<the family $(x_1, \dots, x_k)$ is linearly dependent>>.
+\end{frame}
+
+\begin{frame}[t]{Basis}
+	\vspace{-0.5cm}
+	\begin{exampleblock}{}
+		A family $(x_1, \dots, x_n)$ of vectors of $V$ is a basis of $V$ if
+		\begin{enumerate}
+			\item $x_1, \dots, x_n$ are linearly independent,
+			\item $\Span(x_1, \dots, x_n) = V$.
+		\end{enumerate}
+	\end{exampleblock}
+\end{frame}
+
+\section{The dimension}
+
 \begin{frame}[t]{A useful lemma}
 	\vspace{-0.4cm}
 	\begin{block}{\bf Lemma}
@@ -138,12 +204,9 @@
 		Then, if $k > n$,
 		$x_1, \dots, x_k$ are linearly dependent.
 	\end{block}
-	\textbf{Abuse of language:} Instead of saying <<$x_1, \dots, x_k$ are linearly dependent>>, we should have said <<the family $(x_1, \dots, x_k)$ is linearly dependent>>.
 \end{frame}
 
-\section{Basis, dimension}
-
-\begin{frame}[t]{Dimension =  degrees of freedom}
+\begin{frame}[t]{Definition of the dimension}
 	\begin{block}{\bf Definition}
 		We say that a vector space $V$ has dimension $n$ if it admits a basis $(v_1, \dots, v_n)$ with $n$ vectors.
 	\end{block}
@@ -160,7 +223,7 @@
 \end{frame}
 
 \begin{frame}[t]{Properties of the dimension}
-	\vspace{-0.3cm}
+	\vspace{-0.4cm}
 	\begin{block}{\bf Proposition}
 		Let $V$ be a vector space that has dimension $\dim(V) = n$. Then
 		\begin{itemize}
@@ -188,18 +251,21 @@
 		\end{enumerate}
 	\end{block}
 
-	\vspace{0.5cm}
+	\vspace{0.3cm}
 
-	Very useful to show that a family of vector forms a basis!
+	Very useful to show that a family of vector forms a basis:
+	\\
+	\vspace{0.3cm}
+	\textbf{Example:} $x_1 = (12,37)$ and $x_2 = (-9,17)$ form a basis of $\R^2$.
 
-	\vspace{0.5cm}
+	\vspace{1.9cm}
 
-	\begin{proof}
-		\vfill
+	\begin{proof}[of the Proposition]
 	\end{proof}
 \end{frame}
 
 \begin{frame}[t]{An inequality}
+	\vspace{-0.4cm}
 	\begin{block}{\bf Proposition}
 		Let	$U$ and $V$ be two subspaces of $\R^n$. Assume that $U \subset V$. Then
 		$$
@@ -207,6 +273,7 @@
 		$$
 		If \textbf{moreover} $\dim(U) = \dim(V)$, then $U = V$.
 	\end{block}
+	\pause
 	\begin{proof}
 		\vspace{3.5cm}
 		\vfill
@@ -214,6 +281,7 @@
 \end{frame}
 
 \begin{frame}[t]{A bit of vocabulary}
+	\vspace{-0.4cm}
 	\begin{block}{\bf Definition}
 		Let $S$ be a subspace of $\R^n$.
 		\begin{itemize}
@@ -233,6 +301,7 @@
 		$$
 		We say that $(\alpha_1, \dots, \alpha_n)$ are the coordinates of $x$ in the basis $(v_1, \dots, v_n)$.
 	\end{block}
+	\pause
 	\begin{proof}
 		\vspace{2.5cm}
 		\vfill
@@ -334,6 +403,7 @@
 
 		\item \texttt{JPEG2000} uses \textbf{wavelet bases}, and achieves better performance than \texttt{JPEG}.
 		\item In \textbf{Homework 4}, you will use wavelets to compress/denoise images.
+		\item The course \textbf{DS-GA 1013} deepens these concepts!
 	\end{itemize}
 \end{frame}
 \appendix
