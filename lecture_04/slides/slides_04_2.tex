@@ -1,0 +1,78 @@
+\documentclass{beamer}
+
+\usepackage{../../latex_style/beamerthemeExecushares}
+\usepackage{../../latex_style/notations}
+
+\title{Lecture 4.1: Inner product}
+\subtitle{Optimization and Computational Linear Algebra for Data Science}
+\author{Léo Miolane}
+\date{}
+
+\setcounter{showSlideNumbers}{1}
+
+\begin{document}
+\setcounter{showProgressBar}{0}
+\setcounter{showSlideNumbers}{0}
+
+\frame{\titlepage}
+
+\setcounter{framenumber}{0}
+\setcounter{showSlideNumbers}{1}
+\begin{frame}[t]{The Euclidean dot product}
+	\vspace{-0.3cm}
+	\begin{definition}
+		We define the Euclidean dot product of two vectors $x$ and $y$ of $\R^n$ as:
+		\vspace{-0.3cm}
+		$$
+		x \cdot y = \sum_{i=1}^n x_i \, y_i.
+		\vspace{-0.3cm}
+		$$
+	\end{definition}
+
+
+\end{frame}
+
+\begin{frame}[t]{Inner product}
+	Let $V$ be a vector space.
+	\begin{definition}
+		An inner product on $V$ is a function $\langle \cdot, \cdot \rangle$ from $V \times V$ to $\R$ that verifies the following points:
+		\begin{enumerate}
+			\item \emph{Symmetry}: $\langle u, v \rangle = \langle v, u\rangle$ for all $u,v \in V$.
+			\item \emph{Linearity}: $\langle u+v, w \rangle = \langle u, w\rangle + \langle v, w\rangle$ and $\langle \alpha v, w \rangle = \alpha \langle v, w \rangle$ for all $u,v,w \in V$ and $\alpha \in \R$.
+			\item \emph{Positive definiteness}: $\langle v, v\rangle \geq 0$ with equality if and only if $v = 0$.
+		\end{enumerate}
+	\end{definition}
+\end{frame}
+
+
+\begin{frame}[t]{Other example}
+	If $V$ is the set of all random variables (on a probability space $\Omega$) that have a finite second moment, then 
+	$$\langle X, Y \rangle \ \defeq  \ \E[XY]$$
+	is an inner product on $V$.
+\end{frame}
+\begin{frame}[t]{Norm induced by an inner product}
+	\vspace{-0.3cm}
+	\begin{block}{Proposition}
+		If $\langle \cdot, \cdot \rangle$ is an inner product on $V$ then 
+		$$
+		\| v \| \defeq \sqrt{\langle v, v \rangle}
+		$$ 
+		is a norm on $V$. We say  that the norm $\| \cdot \|$ is induced by the inner product $\langle \cdot, \cdot \rangle$.
+	\end{block}
+\end{frame}
+
+\begin{frame}[t]{Cauchy Schwarz inequality}
+\begin{theorem}[Cauchy-Schwarz inequality]
+	Let $\| \cdot \|$ be the norm induced by the inner product $\langle \cdot , \cdot \rangle$ on the vector space $V$. Then for all $x,y \in V$:
+	\begin{equation}\label{eq:cauchy_schwarz}
+	| \langle x,y \rangle | \leq \|x\| \, \|y\|.
+	\end{equation}
+	Moreover, there is equality in \eqref{eq:cauchy_schwarz} if and only if $x$ and $y$ are linearly dependent, i.e.\ $x = \alpha y$ or $y = \alpha x$ for some $\alpha \in \R$.
+\end{theorem}
+\end{frame}
+
+
+\begin{frame}[t]{Examples}
+	\pause
+\end{frame}
+\end{document}
