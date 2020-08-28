@@ -18,49 +18,59 @@
 
 \setcounter{framenumber}{0}
 \setcounter{showSlideNumbers}{1}
+
 \begin{frame}[t]{Introduction: the Euclidean norm}
+	\vspace{-0.4cm}
 	\begin{definition}
 		We define the Euclidean norm of $x=(x_1, \dots, x_n) \in \R^n$ as:
 		$$
 		\| x\|_2 = \sqrt{x_1^2 + \cdots + x_n^2}.
 		$$
 	\end{definition}
+	\pause
 
 
 \end{frame}
 
 \begin{frame}[t]{General norms}
 	Let $V$ be a vector space.
-\begin{definition}
-	A norm $\| \cdot \|$ on $V$ is a function from $V$ to $\R_{\geq 0}$ that verifies the following points:
-	\begin{enumerate}
-		\item \emph{Homogeneity}: $\| \alpha v \| = |\alpha|\times \| v\|$ for all $\alpha \in \R$ and  $v \in V$.
-		\item \emph{Triangular inequality}: $\|u + v\| \leq \|u\| + \|v\|$ for all $u,v \in V$.
-		\item \emph{Positive definiteness}: if $\|v\| = 0$ for some $v \in V$, then $v=0$.
-	\end{enumerate}
-\end{definition}
+	\begin{definition}
+		A norm $\| \cdot \|$ on $V$ is a function from $V$ to $\R_{\geq 0}$ that verifies:
+		\vspace{0.1cm}
+		\begin{enumerate}
+			\item \emph{Homogeneity}: $\| \alpha v \| = |\alpha|\times \| v\|$ for all $\alpha \in \R$ and  $v \in V$.
+				\vspace{0.1cm}
+			\item \emph{Positive definiteness}: if $\|v\| = 0$ for some $v \in V$, then $v=0$.
+				\vspace{0.1cm}
+			\item \emph{Triangular inequality}: $\|u + v\| \leq \|u\| + \|v\|$ for all $u,v \in V$.
+		\end{enumerate}
+	\end{definition}
 \end{frame}
 
 
 \begin{frame}[t]{Other examples}
+	\vspace{-0.3cm}
 	\begin{itemize}
-\item The $\ell_1$ norm 
+		\item The $\ell_1$ norm 
 	\end{itemize}
-		$$\|x\|_1 \ \defeq \ \sum_{i=1}^n |x_i| \ = \  |x_1| + \cdots + |x_n|.
+	$$\|x\|_1 \ \defeq \ \sum_{i=1}^n |x_i| \ = \  |x_1| + \cdots + |x_n|.
 \end{frame}
 \begin{frame}[t]{Other examples}
 	\begin{itemize}
-\item The $\ell_p$ norm, for $p \geq 1$
-	$$\|x\|_p \ \defeq \ \Big( |x_1|^p + \cdots + |x_n|^p \Big)^{1/p}.$$
+		\item The $\ell_p$ norm, for $p \geq 1$
+			$$\|x\|_p \ \defeq \ \Big( |x_1|^p + \cdots + |x_n|^p \Big)^{1/p}.$$
 		\item The infinity-norm 
 			$$\|x \|_{\infty} \defeq \max(|x_1|, \dots, |x_n|).$$
 	\end{itemize}
 \end{frame}
 \begin{frame}[t]{Balls}
+	\vspace{-0.2cm}
 	For each of the norms $\| \cdot \|_2$, $\| \cdot \|_1$ and $\| \cdot \|_{\infty}$, draw the <<ball>>:
 	$$
 	B = \big\{ x \in \R^2 \, \big| \, \|x\| \leq 1 \big\}.
 	$$
+	\pause
+	\pause
 \end{frame}
 
 \end{document}
