@@ -19,7 +19,7 @@
 \begin{frame}
 	\frametitle{Contents}
 	\begin{enumerate}
-		\item Linear maps \& matrices
+		\item Recap of the videos
 		\item Operation on matrices
 		\item Kernel and Image
 		\item Why do we care about all these things ? \below{Solving linear systems}
@@ -31,14 +31,6 @@
 \setcounter{showSlideNumbers}{1}
 
 \section{Linear maps \& matrices}
-
-\begin{frame}[t]{Rotations in $\R^2$}
-	Let $\theta \in \R$.
-	The rotation $R_{\theta}: \R^2 \to \R^2$ of angle $\theta$ about the origin is linear.
-			\\
-			\vspace{0.3cm}
-			\textbf{Exercise}: what is the canonical matrix of $R_{\theta}$ ?
-\end{frame}
 
 \begin{frame}[t]{Two sides of the same coin}
 	\begin{columns}
@@ -57,7 +49,7 @@
 		\begin{column}{0.5\textwidth}
 			\vspace{-0.5cm}
 			\begin{center}
-			\bf Matrix
+				\bf Matrix
 			\end{center}
 			$$
 			L \in \R^{n \times m}
@@ -66,6 +58,14 @@
 		\end{column}
 	\end{columns}
 	\pause
+\end{frame}
+
+\begin{frame}[t]{Rotations in $\R^2$}
+	Let $\theta \in \R$.
+	The rotation $R_{\theta}: \R^2 \to \R^2$ of angle $\theta$ about the origin is linear.
+	\\
+	\vspace{0.3cm}
+	\textbf{Exercise}: what is the canonical matrix of $R_{\theta}$ ?
 \end{frame}
 
 \section{Operations on matrices}
@@ -143,9 +143,17 @@
 \begin{frame}[t]{Matrix product}
 	Let $L \in \R^{n \times m}$ and $M \in \R^{m \times k}$. 
 	%\vspace{2cm}
-\begin{definition}[Matrix product]
-	The matrix product $LM$ is the $n \times k$ matrix of the linear map $L \circ M$.
-\end{definition}
+	\begin{definition}[Matrix product]
+		The matrix product $LM$ is the $n \times k$ matrix of the linear map $L \circ M$.
+	\end{definition}
+\end{frame}
+\begin{frame}[t]{Rotations in $\R^2$}
+	The $R_{a}$ and $R_{b}$ denote respectively the matrix of the rotation of angle $a$ and $b$ about the origin, in $\R^2$.
+	\\
+	\vspace{0.3cm}
+	\textbf{Exercise}:
+	Compute the product $R_a R_b$.
+
 \end{frame}
 \begin{frame}[t]{Matrix product properties}
 \end{frame}
@@ -154,17 +162,17 @@
 
 \begin{frame}[t]{Definitions}
 	Let \quad $L: \R^m \to \R^n$ \quad be a linear transformation .
-\begin{definition}[Kernel]
-	The kernel $\Ker(L)$ (or nullspace) of $L$ is defined as the set of all vectors $v \in \R^m$ such that $L(v) = 0$, i.e.
-	$$
-	\Ker(L) \defeq \big\{ v \in \R^m \, \big| \, L(v) = 0 \big\}.
-	$$
-\end{definition}
+	\begin{definition}[Kernel]
+		The kernel $\Ker(L)$ (or nullspace) of $L$ is defined as the set of all vectors $v \in \R^m$ such that $L(v) = 0$, i.e.
+		$$
+		\Ker(L) \defeq \big\{ v \in \R^m \, \big| \, L(v) = 0 \big\}.
+		$$
+	\end{definition}
 
-\begin{definition}[Image]
-	The image $\Im(L)$ (or column space) of $L$ is defined as the set of all vectors $u \in \R^n$ such that there exists $v \in \R^m$ such that $L(v) = u$. 
-\end{definition}
-\textbf{Remark:} $\Im(L)$ is also the Span of the columns of the matrix representation of $L$.
+	\begin{definition}[Image]
+		The image $\Im(L)$ (or column space) of $L$ is defined as the set of all vectors $u \in \R^n$ such that there exists $v \in \R^m$ such that $L(v) = u$. 
+	\end{definition}
+	\textbf{Remark:} $\Im(L)$ is also the Span of the columns of the matrix representation of $L$.
 \end{frame}
 
 
