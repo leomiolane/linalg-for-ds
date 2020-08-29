@@ -3,6 +3,7 @@
 \usepackage{../../latex_style/beamerthemeExecushares}
 \usepackage{../../latex_style/notations}
 
+
 \title{Session 1: Vector spaces}
 \subtitle{Optimization and Computational Linear Algebra for Data Science}
 \author{Léo Miolane}
@@ -26,6 +27,13 @@
 	\end{enumerate}
 \end{frame}
 
+\newcommand{\grid}{%
+	\begin{tikzpicture}[overlay]
+		\useasboundingbox (0,0) rectangle(\slidewidth,\slideheight);
+		\draw[step=0.5,ExecusharesAccent,thin,xshift=12.0cm,yshift=0.76cm] (-13.5cm,-8.8cm) grid (0.0,0.0)
+	\end{tikzpicture}
+	\vspace{-0.5cm}
+}
 
 \setcounter{framenumber}{0}
 \setcounter{showSlideNumbers}{1}
@@ -126,7 +134,7 @@
 \section{Vector spaces and subspaces}
 
 \begin{frame}[t]{Quick recap of video 1.2}
-	\vspace{-0.7cm}
+	\grid
 	\begin{exampleblock}{}
 		A \textbf{vector space} is a set $V$ endowed with two 'nice and compatible' operations $+$ and $\cdot$ that verify:
 		\begin{itemize}
