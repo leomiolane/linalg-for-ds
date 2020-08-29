@@ -1,9 +1,9 @@
 #!/bin/bash
 lecture_path(){
 	if [ $1 -lt 10 ]; then
-		echo lecture_0$1/lecture_0$1.pdf
+		echo lectures/lecture_0$1/lecture_0$1.pdf
 	else
-		echo lecture_$1/lecture_$1.pdf
+		echo lectures/lecture_$1/lecture_$1.pdf
 	fi
 }
 if [ -f "notes.zip" ]; then

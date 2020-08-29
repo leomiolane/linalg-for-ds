@@ -42,11 +42,12 @@ while (folder_exists):
         nb = str(N)
     # folder name
     folder_name = 'lecture_' + nb
+    lectures_dir = 'lectures/'
     # Check if lecture folder exists
-    folder_exists = os.path.isdir(folder_name)
+    folder_exists = os.path.isdir(lectures_dir + folder_name)
     if folder_exists:
         # Read Titlek
-        tex_file = open(folder_name + '/' + folder_name + '.tex').read()
+        tex_file = open(lectures_dir + folder_name + '/' + folder_name + '.tex').read()
         # print tex_file.readline()
         search = 'Lecture ' + str(N) + ': ' + '(.*?)\}'
         title = re.findall(search, tex_file, re.S)
