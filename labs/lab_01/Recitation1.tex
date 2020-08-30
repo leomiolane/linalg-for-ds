@@ -110,7 +110,7 @@ First year MSDS students are \textit{highly encouraged} to take this class.
 		\item[1.] Closure under Addition: $x+y \in V$
 		\item[2.] Sum is commutative ($x+y = y+x$) and associative $x+(y+z)= (x+y)+z$
 		\item[3.] Additive Identity (in $V$): $0\in V$ ($x+0 =x$)
-		\item[4.] Additive Inverse: ($\forall x, \exists -x $ s.t $ x+(-x)=0$
+		\item[4.] Additive Inverse: ($\forall x, \exists\ -x $ s.t $ x+(-x)=0$
 		\item[5.] Closure under Scalar Multiplication: $\alpha x \in V$
 		\item[6.] Multiplicative Identity (in $F$): $\alpha x \in V$
 		\item[7.] Compatibility in Multiplication: $\alpha (\beta x) = (\alpha \beta) x $
@@ -149,8 +149,8 @@ Optional: prove (after class) that $\R^3$ with standard definitions for addition
 \begin{definition}[Subspace]
 	A subset $S$ of a vector space $V$ is a \emph{subspace} if it is closed under addition and scalar multiplication.
 	\begin{enumerate}
-		\item[1.] Closure under Addition: $x+y \in V$
-		\item[2.] Closure under Scalar Multiplication: $\alpha x \in V$
+		\item[1.] Closure under Addition: $x+y \in S$
+		\item[2.] Closure under Scalar Multiplication: $\alpha x \in S$
 	\end{enumerate}
 \end{definition}
 \begin{itemize}
@@ -178,7 +178,7 @@ Optional: prove (after class) that $\R^3$ with standard definitions for addition
   \item $\{(1-t)v + tw : t\in[0,1]\}$
   \item $\{(1-t)v+tw : t\in\R\}$
   \item $\{\alpha v + \beta w : \alpha,\beta\geq 0\}$
-  \item $\Span(v,w,x)$ where $x=(0,5)$.
+  \item $\Span(v,w,u)$ where $u=(0,5)$.
   \item $\{(a,b)\in\R^2 : a^2+b^2\leq 25\}$
   \item $\{(a,a)\in\R^2 : a\in\R\}$
   \item $\{(a,a^2)\in\R^2 : a\in\R\}$
@@ -203,7 +203,7 @@ Optional: prove (after class) that $\R^3$ with standard definitions for addition
   \item $\{(1-t)v + tw : t\in[0,1]\}$ \hfill False
   \item $\{(1-t)v+tw : t\in\R\}$ \hfill False
   \item $\{\alpha v + \beta w : \alpha,\beta\geq 0\}$ \hfill False
-  \item $\Span(v,w,x)$ where $x=(0,5)$. \hfill True
+  \item $\Span(v,w,u)$ where $u=(0,5)$. \hfill True
   \item $\{(a,b)\in\R^2 : a^2+b^2\leq 25\}$ \hfill False
   \item $\{(a,a)\in\R^2 : a\in\R\}$ \hfill True
   \item $\{(a,a^2)\in\R^2 : a\in\R\}$ \hfill False
@@ -223,12 +223,12 @@ what are the possible values for $dim(Span\{v_1,v_2,v_3,v_4\})$? (No formal proo
 \smallskip
 \item Let $v_1,...,v_n \in \R^n$ be a basis of $\R^n$. \\
 Prove that for $x \in R^n$, there exists unique $\alpha_1,...,\alpha_n$
-such that $x = \sum_{i=0}^n \alpha_i v_i$.
+such that $x = \sum_{i=1}^n \alpha_i v_i$.
 \smallskip
 \item Let $v_1,...,v_m \in \R^n$ be linearly dependent. \\
 Prove that for $x \in Span(v_1,...,v_m)$, 
 there exist infinitely many $\alpha_1,...,\alpha_m \in \R$ 
-such that $x = \sum_{i=0}^m \alpha_i v_i$.
+such that $x = \sum_{i=1}^m \alpha_i v_i$.
 \smallskip
 \item True or False: If $B=\{v_1,\ldots,v_n\}$ is a basis for $\R^n$,
   and $W$ is a subspace of $\R^n$, then some subset of $B$ is a basis
@@ -257,15 +257,15 @@ such that $x = \sum_{i=0}^m \alpha_i v_i$.
 \begin{enumerate}
 	\item[2.] Let $v_1,...,v_n \in \R^n$ be a basis of $\R^n$. \\
 		Prove that for $x \in R^n$, there exists unique $\alpha_1,...,\alpha_n$
-		such that $x = \sum_{i=0}^n \alpha_i v_i$.
+		such that $x = \sum_{i=1}^n \alpha_i v_i$.
 	\begin{solution}
 	By definition of basis, $v_1,...,v_n$ is a linearly independent set, and spans $\R^n$. Since x $\in \R^n$, 
 	\begin{center}
-		$\exists \alpha_1,...,\alpha_n \text{ s.t } x = \sum_{i=0}^n \alpha_i v_i.$ 
+		$\exists \alpha_1,...,\alpha_n \text{ s.t } x = \sum_{i=1}^n \alpha_i v_i.$ 
 	\end{center}
-	Let $\beta_1,...,\beta_n$ s.t $x = \sum_{i=0}^n \beta_i v_i$. Then,
+	Let $\beta_1,...,\beta_n$ s.t $x = \sum_{i=1}^n \beta_i v_i$. Then,
 	\begin{center}
-		$x-x=0=\sum_{i=0}^n (\alpha_i-\beta_i) v_i$
+		$x-x=0=\sum_{i=1}^n (\alpha_i-\beta_i) v_i$
 	\end{center} 
 	Then by definition of linear independence, 
 	\begin{center}
@@ -283,7 +283,7 @@ such that $x = \sum_{i=0}^m \alpha_i v_i$.
 \item[3.] Let $v_1,...,v_m \in \R^n$ be linearly dependent. \\
 Prove that for $x \in Span(v_1,...,v_m)$, 
 there exist infinitely many $\alpha_1,...,\alpha_m \in \R$ 
-such that $x = \sum_{i=0}^m \alpha_i v_i$.
+such that $x = \sum_{i=1}^m \alpha_i v_i$.
 \begin{solution}
     \fonteight
     By assumption, $x\in Span(v_1,\ldots,v_m)$. So
@@ -292,10 +292,10 @@ such that $x = \sum_{i=0}^m \alpha_i v_i$.
     \end{center}
     
     Since $v_1,\ldots,v_m$ are linearly dependent, there are $\gamma_1,\ldots,\gamma_m\in \R$ such that
-    \begin{center} $\sum_{i=0}^m\gamma_i v_i= 0$ \end{center}
+    \begin{center} $\sum_{i=1}^m\gamma_i v_i= 0$ \end{center}
     where not all $\gamma_i=0$.  \\
     Now, let $r \in \R$. Then,
-    \begin{center} $x = x+0 = \sum_{i=1}^m \beta_iv_i + r\sum_{i=0}^m\gamma_i v_i
+    \begin{center} $x = x+0 = \sum_{i=1}^m \beta_iv_i + r\sum_{i=1}^m\gamma_i v_i
     =  \sum_{i=1}^m (\beta_i +r\gamma_i)v_i $ \end{center} 
     This gives infinitely many distinct $\alpha$ where $\alpha_i=\beta_i+r\gamma_i$ for $r\in\R$.
 
@@ -323,9 +323,8 @@ False. Consider $B=\{(1,0),(0,1)\}$ and $W=Span((1,1))$.
 \begin{frame}
 \frametitle{Questions 3: Bases, Dimension}
 Let $V$ be the set of functions \\
-$$V \coloneqq \{ p: \R \to \R\ |\ p(x) = \sum_{k=0}^n a_k x^k\}$$ \\
-where $a_0,\dots,a_n \in \R$, and $x\in \R$ is \textit{constant}.
-\medskip
+$$V \coloneqq \{ p: \R \to \R\ |\ p(x) = \sum_{k=0}^n a_k x^k, \text{ where }a_0,\dots,a_n \in \R\}$$ \\
+\smallskip
 \begin{enumerate}
 	\item What kind of function does this set contain?
 	\item Define an addition operation $+: V\times V \to V$,\\
