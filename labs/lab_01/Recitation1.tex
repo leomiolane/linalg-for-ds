@@ -1,0 +1,361 @@
+\documentclass{beamer}
+\usepackage{amsthm}
+\usepackage[utf8]{inputenc}
+\usetheme{Madrid}
+\usepackage{../latex_style/packages_old}
+\usepackage{../latex_style/notations_old}
+\usepackage{outlines}
+\usepackage{enumitem}
+\renewenvironment{itemize}
+\usefonttheme{serif}
+\def\labelenumi{\theenumi}
+\usefonttheme{serif}
+
+%\setbeamertemplate{itemize items}[default]
+%\setbeamertemplate{enumerate items}[default]
+
+% define smaller font command
+\newcommand*{\horzbar}{\rule[.5ex]{2.5ex}{0.5pt}}
+\newcommand\fonteight{\fontsize{8}{9.6}\selectfont}
+\newcommand\fontten{\fontsize{10}{1.2}\selectfont}
+
+%define enumerate with periods
+\renewenvironment{enumerate}%
+{\begin{list}{\arabic{enumi}.}%  \langle ------ dot here
+      {\setlength{\leftmargin}{2.5em}%
+       \setlength{\itemsep}{-\parsep}%
+       \setlength{\topsep}{-\parskip}%%
+       \usecounter{enumi}}%
+ }{\end{list}}
+%define itemize with arrows
+\renewenvironment{itemize}%
+{\begin{list}{$\blacktriangleright$}%  \langle ------ dot here
+      {\setlength{\leftmargin}{2.5em}%
+       \setlength{\itemsep}{-\parsep}%
+       \setlength{\topsep}{-\parskip}%%
+       \usecounter{enumi}}%
+ }{\end{list}}
+
+%Information to be included in the title page:
+\title{Recitation 1}
+\author{Alex Dong}
+\institute{CDS, NYU}
+\date{Fall 2020}
+
+
+\makeatletter
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.4\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\insertshortauthor\expandafter\ifblank\expandafter{\beamer@shortinstitute}{}{~~(\insertshortinstitute)}
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.3\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.3\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+    \insertframenumber{} / \inserttotalframenumber\hspace*{2ex} 
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\setbeamertemplate{navigation symbols}{}
+\makeatother
+
+\begin{document}
+%----Slide 1-----------------------
+\frame{\titlepage} 
+%----Slide 2-----------------------
+\begin{frame}
+\frametitle{Announcements}
+Welcome!
+\begin{itemize}
+\item My Office hours: TBA (once I figure my schedule out)
+\item Rotating cohorts - if you are not scheduled to be in person, please join the online zoom call (w/ Carles or Irina)
+\item Recitations are for practice problems
+\item You will have time in recitation to solve the problems.
+\item Recitations will be released so you can look over/solve problems in advance.
+\end{itemize}
+\end{frame}
+
+%----Slide 3-----------------------
+\begin{frame}
+\frametitle{Why is Linear Algebra important?}
+Linear Algebra...
+\begin{itemize}
+\item Appears in ALL applied math, including \textit{data science}
+\item Is solvable. If you can write it down, you can solve it! \\
+    \qquad (not true for other math, e.g Diff Eq, Integrals)
+\item Is \textit{fundamental} to understanding tools in machine learning
+\end{itemize}
+
+Relevant applications we will cover in the class:
+\begin{itemize}
+\item Linear Regression
+\item Principal Component Analysis
+\item Gradient Descent
+\end{itemize}
+
+First year MSDS students are \textit{highly encouraged} to take this class.
+\end{frame}
+%----Slide 4-----------------------
+\begin{frame}
+\frametitle{Concept Review: Vector Spaces}
+
+\begin{definition}[Vector space]
+	    $V$ is a vector space over field $F$ when
+	    \fonteight
+		\begin{enumerate}
+		\item[1.] Closure under Addition: $x+y \in V$
+		\item[2.] Sum is commutative ($x+y = y+x$) and associative $x+(y+z)= (x+y)+z$
+		\item[3.] Additive Identity (in $V$): $0\in V$ ($x+0 =x$)
+		\item[4.] Additive Inverse: ($\forall x, \exists -x $ s.t $ x+(-x)=0$
+		\item[5.] Closure under Scalar Multiplication: $\alpha x \in V$
+		\item[6.] Multiplicative Identity (in $F$): $\alpha x \in V$
+		\item[7.] Compatibility in Multiplication: $\alpha (\beta x) = (\alpha \beta) x $
+		\item[8.] Distributivity: $(\alpha + \beta) x = \alpha x + \beta \cdot \vec{y}
+			 \text{ and }
+			\alpha  (x + y) = \alpha  x + \alpha \cdot y.$
+		\end{enumerate}
+\end{definition}
+Notice that ``vectors" are not explicitly defined. \\
+Optional: prove (after class) that $\R^3$ with standard definitions for addition and scalar multiplication
+ is vector space over field $\R$.
+\end{frame}
+
+%----Slide 5-----------------------
+\begin{frame}
+\frametitle{Concept Review: Vector Spaces}
+\begin{itemize}
+\item In this class,
+\begin{itemize}
+\item Our field is always $\R$. ($\C$ is also a field.)
+\item Standard definitions for vector addition, and scalar multiplication.
+\item But, V is (usually) $\R^n$, or (sometimes) $\R^{n\times n}$.
+\end{itemize}
+
+\item Everything in linear algebra is in a vector space!
+\item (!) A recurring concept in data science is to ``vectorize'' problems
+\begin{itemize}
+\item If you can transform/reframe your problem in linear algebra, you can (attempt) to solve it!
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+%----Slide 6-----------------------
+\begin{frame}
+\frametitle{Concept Review: Subspaces}
+\begin{definition}[Subspace]
+	A subset $S$ of a vector space $V$ is a \emph{subspace} if it is closed under addition and scalar multiplication.
+	\begin{enumerate}
+		\item[1.] Closure under Addition: $x+y \in V$
+		\item[2.] Closure under Scalar Multiplication: $\alpha x \in V$
+	\end{enumerate}
+\end{definition}
+\begin{itemize}
+\item A subspace is also a vector space!\\
+\item Everything in linear algebra is in a vector space. \\ 
+\item Anything \textit{interesting} in linear algebra is in a subspace. \\
+\item Subspaces are a recurring concept throughout this entire course. \\
+\end{itemize}
+\end{frame}
+
+%----Slide 7-----------------------
+\begin{frame}
+\frametitle{Questions 1: Subspaces, Span}
+  Recall that $\R^2=\{(x,y) : x,y\in\R \}$ can be thought
+  of as the $xy$-plane.  Consider the two vectors $v=(1,1)$ and
+  $w=(-1,2)$.  Describe the following sets geometrically.  Which are
+  subspaces of $\R^2$?
+  \begin{enumerate}
+  \item $\Span(v)$
+  \item $\Span(v,w)$
+  \item $\Span(v)\cup\Span(w)$, that is, the vectors in $\Span(v)$ or
+    $\Span(w)$
+  \item $\Span(v)\cap\Span(w)$, that is, the vectors in both $\Span(v)$ and
+    $\Span(w)$
+  \item $\{(1-t)v + tw : t\in[0,1]\}$
+  \item $\{(1-t)v+tw : t\in\R\}$
+  \item $\{\alpha v + \beta w : \alpha,\beta\geq 0\}$
+  \item $\Span(v,w,x)$ where $x=(0,5)$.
+  \item $\{(a,b)\in\R^2 : a^2+b^2\leq 25\}$
+  \item $\{(a,a)\in\R^2 : a\in\R\}$
+  \item $\{(a,a^2)\in\R^2 : a\in\R\}$
+  \item $\{(a,1)\in\R^2 : a\in\R\}$
+  \end{enumerate}
+\end{frame}
+
+%----Slide 8-----------------------
+\begin{frame}
+
+\frametitle{Solutions 1: Subspaces, Span }
+
+ Recall that $\R^2=\{(x,y) : x,y\in\R \}$ can be thought
+  of as the $xy$-plane.  Consider the two vectors $v=(1,1)$ and
+  $w=(-1,2)$.  Describe the following sets geometrically.  Which are
+  subspaces of $\R^2$?
+\begin{enumerate}
+  \item $\Span(v)$ \hfill True
+  \item $\Span(v,w)$ \hfill True
+  \item $\Span(v)\cup\Span(w)$, \hfill False
+  \item $\Span(v)\cap\Span(w)$, \hfill True
+  \item $\{(1-t)v + tw : t\in[0,1]\}$ \hfill False
+  \item $\{(1-t)v+tw : t\in\R\}$ \hfill False
+  \item $\{\alpha v + \beta w : \alpha,\beta\geq 0\}$ \hfill False
+  \item $\Span(v,w,x)$ where $x=(0,5)$. \hfill True
+  \item $\{(a,b)\in\R^2 : a^2+b^2\leq 25\}$ \hfill False
+  \item $\{(a,a)\in\R^2 : a\in\R\}$ \hfill True
+  \item $\{(a,a^2)\in\R^2 : a\in\R\}$ \hfill False
+  \item $\{(a,1)\in\R^2 : a\in\R\}$\hfill  False
+\end{enumerate}
+\end{frame}
+
+%----Slide 9-----------------------
+\begin{frame}
+\frametitle{Questions 2: Linear Independence, Bases, }
+
+\begin{enumerate}
+\item Let $v_1,v_2,v_3,v_4$ (all distinct) $\in \R^3$.\\
+Let $C_1 = \{v_1,v_2\}; C_2 = \{v_3,v_4\}$. \\
+If $C_1$ and $C_2$ are both linearly independent, 
+what are the possible values for $dim(Span\{v_1,v_2,v_3,v_4\})$? (No formal proof necessary)
+\smallskip
+\item Let $v_1,...,v_n \in \R^n$ be a basis of $\R^n$. \\
+Prove that for $x \in R^n$, there exists unique $\alpha_1,...,\alpha_n$
+such that $x = \sum_{i=0}^n \alpha_i v_i$.
+\smallskip
+\item Let $v_1,...,v_m \in \R^n$ be linearly dependent. \\
+Prove that for $x \in Span(v_1,...,v_m)$, 
+there exist infinitely many $\alpha_1,...,\alpha_m \in \R$ 
+such that $x = \sum_{i=0}^m \alpha_i v_i$.
+\smallskip
+\item True or False: If $B=\{v_1,\ldots,v_n\}$ is a basis for $\R^n$,
+  and $W$ is a subspace of $\R^n$, then some subset of $B$ is a basis
+  for $W$.
+\end{enumerate}
+\end{frame}
+
+%----Slide 10-----------------------
+\begin{frame}
+\frametitle{Solutions 2: Linear Independence, Bases }
+
+\begin{enumerate}
+	\item[1.] Let $v_1,v_2,v_3,v_4$ (all distinct) $\in \R^3$ .\\
+		Let $C_1 = \{v_1,v_2\}; C_2 = \{v_3,v_4\}$. \\
+		If $C_1$ and $C_2$ are both linearly independent, 
+		what are the possible values for $dim(Span\{v_1,v_2,v_3,v_4\})$? (No formal proof necessary.)
+	\begin{solution}
+		Either $C_1\subset Span(C_2)$ and the dimension is $2$, or the dimension is $3$.
+	\end{solution}
+\end{enumerate}
+\end{frame}
+%----Slide 11-----------------------
+
+\begin{frame}
+\frametitle{Solutions 2: Linear Independence, Bases}
+\begin{enumerate}
+	\item[2.] Let $v_1,...,v_n \in \R^n$ be a basis of $\R^n$. \\
+		Prove that for $x \in R^n$, there exists unique $\alpha_1,...,\alpha_n$
+		such that $x = \sum_{i=0}^n \alpha_i v_i$.
+	\begin{solution}
+	By definition of basis, $v_1,...,v_n$ is a linearly independent set, and spans $\R^n$. Since x $\in \R^n$, 
+	\begin{center}
+		$\exists \alpha_1,...,\alpha_n \text{ s.t } x = \sum_{i=0}^n \alpha_i v_i.$ 
+	\end{center}
+	Let $\beta_1,...,\beta_n$ s.t $x = \sum_{i=0}^n \beta_i v_i$. Then,
+	\begin{center}
+		$x-x=0=\sum_{i=0}^n (\alpha_i-\beta_i) v_i$
+	\end{center} 
+	Then by definition of linear independence, 
+	\begin{center}
+		$\alpha_i-\beta_i=0  \qquad \forall i \in 1,...,n$
+	\end{center}
+	So $\alpha_i=\beta_i, \forall i \in 1,...,n$ 
+	\end{solution}
+\end{enumerate}
+\end{frame}
+
+%----Slide 12-----------------------
+\begin{frame}
+\frametitle{Solutions 2: Linear Independence, Bases}
+\begin{enumerate}
+\item[3.] Let $v_1,...,v_m \in \R^n$ be linearly dependent. \\
+Prove that for $x \in Span(v_1,...,v_m)$, 
+there exist infinitely many $\alpha_1,...,\alpha_m \in \R$ 
+such that $x = \sum_{i=0}^m \alpha_i v_i$.
+\begin{solution}
+    \fonteight
+    By assumption, $x\in Span(v_1,\ldots,v_m)$. So
+    \begin{center}
+    $\exists \beta_1,...,\beta_m$ s.t $x=\sum_{i=1}^m \beta_iv_i$
+    \end{center}
+    
+    Since $v_1,\ldots,v_m$ are linearly dependent, there are $\gamma_1,\ldots,\gamma_m\in \R$ such that
+    \begin{center} $\sum_{i=0}^m\gamma_i v_i= 0$ \end{center}
+    where not all $\gamma_i=0$.  \\
+    Now, let $r \in \R$. Then,
+    \begin{center} $x = x+0 = \sum_{i=1}^m \beta_iv_i + r\sum_{i=0}^m\gamma_i v_i
+    =  \sum_{i=1}^m (\beta_i +r\gamma_i)v_i $ \end{center} 
+    This gives infinitely many distinct $\alpha$ where $\alpha_i=\beta_i+r\gamma_i$ for $r\in\R$.
+
+\end{solution}
+\end{enumerate}
+\end{frame}
+
+%----Slide 13-----------------------
+\begin{frame}
+\frametitle{Solutions 2: Linear Independence, Bases}
+\begin{enumerate}
+ \item[4.] True or False: If $B=\{v_1,\ldots,v_n\}$ is a basis for $\R^n$,
+  and $W$ is a subspace of $\R^n$, then some subset of $B$ is a basis
+  for $W$.
+  
+\begin{solution}
+False. Consider $B=\{(1,0),(0,1)\}$ and $W=Span((1,1))$.
+\end{solution}
+
+\end{enumerate}
+\end{frame}
+
+%----Slide 14-----------------------
+
+\begin{frame}
+\frametitle{Questions 3: Bases, Dimension}
+Let $V$ be the set of functions \\
+$$V \coloneqq \{ p: \R \to \R\ |\ p(x) = \sum_{k=0}^n a_k x^k\}$$ \\
+where $a_0,\dots,a_n \in \R$, and $x\in \R$ is \textit{constant}.
+\medskip
+\begin{enumerate}
+	\item What kind of function does this set contain?
+	\item Define an addition operation $+: V\times V \to V$,\\
+	 and a scalar multiplication operation $\cdot: \R \times V \to V$, \\
+	 such that the triple $(V,+,\cdot$) is a vector space.
+	\item Find a basis for this vector space.
+	\item What is the dimension of this vector space?
+\end{enumerate}
+\end{frame}
+
+%----Slide 15-----------------------
+\begin{frame}
+\frametitle{Solutions 3: Bases, Dimension}
+\begin{enumerate}
+	\item What kind of function does this set contain?\\
+	\item Define an addition operation $+: V\times V \to V$,\\
+	 and a scalar multiplication operation $\cdot: \R \times V \to V$, \\
+	 such that the triple $(V,+,\cdot$) is a vector space.\\
+	\item Find a basis for this vector space.\\
+	\item What is the dimension of this vector space?\\
+\end{enumerate}
+
+\begin{solution}
+\begin{enumerate}
+	\item Polynomials evaluated at x
+	\item Standard definitions for function addition and scalar multiplication	 
+	\item ${1,x,x^2,...,x^n}$
+	\item $n+1$
+\end{enumerate}
+\end{solution}
+\end{frame}
+
+\end{document}
