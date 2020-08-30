@@ -1,7 +1,7 @@
 \documentclass{beamer}
 
-\usepackage{../../latex_style/beamerthemeExecushares}
-\usepackage{../../latex_style/notations}
+\usepackage{../../../latex_style/beamerthemeExecushares}
+\usepackage{../../../latex_style/notations}
 
 
 \title{Session 1: Vector spaces}
@@ -27,13 +27,6 @@
 	\end{enumerate}
 \end{frame}
 
-\newcommand{\grid}{%
-	\begin{tikzpicture}[overlay]
-		\useasboundingbox (0,0) rectangle(\slidewidth,\slideheight);
-		\draw[step=0.5,ExecusharesGrid,thin,xshift=12.0cm,yshift=0.76cm] (-13.5cm,-8.8cm) grid (0.0,0.0)
-	\end{tikzpicture}
-	\vspace{-0.5cm}
-}
 
 \setcounter{framenumber}{0}
 \setcounter{showSlideNumbers}{1}
@@ -129,6 +122,7 @@
 \end{frame}
 
 \begin{frame}[t]{Questions on logistics ?}
+	\grid
 \end{frame}
 
 \section{Vector spaces and subspaces}
@@ -184,6 +178,7 @@
 \end{frame}
 
 \begin{frame}[t]{Linear dependency}
+	\grid
 	\vspace{-0.5cm}
 	\begin{exampleblock}{}
 		\begin{itemize}
@@ -195,6 +190,7 @@
 \end{frame}
 
 \begin{frame}[t]{Basis}
+	\grid
 	\vspace{-0.5cm}
 	\begin{exampleblock}{}
 		A family $(x_1, \dots, x_n)$ of vectors of $V$ is a basis of $V$ if
@@ -208,6 +204,7 @@
 \section{The dimension}
 
 \begin{frame}[t]{A useful lemma}
+	\grid
 	\vspace{-0.4cm}
 	\begin{block}{\bf Lemma}
 		Let $v_1, \dots, v_n \in V$
@@ -219,12 +216,14 @@
 \end{frame}
 
 \begin{frame}[t]{Definition of the dimension}
+	\grid
 	\begin{block}{\bf Definition}
 		We say that a vector space $V$ has dimension $n$ if it admits a basis $(v_1, \dots, v_n)$ with $n$ vectors.
 	\end{block}
 \end{frame}
 
 \begin{frame}[t]{The dimension is well defined!}
+	\grid
 	\begin{block}{\bf Theorem}
 		If $V$ admits a basis $(v_1, \dots, v_n)$, then every basis of $V$ has also $n$ vectors. We say that $V$ has dimension $n$ and write $\dim(V) = n$.
 	\end{block}
@@ -235,6 +234,7 @@
 \end{frame}
 
 \begin{frame}[t]{Properties of the dimension}
+	\grid
 	\vspace{-0.4cm}
 	\begin{block}{\bf Proposition}
 		Let $V$ be a vector space that has dimension $\dim(V) = n$. Then
@@ -254,6 +254,7 @@
 
 
 \begin{frame}[t]{Properties of the dimension}
+	\grid
 	\vspace{-0.3cm}
 	\begin{block}{\bf Proposition}
 		Let $V$ be a vector space of dimension $n$ and let $x_1, \dots, x_n \in V$.
@@ -277,6 +278,7 @@
 \end{frame}
 
 \begin{frame}[t]{An inequality}
+	\grid
 	\vspace{-0.4cm}
 	\begin{block}{\bf Proposition}
 		Let	$U$ and $V$ be two subspaces of $\R^n$. Assume that $U \subset V$. Then
@@ -293,6 +295,7 @@
 \end{frame}
 
 \begin{frame}[t]{A bit of vocabulary}
+	\grid
 	\vspace{-0.4cm}
 	\begin{block}{\bf Definition}
 		Let $S$ be a subspace of $\R^n$.
@@ -305,6 +308,7 @@
 
 \section{Coordinates}
 \begin{frame}[t]{Coordinates of a vector in a basis}
+	\grid
 	\vspace{-0.4cm}
 	\begin{block}{\bf Definition}
 		If $(v_1, \dots, v_n)$ is a basis of $V$, then for every $x \in V$ there exists a unique vector $(\alpha_1, \dots, \alpha_n) \in \R^n$ such that
@@ -321,6 +325,7 @@
 \end{frame}
 
 \begin{frame}[t]{Exercise}
+	\grid
 	\vspace{-0.8cm}
 	\begin{exampleblock}{}
 		\begin{enumerate}

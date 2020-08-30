@@ -1,7 +1,7 @@
 \documentclass[11pt,nocut]{article}
 
-\usepackage{../latex_style/packages}
-\usepackage{../latex_style/notations}
+\usepackage{../../latex_style/packages}
+\usepackage{../../latex_style/notations}
 
 \title{\vspace{-2.0cm}%
 	Optimization and Computational Linear Algebra for Data Science\\
@@ -227,7 +227,7 @@ The next proposition is very useful for proving that a family $(x_1, \dots, x_n)
 		\end{enumerate}
 	\end{proposition}
 
-	In words, if the family we consider has as many vectors as the dimension of $V$ then we only have to check one of the two points of Definition \ref{def:basis}!
+	In words, if the family we consider has as many vectors as the dimension of $V$, then we only have to check one of the two points of Definition \ref{def:basis}!
 
 	\begin{proposition}\label{prop:ineq_dim}
 	Let	$U$ and $V$ be two subspaces of $\R^n$. Assume that $U \subset V$. Then
@@ -249,7 +249,7 @@ The next proposition is very useful for proving that a family $(x_1, \dots, x_n)
 	We say that $(\alpha_1, \dots, \alpha_n)$ are the coordinates of $x$ in the basis $(v_1, \dots, v_n)$.
 \end{proposition}
 \begin{proof}
-	\textbf{Existence}. $(v_1, \dots, v_n)$ forms a basis of $V$ therefore  $V = \Span(v_1, \dots, v_n)$. We get that $x \in \Span(v_1, \dots, v_n)$ which gives that there exists $\alpha_1, \dots, \alpha_n$ such that $x = \alpha_1 v_1 + \cdot + \alpha_n v_n$.
+	\textbf{Existence}. $(v_1, \dots, v_n)$ forms a basis of $V$ therefore  $V = \Span(v_1, \dots, v_n)$. We get that $x \in \Span(v_1, \dots, v_n)$ which gives that there exists $\alpha_1, \dots, \alpha_n$ such that $x = \alpha_1 v_1 + \cdots + \alpha_n v_n$.
 	\\
 	\textbf{Uniqueness}. Let $\alpha_1, \dots, \alpha_n, \beta_1, \dots, \beta_n \in \R$ such that
 	\begin{align*}
