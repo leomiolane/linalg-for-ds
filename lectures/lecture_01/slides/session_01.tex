@@ -120,9 +120,10 @@
 	\hspace*{-1.2cm}
 	\includegraphics[width=12.9cm]{gradescope.png}
 \end{frame}
+
 \begin{frame}{Midterm and Final}
 	\begin{itemize}
-		\item Midterm ($\sim$ mid-October) and Final will be <<take-home exams>>.
+		\item {\bf Midterm} ($\sim$ mid-October) and {\bf Final} will be <<take-home exams>>.
 			\vspace{0.3cm}
 		\item Limited time: after downloading the Midterm/Final questions, you will have to upload your work within few hours.
 	\end{itemize}
@@ -130,6 +131,24 @@
 	\begin{center}
 		Check out the syllabus on the course webpage!
 	\end{center}
+\end{frame}
+
+\begin{frame}[t]{Office hours + feedback}
+	\begin{itemize}
+		\item I will have 2 office hours slots (+appointments):
+			\begin{itemize}
+				\item One during New York 'standard hours'.
+				\item One early morning or late evening for students with a big time difference.
+			\end{itemize}
+			\vspace{1cm}
+		\item Please fill the Google form with you preferences.
+			\vspace{1cm}
+		\item Feedback, remarks about the lectures / videos / recitations / homeworks ... :
+			\begin{itemize}
+				\item email me!
+				\item link for anonymous feedback on the course's website.
+			\end{itemize}
+	\end{itemize}
 \end{frame}
 
 \begin{frame}[t]{Questions on logistics ?}
@@ -156,7 +175,7 @@
 	\grid
 	\vspace{-0.7cm}
 	\begin{exampleblock}{}
-		A subset $S$ of a vector space $V$ is called a \textbf{subspace} if it is closed under addition and multiplication by a scalar.
+		A non-empty subset $S$ of a vector space $V$ is called a \textbf{subspace} if it is closed under addition and multiplication by a scalar.
 	\end{exampleblock}
 	\textbf{Example}: For all $v \in \R^n$, 
 	$$
@@ -236,11 +255,12 @@
 
 \begin{frame}[t]{The dimension is well defined!}
 	\grid
+	\vspace{-0.3cm}
 	\begin{block}{\bf Theorem}
-		If $V$ admits a basis $(v_1, \dots, v_n)$, then every basis of $V$ has also $n$ vectors. We say that $V$ has dimension $n$ and write $\dim(V) = n$.
+		If $V$ admits a basis $(v_1, \dots, v_n)$, then every basis of $V$ has also $n$ vectors. 
 	\end{block}
 	\begin{proof}
-		\vspace{3cm}
+		\vspace{4.5cm}
 		\vfill
 	\end{proof}
 \end{frame}
@@ -250,15 +270,15 @@
 	\vspace{-0.4cm}
 	\begin{block}{\bf Proposition}
 		Let $V$ be a vector space that has dimension $\dim(V) = n$. Then
-		\begin{itemize}
-			\item Any family of vectors of $V$ that are linearly independent contains at most $n$ vectors.
-				\below{i.e.\ if $x_1, \dots, x_k \in V$ are linearly independent, then $k \leq n$.}
+		\begin{enumerate}
 			\item Any family of vectors of $V$ that spans $V$ contains at least $n$ vectors.
-				\below{i.e.\ if $x_1, \dots, x_k \in V$ are such that $\Span(x_1, \dots, x_k) = V$, then $k \geq n$.}
-		\end{itemize}
+				%\below{i.e.\ if $x_1, \dots, x_k \in V$ are such that $\Span(x_1, \dots, x_k) = V$, then $k \geq n$.}
+			\item Any family of vectors of $V$ that are linearly independent contains at most $n$ vectors.
+				%\below{i.e.\ if $x_1, \dots, x_k \in V$ are linearly independent, then $k \leq n$.}
+		\end{enumerate}
 	\end{block}
 	\begin{proof}
-		\vspace{2cm}
+		\vspace{3cm}
 		\vfill
 	\end{proof}
 	\pause
@@ -283,7 +303,7 @@
 	\vspace{0.3cm}
 	\textbf{Example:} $x_1 = (12,37)$ and $x_2 = (-9,17)$ form a basis of $\R^2$.
 
-	\vspace{1.9cm}
+	\vspace{2.2cm}
 
 	\begin{proof}[of the Proposition]
 	\end{proof}
@@ -294,8 +314,10 @@
 	\vspace{-0.4cm}
 	\begin{block}{\bf Proposition}
 		Let	$U$ and $V$ be two subspaces of $\R^n$. Assume that $U \subset V$. Then
+	\vspace{-0.2cm}
 		$$
 		\dim(U) \leq \dim(V) \leq n.
+	\vspace{-0.2cm}
 		$$
 		If \textbf{moreover} $\dim(U) = \dim(V)$, then $U = V$.
 	\end{block}
@@ -336,6 +358,10 @@
 	\end{proof}
 \end{frame}
 
+\begin{frame}[t]{Coordinates of a vector in a basis}
+	\grid
+\end{frame}
+
 \begin{frame}[t]{Exercise}
 	\grid
 	\vspace{-0.8cm}
@@ -356,7 +382,7 @@
 			\begin{itemize}
 				\item Image = Grid of pixels
 				\item Represented as a vector $v \in \R^n$, for some large $n$.
-				\item One need to store $n$ numbers.
+				\item One needs to store $n$ numbers.
 			\end{itemize}
 		\end{column}
 		\begin{column}{0.5\textwidth}
@@ -406,6 +432,8 @@
 	\begin{exampleblock}{}
 		\begin{itemize}
 			\item There exists a basis $(w_1, \dots, w_n)$ of $\R^n$ in which <<real>> images $v \in \R^n$ are (approximately) \textbf{sparse}. 
+				
+	\vspace{0.2cm}
 
 			\item This means that the coordinates $(\alpha_1, \dots, \alpha_n)$ of $v$ in the basis $(w_1, \dots, w_n)$ contains a lot of zeros.
 		\end{itemize}
@@ -440,6 +468,9 @@
 \backupbegin
 \begin{frame}[t]{Questions?}
 	\grid
+	\pause
+	\pause
+	\pause
 \end{frame}
 \backupend
 
