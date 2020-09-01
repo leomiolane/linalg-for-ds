@@ -1,0 +1,614 @@
+\documentclass[table]{beamer}
+\usepackage{xcolor}
+
+\usepackage{amsthm}
+\usepackage[utf8]{inputenc}
+\usetheme{Madrid}
+\usepackage{../latex_style/packages_old}
+\usepackage{../latex_style/notations_old}
+\usepackage{outlines}
+\usepackage{enumitem}
+\renewenvironment{itemize}
+\usefonttheme{serif}
+\def\labelenumi{\theenumi}
+\usefonttheme{serif}
+
+%\setbeamertemplate{itemize items}[default]
+%\setbeamertemplate{enumerate items}[default]
+
+% define smaller font command
+\newcommand*{\horzbar}{\rule[.5ex]{2.5ex}{0.5pt}}
+\newcommand\fonteight{\fontsize{8}{9.6}\selectfont}
+\newcommand\fontten{\fontsize{10}{1.2}\selectfont}
+\newcommand\fonttwelve{\fontsize{12}{1.44}\selectfont}
+
+%define enumerate with periods
+\renewenvironment{enumerate}%
+{\begin{list}{\arabic{enumi}.}%  \langle ------ dot here
+      {\setlength{\leftmargin}{2.5em}%
+       \setlength{\itemsep}{-\parsep}%
+       \setlength{\topsep}{-\parskip}%%
+       \usecounter{enumi}}%
+ }{\end{list}}
+%define itemize with arrows
+\renewenvironment{itemize}%
+{\begin{list}{$\blacktriangleright$}%  \langle ------ dot here
+      {\setlength{\leftmargin}{2.5em}%
+       \setlength{\itemsep}{-\parsep}%
+       \setlength{\topsep}{-\parskip}%%
+       \usecounter{enumi}}%
+ }{\end{list}}
+
+%Information to be included in the title page:
+\title{Recitation 2}
+\author{Alex Dong}
+\institute{CDS, NYU}
+\date{Fall 2020}
+
+
+\makeatletter
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.4\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\insertshortauthor\expandafter\ifblank\expandafter{\beamer@shortinstitute}{}{~~(\insertshortinstitute)}
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.3\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.3\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+    \insertframenumber{} / \inserttotalframenumber\hspace*{2ex} 
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\setbeamertemplate{navigation symbols}{}
+\makeatother
+
+\begin{document}
+%----Slide 1-----------------------
+
+\frame{\titlepage} 
+
+%----Slide 2-----------------------
+
+\begin{frame}
+\frametitle{Some Etymology...}
+
+\begin{definition}[Linearity: Wikipedia]
+The property of a mathematical relationship (function) that can be graphically represented as a straight line.
+\end{definition}
+
+\begin{definition}[Algebra: Wikipedia]
+The study of mathematical symbols and the rules for manipulating these symbols.
+\end{definition}
+\begin{itemize}
+\item Linear algebra is the study of \textit{manipulating} letters/symbols which are used to represent linear transformations.
+\item Two types of manipulation....
+\end{itemize}
+\end{frame}
+
+%----Slide 3-----------------------
+
+\begin{frame}
+\frametitle{Type 1: Linear Transformations as Letters}
+\begin{definition}[Linear Transformation]	        
+		A function $L: \R^m \to \R^n$ is linear if
+	\begin{enumerate}
+		\item for all $v \in \R^m$ and all $\alpha \in \R$ we have $L(\alpha v) = \alpha L(v)$ and
+		\item for all $v,w \in \R^m$ we have $L(v + w) = L(v) + L(w)$.
+	\end{enumerate}
+\end{definition}
+\begin{itemize}
+\item Our linear transformation here is represented by the \textit{letter} $L$.
+\item We will examine the rules behind manipulating $L$ from an \textit{algebraic} perspective, such as...
+\begin{itemize}
+\item Associative? Commutative?
+\item Invertible?
+\item Derivatives? (Homework 9)
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Type 2: Linear Transformations as Matrices}
+\begin{theorem}[Matrix Representation Theorem]
+All linear transformations represent matrices;\\
+ all matrices represent linear transformations.
+\end{theorem}
+\begin{itemize}
+\item Important, but boring theorem.
+\item Linear transformations can also be represented by matrices 
+$L = \begin{bmatrix}
+			L_{1,1} & \hdots & L_{1,n}  \\
+			\vdots  & \ddots & \vdots  \\
+			L_{m,1} & \hdots & L_{m,n}   \\
+			\end{bmatrix}$
+\item We will also examine the \textit{mechanical} perspective of linear transformations, such as...
+\begin{itemize}
+\item How to actually multiply? 
+\item Interpretation of multiplication
+\item Using matrix multiplication simply for calculations. (Removing the notion of a transformation)
+\end{itemize}
+\item (!) Think about which framework to use in your proofs!
+\end{itemize}
+\end{frame}
+
+%----Slide 4-----------------------
+
+\begin{frame}
+\frametitle{A Note about Gaussian Elimination}
+\begin{itemize}
+\item Gaussian Elimination is a procedure to calculate the solutions of a matrix equation.\\
+\item Not covered in this course, but you should be familiar with it.
+\item If this is the first time you've heard this, then please do some light studying to familiarize yourself with the process.\\
+\item Just know this at the high school/undergrad level
+\item \textbf{If you've already studied it in previous courses, that should be enough.}\\
+\end{itemize}
+\end{frame}
+
+%----Slide 5-----------------------
+\begin{frame}
+\frametitle{Questions 1: Linear Transformations}
+Which of the following functions are linear?  If the function is
+linear, what is the kernel?
+  \begin{enumerate}
+  \item $f_1:\R^2\to\R^2$ such that $f_1(a,b) = (2a,a+b)$
+  \item $f_2:\R^2\to\R^3$ such that $f_2(a,b) = (a+b,2a+2b,0)$
+  \item $f_3:\R^2\to\R^3$ such that $f_3(a,b) = (2a,a+b,1)$
+  \item $f_4:\R^2\to\R$ such that $f_4(a,b) = \sqrt{a^2+b^2}$
+  \item $f_5:\R\to\R$ such that $f_5(x) = 5x+3$
+  \end{enumerate}
+\end{frame}
+
+%----Slide 6-----------------------
+\begin{frame}
+\frametitle{Solutions 1: Linear Transformations}
+Which of the following functions are linear?  If the function is
+linear, what is the kernel?
+  \begin{enumerate}
+  \item $f_1:\R^2\to\R^2$ such that $f_1(a,b) = (2a,a+b)$
+  \item $f_2:\R^2\to\R^3$ such that $f_2(a,b) = (a+b,2a+2b,0)$
+  \item $f_3:\R^2\to\R^3$ such that $f_3(a,b) = (2a,a+b,1)$
+  \item $f_4:\R^2\to\R$ such that $f_4(a,b) = \sqrt{a^2+b^2}$
+  \item $f_5:\R\to\R$ such that $f_5(x) = 5x+3$
+  \end{enumerate}
+\begin{solution}
+\begin{enumerate}
+  \item Linear, Kernel is $\{0\}$.
+  \item Linear, Kernel is $\{(c,-c) : c\in\R\}$.
+  \item Not linear, $f_3(0,0)=(0,0,1)$.
+  \item Not linear, $f_4(1,0)+f_4(0,1)=2$ and $f_4(1,1)=\sqrt{2}$.
+  \item Not linear, $f_5(0)=3$.
+  \end{enumerate}
+\end{solution}
+\end{frame}
+
+%----Slide 7-----------------------
+
+\begin{frame}
+\frametitle{Matrix Notation}
+\begin{itemize}
+\item A linear transformation $ T: \R^n \to \R^m$ is represented by a $m \times n $ matrix
+which is an element of $\R^{m\times n}$. (!! Note the order !!)\\
+T = \bordermatrix{ &  & n &  \cr
+       & T_{1,1} & ... & T_{1,n} \cr
+      m & \vdots & \ddots & \vdots \cr
+       & T_{m,1} & \dots & T_{m,n} }
+\\
+\medskip
+\item This matrix has $m$ rows and $n$ columns. \\
+\item $T_{i,j}$ represents the entry in the $i$th row and $j$th column.
+\end{itemize}
+\end{frame}
+
+%----Slide 8-----------------------
+\begin{frame}
+\frametitle{Matrix Multiplication Mechanics: Inner Products}
+\begin{itemize}
+\item Next few slides go over ``Inner Product Method'' of matrix multiplication.
+\begin{itemize}
+
+\item (This is a term I made up....)
+\item We haven't covered inner products yet
+\end{itemize}
+\item Each entry of the resultant matrix is an inner product of a row of the first matrix and a column of the second matrix
+\item This is the \textit{exact} definition of matrix multiplication.\\
+\item Most straightforward way to calculate a matrix product
+\end{itemize}
+\end{frame}
+
+%----Slide 9-----------------------
+
+\begin{frame}
+\frametitle{Matrix Multiplication Mechanics: Inner Products}
+Let $A\in \R^{n\times k}$, $B \in \R^{k\times m}$\\
+Rows of first matrix ``line up" with columns of the second matrix.\\
+\fonteight
+$\left[\begin{matrix}
+\rowcolor{red!20}    a_{1,1} & \hdots & a_{1,k} \\ 
+\rowcolor{blue!20}   a_{2,1} & \hdots & a_{2,k} \\ 
+                      \vdots & \hdots & \vdots \\
+\rowcolor{green!20}  a_{n-1,1} & \hdots & a_{n-1,k} \\ 
+\rowcolor{yellow!20} a_{n,1} & \hdots & a_{n,k} \\ 
+\end{matrix}\right]$
+$\left[\begin{array}{>{\columncolor{gray!20}}ccccc}
+b_{1,1} & b_{1,2} &\hdots & b_{1,m-1} & b_{1,m} \\ 
+\vdots & \vdots & \hdots & \vdots & \vdots \\
+b_{k,1} &  b_{k,2} &\hdots & b_{k,m-1} & b_{k,m} 
+\end{array}\right]$
+$=
+\left[\begin{array}{ccccc}
+{\cellcolor{red!20}}    \sum_{i=0}^k a_{1,i}b_{i,1} & \hdots & \hdots & & \\
+{\cellcolor{blue!20}}   \sum_{i=0}^k a_{2,i}b_{i,1} & \hdots & \hdots& & \\
+                        \vdots & \hdots & \hdots & & \\
+{\cellcolor{green!20}}  \sum_{i=0}^k a_{n-1,i}b_{i,1} & \hdots& \hdots& & \\
+{\cellcolor{yellow!20}} \sum_{i=0}^k a_{n,i}b_{i,1} & \hdots& \hdots& & \\
+\end{array}\right]
+$
+\end{frame}
+
+%----Slide 10-----------------------
+
+\begin{frame}
+\frametitle{Matrix Multiplication Mechanics: Inner Products}
+Let $A\in \R^{n\times k}$, $B \in \R^{k\times m}$\\
+Rows of first matrix ``line up" with columns of the second matrix.\\
+\fonteight
+$\left[\begin{matrix}
+\rowcolor{red!20}    a_{1,1} & \hdots & a_{1,k} \\ 
+\rowcolor{blue!20}   a_{2,1} & \hdots & a_{2,k} \\ 
+                      \vdots & \hdots & \vdots \\
+\rowcolor{green!20}  a_{n-1,1} & \hdots & a_{n-1,k} \\ 
+\rowcolor{yellow!20} a_{n,1} & \hdots & a_{n,k} \\ 
+\end{matrix}\right]$
+$\left[\begin{array}{c>{\columncolor{gray!20}}cccc}
+b_{1,1} & b_{1,2} &\hdots & b_{1,m-1} & b_{1,m} \\ 
+\vdots & \vdots & \hdots & \vdots & \vdots \\
+b_{k,1} &  b_{k,2} &\hdots & b_{k,m-1} & b_{k,m} 
+\end{array}\right]$
+$=
+\left[\begin{array}{ccccc}
+\hdots & {\cellcolor{red!20}}    \sum_{i=0}^k a_{1,i}b_{i,2} & \hdots & & \\
+\hdots & {\cellcolor{blue!20}}   \sum_{i=0}^k a_{2,i}b_{i,2} & \hdots & & \\
+\hdots &                        \vdots & \hdots & & \\
+\hdots & {\cellcolor{green!20}}  \sum_{i=0}^k a_{n-1,i}b_{i,2} & \hdots& & \\
+\hdots & {\cellcolor{yellow!20}} \sum_{i=0}^k a_{n,i}b_{i,2}& \hdots& & \\
+\end{array}\right]
+$
+\end{frame}
+
+%----Slide 11-----------------------
+
+\begin{frame}
+\frametitle{Matrix Multiplication Mechanics: Inner Products}
+Let $A\in \R^{n\times k}$, $B \in \R^{k\times m}$\\
+Rows of first matrix ``line up" with columns of the second matrix.\\
+\fonteight
+$\left[\begin{matrix}
+\rowcolor{red!20}    a_{1,1} & \hdots & a_{1,k} \\ 
+\rowcolor{blue!20}   a_{2,1} & \hdots & a_{2,k} \\ 
+                      \vdots & \hdots & \vdots \\
+\rowcolor{green!20}  a_{n-1,1} & \hdots & a_{n-1,k} \\ 
+\rowcolor{yellow!20} a_{n,1} & \hdots & a_{n,k} \\ 
+\end{matrix}\right]$
+$\left[\begin{array}{cccc>{\columncolor{gray!20}}c}
+b_{1,1} & b_{1,2} &\hdots & b_{1,m-1} & b_{1,m} \\ 
+\vdots & \vdots & \hdots & \vdots & \vdots \\
+b_{k,1} &  b_{k,2} &\hdots & b_{k,m-1} & b_{k,m} 
+\end{array}\right]$
+$=
+\left[\begin{array}{ccccc}
+\hdots & \hdots & {\cellcolor{red!20}}    \sum_{i=0}^k a_{1,i}b_{i,m}  \\
+\hdots & \hdots & {\cellcolor{blue!20}}   \sum_{i=0}^k a_{2,i}b_{i,m}  \\
+\hdots & \hdots &                        \vdots & \\
+\hdots & \hdots & {\cellcolor{green!20}}  \sum_{i=0}^k a_{n-1,i}b_{i,m}  \\
+\hdots & \hdots &{\cellcolor{yellow!20}} \sum_{i=0}^k a_{n,i}b_{i,m} \\
+\end{array}\right]
+$
+\smallskip
+\fonttwelve
+\begin{itemize}
+\item This is the \textit{exact} definition of matrix multiplication.\\
+\item Most straightforward way to calculate a matrix product
+\end{itemize}
+\end{frame}
+
+%----Slide 12-----------------------
+\begin{frame}
+\frametitle{More M.M.M: Linear Combination of Columns}
+\begin{itemize}
+\item Next few slides go over ``Linear Combination of Columns'' method of matrix multiplication.
+\begin{itemize}
+\item (Also a term I made up....heh...)
+\item We \textit{have} covered linear combinations :)
+\end{itemize}
+\item Each \textit{column} of the result is a \textit{linear combination of the columns} of the first matrix.
+\item Much more interpretable!
+\item (!) Keep an eye out for this 
+\item Less straightforward way of calculating
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{More M.M.M: Linear Combination of Columns}
+Each column of the $AB$ is a linear combination of the columns of $A$.\\
+$
+\left[\begin{array}{>{\columncolor{red!20}}c>{\columncolor{blue!20}}cc>{\columncolor{green!20}}c >{\columncolor{yellow!20}}c}
+\vline & \vline & \hdots & \vline  & \vline \\ 
+\mathbf{a_1}    & \mathbf{a_2}    & \hdots & \mathbf{a_{k-1}}   &  \mathbf{a_k} \\
+\vline & \vline & \hdots & \vline  & \vline \\ 
+\end{array}\right]
+$
+$
+\left[\begin{matrix}
+{\cellcolor{red!20}}    b_{1,1}       & \hdots &   b_{1,m}  \\ 
+{\cellcolor{blue!20}}   b_{2,1}       & \hdots &   b_{2,m}  \\ 
+                          \vdots   & \vdots &   \vdots \\
+{\cellcolor{green!20}} b_{k-1,1}  & \hdots &   b_{k-1,m}  \\ 
+{\cellcolor{yellow!20}} b_{k,1}  & \hdots &   b_{k,m}
+\end{matrix}\right]
+$
+$=
+\left[\begin{array}{>{\columncolor{gray!20}}ccc}
+\vline  & \hdots   & \vline \\ 
+\sum_{i=1}^k \mathbf{a_i} b_{i,1}   & \hdots &  \sum_{i=1}^k \mathbf{a_i} b_{i,m} \\
+\vline  & \hdots  & \vline \\ 
+\end{array}\right]
+$
+
+\end{frame}
+
+\begin{frame}
+\frametitle{More M.M.M: Linear Combination of Columns}
+Each column of the $AB$ is a linear combination of the columns of $A$.\\
+%{>{\columncolor{red!20}}c>{\columncolor{blue!20}}c>{\columncolor{green!20}}cc >{\columncolor{yellow!20}}c}
+$
+\left[\begin{array}{>{\columncolor{red!20}}c>{\columncolor{blue!20}}cc>{\columncolor{green!20}}c >{\columncolor{yellow!20}}c}
+\vline & \vline & \hdots & \vline  & \vline \\ 
+\mathbf{a_1}    & \mathbf{a_2}    & \hdots & \mathbf{a_{k-1}}   &  \mathbf{a_k} \\
+\vline & \vline & \hdots & \vline  & \vline \\ 
+\end{array}\right]
+$
+$
+\left[\begin{matrix}
+b_{1,1}    & \hdots &   {\cellcolor{red!20}}  b_{1,m}  \\ 
+b_{2,1}    & \hdots &   {\cellcolor{blue!20}}   b_{2,m}  \\ 
+  \vdots   & \vdots &   \vdots \\
+b_{k-1,1}  & \hdots &   {\cellcolor{green!20}} b_{k-1,m}  \\ 
+b_{k,1}    & \hdots &   {\cellcolor{yellow!20}}b_{k,m}
+\end{matrix}\right]
+$
+$=
+\left[\begin{array}{cc>{\columncolor{gray!20}}c}
+\vline  & \hdots   & \vline \\ 
+\sum_{i=1}^k \mathbf{a_i} b_{i,1}   & \hdots &  \sum_{i=1}^k \mathbf{a_i} b_{i,m} \\
+\vline  & \hdots  & \vline \\ 
+\end{array}\right]
+$
+
+\end{frame}
+
+\begin{frame}
+\frametitle{More M.M.M: Linear Combination of Columns}
+One dimensional case (for $B$):\\
+$
+\left[\begin{array}{>{\columncolor{red!20}}c>{\columncolor{blue!20}}cc>{\columncolor{green!20}}c >{\columncolor{yellow!20}}c}
+\vline & \vline & \hdots & \vline  & \vline \\ 
+\mathbf{a_1}    & \mathbf{a_2}    & \hdots & \mathbf{a_{k-1}}   &  \mathbf{a_k} \\
+\vline & \vline & \hdots & \vline  & \vline \\ 
+\end{array}\right]
+$
+$
+\left[\begin{matrix}
+{\cellcolor{red!20}}    b_{1,1}  \\ 
+{\cellcolor{blue!20}}   b_{2,1}  \\
+                          \vdots \\
+{\cellcolor{green!20}} b_{k-1,1} \\
+{\cellcolor{yellow!20}} b_{k,1}  \\
+\end{matrix}\right]
+$
+$=
+\left[\begin{array}{>{\columncolor{gray!20}}c}
+\vline \\
+\sum_{i=1}^k \mathbf{a_i} b_{i,1} \\
+\vline   \\
+\end{array}\right]
+$\\
+\smallskip
+\begin{itemize}
+\item Result is in the span of columns of A!
+\item Much more interpretable!
+\item (!) Keep an eye out for this, especially if columns of A have meaning.
+\end{itemize}
+
+\end{frame}
+
+%----Slide 9-----------------------
+
+\begin{frame}
+\frametitle{Questions 2: Matrix Manipulation}
+Let 
+$A = \begin{bmatrix}
+			5 & 0 & 0  \\
+			0 & 0 & 1  \\
+			0 & 1 & 0   \\
+			\end{bmatrix}$
+$B = \begin{bmatrix}
+			1 & 0 & 0 & 2 \\
+			0 & 1 & 0 & 3 \\
+			0 & 0 & 1 & 4 \\
+			\end{bmatrix}$
+$C = \begin{bmatrix}
+			0 & 0 & 0 & 0  \\
+			2 & 1 & 0 & 0 \\
+			1 & 0 & 0 & 1  \\
+			0 & 0 & 1 & 0  \\
+			\end{bmatrix}$
+  \begin{enumerate}
+  \item Calculate AB
+  \item Calculate BC
+  \item What does A do to B?
+  \item What does C do to B?
+  \item Can you find an $x$ s.t 
+  $Cx = \begin{bmatrix}
+  1 \\
+  1 \\
+  1 \\
+  1 \\
+  \end{bmatrix}$?
+  \end{enumerate}
+\end{frame}
+
+%----Slide 10-----------------------
+
+\begin{frame}
+\frametitle{Solutions 2: Matrix Manipulation}
+\begin{solution}
+\begin{enumerate}
+  \item $AB = \begin{bmatrix}
+			5 & 0 & 0 & 10  \\
+			0 & 0 & 1 & 4   \\
+			0 & 1 & 0 & 3   \\
+			\end{bmatrix}$
+  \item $BC = \begin{bmatrix}
+			0 & 0 & 2 & 0  \\
+			2 & 1 & 3 & 0   \\
+			1 & 0 & 4 & 1  \\
+			\end{bmatrix}$
+  \item Five times first row, switch second and third row
+  \item First column becomes twice the second column plus one times third column, second column stays the same, switch 3rd and fourth columns.
+  \item No, $\begin{bmatrix}
+  1 \\
+  1 \\
+  1 \\
+  1 \\
+  \end{bmatrix}$ is not in the span of the columns of C
+  \end{enumerate}
+\end{solution}
+\end{frame}
+
+\begin{frame}
+\frametitle{Linear Transformations and Subspaces}
+\begin{itemize}
+\item Linear transformations are \textit{fundamentally connected} to subspaces.
+\item We will spend a lot of time on investigating the \textit{action} of a linear transformation 
+\textit{from} subspaces, and \textit{to} subspaces\\
+\medskip
+\item Key questions in linear algebra: 
+\begin{itemize}
+\item What does a linear transformation do to 1-dimensional (and \textit{by linearity}) n-dimensional subspaces?
+\item What are ``nice'' combinations of 1-dimensional subspaces?
+\item How do linear transformations cut up vector spaces?
+\item For a given linear transformation, are there certain, \textit{special} subspaces? (Lec 6,7) 
+\end{itemize}
+\end{itemize}
+\end{frame}
+%----Slide 11-----------------------
+
+\begin{frame}
+\frametitle{Questions 3: Invertibility}
+Let $S \in \R^{n\times n}$, $T \in \R^{n\times k}$ and $U \in \R^{k \times k}$. \\
+Let $S$ and $U$ be invertible.\\ 
+\begin{enumerate}
+\item Prove that $Ker(S) = \{0\}$.\\
+\end{enumerate}
+
+Now, prove or give a counter example to the following statements:
+\begin{enumerate}
+\item[2.]{$Ker(T) = Ker(TU)$}
+\item[3.]{$Ker(ST) = Ker(T)$}
+\end{enumerate}
+
+\end{frame}
+
+%----Slide 12-----------------------
+
+\begin{frame}
+\frametitle{Solutions 3: Invertibility}
+Let $S \in \R^{n\times n}$, $T \in \R^{n\times k}$ and $U \in \R^{k \times k}$. \\
+Let $S$ and $U$ be invertible.\\ 
+
+\begin{enumerate}
+	\item Prove that $Ker(S) = \{0\}$.\\
+	\begin{solution}
+
+    We prove by contradiction. \\
+    Suppose that $Ker(S)\neq{0}$. Then $\exists x\neq 0$ s.t $Sx = 0$.\\
+    Now, consider $S^{-1}Sx$. \\
+    \qquad$(S^{-1}S)x = Ix = x$,\\
+    \qquad and $S^{-1}(Sx)=0$. \\
+    We have reached a contradiction, so $Ker(S) = 0$ 
+\end{solution}
+
+\end{enumerate}
+\end{frame}
+
+%----Slide 13-----------------------
+
+\begin{frame}
+\frametitle{Solutions 3: Invertibility}
+\begin{solution}
+\begin{enumerate}
+\item[2.]{$Ker(T) = Ker(TU)$. \textbf{False}}\\
+	Consider $T = \begin{bmatrix}
+			1 & 0 \\
+			0 & 0 \\
+			\end{bmatrix}
+			U = \begin{bmatrix}
+			0 & 1 \\
+			1 & 0 \\
+			\end{bmatrix}$\\
+	$ Ker(T) = \{\begin{bmatrix}
+			0 \\
+			y \\
+			\end{bmatrix}\ |\ y\in\R\}$.\\
+	$\Ker(TU) = \{\begin{bmatrix}
+			x \\
+			0 \\
+			\end{bmatrix}\ |\ x\in\R\}$
+
+\item[3.]{$Ker(ST) = Ker(T)$}. \textbf{True}\\
+We'll show that $Ker(ST)\subset Ker(T).$\\
+Let $x \in Ker(ST)$.\\
+So, $STx = 0$.\\
+Since $S$ is invertible, then $Ker(S) = 0$.\\
+Therefore, $Tx=0$, and $x\in Ker(T)$.\\
+$Ker(T)\subset Ker(ST)$ is straightforward.
+\end{enumerate}
+\end{solution}
+\end{frame}
+
+\begin{frame}
+\frametitle{Question 4: Kernel and Image}
+\begin{enumerate}
+\item Let $T\in\R^{n\times n}$. Show that:\\
+$Ker(T)\cap Im(T) = \{0\} \iff $If $T^2v=0$, then $ Tv=0$
+\end{enumerate}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Solution 4: Kernel and Image}
+\begin{enumerate}
+\item Let $T\in\R^{n\times n}$. Show that:\\
+$Ker(T)\cap Im(T) = \{0\} \iff $If $T^2v=0$, then $ Tv=0$
+\end{enumerate}
+
+\begin{solution}
+$(\implies)$ \\
+Assume that $Ker(T)\cap Im(T) = \{0\}$.\\
+Assume that $T^2v = 0$. We will show that $Tv=0$\\
+Since $T^2v = 0$, then $T(Tv)=0$, so $Tv \in Ker(T)$.  \\
+Now, by definition, $Tv\in Im(T)$, so $Tv\in Ker(T)\cap Im(T)$, and $Tv =0$
+
+$(\impliedby)$ \\
+Assume that $T^2v = 0 \implies Tv=0$\\
+Let $y\in Ker(T$), and $y\in \Im(T)$. We show that $y=0$.\\
+Since $y\in Ker(T$), then $Ty=0$.\\
+Since $y\in Im(T)$, then $\exists x$ s.t $Tx=y$.\\
+Then $0=Ty=T(Tx)= T^2x$. Since $T^2x=0$, then $Tx=0$. So $y=Tx=0$.
+\end{solution}
+\end{frame}
+\end{document}
