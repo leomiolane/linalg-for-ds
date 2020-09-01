@@ -1,0 +1,172 @@
+\documentclass{beamer}
+
+\usepackage{../../latex_style/beamerthemeExecushares}
+\usepackage{../../latex_style/notations}
+
+\title{Recitation 1}
+\author{Carles Domingo}
+\date{Fall 2020}
+
+
+\begin{document}
+
+\frame{\titlepage} 
+
+\setcounter{showProgressBar}{0}
+\setcounter{showSlideNumbers}{1}
+
+\begin{frame}[t]
+	\frametitle{Concept Review: Vector Spaces}
+	\begin{block}{Definition}
+		A \textbf{vector space} is a set $V$ endowed with two 'nice and compatible' operations $+$ and $\cdot$ that verify:
+		\begin{itemize}
+			\item For all $u,v \in V$, $u+v \in V$.
+			\item For all $u \in V$ and all $\lambda \in \R$, $\lambda \cdot u \in V$.
+		\end{itemize}
+	\end{block}
+	\textbf{Example}: $V = \R^n$, with the usual vector addition $+$ and scalar multiplication $\cdot$ is a vector space.
+\end{frame}
+
+%----Slide 5-----------------------
+\begin{frame}
+	\frametitle{Concept Review: Vector Spaces}
+	In this class:
+	\begin{itemize}
+		\item We will always consider \emph{real} scalars. Note that it is also possible to consider \emph{complex} scalars.
+			\vspace{0.6cm}
+		\item $V$ is (usually) $\R^n$, or (sometimes) $\R^{n\times m}$ (set of $n \times m$ matrices).
+	\end{itemize}
+
+	%\item Everything in linear algebra is in a vector space!
+	%\item (!) A recurring concept in data science is to ``vectorize'' problems
+	%\begin{itemize}
+	%\item If you can transform/reframe your problem in linear algebra, you can (attempt) to solve it!
+	%\end{itemize}
+\end{frame}
+
+%----Slide 6-----------------------
+\begin{frame}[t]
+	\frametitle{Concept Review: Subspaces}
+	\begin{definition}[Subspace]
+		A subset $S$ of a vector space $V$ is a \emph{subspace} if it is closed under addition and scalar multiplication:
+		\begin{enumerate}
+			\item Closure under Addition: $x+y \in S$  for all $x,y \in S$.
+			\item Closure under Scalar Multiplication: $\alpha x \in S$, for all $x \in S$ and $\alpha \in \R$.
+		\end{enumerate}
+	\end{definition}
+	\begin{itemize}
+		\item A subspace is also a vector space!
+		\item Subspaces are a recurring concept throughout this entire course.
+	\end{itemize}
+\end{frame}
+
+%----Slide 7-----------------------
+\begin{frame}
+	\frametitle{Questions 1: Subspaces, Span}
+	%Recall that $\R^2=\{(x,y) : x,y\in\R \}$ can be thought
+	%of as the $xy$-plane.  
+	Consider the two vectors $v=(1,1)$ and
+	$w=(-1,2)$.  Describe the following sets geometrically.  Which are
+	subspaces of $\R^2$?
+	\begin{enumerate}
+		\item $\Span(v)$
+		\item $\Span(v,w)$
+		\item $\Span(v)\cup\Span(w)$, that is, the vectors in $\Span(v)$ or
+			$\Span(w)$
+		\item $\Span(v)\cap\Span(w)$, that is, the vectors in both $\Span(v)$ and
+			$\Span(w)$
+			\pause
+		\item $\{(1-t)v + tw | t\in[0,1]\}$
+		\item $\{(1-t)v+tw | t\in\R\}$
+		\item $\{\alpha v + \beta w | \alpha,\beta\geq 0\}$
+		\item $\Span(v,w,u)$ where $u=(0,5)$.
+		\item $\{(a,b)\in\R^2 | a^2+b^2\leq 25\}$
+		\item $\{(a,a)\in\R^2 | a\in\R\}$
+		\item $\{(a,a^2)\in\R^2 | a\in\R\}$
+		\item $\{(a,1)\in\R^2 | a\in\R\}$
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}[t]{Answers}
+	\grid
+	\pause
+	\pause
+\end{frame}
+%----Slide 8-----------------------
+%\begin{frame}
+
+%\frametitle{Solutions 1: Subspaces, Span }
+
+%Recall that $\R^2=\{(x,y) : x,y\in\R \}$ can be thought
+%of as the $xy$-plane.  Consider the two vectors $v=(1,1)$ and
+%$w=(-1,2)$.  Describe the following sets geometrically.  Which are
+%subspaces of $\R^2$?
+%\begin{enumerate}
+%\item $\Span(v)$ \hfill True
+%\item $\Span(v,w)$ \hfill True
+%\item $\Span(v)\cup\Span(w)$, \hfill False
+%\item $\Span(v)\cap\Span(w)$, \hfill True
+%\item $\{(1-t)v + tw : t\in[0,1]\}$ \hfill False
+%\item $\{(1-t)v+tw : t\in\R\}$ \hfill False
+%\item $\{\alpha v + \beta w : \alpha,\beta\geq 0\}$ \hfill False
+%\item $\Span(v,w,u)$ where $u=(0,5)$. \hfill True
+%\item $\{(a,b)\in\R^2 : a^2+b^2\leq 25\}$ \hfill False
+%\item $\{(a,a)\in\R^2 : a\in\R\}$ \hfill True
+%\item $\{(a,a^2)\in\R^2 : a\in\R\}$ \hfill False
+%\item $\{(a,1)\in\R^2 : a\in\R\}$\hfill  False
+%\end{enumerate}
+%\end{frame}
+
+%----Slide 9-----------------------
+\begin{frame}[t]
+	\frametitle{Questions 2: Linear Independence}
+	\grid
+	\begin{enumerate}
+		\item[1.] Let $v_1,v_2,v_3,v_4 \in \R^3$. Let $C_1 = \{v_1,v_2\}; C_2 = \{v_3,v_4\}$. \\
+			If $C_1$ and $C_2$ are both linearly independent, 
+			what are the possible values for $\dim(\Span(v_1,v_2,v_3,v_4))$? (No formal proof necessary)
+	\end{enumerate}
+\end{frame}
+\begin{frame}[t]
+	\frametitle{Questions 2: Linear Independence}
+	\grid
+	\begin{enumerate}
+		\item[2.] Let $v_1,...,v_m \in \R^n$ be linearly dependent. \\
+			Prove that for $x \in \Span(v_1,\dots,v_m)$, 
+			there exist infinitely many $\alpha_1,\dots,\alpha_m \in \R$ 
+			such that 
+			\vspace{-0.3cm}
+			$$
+			x = \sum_{i=1}^m \alpha_i v_i.
+			$$
+			\pause
+	\end{enumerate}
+\end{frame}
+\begin{frame}[t]
+	\frametitle{Questions 2: Linear Independence}
+	\grid
+	\begin{enumerate}
+		\item[3.] True or False: If $B=(v_1,\ldots,v_n)$ is a basis for $\R^n$,
+			and $W$ is a subspace of $\R^n$, then some subset of $B$ is a basis
+			for $W$.
+	\end{enumerate}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Questions 3: Bases, Dimension}
+	Let $V$ be the set of functions \\
+	$$V \ \defeq \ \left\{ p: \R \to \R\ \middle| \ p(x) = \sum_{k=0}^n a_k x^k, \text{ for some } a_0,\dots,a_n \in \R \right\}$$
+	\smallskip
+	\begin{enumerate}
+		\item What kind of function does this set contain?
+		\item Define an addition operation $+: V\times V \to V$,
+			and a scalar multiplication operation $\cdot: \R \times V \to V$,
+			such that the triple $(V,+,\cdot)$ is a vector space.
+		\item What is the zero vector of this vector space?
+		\item Find a basis for this vector space.
+		\item What is the dimension of this vector space?
+	\end{enumerate}
+\end{frame}
+
+\end{document}
