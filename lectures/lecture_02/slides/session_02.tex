@@ -1,7 +1,7 @@
 \documentclass{beamer}
 
-\usepackage{../../latex_style/beamerthemeExecushares}
-\usepackage{../../latex_style/notations}
+\usepackage{../../../latex_style/beamerthemeExecushares}
+\usepackage{../../../latex_style/notations}
 
 \title{Session 2: Linear transformations and matrices}
 \subtitle{Optimization and Computational Linear Algebra for Data Science}
@@ -146,6 +146,16 @@
 	\begin{definition}[Matrix product]
 		The matrix product $LM$ is the $n \times k$ matrix of the linear map $L \circ M$.
 	\end{definition}
+	\vspace{2.7cm}
+	\begin{theorem}
+		The entries matrix product $LM$ are given by
+		\vspace{-0.2cm}
+		$$
+		(LM)_{i,j} 
+		=\sum_{\ell = 1}^m L_{i,\ell} M_{\ell,j}, \qquad \text{for} \ \  1 \leq i \leq n \ \ \text{and} \ \ 1 \leq j \leq k.
+		\vspace{-0.2cm}
+		$$
+	\end{theorem}
 \end{frame}
 \begin{frame}[t]{Rotations in $\R^2$}
 	The $R_{a}$ and $R_{b}$ denote respectively the matrix of the rotation of angle $a$ and $b$ about the origin, in $\R^2$.
