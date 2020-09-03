@@ -74,82 +74,6 @@
 %----Slide 2-----------------------
 
 \begin{frame}
-\frametitle{Some Etymology...}
-
-\begin{definition}[Linearity: Wikipedia]
-The property of a mathematical relationship (function) that can be graphically represented as a straight line.
-\end{definition}
-
-\begin{definition}[Algebra: Wikipedia]
-The study of mathematical symbols and the rules for manipulating these symbols.
-\end{definition}
-\begin{itemize}
-\item Linear algebra is the study of \textit{manipulating} letters/symbols which are used to represent linear transformations.
-\item Two types of manipulation....
-\end{itemize}
-\end{frame}
-
-%----Slide 3-----------------------
-
-\begin{frame}
-\frametitle{Type 1: Linear Transformations as Letters}
-\begin{definition}[Linear Transformation]	        
-		A function $L: \R^m \to \R^n$ is linear if
-	\begin{enumerate}
-		\item for all $v \in \R^m$ and all $\alpha \in \R$ we have $L(\alpha v) = \alpha L(v)$ and
-		\item for all $v,w \in \R^m$ we have $L(v + w) = L(v) + L(w)$.
-	\end{enumerate}
-\end{definition}
-\begin{itemize}
-\item Our linear transformation here is represented by the \textit{letter} $L$.
-\item We will examine the rules behind manipulating $L$ from an \textit{algebraic} perspective, such as...
-\begin{itemize}
-\item Associative? Commutative?
-\item Invertible?
-\item Derivatives? (Homework 9)
-\end{itemize}
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Type 2: Linear Transformations as Matrices}
-\begin{theorem}[Matrix Representation Theorem]
-All linear transformations represent matrices;\\
- all matrices represent linear transformations.
-\end{theorem}
-\begin{itemize}
-\item Important, but boring theorem.
-\item Linear transformations can also be represented by matrices 
-$L = \begin{bmatrix}
-			L_{1,1} & \hdots & L_{1,n}  \\
-			\vdots  & \ddots & \vdots  \\
-			L_{m,1} & \hdots & L_{m,n}   \\
-			\end{bmatrix}$
-\item We will also examine the \textit{mechanical} perspective of linear transformations, such as...
-\begin{itemize}
-\item How to actually multiply? 
-\item Interpretation of multiplication
-\item Using matrix multiplication simply for calculations. (Removing the notion of a transformation)
-\end{itemize}
-\item (!) Think about which framework to use in your proofs!
-\end{itemize}
-\end{frame}
-
-%----Slide 4-----------------------
-
-\begin{frame}
-\frametitle{A Note about Gaussian Elimination}
-\begin{itemize}
-\item Gaussian Elimination is a procedure to calculate the solutions of a matrix equation.\\
-\item Not covered in this course, but you should be familiar with it.
-\item If this is the first time you've heard this, then please do some light studying to familiarize yourself with the process.\\
-\item Just know this at the high school/undergrad level
-\item \textbf{If you've already studied it in previous courses, that should be enough.}\\
-\end{itemize}
-\end{frame}
-
-%----Slide 5-----------------------
-\begin{frame}
 \frametitle{Questions 1: Linear Transformations}
 Which of the following functions are linear?  If the function is
 linear, what is the kernel?
@@ -162,7 +86,8 @@ linear, what is the kernel?
   \end{enumerate}
 \end{frame}
 
-%----Slide 6-----------------------
+%----Slide 3-----------------------
+
 \begin{frame}
 \frametitle{Solutions 1: Linear Transformations}
 Which of the following functions are linear?  If the function is
@@ -185,35 +110,130 @@ linear, what is the kernel?
 \end{solution}
 \end{frame}
 
+%----Slide 4-----------------------
+
+\begin{frame}
+\frametitle{Some Etymology...}
+
+\begin{exampleblock}{Linearity: Wikipedia}
+The property of a mathematical relationship (function) that can be graphically represented as a straight line.
+\end{exampleblock}
+\begin{itemize}
+\item (!) \textbf{Huge caveat} - `Linear' in Linear Algebra actually refers to \textit{linear equations}.
+\item We will actually study many curved objects, using linear tools
+\end{itemize}
+
+\begin{exampleblock}{Algebra: Wikipedia}
+The study of mathematical symbols and the rules for manipulating these symbols.
+\end{exampleblock}
+\begin{itemize}
+\item Linear algebra is the study of \textit{manipulating} letters/symbols which are used to represent linear transformations.
+\item Two types of manipulation....
+\end{itemize}
+\end{frame}
+
+%----Slide 3-----------------------
+
+\begin{frame}
+\frametitle{Type 1: Linear Transformations as Letters}
+\begin{definition}[Linear Transformation]	        
+		A function $L: \R^m \to \R^n$ is linear if
+	\begin{enumerate}
+		\item for all $v \in \R^m$ and all $\alpha \in \R$ we have $L(\alpha v) = \alpha L(v)$ and
+		\item for all $v,w \in \R^m$ we have $L(v + w) = L(v) + L(w)$.
+	\end{enumerate}
+\end{definition}
+\begin{itemize}
+\item Our linear transformation here is represented by the \textit{letter} $L$.
+\item We saw/will see rules for manipulating linear transformations from an \textit{algebraic} perspective, such as...
+\begin{itemize}
+\item Associative, but not Commutative
+\item When are matrices invertible?
+\item How to take Derivatives? (Homework 9)
+\end{itemize}
+\item Practice questions later
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Type 2: Linear Transformations as Matrices}
+\begin{theorem}[Matrix Representation Theorem]
+All linear transformations represent matrices;\\
+ all matrices represent linear transformations.
+\end{theorem}
+\begin{itemize}
+\item Important, but boring theorem.
+\item Linear transformations can also be represented by matrices 
+{\tiny $L = \begin{bmatrix}
+			L_{1,1} & \hdots & L_{1,n}  \\
+			\vdots  & \ddots & \vdots  \\
+			L_{m,1} & \hdots & L_{m,n}   \\
+			\end{bmatrix}$}
+\item We will also examine the \textit{mechanical} perspective of linear transformations, such as...
+\begin{itemize}
+\item How to actually multiply? 
+\item Interpretation of multiplication
+\item Using matrix multiplication simply for calculations. (Removing the notion of a transformation)
+\end{itemize}
+\item (!) Think about which framework to use in your proofs!
+\end{itemize}
+\end{frame}
+
+%----Slide 4-----------------------
+
+%\begin{frame}
+%\frametitle{A Note about Gaussian Elimination}
+%\begin{itemize}
+%\item Gaussian Elimination is a procedure to calculate the solutions of a matrix equation.\\
+%\item Not covered in this course, but you should be familiar with it.
+%\item If this is the first time you've heard this, then please do some light studying to familiarize yourself with the process.\\
+%\item Just know this at the high school/undergrad level
+%\item \textbf{If you've already studied it in previous courses, that should be enough.}\\
+%\end{itemize}
+%\end{frame}
+
+
 %----Slide 7-----------------------
 
 \begin{frame}
-\frametitle{Matrix Notation}
+\frametitle{Matrix Notation: (Reference Slide)}
 \begin{itemize}
+\fonttwelve
 \item A linear transformation $ T: \R^n \to \R^m$ is represented by a $m \times n $ matrix
-which is an element of $\R^{m\times n}$. (!! Note the order !!)\\
+which is an element of $\R^{m\times n}$. (Note the order!)\\
+\fonteight
 T = \bordermatrix{ &  & n &  \cr
        & T_{1,1} & ... & T_{1,n} \cr
       m & \vdots & \ddots & \vdots \cr
        & T_{m,1} & \dots & T_{m,n} }
 \\
+\fonttwelve
 \medskip
 \item This matrix has $m$ rows and $n$ columns. \\
 \item $T_{i,j}$ represents the entry in the $i$th row and $j$th column.
+
+\begin{definition}[Matrix product]
+\fonteight
+	Let $A \in \R^{n \times k}$ and $B \in \R^{k \times n}$. \\
+	$AB$ is the $n \times m$ matrix of the $A \circ B$, with coefficients
+	$$
+	(AB)_{r,c} = \sum_{i=1}^k A_{r,i} B_{i,c} \quad \text{for all} \quad 1 \leq r \leq n, \quad 1 \leq c \leq m.
+	$$
+$(r,c)$ denote row,column
+\end{definition}
 \end{itemize}
 \end{frame}
 
 %----Slide 8-----------------------
 \begin{frame}
 \frametitle{Matrix Multiplication Mechanics: Inner Products}
+
 \begin{itemize}
 \item Next few slides go over ``Inner Product Method'' of matrix multiplication.
 \begin{itemize}
-
-\item (This is a term I made up....)
 \item We haven't covered inner products yet
 \end{itemize}
-\item Each entry of the resultant matrix is an inner product of a row of the first matrix and a column of the second matrix
+\item Each entry of the resultant matrix is an \textit{inner product} of a row of the first matrix and a column of the second matrix
 \item This is the \textit{exact} definition of matrix multiplication.\\
 \item Most straightforward way to calculate a matrix product
 \end{itemize}
@@ -225,6 +245,7 @@ T = \bordermatrix{ &  & n &  \cr
 \frametitle{Matrix Multiplication Mechanics: Inner Products}
 Let $A\in \R^{n\times k}$, $B \in \R^{k\times m}$\\
 Rows of first matrix ``line up" with columns of the second matrix.\\
+\medskip
 \fonteight
 $\left[\begin{matrix}
 \rowcolor{red!20}    a_{1,1} & \hdots & a_{1,k} \\ 
@@ -237,14 +258,15 @@ $\left[\begin{array}{>{\columncolor{gray!20}}ccccc}
 b_{1,1} & b_{1,2} &\hdots & b_{1,m-1} & b_{1,m} \\ 
 \vdots & \vdots & \hdots & \vdots & \vdots \\
 b_{k,1} &  b_{k,2} &\hdots & b_{k,m-1} & b_{k,m} 
-\end{array}\right]$
+\end{array}\right]$\\
+\medskip
 $=
 \left[\begin{array}{ccccc}
-{\cellcolor{red!20}}    \sum_{i=0}^k a_{1,i}b_{i,1} & \hdots & \hdots & & \\
-{\cellcolor{blue!20}}   \sum_{i=0}^k a_{2,i}b_{i,1} & \hdots & \hdots& & \\
+{\cellcolor{red!20}}    \sum_{i=1}^k a_{1,i}b_{i,1} & \hdots & \hdots & & \\
+{\cellcolor{blue!20}}   \sum_{i=1}^k a_{2,i}b_{i,1} & \hdots & \hdots& & \\
                         \vdots & \hdots & \hdots & & \\
-{\cellcolor{green!20}}  \sum_{i=0}^k a_{n-1,i}b_{i,1} & \hdots& \hdots& & \\
-{\cellcolor{yellow!20}} \sum_{i=0}^k a_{n,i}b_{i,1} & \hdots& \hdots& & \\
+{\cellcolor{green!20}}  \sum_{i=1}^k a_{n-1,i}b_{i,1} & \hdots& \hdots& & \\
+{\cellcolor{yellow!20}} \sum_{i=1}^k a_{n,i}b_{i,1} & \hdots& \hdots& & \\
 \end{array}\right]
 $
 \end{frame}
@@ -255,6 +277,7 @@ $
 \frametitle{Matrix Multiplication Mechanics: Inner Products}
 Let $A\in \R^{n\times k}$, $B \in \R^{k\times m}$\\
 Rows of first matrix ``line up" with columns of the second matrix.\\
+\medskip
 \fonteight
 $\left[\begin{matrix}
 \rowcolor{red!20}    a_{1,1} & \hdots & a_{1,k} \\ 
@@ -267,14 +290,15 @@ $\left[\begin{array}{c>{\columncolor{gray!20}}cccc}
 b_{1,1} & b_{1,2} &\hdots & b_{1,m-1} & b_{1,m} \\ 
 \vdots & \vdots & \hdots & \vdots & \vdots \\
 b_{k,1} &  b_{k,2} &\hdots & b_{k,m-1} & b_{k,m} 
-\end{array}\right]$
+\end{array}\right]$\\
+\medskip
 $=
 \left[\begin{array}{ccccc}
-\hdots & {\cellcolor{red!20}}    \sum_{i=0}^k a_{1,i}b_{i,2} & \hdots & & \\
-\hdots & {\cellcolor{blue!20}}   \sum_{i=0}^k a_{2,i}b_{i,2} & \hdots & & \\
+\hdots & {\cellcolor{red!20}}    \sum_{i=1}^k a_{1,i}b_{i,2} & \hdots & & \\
+\hdots & {\cellcolor{blue!20}}   \sum_{i=1}^k a_{2,i}b_{i,2} & \hdots & & \\
 \hdots &                        \vdots & \hdots & & \\
-\hdots & {\cellcolor{green!20}}  \sum_{i=0}^k a_{n-1,i}b_{i,2} & \hdots& & \\
-\hdots & {\cellcolor{yellow!20}} \sum_{i=0}^k a_{n,i}b_{i,2}& \hdots& & \\
+\hdots & {\cellcolor{green!20}}  \sum_{i=1}^k a_{n-1,i}b_{i,2} & \hdots& & \\
+\hdots & {\cellcolor{yellow!20}} \sum_{i=1}^k a_{n,i}b_{i,2}& \hdots& & \\
 \end{array}\right]
 $
 \end{frame}
@@ -285,6 +309,7 @@ $
 \frametitle{Matrix Multiplication Mechanics: Inner Products}
 Let $A\in \R^{n\times k}$, $B \in \R^{k\times m}$\\
 Rows of first matrix ``line up" with columns of the second matrix.\\
+\medskip
 \fonteight
 $\left[\begin{matrix}
 \rowcolor{red!20}    a_{1,1} & \hdots & a_{1,k} \\ 
@@ -297,14 +322,15 @@ $\left[\begin{array}{cccc>{\columncolor{gray!20}}c}
 b_{1,1} & b_{1,2} &\hdots & b_{1,m-1} & b_{1,m} \\ 
 \vdots & \vdots & \hdots & \vdots & \vdots \\
 b_{k,1} &  b_{k,2} &\hdots & b_{k,m-1} & b_{k,m} 
-\end{array}\right]$
+\end{array}\right]$\\
+\medskip
 $=
 \left[\begin{array}{ccccc}
-\hdots & \hdots & {\cellcolor{red!20}}    \sum_{i=0}^k a_{1,i}b_{i,m}  \\
-\hdots & \hdots & {\cellcolor{blue!20}}   \sum_{i=0}^k a_{2,i}b_{i,m}  \\
+\hdots & \hdots & {\cellcolor{red!20}}    \sum_{i=1}^k a_{1,i}b_{i,m}  \\
+\hdots & \hdots & {\cellcolor{blue!20}}   \sum_{i=1}^k a_{2,i}b_{i,m}  \\
 \hdots & \hdots &                        \vdots & \\
-\hdots & \hdots & {\cellcolor{green!20}}  \sum_{i=0}^k a_{n-1,i}b_{i,m}  \\
-\hdots & \hdots &{\cellcolor{yellow!20}} \sum_{i=0}^k a_{n,i}b_{i,m} \\
+\hdots & \hdots & {\cellcolor{green!20}}  \sum_{i=1}^k a_{n-1,i}b_{i,m}  \\
+\hdots & \hdots &{\cellcolor{yellow!20}} \sum_{i=1}^k a_{n,i}b_{i,m} \\
 \end{array}\right]
 $
 \smallskip
@@ -320,10 +346,6 @@ $
 \frametitle{More M.M.M: Linear Combination of Columns}
 \begin{itemize}
 \item Next few slides go over ``Linear Combination of Columns'' method of matrix multiplication.
-\begin{itemize}
-\item (Also a term I made up....heh...)
-\item We \textit{have} covered linear combinations :)
-\end{itemize}
 \item Each \textit{column} of the result is a \textit{linear combination of the columns} of the first matrix.
 \item Much more interpretable!
 \item (!) Keep an eye out for this 
@@ -334,6 +356,7 @@ $
 \begin{frame}
 \frametitle{More M.M.M: Linear Combination of Columns}
 Each column of the $AB$ is a linear combination of the columns of $A$.\\
+\medskip
 $
 \left[\begin{array}{>{\columncolor{red!20}}c>{\columncolor{blue!20}}cc>{\columncolor{green!20}}c >{\columncolor{yellow!20}}c}
 \vline & \vline & \hdots & \vline  & \vline \\ 
@@ -349,7 +372,8 @@ $
 {\cellcolor{green!20}} b_{k-1,1}  & \hdots &   b_{k-1,m}  \\ 
 {\cellcolor{yellow!20}} b_{k,1}  & \hdots &   b_{k,m}
 \end{matrix}\right]
-$
+$\\
+\medskip
 $=
 \left[\begin{array}{>{\columncolor{gray!20}}ccc}
 \vline  & \hdots   & \vline \\ 
@@ -363,6 +387,7 @@ $
 \begin{frame}
 \frametitle{More M.M.M: Linear Combination of Columns}
 Each column of the $AB$ is a linear combination of the columns of $A$.\\
+\medskip
 %{>{\columncolor{red!20}}c>{\columncolor{blue!20}}c>{\columncolor{green!20}}cc >{\columncolor{yellow!20}}c}
 $
 \left[\begin{array}{>{\columncolor{red!20}}c>{\columncolor{blue!20}}cc>{\columncolor{green!20}}c >{\columncolor{yellow!20}}c}
@@ -379,7 +404,8 @@ b_{2,1}    & \hdots &   {\cellcolor{blue!20}}   b_{2,m}  \\
 b_{k-1,1}  & \hdots &   {\cellcolor{green!20}} b_{k-1,m}  \\ 
 b_{k,1}    & \hdots &   {\cellcolor{yellow!20}}b_{k,m}
 \end{matrix}\right]
-$
+$\\
+\medskip
 $=
 \left[\begin{array}{cc>{\columncolor{gray!20}}c}
 \vline  & \hdots   & \vline \\ 
@@ -393,6 +419,7 @@ $
 \begin{frame}
 \frametitle{More M.M.M: Linear Combination of Columns}
 One dimensional case (for $B$):\\
+\medskip
 $
 \left[\begin{array}{>{\columncolor{red!20}}c>{\columncolor{blue!20}}cc>{\columncolor{green!20}}c >{\columncolor{yellow!20}}c}
 \vline & \vline & \hdots & \vline  & \vline \\ 
@@ -408,7 +435,8 @@ $
 {\cellcolor{green!20}} b_{k-1,1} \\
 {\cellcolor{yellow!20}} b_{k,1}  \\
 \end{matrix}\right]
-$
+$\\
+\medskip
 $=
 \left[\begin{array}{>{\columncolor{gray!20}}c}
 \vline \\
@@ -498,9 +526,8 @@ $C = \begin{bmatrix}
 \medskip
 \item Key questions in linear algebra: 
 \begin{itemize}
-\item What does a linear transformation do to 1-dimensional (and \textit{by linearity}) n-dimensional subspaces?
-\item What are ``nice'' combinations of 1-dimensional subspaces?
-\item How do linear transformations cut up vector spaces?
+\item How do linear transformations cut up vector spaces? (Kernel, Image)
+\item What are ``nice'' combinations of 1-dimensional subspaces? (Lec 4, 5)
 \item For a given linear transformation, are there certain, \textit{special} subspaces? (Lec 6,7) 
 \end{itemize}
 \end{itemize}
@@ -509,6 +536,14 @@ $C = \begin{bmatrix}
 
 \begin{frame}
 \frametitle{Questions 3: Invertibility}
+\begin{definition}[Matrix inverse]\label{prop:matrix_inverse}
+	A matrix $M \in \R^{n \times n}$ is called \emph{invertible} if there exists a matrix $M^{-1} \in \R^{n \times n}$ such that 
+	$$
+	M M^{-1} = M^{-1} M = \Id_n.
+	$$
+	Such matrix $M^{-1}$ is unique and is called the \emph{inverse} of $M$.
+\end{definition}
+
 Let $S \in \R^{n\times n}$, $T \in \R^{n\times k}$ and $U \in \R^{k \times k}$. \\
 Let $S$ and $U$ be invertible.\\ 
 \begin{enumerate}
@@ -585,6 +620,9 @@ $Ker(T)\subset Ker(ST)$ is straightforward.
 \begin{enumerate}
 \item Let $T\in\R^{n\times n}$. Show that:\\
 $Ker(T)\cap Im(T) = \{0\} \iff $If $T^2v=0$, then $ Tv=0$
+
+\medskip
+(Second part means that $\forall v\in \R^n$ s.t $T^2v=0$, we have $Tv=0.$)
 \end{enumerate}
 \end{frame}
 
@@ -592,8 +630,8 @@ $Ker(T)\cap Im(T) = \{0\} \iff $If $T^2v=0$, then $ Tv=0$
 \begin{frame}
 \frametitle{Solution 4: Kernel and Image}
 \begin{enumerate}
-\item Let $T\in\R^{n\times n}$. Show that:\\
-$Ker(T)\cap Im(T) = \{0\} \iff $If $T^2v=0$, then $ Tv=0$
+\item Let $T\in\R^{n\times n}$, and let $v\in R^n$. Show that:\\
+$Ker(T)\cap Im(T) = \{0\} \iff $ If $T^2v=0$, then $ Tv=0$\\
 \end{enumerate}
 
 \begin{solution}
