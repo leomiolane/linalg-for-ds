@@ -64,10 +64,11 @@
 \begin{frame}[t]{Rotations in $\R^2$}
 	\grid
 
+	\vspace{-0.25cm}
 	Let $\theta \in \R$.
 	The rotation $R_{\theta}: \R^2 \to \R^2$ of angle $\theta$ about the origin is linear.
 	\\
-	\vspace{0.3cm}
+	%\vspace{0.3cm}
 	\textbf{Exercise}: what is the canonical matrix of $R_{\theta}$ ?
 \end{frame}
 
@@ -126,6 +127,8 @@
 	\end{itemize}
 \end{frame}
 \begin{frame}[t]{A new vector space!}
+	\grid
+
 	\vspace{-0.3cm}
 	\begin{block}{Proposition}
 		\begin{itemize}
@@ -181,6 +184,8 @@
 	\grid
 	\vspace{-0.3cm}
 	\begin{theorem}
+	Let $L \in \R^{n \times m}$ and $M \in \R^{m \times k}$. 
+	\\
 		The entries matrix product $LM$ are given by
 		\vspace{-0.2cm}
 		$$
@@ -190,10 +195,14 @@
 		$$
 	\end{theorem}
 \end{frame}
+\begin{frame}[t]{Proof}
+	\grid
+\end{frame}
 \begin{frame}[t]{Rotations in $\R^2$}
 	\grid
 
-	The $R_{a}$ and $R_{b}$ denote respectively the matrix of the rotation of angle $a$ and $b$ about the origin, in $\R^2$.
+	\vspace{-0.25cm}
+	The $R_{a}$ and $R_{b}$ denote respectively the matrices of the rotations of angles $a$ and $b$ about the origin, in $\R^2$.
 	\\
 	\vspace{0.3cm}
 	\textbf{Exercise}:
@@ -266,7 +275,8 @@
 \begin{frame}[t]{Matrix notation}
 	\grid
 
-	Let us write
+	\vspace{-0.3cm}
+	Let's write
 	$$
 	A = 
 	\begin{pmatrix}
@@ -285,8 +295,26 @@
 	$$
 \end{frame}
 
-\begin{frame}[t]{3 possible cases}
+\begin{frame}[t]{Let's find all solutions !}
 	\grid
+
+\end{frame}
+\begin{frame}[t]{Conclusion: 3 possible cases}
+	\grid
+
+	\begin{enumerate}
+		\item $y \not \in \Im(A)$: there is no solution to $Ax = y$.
+			\vspace{0.4cm}
+		\item $y \in \Im(A)$, then there exists $x_0 \in \R^m$ such that $Ax_0 =y$. The set of solutions in then
+			$$
+			S = \Big\{ x_0 + v \, \Big| \, v \in \Ker(A) \Big\}.
+			$$
+			\begin{itemize}
+				\item If $\Ker(A) = \{ 0 \}$, then $S = \{x_0\}$: \ \ $x_0$ is the unique solution.
+			\vspace{0.4cm}
+				\item If $\Ker(A) \neq \{ 0 \}$, then $\Ker(A)$ contains infinitely many vectors: there are infinitely many solutions.
+			\end{itemize}
+	\end{enumerate}
 
 \end{frame}
 
@@ -318,8 +346,11 @@
 \end{frame}
 \appendix
 \backupbegin
-\begin{frame}
+\begin{frame}[t]
 	\frametitle{Questions?}
+	\grid
+	\pause
+	\pause
 \end{frame}
 \backupend
 
