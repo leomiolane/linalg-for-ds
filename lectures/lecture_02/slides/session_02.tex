@@ -30,6 +30,11 @@
 \setcounter{framenumber}{0}
 \setcounter{showSlideNumbers}{1}
 
+\begin{frame}[t]
+	\frametitle{Questions?}
+	\grid
+\end{frame}
+
 \section{Linear maps \& matrices}
 
 \begin{frame}[t]{Two sides of the same coin}
@@ -214,6 +219,24 @@
 
 \end{frame}
 
+\begin{frame}[t]{Can we divide two matrices ?}
+	\grid
+
+\end{frame}
+\begin{frame}[t]{Invertible matrices}
+	\grid
+
+	\vspace{-0.3cm}
+\begin{definition}[Matrix inverse]\label{prop:matrix_inverse}
+	A \textbf{square} matrix $M \in \R^{n \times n}$ is called \emph{invertible} if there exists a matrix $M^{-1} \in \R^{n \times n}$ such that 
+	$$
+	M M^{-1} = M^{-1} M = \Id_n.
+	$$
+	Such matrix $M^{-1}$ is unique and is called the \emph{inverse} of $M$.
+\end{definition}
+\textbf{Exercise}: Let $A,B \in \R^{n \times n}$. Show that if $AB = \Id_n$ then $BA = \Id_n$.
+\end{frame}
+
 \section{Kernel and image}
 
 \begin{frame}[t]{Definitions}
@@ -333,7 +356,7 @@
 	\begin{pmatrix}
 		1 \\
 		1 \\
-		-1
+		4
 	\end{pmatrix}
 	\in \R^n.
 	$$
