@@ -1,0 +1,286 @@
+\documentclass{beamer}
+\usepackage{amsthm}
+\usepackage[utf8]{inputenc}
+\usetheme{Madrid}
+\usepackage{../latex_style/packages_old}
+\usepackage{../latex_style/notations_old}
+\usepackage{outlines}
+\usepackage{enumitem}
+\renewenvironment{itemize}
+\usefonttheme{serif}
+
+\def\labelenumi{\theenumi}
+\usefonttheme{serif}
+
+%\setbeamertemplate{itemize items}[default]
+%\setbeamertemplate{enumerate items}[default]
+
+% define smaller font command
+\newcommand*{\horzbar}{\rule[.5ex]{2.5ex}{0.5pt}}
+\newcommand\Fonteight{\fontsize{8}{9.6}\selectfont}
+%define enumerate with periods
+\renewenvironment{enumerate}%
+{\begin{list}{\arabic{enumi}.}% <------ dot here
+      {\setlength{\leftmargin}{2.5em}%
+       \setlength{\itemsep}{-\parsep}%
+       \setlength{\topsep}{-\parskip}%%
+       \usecounter{enumi}}%
+ }{\end{list}}
+%define itemize with arrows
+\renewenvironment{itemize}%
+{\begin{list}{$\blacktriangleright$}% <------ dot here
+      {\setlength{\leftmargin}{2.5em}%
+       \setlength{\itemsep}{-\parsep}%
+       \setlength{\topsep}{-\parskip}%%
+       \usecounter{enumi}}%
+ }{\end{list}}
+
+%Information to be included in the title page:
+\title{Recitation 3}
+\author{Alex Dong}
+\institute{CDS, NYU}
+\date{Fall 2020}
+
+
+\makeatletter
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.4\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\insertshortauthor\expandafter\ifblank\expandafter{\beamer@shortinstitute}{}{~~(\insertshortinstitute)}
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.3\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.3\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+    \insertframenumber{} / \inserttotalframenumber\hspace*{2ex} 
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\setbeamertemplate{navigation symbols}{}
+\makeatother
+
+\begin{document}
+%1
+\frame{\titlepage} 
+%2
+\begin{frame}
+\frametitle{Rank Nullity Theorem}
+\begin{theorem}[Rank-Nullity Theorem (!!!)]
+	Let $L: \R^m \to \R^n$ be a linear transformation. Then
+	$$
+	\rank(L) + \dim(\Ker(L)) = m.
+	$$
+\end{theorem}
+\begin{itemize}
+\item \textbf{One of the most important theorems in linear algebra}.\\
+\item You should be able to state and prove this theorem (with no notes).
+\item The `conservation of dimension' theorem
+\begin{itemize}
+\item The main rank inequality:
+\item $rank(AB)\leq min(rank(A),rank(B))$
+\end{itemize}
+\item If $n>m$, then the $max(dim(Im(L)))=m$
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Questions: Rank-Nullity Theorem}
+Let $A\in \R^{l\times h}$ and $B\in \R^{h\times l}$, and $h>l$.\\
+Prove or give a counterexample to the following statements.
+\begin{enumerate}
+\item $\exists A,B$ s.t $AB$ is invertible.
+\item $\exists A,B$ s.t.$BA$ is invertible.
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Questions: Rank-Nullity Theorem}
+Let $A\in \R^{l\times h}$ and $B\in \R^{h\times l}$, and $h>l$.\\
+Prove or give a counterexample to the following statements.
+\begin{solution}
+\begin{enumerate}
+\item $\exists A,B$ s.t $AB$ is invertible.
+ \textbf{True}\\
+Consider 
+A = $\begin{bmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+\end{bmatrix}$, $
+B = \begin{bmatrix}
+1 & 0 \\
+0 & 1 \\
+0 & 0 \\
+\end{bmatrix}$. 
+$AB= \begin{bmatrix}
+1 & 0 \\
+0 & 1 \\
+\end{bmatrix}$ 
+\medskip
+\item $\exists A,B$ s.t.$BA$ is invertible.
+\textbf{False}.\\
+In order for $BA$ to be invertible, $rank(BA)=3$. However, $rank(BA) \leq rank(B)=2$.
+\end{enumerate}
+\end{solution}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Symmetric Matrices: That's cute!}
+\begin{itemize}
+
+\item Symmetric Matrices are not just ``cute"...\\
+	\begin{itemize}
+	\item They are actually DEEPLY LINKED to many topics in linear algebra.\\
+	\end{itemize}
+\item Concepts involving Symmetric Matrices
+\begin{itemize}
+\item Orthogonal Projections (Lec 4) are symmetric.\\
+\item Spectral Theorem (Lec 7) ``eigenvectors of symmetric matrices are orthogonal".\\
+\item PCA: Covariance matrix is symmetric
+\item Concavity: Hessian Matrix (matrix of second derivative) is symmetric
+\end{itemize}
+\item But, we will see most of this later. For now, just trust me!
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Questions: Symmetric Matrices}
+Let $A\in \R^{k \times n}.$\\
+Prove/answer the following statements.
+\begin{enumerate}
+\item Show that $\forall x\in\R^n$, $ x^TA^TAx\geq0$
+\item When is $x^TA^TAx = 0?$
+\item Show that $Ker(A) = Ker(A^TA)$
+\item Use this to show $rank(A)=rank(A^TA)$
+\item Now, show that $rank(A) = rank(A^T)$
+\end{enumerate}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Solutions: Symmetric Matrices}
+
+Let $A\in \R^{k \times n}.$\\
+\begin{solution}
+\begin{enumerate}
+\item Show that $\forall x\in\R^n$, $ x^TA^TAx\geq0$ \\
+Let $y = Ax$, with y = $\begin{bmatrix} y_1 & \hdots & y_n \\ \end{bmatrix}^T$ \\
+Then $x^TA^TAx = (Ax)^T(Ax)=y^Ty = \sum_{i=1}^n {y_i}^2$. \\
+Since $y_i$ is a real number, $\sum_{i=1}^n {y_i}^2 \geq 0$.
+\medskip
+\item What happens when $x^TA^TAx = 0?$ \\
+$\sum_{i=1}^n {y_i}^2 = 0 \iff y_i = 0 \quad \forall i\in\{1,...,n\}$ \\
+So, $x^TA^TAx = 0 \iff x\in Ker(A)$
+
+\end{enumerate}
+\end{solution}
+\end{frame}
+
+\begin{frame}
+\frametitle{Solutions: Symmetric Matrices}
+
+Let $A\in \R^{k \times n}.$\\
+\begin{enumerate}
+\item[3.] Show that $Ker(A) = Ker(A^TA)$\\
+\end{enumerate}
+
+\begin{solution}
+$Ker(A)\subset Ker(A^TA)$ is trivial.\\
+\medskip
+We now show $Ker(A^TA) \subset Ker(A).$\\
+Let $x \in Ker(A^TA)$. \\
+Then $A^TAx = 0$.\\
+Then $x^T(A^TAx) =x(0) =0 $ \\
+By the previous question, then $x\in Ker(A)$.
+\end{solution}
+\end{frame}
+
+\begin{frame}
+\frametitle{Solutions: Symmetric Matrices}
+
+Let $A\in \R^{k \times n}.$\\
+Prove or give a counter example to the following statements.
+\begin{enumerate}
+\item[4.] Use this to show $rank(A)=rank(A^TA)$\\
+\end{enumerate}
+
+\begin{solution}
+By the rank nullity theorem, \\
+\qquad
+$n = dim(Ker(A))+rank(A)$ \\
+Now, $A^TA \in \R ^{n\times n}$. So by the rank nullity theorem,\\
+\qquad $n = dim(Ker(A^TA))+rank(A^TA)$ \\
+Setting these equations equal to each other yields: \\
+\qquad $dim(Ker(A))+rank(A) = dim(Ker(A^TA))+rank(A^TA)$ \\
+And since $Ker(A) = Ker(A^TA)$, then \\
+\qquad $rank(A)=rank(A^TA)$
+\end{solution}
+\end{frame}
+
+\begin{frame}
+\frametitle{Solutions: Symmetric Matrices}
+
+Let $A\in \R^{k \times n}.$\\
+\begin{enumerate}
+\item[5.] Now show $rank(A)=rank(A^T)$\\
+\end{enumerate}
+\begin{solution}
+By the previous question,\\
+\qquad $rank(A)=rank(A^TA)$.\\
+and similarly, \\
+\qquad $rank(A^T)=rank(AA^T)$.\\
+Recall that $rank(T_1T_2)\leq min(rank(T_1),rank(T_2))$, and therefore, \\
+\qquad $rank(T_1T_2)\leq rank(T_1)$.\\
+Applying this to $rank(A^TA)$ and $rank(AA^T)$ yields: \\
+\qquad $rank(A^T) \geq rank(A^TA)$ \quad and \quad $rank(A) \geq rank(AA^T)$.  \\
+Replacing $rank(A^TA)$ and $rank(AA^T)$, we get that\\
+\qquad $rank(A^T) \geq rank(A)$ \quad and \quad $rank(A) \geq rank(A^T)$.  \\
+So $rank(A)=rank(A^T)$
+\end{solution}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Solutions: Matrix Products}
+Let $x,y \in \R^{n \times 1}$.
+\begin{enumerate}
+\item What is the shape and rank of $x^Ty$?
+\item What is the shape and rank of $xy^T$?
+\item Let $A\in \R^{m\times k}$ and $B \in \R^{k\times n}$. Show that the matrix product AB can be expressed as: $AB=C_1 + \cdots + C_k$ s.t $rank(C_i) \leq 1,$  $\forall i \in \{1,...,k\}$.\\
+(Hint, use 2, and try manually calculating for small values of $m,k,n$)
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Questions: Matrix Products}
+Let $x,y \in \R^{n \times 1}$ both have rank 1.
+\begin{solution}
+\begin{enumerate}
+\item What is the shape and rank of $x^Ty$?\\
+Shape is $1\times 1$ and rank is 1 (or 0).
+\item What is the shape and rank of $xy^T$?\\
+Shape is $n\times n$ and rank is 1 (or 0).
+\item Let $A\in \R^{m\times k}$ and $B \in \R^{k\times n}$. Show that the matrix product AB can be expressed as: $AB=C_1 + \cdots + C_k$ s.t $rank(C_i) \leq 1,$  $\forall i \in \{1,...,k\}$.\\
+(Hint, use 2, and manually calculating for small values of $m,k,n$)\\
+Let $A = \begin{bmatrix}
+			\vline & \hdots & \vline  \\
+			a_1    & \hdots & a_k  \\
+			\vline & \hdots & \vline   \\
+		 \end{bmatrix}$
+and $B = \begin{bmatrix}
+			\horzbar    & b_1    & \horzbar  \\
+			\vdots    & \vdots & \vdots  \\
+			\horzbar    & b_k    & \horzbar   \\
+		 \end{bmatrix}$
+\end{enumerate}
+\end{solution}
+\end{frame}
+
+
+\end{document}
