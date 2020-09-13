@@ -5,8 +5,8 @@
       %\immediate\openout\tf@toc\jobname.toc\relax
 %\makeatother
 
-\usepackage{../latex_style/packages}
-\usepackage{../latex_style/notations}
+\usepackage{../../latex_style/packages}
+\usepackage{../../latex_style/notations}
 \externaldocument{../lecture_02/lecture_02}
 
 
@@ -110,6 +110,10 @@ Theorem \ref{th:rank} is proved at the end of these notes.
 	$$
 	Such matrix $M^{-1}$ is unique and is called the \emph{inverse} of $M$.
 \end{definition}
+
+\begin{exercise} 
+	Let $A,B \in \R^{n \times n}$. Show that if $AB = \Id_n$ then $BA = \Id_n$.
+\end{exercise}
 
 \begin{remark}
 	$M \in \R^{n \times n}$ is invertible if and only if the linear transformation associated to $M$ is a bijection. In that case, $M^{-1}$ is the matrix associated to the inverse transformation.

@@ -30,9 +30,15 @@
 \setcounter{framenumber}{0}
 \setcounter{showSlideNumbers}{1}
 
+\begin{frame}[t]
+	\frametitle{Questions?}
+	\grid
+\end{frame}
+
 \section{Linear maps \& matrices}
 
 \begin{frame}[t]{Two sides of the same coin}
+	\grid
 	\begin{columns}
 		\hspace{-0.85cm}
 		\begin{column}{0.5\textwidth}
@@ -61,60 +67,88 @@
 \end{frame}
 
 \begin{frame}[t]{Rotations in $\R^2$}
+	\grid
+
+	\vspace{-0.25cm}
 	Let $\theta \in \R$.
 	The rotation $R_{\theta}: \R^2 \to \R^2$ of angle $\theta$ about the origin is linear.
 	\\
-	\vspace{0.3cm}
+	%\vspace{0.3cm}
 	\textbf{Exercise}: what is the canonical matrix of $R_{\theta}$ ?
 \end{frame}
 
 \section{Operations on matrices}
 
 \begin{frame}[t]{Addition and scalar multiplication}
-	Sum of two matrices of the \textbf{same} dimensions:
-	{\small
-		$$
-		\!\!\!\!\!\!\!\!\!\!\!\!
-		\begin{pmatrix}
-			a_{1,1}  & \cdots & a_{1,m} \\
-			\vdots & \ddots & \vdots \\
-			a_{n,1} & \cdots & a_{n,m} \\
-		\end{pmatrix}
-		+
-		\begin{pmatrix}
-			b_{1,1}  & \cdots & b_{1,m} \\
-			\vdots & \ddots & \vdots \\
-			b_{n,1} & \cdots & b_{n,m} \\
-		\end{pmatrix}
-		=
-		\begin{pmatrix}
-			a_{1,1} + b_{1,1}  & \cdots & a_{1,m} + b_{1,m} \\
-			\vdots & \ddots & \vdots \\
-			a_{n,1} + b_{n,1} & \cdots & a_{n,m} + b_{n,m} \\
-		\end{pmatrix}
-		$$
-	}
+	\grid
 
-	\vspace{2cm}
-	{
-		Multiplication by a scalar $\lambda$:
-		$$
-		\lambda
-		\begin{pmatrix}
-			a_{1,1}  & \cdots & a_{1,m} \\
-			\vdots & \ddots & \vdots \\
-			a_{n,1} & \cdots & a_{n,m} \\
-		\end{pmatrix}
-		=
-		\begin{pmatrix}
-			\lambda a_{1,1}  & \cdots & \lambda a_{1,m} \\
-			\vdots & \ddots & \vdots \\
-			\lambda a_{n,1} & \cdots & \lambda a_{n,m} \\
-		\end{pmatrix}
-		$$
-	}
+	\vspace{0.3cm}
+	\begin{itemize}
+		\item
+			Sum of two matrices of the \textbf{same} dimensions:
+			{\small
+				$$
+				\!\!\!\!\!\!\!\!\!\!\!\!
+				\hspace*{-0.7cm}
+				\begin{pmatrix}
+					a_{1,1}  & \cdots & a_{1,m} \\
+					\vdots & \ddots & \vdots \\
+					a_{n,1} & \cdots & a_{n,m} \\
+				\end{pmatrix}
+				+
+				\begin{pmatrix}
+					b_{1,1}  & \cdots & b_{1,m} \\
+					\vdots & \ddots & \vdots \\
+					b_{n,1} & \cdots & b_{n,m} \\
+				\end{pmatrix}
+				=
+				\begin{pmatrix}
+					a_{1,1} + b_{1,1}  & \cdots & a_{1,m} + b_{1,m} \\
+					\vdots & \ddots & \vdots \\
+					a_{n,1} + b_{n,1} & \cdots & a_{n,m} + b_{n,m} \\
+				\end{pmatrix}
+				$$
+			}
+			\vspace{0.6cm}
+
+		\item
+			{
+				Multiplication by a scalar $\lambda$:
+				$$
+				\lambda
+				\begin{pmatrix}
+					a_{1,1}  & \cdots & a_{1,m} \\
+					\vdots & \ddots & \vdots \\
+					a_{n,1} & \cdots & a_{n,m} \\
+				\end{pmatrix}
+				=
+				\begin{pmatrix}
+					\lambda a_{1,1}  & \cdots & \lambda a_{1,m} \\
+					\vdots & \ddots & \vdots \\
+					\lambda a_{n,1} & \cdots & \lambda a_{n,m} \\
+				\end{pmatrix}
+				$$
+			}
+	\end{itemize}
+\end{frame}
+\begin{frame}[t]{A new vector space!}
+	\grid
+
+	\vspace{-0.3cm}
+	\begin{block}{Proposition}
+		\begin{itemize}
+			\item $\R^{n \times m}$ is a vector space. 
+			\item $\dim(\R^{n \times m}) = $
+		\end{itemize}
+	\end{block}
+	\begin{proof}
+		\vspace{4cm}
+		\vfill
+	\end{proof}
 \end{frame}
 \begin{frame}[t]{Product of two matrices}
+	\grid
+
 	\textbf{Warning:}
 	{\small
 		$$
@@ -141,13 +175,22 @@
 \end{frame}
 
 \begin{frame}[t]{Matrix product}
+	\grid
+
 	Let $L \in \R^{n \times m}$ and $M \in \R^{m \times k}$. 
 	%\vspace{2cm}
 	\begin{definition}[Matrix product]
 		The matrix product $LM$ is the $n \times k$ matrix of the linear map $L \circ M$.
 	\end{definition}
 	\vspace{2.7cm}
+\end{frame}
+
+\begin{frame}[t]{Matrix product}
+	\grid
+	\vspace{-0.3cm}
 	\begin{theorem}
+	Let $L \in \R^{n \times m}$ and $M \in \R^{m \times k}$. 
+	\\
 		The entries matrix product $LM$ are given by
 		\vspace{-0.2cm}
 		$$
@@ -157,8 +200,14 @@
 		$$
 	\end{theorem}
 \end{frame}
+\begin{frame}[t]{Proof}
+	\grid
+\end{frame}
 \begin{frame}[t]{Rotations in $\R^2$}
-	The $R_{a}$ and $R_{b}$ denote respectively the matrix of the rotation of angle $a$ and $b$ about the origin, in $\R^2$.
+	\grid
+
+	\vspace{-0.25cm}
+	The $R_{a}$ and $R_{b}$ denote respectively the matrices of the rotations of angles $a$ and $b$ about the origin, in $\R^2$.
 	\\
 	\vspace{0.3cm}
 	\textbf{Exercise}:
@@ -166,12 +215,32 @@
 
 \end{frame}
 \begin{frame}[t]{Matrix product properties}
+	\grid
+
+\end{frame}
+
+\begin{frame}[t]{Can we divide two matrices ?}
+	\grid
+
+\end{frame}
+\begin{frame}[t]{Invertible matrices}
+	\grid
+
+	\vspace{-0.3cm}
+\begin{definition}[Matrix inverse]\label{prop:matrix_inverse}
+	A \textbf{square} matrix $M \in \R^{n \times n}$ is called \emph{invertible} if there exists a matrix $M^{-1} \in \R^{n \times n}$ such that 
+	$$
+	M M^{-1} = M^{-1} M = \Id_n.
+	$$
+	Such matrix $M^{-1}$ is unique and is called the \emph{inverse} of $M$.
+\end{definition}
+\textbf{Exercise}: Let $A,B \in \R^{n \times n}$. Show that if $AB = \Id_n$ then $BA = \Id_n$.
 \end{frame}
 
 \section{Kernel and image}
 
 \begin{frame}[t]{Definitions}
-	Let \quad $L: \R^m \to \R^n$ \quad be a linear transformation .
+	Let \quad $L: \R^m \to \R^n$ \quad be a linear transformation.
 	\begin{definition}[Kernel]
 		The kernel $\Ker(L)$ (or nullspace) of $L$ is defined as the set of all vectors $v \in \R^m$ such that $L(v) = 0$, i.e.
 		$$
@@ -182,16 +251,31 @@
 	\begin{definition}[Image]
 		The image $\Im(L)$ (or column space) of $L$ is defined as the set of all vectors $u \in \R^n$ such that there exists $v \in \R^m$ such that $L(v) = u$. 
 	\end{definition}
+\end{frame}
+
+
+
+\begin{frame}[t]{Picture}
+	\grid
+\end{frame}
+
+\begin{frame}[t]{Remarks}
+	\grid
+
+	Let \quad $L: \R^m \to \R^n$ \quad be a linear transformation.
+	\begin{block}{Proposition}
+		\begin{itemize}
+			\item $\Ker(L)$ is a subspace of $\R^m$.
+			\item $\Im(L)$ is a subspace of $\R^n$.
+		\end{itemize}
+	\end{block}
 	\textbf{Remark:} $\Im(L)$ is also the Span of the columns of the matrix representation of $L$.
+
 \end{frame}
-
-
-
-\begin{frame}{Picture}
-\end{frame}
-
 
 \begin{frame}[t]{Example: orthogonal projection}
+	\grid
+
 	Consider \quad $L: \R^2 \to \R^2$ \quad to be the orthogonal projection onto the $x$-axis.
 \end{frame}
 
@@ -199,14 +283,97 @@
 \section{Why do we care about this ?}
 
 \begin{frame}[t]{Linear systems}
+	\grid
 
+	Assume that we given a dataset:
+	$$
+	a_i = (a_{i,1}, \dots, a_{i,m}) \in \R^m, \quad y_i \in \R \qquad \text{for} \quad i = 1, \dots, n.
+	$$
+	We would like to find $x \in \R^m$ such that
+	$$
+	x_1 a_{i,1} + \cdots + x_m a_{i,m} = y_i \qquad \text{for all} \quad i \in \{1, \dots, n\}.
+	$$
+\end{frame}
+
+\begin{frame}[t]{Matrix notation}
+	\grid
+
+	\vspace{-0.3cm}
+	Let's write
+	$$
+	A = 
+	\begin{pmatrix}
+		a_{1,1}  & \cdots & a_{1,m} \\
+		\vdots & \ddots & \vdots \\
+		a_{n,1} & \cdots & a_{n,m} \\
+	\end{pmatrix} \in \R^{n \times m}
+	\qquad \text{and} \qquad
+	y = 
+	\begin{pmatrix}
+		y_1 \\
+		\vdots \\
+		y_n
+	\end{pmatrix}
+	\in \R^n.
+	$$
+\end{frame}
+
+\begin{frame}[t]{Let's find all solutions !}
+	\grid
+
+\end{frame}
+\begin{frame}[t]{Conclusion: 3 possible cases}
+	\grid
+
+	\begin{enumerate}
+		\item $y \not \in \Im(A)$: there is no solution to $Ax = y$.
+			\vspace{0.4cm}
+		\item $y \in \Im(A)$, then there exists $x_0 \in \R^m$ such that $Ax_0 =y$. The set of solutions in then
+			$$
+			S = \Big\{ x_0 + v \, \Big| \, v \in \Ker(A) \Big\}.
+			$$
+			\begin{itemize}
+				\item If $\Ker(A) = \{ 0 \}$, then $S = \{x_0\}$: \ \ $x_0$ is the unique solution.
+			\vspace{0.4cm}
+				\item If $\Ker(A) \neq \{ 0 \}$, then $\Ker(A)$ contains infinitely many vectors: there are infinitely many solutions.
+			\end{itemize}
+	\end{enumerate}
 
 \end{frame}
 
+
+\begin{frame}[t]{Gaussian elimination}
+	\grid
+	$$
+	A = 
+	\begin{pmatrix}
+		1  & -1 & 0 & 1 \\
+		2  & 0 & 1 & -1 \\
+		-1  & 5 & 2 & 0 
+	\end{pmatrix} \in \R^{n \times m}
+	\qquad \text{and} \qquad
+	y = 
+	\begin{pmatrix}
+		1 \\
+		1 \\
+		4
+	\end{pmatrix}
+	\in \R^n.
+	$$
+
+\end{frame}
+\begin{frame}[t]{Gaussian elimination}
+	\grid
+	\pause
+	\pause
+\end{frame}
 \appendix
 \backupbegin
-\begin{frame}
+\begin{frame}[t]
 	\frametitle{Questions?}
+	\grid
+	\pause
+	\pause
 \end{frame}
 \backupend
 
