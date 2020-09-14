@@ -72,10 +72,12 @@
 	For $v_1, \dots, v_k \in \R^n$, and $\alpha \in \R \setminus \{0\}, \, \beta \in \R$ we have
 	\begin{align*}
 		\rank(v_1, \dots, v_k)
-		&=
+		=
+		\begin{cases}
 		\rank(v_1, \dots, v_{i-1}, \, \alpha v_i \, , v_{i+1}, \dots, v_k)\\
-		&=
+		\\
 		\rank(v_1, \dots, v_{i-1}, \, v_i + \beta v_j \, , v_{i+1}, \dots, v_k)
+		\end{cases}
 	\end{align*}
 	\vspace{2cm}
 	\\
@@ -115,9 +117,10 @@
 
 \end{frame}
 
-\begin{frame}[t]{Proof sketch on an example}
+\begin{frame}[t]{Intuition}
 	\grid
 
+	\vspace{-0.3cm}
 	Let us solve the linear system $Ax = 0$.
 	\begin{columns}
 		\hspace*{-0.7cm}
@@ -193,6 +196,7 @@
 \begin{frame}[t]{Proof of the rank-nullity Theorem}
 	\grid
 
+	\pause
 	\pause
 	\pause
 	\pause
@@ -325,16 +329,17 @@
 
 
 
-\begin{frame}[t]{Conclusions}
+\begin{frame}[t]{Conclusion}
 	\grid
 
+			\vspace{0.5cm}
 	\begin{itemize}
 		\item The rank is not <<robust>> !
-			\vspace{0.3cm}
+			\vspace{0.5cm}
 		\item We need to have a way to check if a matrix is <<approximately low-rank>>.
-			\vspace{0.3cm}
-		\item Equivalentely, given $m$ vectors, one would like to be able to see if there exists a subspace of dimension $k \ll m$ from which the vectors are << not far >>.
-			\vspace{0.3cm}
+			\vspace{0.5cm}
+		\item Equivalentely, given $m$ vectors, one would like to be able to see if there exists a subspace of dimension $k \ll m$ from which the vectors are << close >>.
+			\vspace{0.5cm}
 		\item The singular value decomposition (lecture 6-7) will solves our problems !
 	\end{itemize}
 \end{frame}
