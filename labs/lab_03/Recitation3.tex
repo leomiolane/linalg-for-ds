@@ -140,9 +140,9 @@ In order for $BA$ to be invertible, $rank(BA)=h$. However, $rank(BA) \leq rank(B
 \item Concepts involving Symmetric Matrices
 \begin{itemize}
 \item Orthogonal Projections (Lec 4) are symmetric.\\
-\item Spectral Theorem (Lec 7) ``eigenvectors of symmetric matrices are orthogonal".\\
-\item PCA: Covariance matrix is symmetric
-\item Concavity: Hessian Matrix (matrix of second derivative) is symmetric
+\item Spectral Theorem (Lec 7) ``symmetric matrices have an orthonormal basis of eigenvectors".\\
+\item PCA (Lec 7): Covariance matrix is symmetric
+\item Convexity (Lec 9,11): Hessian Matrix (matrix of second derivative) is symmetric
 \end{itemize}
 \item But, we will see most of this later. For now, just trust me!
 \end{itemize}
@@ -240,7 +240,7 @@ Applying this to $rank(A^TA)$ yields \\ %and $rank(AA^T)$ yields: \\
 \qquad $rank(A^T) \geq rank(A^TA)$ \\ %\quad and \quad $rank(A) \geq rank(AA^T)$.  \\
 Replacing $rank(A^TA)$ with $rank(A)$ gives: \\ %and $rank(AA^T)$, we get that\\
 \qquad $rank(A^T) \geq rank(A)$ \\ % \quad and \quad $rank(A) \geq rank(A^T)$.  \\
-Apply this again for $rank(A^T) = rank(AA^T)$ (start from $(1)$) gives: \\
+Applying the previous result to $A^T$ gives: \\
 \qquad $rank(A) \geq rank(A^T)$ \\
 So $rank(A)=rank(A^T)$
 \end{solution}
