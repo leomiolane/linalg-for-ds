@@ -82,7 +82,7 @@
 \item The main rank inequality:
 \item $rank(AB)\leq min(rank(A),rank(B))$
 \end{itemize}
-\item If $n>m$, then the $max(dim(Im(L)))=m$
+\item If $n>m$, then the $dim(Im(L)) \leq m$
 
 \end{itemize}
 \end{frame}
@@ -100,7 +100,7 @@ Prove or give a counterexample to the following statements.
 
 \begin{frame}
 \frametitle{Questions: Rank-Nullity Theorem}
-Let $A\in \R^{l\times h}$ and $B\in \R^{h\times l}$, and $h>l$.\\
+Let $A\in \R^{\ell\times h}$ and $B\in \R^{h\times \ell}$, and $h>\ell$.\\
 Prove or give a counterexample to the following statements.
 \begin{solution}
 \begin{enumerate}
@@ -123,7 +123,7 @@ $AB= \begin{bmatrix}
 \medskip
 \item $\exists A,B$ s.t.$BA$ is invertible.
 \textbf{False}.\\
-In order for $BA$ to be invertible, $rank(BA)=3$. However, $rank(BA) \leq rank(B)=2$.
+In order for $BA$ to be invertible, $rank(BA)=h$. However, $rank(BA) \leq rank(B)\leq \ell $.
 \end{enumerate}
 \end{solution}
 \end{frame}
@@ -231,15 +231,17 @@ Let $A\in \R^{k \times n}.$\\
 \end{enumerate}
 \begin{solution}
 By the previous question,\\
-\qquad $rank(A)=rank(A^TA)$.\\
-and similarly, \\
-\qquad $rank(A^T)=rank(AA^T)$.\\
+\qquad $rank(A)=rank(A^TA).\qquad \qquad \qquad \qquad (1)$ \\
+%and similarly, \\
+%\qquad $rank(A^T)=rank(AA^T)$.\\
 Recall that $rank(T_1T_2)\leq min(rank(T_1),rank(T_2))$, and therefore, \\
 \qquad $rank(T_1T_2)\leq rank(T_1)$.\\
-Applying this to $rank(A^TA)$ and $rank(AA^T)$ yields: \\
-\qquad $rank(A^T) \geq rank(A^TA)$ \quad and \quad $rank(A) \geq rank(AA^T)$.  \\
-Replacing $rank(A^TA)$ and $rank(AA^T)$, we get that\\
-\qquad $rank(A^T) \geq rank(A)$ \quad and \quad $rank(A) \geq rank(A^T)$.  \\
+Applying this to $rank(A^TA)$ yields \\ %and $rank(AA^T)$ yields: \\
+\qquad $rank(A^T) \geq rank(A^TA)$ \\ %\quad and \quad $rank(A) \geq rank(AA^T)$.  \\
+Replacing $rank(A^TA)$ with $rank(A)$ gives: \\ %and $rank(AA^T)$, we get that\\
+\qquad $rank(A^T) \geq rank(A)$ \\ % \quad and \quad $rank(A) \geq rank(A^T)$.  \\
+Apply this again for $rank(A^T) = rank(AA^T)$ (start from $(1)$) gives: \\
+\qquad $rank(A) \geq rank(A^T)$ \\
 So $rank(A)=rank(A^T)$
 \end{solution}
 \end{frame}
