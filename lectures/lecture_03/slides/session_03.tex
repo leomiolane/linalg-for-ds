@@ -19,11 +19,11 @@
 \begin{frame}
 	\frametitle{Contents}
 	\begin{enumerate}
-		\item Subspaces
-		\item Linear dependency
-		\item Properties of the dimension
-		\item Coordinates
-		\item Why do we care about all these things ? \below{Application to data science: image compression}
+		\item The rank
+		\item The rank-nullity Theorem
+		\item More on the inverse of a matrix
+		\item Transpose of a matrix
+		\item Why do we care about all these things ? \below{Is the rank useful in practice?}
 	\end{enumerate}
 \end{frame}
 
@@ -43,6 +43,7 @@
 		\vspace{-0.3cm}
 		$$
 	\end{definition}
+
 	\begin{definition}
 		Let $M \in \R^{n \times m}$. Let $c_1, \dots, c_m \in \R^n$ be its columns.
 		We define
@@ -52,6 +53,7 @@
 		\vspace{-0.3cm}
 		$$
 	\end{definition}
+
 	\begin{block}{Proposition}
 		Let $M \in \R^{n \times m}$. Let $r_1, \dots, r_n \in \R^m$ be the rows of $M$ and $c_1, \dots, c_m \in \R^n$ be its columns.
 		Then we have
@@ -61,25 +63,25 @@
 		\vspace{-0.3cm}
 		$$
 	\end{block}
+
 \end{frame}
 
 \begin{frame}[t]{How do we compute the rank ?}
 	\grid
 
 	For $v_1, \dots, v_k \in \R^n$, and $\alpha \in \R \setminus \{0\}, \, \beta \in \R$ we have
-	{
-		\begin{align*}
-			\rank(v_1, \dots, v_k)
+	\begin{align*}
+		\rank(v_1, \dots, v_k)
 		&=
 		\rank(v_1, \dots, v_{i-1}, \, \alpha v_i \, , v_{i+1}, \dots, v_k)\\
 		&=
 		\rank(v_1, \dots, v_{i-1}, \, v_i + \beta v_j \, , v_{i+1}, \dots, v_k)
-		\end{align*}
-	}
+	\end{align*}
 	\vspace{2cm}
 	\\
 	As a consequence, the Gaussian elimination method keeps the rank of a matrix unchanged!
 \end{frame}
+
 \begin{frame}[t]{Example}
 	\grid
 
@@ -92,8 +94,8 @@
 		-1  & 5 & 2 & 0 
 	\end{pmatrix}
 	$
-
 \end{frame}
+
 \begin{frame}[t]{Example}
 	\grid
 
@@ -188,6 +190,14 @@
 
 \end{frame}
 
+\begin{frame}[t]{Proof of the rank-nullity Theorem}
+	\grid
+
+	\pause
+	\pause
+	\pause
+\end{frame}
+
 \section{Invertible matrices}
 
 \begin{frame}[t]{Invertible matrices}
@@ -231,30 +241,107 @@
 \end{frame}
 
 
-\begin{frame}{What do we mean by << structure >> ?}
-\end{frame}
+\section{Transpose of a matrix}
 
-\begin{frame}[t]{A toy example}
-	Consider $n = 2$, that is images $v\in\R^2$ with only $2$ pixels.
-\end{frame}
+\begin{frame}[t]{Transpose of a matrix}
+	\grid
 
-\begin{frame}[t]{Examples of good bases}
+	\vspace{-0.4cm}
+	\begin{definition}
+		Let $M \in \R^{n \times m}$. We define its \emph{transpose} $M^{\sT} \in \R^{m \times n}$ by
+		$$
+		(M^{\sT})_{i,j} = M_{j,i}
+		$$
+		for all $i \in \{1, \dots, m\}$ and $j \in \{1, \dots, n\}$.
+	\end{definition}
+
+	\vspace{3cm}
+	\textbf{Remark:}
 	\begin{itemize}
-		\item \textbf{Fourier bases} (used in \texttt{.jpeg}, \texttt{.mp3})
-			\begin{figure}
-				\includegraphics[height=4cm]{./fourier.jpeg}
-				\hspace{1cm}
-				\includegraphics[height=4cm]{./fourier_dec.jpg}
-			\end{figure}
-
-		\item \texttt{JPEG2000} uses \textbf{wavelet bases}, and achieves better performance than \texttt{JPEG}.
-		\item In \textbf{Homework 4}, you will use wavelets to compress/denoise images.
+		\item We have $(M^{\sT})^{\sT} = M$. 
+		\item The mapping $M \mapsto M^{\sT}$ is linear.
 	\end{itemize}
 \end{frame}
+
+
+\begin{frame}[t]{Properties of the transpose}
+	\grid
+
+	\vspace{-0.4cm}
+	\begin{block}{Proposition}
+		For all $A \in \R^{n \times m}$, \quad
+		$\rank(A) = \rank(A^{\sT})$.
+	\end{block}
+
+	\begin{block}{Proposition}
+		Let $A \in \R^{n \times m}$ and $B \in \R^{m \times k}$. Then
+		\vspace{-0.3cm}
+		$$
+		(AB)^{\sT} = B^{\sT} A^{\sT}.
+		\vspace{-0.3cm}
+		$$
+	\end{block}
+	\begin{proof}
+		\vspace{2.5cm}
+		\vfill
+	\end{proof}
+\end{frame}
+
+\begin{frame}[t]{Symmetric matrices}
+	\grid
+
+	\vspace{-0.4cm}
+	\begin{block}{Definition}
+	A square matrix $A \in \R^{n \times n}$ is said to be \emph{symmetric} if
+	$$
+	\forall i,j \in \{1, \dots, n\}, \ A_{i,j} = A_{j,i}
+	$$
+	or, equivalently if $A = A^{\sT}$.
+	\end{block}
+
+	\begin{Remark}: For all $M \in \R^{n \times m}$ the matrix $M M^{\sT}$ is symmetric.
+\end{frame}
+
+\section{Is the rank useful in practice?}
+
+\begin{frame}[t]{Back to the movies ratings example}
+	\grid
+
+	\vspace{-0.3cm}
+	Assume that you are given the matrix of movies ratings:
+	$$
+	\begin{pmatrix}
+		1 & 1 & 5 & 5 & 5 \\
+		2 & 2 & 2 & 0 & 0 \\
+		1 & 1.001 & 5 & 5 & 5 \\
+		2 & 2 & 2 & 0.0001 & 0 \\
+		2.0001 & 2 & 2 & 0 & 0 
+	\end{pmatrix}
+	$$
+
+	\vspace{0.5cm}
+	\textbf{Goal:} how many different << user profiles >> do we have ?
+\end{frame}
+
+
+
+\begin{frame}[t]{Conclusions}
+	\grid
+
+	\begin{itemize}
+		\item The rank is not <<robust>> !
+		\item We need to have a way to check if a matrix is <<approximately low-rank>>.
+		\item The singular value decomposition (SVD) will solves our problems !
+	\end{itemize}
+\end{frame}
+
+
 \appendix
 \backupbegin
 \begin{frame}
 	\frametitle{Questions?}
+	\pause
+	\pause
 \end{frame}
 \backupend
 
