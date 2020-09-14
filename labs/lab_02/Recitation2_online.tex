@@ -1,0 +1,197 @@
+\documentclass{beamer}
+
+\usepackage{../../latex_style/beamerthemeExecushares}
+\usepackage{../../latex_style/notations}
+
+\title{Recitation 2}
+\author{Carles Domingo}
+\date{Fall 2020}
+
+
+\begin{document}
+
+\frame{\titlepage} 
+
+\setcounter{showProgressBar}{0}
+\setcounter{showSlideNumbers}{1}
+
+\begin{frame}[t]
+	\frametitle{Review: Linear Transformations}
+	\begin{block}{Definition: Linear Transformation}
+		A function $L: \R^m \to \R^n$ is a linear transformation if
+	\begin{enumerate}
+		\item for all $v \in \R^m$ and all $\alpha \in \R$ we have $L(\alpha v) = \alpha L(v)$ and
+		\item for all $v,w \in \R^m$ we have $L(v + w) = L(v) + L(w)$.
+	\end{enumerate}
+	\end{block}
+	\textbf{Example}: $L : \R^2 \to \R^2$ defined as 
+	\begin{align*}	
+	L\left( \begin{bmatrix} x \\ y \end{bmatrix} \right) = \begin{bmatrix} 3x+y \\ -x+4y \end{bmatrix} = x \begin{bmatrix} 3 \\ -1 \end{bmatrix} + y \begin{bmatrix} 1 \\ 4 \end{bmatrix}
+	\end{align*}
+	%\begin{block}{Definition: Kernel of a linear transformation}
+	%The kernel $\text{Ker}(L)$ of a linear transformation $L: \R^m \to \R^n$ is the subset of $\R^m$ of vectors $v$ such that $ L(v) = 0$.
+	%\end{block}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Questions 1: Linear Transformations}
+Which of the following functions are linear?  %If the function is linear, what is the kernel?
+  \begin{enumerate}
+  \item $f_1:\R^2\to\R^2$ such that $f_1(a,b) = (2a,a+b)$
+  \item $f_2:\R^2\to\R^3$ such that $f_2(a,b) = (a+b,2a+2b,0)$
+  \item $f_3:\R^2\to\R^3$ such that $f_3(a,b) = (2a,a+b,1)$
+  \item $f_4:\R^2\to\R$ such that $f_4(a,b) = \sqrt{a^2+b^2}$
+  \item $f_5:\R\to\R$ such that $f_5(x) = 5x+3$
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[t]{Solution}
+	\grid
+	\pause
+	\pause
+\end{frame}
+
+%----Slide 5-----------------------
+\begin{frame}[t]
+	\frametitle{Review: Matrices}
+	\begin{itemize}
+	\fonttwelve
+\item A linear transformation $ T: \R^n \to \R^m$ is represented by a $m \times n $ matrix
+which is an element of $\R^{m\times n}$. (Note the order!)\begin{align*}
+\mathbf{T} = \bordermatrix{ &  & n &  \cr
+       & T_{1,1} & ... & T_{1,n} \cr
+      m & \vdots & \ddots & \vdots \cr
+       & T_{m,1} & \dots & T_{m,n} }
+\end{align*}
+\item What does this mean? If $u_1, u_2, \dots, u_n$ is a basis of $\R^n$ and $v_1, v_2, \dots, v_m$ is a basis of $\R^m$, we have
+\begin{align*}
+\begin{split}
+T(u_1) &= T_{1,1} v_1 + T_{2,1} v_2 + \dots + T_{m,1} v_m, \\
+T(u_2) &= T_{1,2} v_1 + T_{2,2} v_2 + \dots + T_{m,2} v_m, \\
+&\cdots \\
+T(u_n) &= T_{1,n} v_1 + T_{2,n} v_2 + \dots + T_{m,n} v_m.
+\end{split}
+\end{align*}
+\item Important: The matrix representation depends on the basis!
+\fonttwelve
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+	\frametitle{Review: Matrices}
+	\textbf{Example}: $L : \R^2 \to \R^2$ defined as 
+	\begin{align*}	
+	L\left( \begin{bmatrix} x \\ y \end{bmatrix} \right) = \begin{bmatrix} 3x+y \\ -x+4y \end{bmatrix} = x \begin{bmatrix} 3 \\ -1 \end{bmatrix} + y \begin{bmatrix} 1 \\ 4 \end{bmatrix}
+	\end{align*}
+	We choose the canonical basis for both vector spaces: $e_1 = (1,0), e_2 = (0,1)$.
+	\begin{align*}
+	L(e_1) &= L\left( \begin{bmatrix} 1 \\ 0 \end{bmatrix} \right) = \begin{bmatrix} 3 \\ -1 \end{bmatrix} = 3 e_1 -1 e_2, \\  
+	L(e_2) &= L\left( \begin{bmatrix} 0 \\ 1 \end{bmatrix} \right) = \begin{bmatrix} 1 \\ 4 \end{bmatrix} = 1 e_1 + 4 e_2.
+	\end{align*}
+	\begin{align*}
+	\implies \mathbf{L} = \begin{bmatrix} 3 & 1 \\ -1 & 4 \end{bmatrix}
+	\end{align*}
+\end{frame}
+
+
+\begin{frame}[t]
+	\frametitle{Review: Matrix products}
+	\begin{itemize}
+	\item The product of $\mathbf{A} \in \mathbb{R}^{m \times n}$ with  $\mathbf{B} \in \mathbb{R}^{n \times p}$ is a matrix $\mathbf{A} \mathbf{B} \in \mathbb{R}^{m \times p}$. 
+	\item \textbf{Example:} If 
+	\begin{align*}
+	\mathbf{A} = 
+	\begin{bmatrix} 
+	\textcolor{red}{a_{11}} & \textcolor{red}{a_{12}} \\
+	\textcolor{blue}{a_{21}} & \textcolor{blue}{a_{22}} \\
+	\textcolor{green}{a_{31}} & \textcolor{green}{a_{32}} 
+	\end{bmatrix}, \quad 
+	\mathbf{B} = 
+	\begin{bmatrix} 
+	\textcolor{orange}{b_{11}} & \textcolor{purple}{b_{12}} \\
+	\textcolor{orange}{b_{21}} & \textcolor{purple}{b_{22}}
+	\end{bmatrix}
+	\end{align*}
+	\begin{align*}
+	\mathbf{A} \mathbf{B} =
+	\begin{bmatrix}
+	\textcolor{red}{a_{11}} \textcolor{orange}{b_{11}} + \textcolor{red}{a_{12}} \textcolor{orange}{b_{21}} & \textcolor{red}{a_{11}} \textcolor{purple}{b_{12}} + \textcolor{red}{a_{12}} \textcolor{purple}{b_{22}} \\
+	\textcolor{blue}{a_{21}} \textcolor{orange}{b_{11}} + \textcolor{blue}{a_{22}} \textcolor{orange}{b_{21}} & \textcolor{blue}{a_{21}} \textcolor{purple}{b_{12}} + \textcolor{blue}{a_{22}} \textcolor{purple}{b_{22}} \\
+	\textcolor{green}{a_{31}} \textcolor{orange}{b_{11}} + \textcolor{green}{a_{32}}  \textcolor{orange}{b_{21}} & \textcolor{green}{a_{31}} \textcolor{purple}{b_{12}} + \textcolor{green}{a_{32}} \textcolor{purple}{b_{22}}
+	\end{bmatrix}
+	\end{align*}
+	\item The matrix product is associative: $(\mathbf{A} \mathbf{B}) \mathbf{C} = \mathbf{A} (\mathbf{B} \mathbf{C})$. It is not commutative: in general $\mathbf{A} \mathbf{B} \neq \mathbf{B} \mathbf{A}$
+	\item As we will see in the next exercise, matrix products are very useful to compose and evaluate linear transformation.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+	\frametitle{Questions 2: Matrix products}
+	Let $x = (-2,0,3,1) \in \R^4$. Let $A : \R^{3} \to \R^3$ be a linear transformation with matrix $\mathbf{A}$ in the canonical basis and let $B : \R^{4} \to \R^3$ be a linear transformation with matrix $\mathbf{B}$ in the canonical, where 
+	\begin{align*}
+	A = \begin{bmatrix}
+			5 & 0 & 0  \\
+			0 & 0 & 1  \\
+			0 & 1 & 0   \\
+			\end{bmatrix},
+	\quad B = \begin{bmatrix}
+			1 & 0 & 0 & 2 \\
+			0 & 1 & 0 & 3 \\
+			0 & 0 & 1 & 4 \\
+			\end{bmatrix}
+	\end{align*}
+	\begin{enumerate}
+	\item The matrix representation of the composition $A \circ B$ is $\mathbf{A} \mathbf{B}$. Compute $\mathbf{A} \mathbf{B}$.
+	\item Compute $(A \circ B)(x)$. 
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}[t]
+	\frametitle{Questions 2: Matrix products} 
+	\grid
+	\begin{align*}
+	A = \begin{bmatrix}
+			5 & 0 & 0  \\
+			0 & 0 & 1  \\
+			0 & 1 & 0   \\
+			\end{bmatrix},
+	\quad B = \begin{bmatrix}
+			1 & 0 & 0 & 2 \\
+			0 & 1 & 0 & 3 \\
+			0 & 0 & 1 & 4 \\
+			\end{bmatrix} 
+	\quad x = \begin{bmatrix}
+	-2 \\ 0 \\ 3 \\ 1
+	\end{bmatrix}
+	\end{align*}
+	\pause
+	\pause
+\end{frame}
+
+\begin{frame}[t]
+	\frametitle{Review: Kernel, Inverse} 
+	\begin{block}{Definition: Kernel of a linear transformation}
+	The kernel $\text{Ker}(L)$ of a linear transformation $L: \R^n \to \R^m$ is the subset of $\R^m$ of vectors $v$ such that $ L(v) = 0$. Similarly, the kernel of a matrix $\mathbf{L} \in \R^{m \times n}$ is the subset of $\R^n$ of points $x$ such that $\mathbf{L} x = 0$.
+	\end{block}
+	
+	\begin{block}{Definition: Invertible matrix, inverse}
+	A matrix $M \in \R^{n \times n}$ is called \emph{invertible} if there exists a matrix $M^{-1} \in \R^{n \times n}$ such that 
+	$$
+	M M^{-1} = M^{-1} M = \Id_n.
+	$$
+	Such matrix $M^{-1}$ is unique and is called the \emph{inverse} of $M$.
+	\end{block}
+\end{frame}
+
+\begin{frame}[t]
+	\frametitle{Questions 3: Kernel, Inverse} 
+	\grid
+	\begin{enumerate}
+	\item Prove that if $M \in \mathbb{R}^{n \times n}$ the matrix $M^{-1}$ is indeed unique. 
+	\item Prove that if $M \in \mathbb{R}^{n \times n}$ is invertible, then $\text{Ker}(M) = \{0\}$
+	\end{enumerate}
+	\pause
+	\pause
+\end{frame}
+
+\end{document}
