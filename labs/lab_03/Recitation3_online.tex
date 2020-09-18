@@ -1,0 +1,115 @@
+\documentclass{beamer}
+
+\usepackage{../../latex_style/beamerthemeExecushares}
+\usepackage{../../latex_style/notations}
+
+\title{Recitation 3}
+\author{Carles Domingo}
+\date{Fall 2020}
+
+
+\begin{document}
+
+\frame{\titlepage} 
+
+\setcounter{showProgressBar}{0}
+\setcounter{showSlideNumbers}{1}
+
+\begin{frame}[t]
+\frametitle{Rank Nullity Theorem}
+\begin{theorem}[Rank-Nullity Theorem]
+	Let $L: \R^m \to \R^n$ be a linear transformation. Then
+	$$
+	\rank(L) + \dim(\Ker(L)) = m.
+	$$
+\end{theorem}
+\begin{itemize}
+\item Important theorem (check that you can reproduce the proof).\\
+\item Other things to keep in mind:
+\begin{itemize}
+\item $\text{rank}(AB)\leq \min(\text{rank}(A),\text{rank}(B))$
+\item For $c_1, c_2, \dots, c_m \in \R^n$, 
+\begin{align*}
+\text{rank}(c_1, c_2, \dots, c_m) = \text{rank}(\begin{bmatrix} c_1 & c_2 & \dots & c_m \end{bmatrix}) = \text{rank} \left(\begin{bmatrix} c_1 \\ c_2 \\ \dots \\ c_m \end{bmatrix} \right)
+\end{align*}
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Typical exercise} 
+\begin{align*}
+A = 
+\begin{bmatrix}
+1 & -2 & 3 \\
+0 & 1 & 0 \\
+3 & -1 & -1 \\
+4 & -2 & 0
+\end{bmatrix}
+\end{align*}
+\begin{enumerate}
+\item Find a basis of the kernel of $A$.
+\item Find the rank of $A$. Did you need to perform additional computations?
+\item Find a basis of the image of $A$. Did you need to perform additional computations?
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Typical exercise} 
+\begin{align*}
+A = 
+\begin{bmatrix}
+1 & -2 & 3 \\
+0 & 1 & 0 \\
+3 & -1 & -1 \\
+4 & -2 & 0
+\end{bmatrix}
+\end{align*}
+\pause
+\pause
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Questions: Rank-Nullity Theorem}
+Let $A\in \R^{l\times h}$ and $B\in \R^{h\times l}$, and $h>l$.\\
+Prove or give a counterexample to the following statements.
+\begin{enumerate}
+\item $\exists A,B$ s.t $AB$ is invertible.
+\item $\exists A,B$ s.t.$BA$ is invertible.
+\end{enumerate}
+\pause
+\pause
+\pause
+\end{frame}
+
+%----Slide 5-----------------------
+\begin{frame}[t]
+\frametitle{Symmetric Matrices}
+\begin{itemize}
+\item $A \in \R^{n\times n}$ symmetric if $A_{ij} = A_{ji}$ for all $i,j \in [1:n]$.
+\item Symmetric matrices appear often and have good properties:
+\begin{itemize}
+\item Orthogonal Projections (Lec. 4) are symmetric.\\
+\item Spectral Theorem (Lec. 7) ``symmetric matrices have an orthonormal basis of eigenvectors".\\
+\item PCA (Lec. 7): Covariance matrix is symmetric.
+\item Convexity (Lec. 9,11): Hessian Matrix (matrix of second derivative) is symmetric
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Questions: Symmetric Matrices}
+Let $A\in \R^{k \times n}$. Prove/answer the following statements.
+\begin{enumerate}
+\item Show that $\forall x\in\R^n$, $ x^\top A^\top Ax\geq0$.
+\item When is $x^\top A^\top Ax = 0$ ?
+\item Show that $\text{Ker}(A) = \text{Ker}(A^\top A)$.
+\item Use this to show $\text{rank}(A)=\text{rank}(A^\top A)$.
+\end{enumerate}
+\pause
+\pause
+\pause
+\pause
+\end{frame}
+
+\end{document}
