@@ -1,0 +1,507 @@
+\documentclass{beamer}
+\usepackage{amsthm}
+\usepackage[utf8]{inputenc}
+\usetheme{Madrid}
+\usepackage{../latex_style/packages_old}
+\usepackage{../latex_style/notations_old}
+\usepackage{outlines}
+\usepackage{enumitem}
+\renewenvironment{itemize}
+\usefonttheme{serif}
+\def\labelenumi{\theenumi}
+\usefonttheme{serif}
+
+%\setbeamertemplate{itemize items}[default]
+%\setbeamertemplate{enumerate items}[default]
+
+% define smaller font command
+\newcommand*{\horzbar}{\rule[.5ex]{2.5ex}{0.5pt}}
+\newcommand\fonteight{\fontsize{8}{9.6}\selectfont}
+\newcommand\fontten{\fontsize{10}{1.2}\selectfont}
+
+%define enumerate with periods
+\renewenvironment{enumerate}%
+{\begin{list}{\arabic{enumi}.}%  \langle ------ dot here
+      {\setlength{\leftmargin}{2.5em}%
+       \setlength{\itemsep}{-\parsep}%
+       \setlength{\topsep}{-\parskip}%%
+       \usecounter{enumi}}%
+ }{\end{list}}
+%define itemize with arrows
+\renewenvironment{itemize}%
+{\begin{list}{$\blacktriangleright$}%  \langle ------ dot here
+      {\setlength{\leftmargin}{2.5em}%
+       \setlength{\itemsep}{-\parsep}%
+       \setlength{\topsep}{-\parskip}%%
+       \usecounter{enumi}}%
+ }{\end{list}}
+
+%Information to be included in the title page:
+\title{Recitation 4}
+\author{Alex Dong}
+\institute{CDS, NYU}
+\date{Fall 2020}
+
+
+\makeatletter
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.4\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\insertshortauthor\expandafter\ifblank\expandafter{\beamer@shortinstitute}{}{~~(\insertshortinstitute)}
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.3\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.3\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+    \insertframenumber{} / \inserttotalframenumber\hspace*{2ex} 
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\setbeamertemplate{navigation symbols}{}
+\makeatother
+
+\begin{document}
+%1
+\frame{\titlepage} 
+%2
+
+\begin{frame}
+\frametitle{Norms}
+\begin{itemize}
+\item Norms measure distances!
+\item Think about all the ``natural" properties of distance that make sense.
+\begin{itemize}
+\item distance = 0 means at the same point
+\item distance is always non-negative
+\item distance follows triangle inequality (at least in Euclidean space)
+\end{itemize}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Norms}
+Shorthand way to remember what the properties do.
+\begin{definition}[Norm]
+	A norm $\| \cdot \|$ on $V$ verifies the following points:
+	\begin{enumerate}
+		\item \emph{Triangular inequality}: $\|u + v\| \leq \|u\| + \|v\|$ \hfill ``Euclidean space"
+		\item \emph{Homogeneity}: $\| \alpha v \| = |\alpha|\times \| v\|$ \hfill ``farther actually means farther"
+		\item \emph{Positive definiteness}: if $\|v\| = 0 \implies v=0$. \hfill ``Non-negative"
+	\end{enumerate}
+\end{definition}
+\end{frame}
+
+\begin{frame}
+\frametitle{Inner Products}
+\begin{definition}[Inner product]
+	Let $V$ be a vector space.
+	An inner product on $V$ is a function $\langle \cdot, \cdot \rangle$ from $V \times V$ to $\R$ that verifies the following points:
+	\begin{enumerate}
+		\item \emph{Symmetry}: $\langle u, v \rangle = \langle v, u\rangle$ for all $u,v \in V$.
+		\item \emph{Linearity}: $\langle u+v, w \rangle = \langle u, w\rangle + \langle v, w\rangle$ and $\langle \alpha v, w \rangle = \alpha \langle v, w \rangle$ for all $u,v,w \in V$ and $\alpha \in \R$.
+		\item \emph{Positive definiteness}: $\langle v, v\rangle \geq 0$ with equality if and only if $v = 0$.
+\end{enumerate}
+\end{definition}
+\begin{itemize}
+\item Definition of inner product does not reveal it's purpose.
+\item \textbf{In this class, we always use the Euclidean inner product.}
+\begin{itemize}
+\item $\langle u,v \rangle = u^Tv$
+\end{itemize}
+\item (!!) Inner products are (indirectly) used for a notion of angles.
+\item $cos(\theta) = \frac{ \langle u,v \rangle }{\|u\| \|v\|}$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Inner Products in Machine Learning (\&)}
+\begin{itemize}
+\item Inner products can be used as a measure of similarity
+\item Kernel Tricks (\&) - Increase Data Complexity
+\begin{itemize}
+\item Sometimes you have to calculate  $x_{old}^T x_{new}$, equivalently $ \langle x_{old},x_{new} \rangle $
+\item You can replace the inner product with a inner product in a higher dimensional space
+\item Instead of calculating $ \langle x_{old},x_{new} \rangle $, define a function $K$ and calculate $ \langle K(x_{old}),K(x_{new}) \rangle $
+\item If you pick ``the right" higher dimensional space, your data can be a lot easier to work with
+\end{itemize}
+\end{itemize}
+\footnotetext{(\&) denotes extra material not covered in this course}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Questions 1: Norms and Inner Products}
+
+\begin{enumerate}
+\item[1.] Which of the following functions are inner products for $x,y\in\R^3$?
+\begin{enumerate}
+\item[i.] $f(x,y) = x_1y_2+x_2y_3+x_3y_1$
+\item[ii.] $f(x,y) = x_1^2y_1^2+x_2^2y_2^2+x_1^2y_1^2$
+\item[iii.] $f(x,y) = x_1y_1+x_3y_3$
+\end{enumerate}
+\item[2.] For $A \in \R^{m\times n}$ and $x\in \R^n$, prove that
+$$ \|Ax\| \leq \|x\|\sqrt{\sum_{i=1}^m \sum_{j=1}^n} A_{i,j}^2$$
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Solutions 1: Norms and Inner Products}
+
+\begin{enumerate}
+\item[1.] Which of the following functions are inner products for $x,y\in\R^3$?
+\begin{solution}
+\begin{enumerate}
+\item[i.] $f(x,y) = x_1y_2+x_2y_3+x_3y_1$ \hfill False\\
+Consider $u=[1,0,0]^T$ and $v=[0,1,0]^T$.\\
+$ \langle u,v \rangle =1$, but $ \langle v,u \rangle  = 0$. (Not symmetric)
+\medskip
+\item[ii.] $f(x,y) = x_1^2y_1^2+x_2^2y_2^2+x_3^2y_3^2$ \hfill False\\
+Consider $v = [1,0,0]^T.$ \\
+$ \langle 2v,v \rangle  = 4$, but $2 \langle v,v \rangle  = 2$. (Not linear)
+\medskip
+\item[iii.] $f(x,y) = x_1y_1+x_3y_3$ \hfill False \\
+Consider $v = [0,1,0]^T$. \\
+ $ \langle v,v \rangle  = 0$, but $v\neq0$. (Not positive definite)
+\end{enumerate}
+\end{solution}
+\end{enumerate}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Solutions 1: Norms and Inner Products}
+
+\begin{enumerate}
+\item[2.] For $A \in \R^{m\times n}$ and $x\in \R^n$, prove that
+$$ \|Ax\| \leq \|x\|\sqrt{\sum_{i=1}^m \sum_{j=1}^n} A_{i,j}^2$$
+\begin{solution}
+Let $A = {\fonteight\begin{bmatrix}
+			\horzbar    & \mathbf{a_1}^T    & \horzbar  \\
+			\vdots    & \vdots & \vdots  \\
+			\horzbar    & \mathbf{a_m}^T    & \horzbar   \\
+		 \end{bmatrix}}$
+	and
+	$x =  \begin{bmatrix}
+			\vline \\
+			 x \\   
+			\vline \\ 
+		 \end{bmatrix}$ .
+Observe that 
+$Ax =  \begin{bmatrix}
+			 \langle \mathbf{a_1},x \rangle \\
+			 \vdots \\   
+			\langle \mathbf{a_m},x \rangle \\ 
+		 \end{bmatrix}$ .
+Now,\\
+\qquad $\|Ax\|^2 = \sum_{i=1}^m  |\langle \mathbf{a_i},x \rangle ^2|$ \qquad by definition of norm \\
+\qquad $\|Ax\|^2 \leq \sum_{i=1}^m \|\mathbf{a_i}\|^2 \|x\|^2$ \qquad by Cauchy-Schwarz \\
+\qquad $\|Ax\| \leq (\sum_{i=1}^m \|\mathbf{a_i}\|^2 \|x\|^2)^{.5}$\\
+\qquad $\|Ax\| \leq \|x\|(\sum_{i=1}^m \|\mathbf{a_i}\|^2 )^{.5}$ \\
+\qquad $\|Ax\| \leq \|x\|(\sum_{i=1}^m \sum_{j=1}^n A_{i,j})^{.5}$ \qquad by definition of $\mathbf{a_i}$
+
+\end{solution}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Orthogonality}
+\begin{itemize}
+\item Angles can be used as a measure of similarity
+\item Vectors $u,v$ are orthogonal if and only if $ \langle u,v \rangle =0$
+\item Vectors are orthogonal $\implies$ vectors are as dissimilar as possible
+\item Orthogonal coordinate systems are nice because we can view each coordinate ``independently'' (we will prove later).
+\item Gram-Schmidt Process (Lec 5) allows us to change any basis into an orthonormal basis.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Orthogonal Projections}
+\begin{itemize}
+\item Projections form an important part of linear algebra.
+\begin{itemize}
+\item We can view the action of a matrix and how it affects a certain subspace
+\item We can simplify our data by picking the subspace ``closest'' to the data (PCA, Lec 7)
+\item We can find the best-fit line/plane/subspace  (Linear regression, Lec 9)
+\end{itemize}
+\medskip
+\item \textit{Orthogonal} projections are a special kind of projection
+\begin{itemize}
+\item They preserve the original vector components (in the orthogonal basis)
+\item Practice question on this later
+
+\end{itemize}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Idempotence}
+Lets take a step back.\medskip
+\begin{itemize}
+\item $P_S$ is an \textit{orthogonal} projection $\iff$ $P_S = VV^T$
+\begin{itemize}
+ \item V has orthonormal columns that form a basis for $S$.\\
+\end{itemize}
+\item There is a more general definition of a projection - known as \textit{idempotence}.
+
+\begin{definition}[Idempotence]
+An matrix P is idempotent when $P^2=P$.
+\end{definition}
+\end{itemize}
+An idempotent matrix is also called a \textit{projection} or \textit{projection matrix}.
+\end{frame}
+
+\begin{frame}
+\frametitle{Questions 2: Orthogonal Projections vs Idempotence}
+\begin{definition}[Idempotence]
+An matrix P is idempotent when $P^2=P$.
+\end{definition}
+\bigskip
+\begin{enumerate}
+\item Show that $X(X^TX)^{-1}X^T$ is idempotent.
+\item Show that all orthogonal projections are idempotent.
+\item Give an example of an idempotent matrix that is not an orthogonal projection.  \\
+(Hint: Show that your matrix does not minimize the distance to subspace it projects onto.)
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Solutions 2: Orthogonal Projections vs Idempotence}
+\begin{solution}
+\begin{enumerate}
+\item Show that $X(X^TX)^{-1}X^T$ is idempotent. \\
+\begin{align*}
+P^2 &= (X(X^TX)^{-1}X^T)(X(X^TX)^{-1}X^T) \\
+&= X(X^TX)^{-1}(X^TX)(X^TX)^{-1}X^T \\
+&= X(X^TX)^{-1}X^T
+\end{align*}
+\item Show that all orthogonal projections are idempotent.\\
+\medskip
+Let $P$ be an orthogonal projection.\\
+Recall that all orthogonal projections take the form $VV^T$, where $V\in \R^{n\times k}$ has orthonormal columns. \\
+Note that $V^TV = I_k$, the identity matrix in $\R^{k\times k}$. \\
+Then $P^2 = (VV^T)(VV^T) = V(V^TV)V^T = VI_kV^T = VV^T = P$
+
+\end{enumerate}
+\end{solution}
+\end{frame}
+
+\begin{frame}
+\frametitle{Solutions 2: Orthogonal Projections vs Idempotence}
+\begin{solution}
+\begin{enumerate}
+\item[3.] Give an example of an idempotent matrix that is not an orthogonal projection.  \\
+\fonteight
+
+Consider the matrix 
+$A = \begin{bmatrix}
+			1   & 1   \\
+			0   & 0\\
+		 \end{bmatrix}$\\
+It's easy to see $A^2 = A$, and
+$Im(A) = \{\begin{bmatrix}
+x  \\
+0  \\
+\end{bmatrix}\ | \ x\in \R\}$\\
+Consider the vector $v = \begin{bmatrix}
+			2\\
+			2\\
+		 \end{bmatrix}$\\
+The closest vector in Im(A) is $v_{Im(A)} = \begin{bmatrix}
+			2\\
+			0\\
+		 \end{bmatrix}$, but $Av=\begin{bmatrix}
+			4\\
+			0\\
+		 \end{bmatrix}$\\
+\medskip
+Note: Rigorously speaking, we need to prove that $v_{Im(A)} = \begin{bmatrix}
+			2\\
+			0\\
+		 \end{bmatrix}$
+
+is the closest vector in $Im(A)$. We can do this by constructing an orthogonal projection onto $Im(A)$,
+which is found by setting $V =\begin{bmatrix}
+			1\\
+			0\\
+\end{bmatrix}$, and calculating $VV^T = \begin{bmatrix}
+			1   & 0   \\
+			0   & 0\\
+		 \end{bmatrix}$\\
+\end{enumerate}
+\end{solution}
+\end{frame}
+
+
+\begin{frame}
+
+\frametitle{Questions: Orthogonality}
+\begin{enumerate}
+\item Let $v_1,...,v_k$ be a list of orthogonal vectors. Show that $v_1,...,v_k$ are linearly independent.
+\item Let U be the subspace of $\R^n$ with orthonormal basis $u_1,...,u_k$.
+\begin{enumerate}
+ \item[i.] Prove that the orthogonal projection of $v \in \R^n$ onto $U$ can be expressed as $P_U  = \sum_{i=0}^k  \langle v,u_i \rangle u_i$. (Use the fact that the orthonormal basis for a subspace of $\R$ can be extended to obtain an orthonormal basis for $\R$)
+ \item[ii.] Prove that $P_U(v)\leq \|v\|$
+ \item[iii.] Prove that $v-P_U(v)$ is orthogonal to $P_U(v)$
+\end{enumerate}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Solutions: Orthogonality}
+
+\begin{solution}
+\begin{enumerate}
+\item Let $v_1,...,v_k$ be a list of orthogonal vectors. Show that $v_1,...,v_k$ are linearly independent.\\ \medskip
+\fonteight
+Let $\alpha_1,...,\alpha_k \in \R$ s.t $\sum_{i=1}^k \alpha_i v_i = \vec{0}.$\\
+
+Consider $ \langle \sum_{i=1}^k \alpha_i v_i, \sum_{j=1}^k \alpha_j v_j \rangle .$
+\begin{align*}
+0 &=\  \langle \vec{0},\vec{0} \rangle \ \\
+&=\  \langle \sum_{i=1}^k \alpha_i v_i, \sum_{j=1}^k \alpha_j v_j \rangle  \\
+&=\sum_{i=1}^k \alpha_i^2  \langle v_i,v_i \rangle , \sum_{i\neq j} \alpha_i \alpha_j  \langle v_i, v_j \rangle  \\
+0&= \sum_{i=1}^k \alpha_i^2 \qquad \text{ by orthonormality of }v_i, v_j
+\end{align*}\\
+So $\alpha_1,...,\alpha_k = 0$.
+\end{enumerate}
+\end{solution}
+\end{frame}
+
+
+
+\setlength{\abovedisplayskip}{0pt}%
+\setlength{\belowdisplayskip}{0pt}%
+\setlength{\abovedisplayshortskip}{0pt}%
+\setlength{\belowdisplayshortskip}{0pt}%
+\setlength{\jot}{0pt}
+\begin{frame}
+\frametitle{Solutions: Orthogonality}
+
+\begin{solution}
+\fonteight
+Let U be the subspace of $\R^n$ with orthonormal basis $u_1,...,u_k$.
+\begin{enumerate}
+\item[2i.] Prove that the orthogonal projection of $v \in \R^n$ onto $U$ can be expressed as $P_U(v)  = \sum_{i=0}^k  \langle v,u_i \rangle u_i$. \\
+
+Let $u_{k+1},...,u_n$ be an orthonormal basis extension for $ u_1,...,u_k$.\\
+Then $u_1,...,u_k,u_{k+1},...,u_n$ form an orthonormal basis for $\R^n$\\
+Now, let $v = \sum_{i=1}^n \alpha_i u_i$ where $\alpha_i=\  \langle v,u_i \rangle $ and let $x\in U$, where $x=\sum_{j=1}^k  \beta_i u_i$.\\
+We want to find $\argmin_{x\in U} \|v-x\|$.
+\begin{align*}
+ \|v-x\| &= \|\ \sum_{i=1}^n \alpha_i u_i - \sum_{j=1}^k  \beta_i u_i \| \\
+         &= \|\ \sum_{j=1}^k (\alpha_i-\beta_i) u_i - \sum_{i=k+1}^n  \alpha_i u_i \| \\
+         &= \sqrt{\sum_{j=1}^k (\alpha_i-\beta_i)^2 + \sum_{i=k+1}^n  \alpha_i^2} \qquad \text{by orthonormality}
+\end{align*}
+$\|v-x\|$ is minimized when $\alpha_i = \beta_i \quad \forall i \in \{1,...,k\}$\\
+This implies that $\beta_i =  \langle v,u_i \rangle $.\\
+ So $P_U(v)=argmin_{x\in U}\|v-x\| = \sum_{i=0}^k  \langle v,u_i \rangle u_i$.
+\end{enumerate}
+\end{solution}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Solutions: Orthogonality}
+\begin{solution}
+Let U be the subspace of $\R^n$ with orthonormal basis $u_1,...,u_k$.
+\begin{enumerate}
+ \item[2ii.] Prove that $P_U(v)\leq \|v\|$\\
+$P_U(v) = \sum_{i=1}^k  \langle v,u_i \rangle u_i$ from $2i$
+\begin{align*}
+\|P_U(v)\|^2 &= \| \sum_{i=1}^k  \langle v,u_i \rangle u_i \|^2  \\
+             &= \sum_{i=1}^k  \| \langle v,u_i \rangle u_i\|^2 \qquad \text{ by Pythagorean Theorem} \\
+             &\leq \sum_{i=1}^n \| \langle v,u_i \rangle u_i\|^2 \qquad \text {add extra components}\\
+             &= \|\sum_{i=1}^n  \langle v,u_i \rangle u_i\|^2 \qquad \text {Pythagorean Theorem} \\ 
+             &= \|v\|^2
+\end{align*}
+So $P_U(v)\leq \|v\|$ 
+\end{enumerate}
+\end{solution}
+\end{frame}
+
+\begin{frame}
+\frametitle{Solutions: Orthogonality}
+\begin{solution}
+Let U be the subspace of $\R^n$ with orthonormal basis $u_1,...,u_k$.
+\begin{enumerate}
+\item[2iii.] Prove that $v-P_U(v)$ is orthogonal to $P_U(v)$
+$P_U(v) = \sum_{i=1}^k  \langle v,u_i \rangle u_i$ \qquad from $2i$\\
+$v = \sum_{i=0}^n  \langle v,u_i \rangle u_i$ \qquad since $u_1,...,u_n$ is a orthonormal basis.
+\begin{align*}
+v-P_U(v) &= \sum_{i=1}^n  \langle v,u_i \rangle u_i - \sum_{i=1}^k \langle v,u_i \rangle u_i\\
+&= \sum_{i=k+1}^n \langle v,u_i \rangle u_i\\
+\langle v-P_U(v),v \rangle \ &=\ \langle (\sum_{i=k+1}^n \langle v,u_i \rangle u_i),(\sum_{i=1}^k \langle v,u_i \rangle u_i) \rangle \\
+&=0 \qquad u_i \text{ are pairwise orthogonal}.
+\end{align*}
+\end{enumerate}
+\end{solution}
+\end{frame}
+
+\begin{frame}
+\frametitle{Questions: Orthogonal Complements}
+Let $S, U$ be subspaces of a vector space $V$.\\
+Prove the following statement:
+\begin{enumerate}
+
+\item $S\subset U \implies S^\perp \supset U^\perp$
+\end{enumerate}
+\bigskip
+Let $A\in\R^{n\times m}$.
+Assume the Euclidean inner product.
+\begin{enumerate}
+\item[2.] (!) Prove that $Im(A^T) = Ker(A)^\perp$.
+\end{enumerate}
+\bigskip
+\qquad (Hint: $\implies$ is easy. Use (1) for $\impliedby$)\\
+\end{frame}
+
+\begin{frame}
+\frametitle{Solutions: Orthogonal Complements}
+\begin{enumerate}
+\item $S\subset U \implies S^\perp \supset U^\perp$
+\end{enumerate}
+\begin{solution}
+Let $x\in U^\perp$, and $z\in S$. \\
+Since $z\in S$ and $S\subset U$, then $z\in U$.\\
+Now, since $x\in U^\perp$ and $z \in U$, then $\langle x,z \rangle$ = 0.\\
+So $x \in S^\perp$.
+\end{solution}
+\end{frame}
+
+\begin{frame}
+\frametitle{Solutions: Orthogonal Complements}
+\begin{enumerate}
+\item[2.] Prove that $Im(A^T) = Ker(A)^\perp$.
+\end{enumerate}
+\begin{solution}
+$\implies$ \\
+Let $x\in \Im(A^T)$. Then $\exists y$ s.t $x = A^Ty$. We show $x\in Ker(A)^\perp$.\\
+Let $v\in Ker(A)$. Then $Av=0$. \\
+Consider $\langle x,v \rangle$. \\
+\qquad $\langle x,v \rangle = x^Tv = y^TAv =\langle y,Av \rangle =\langle y,0 \rangle = 0$
+Then $x\in Ker(A)^\perp$.
+$\impliedby$.\\
+We use 1. to show $Im(A^T)^\perp \subset Ker(A)$ instead.\\
+Let $x\in Im(A^T)^\perp$. \\
+Consider $Ax$. We show $\langle x,A^Ty \rangle = 0$ for all $y\in \R^n$. \\
+Since $x\in Im(A^T)^\perp$, then $\forall y\in \Im(A^T)$, $\langle x,y \rangle = x^Ty = 0$.\\
+Consider $\|Ax\|$.\\ 
+\qquad $\|Ax\| = x^TA^TAx = x(A^TAx)$.\\
+Since $A^TAx \in Im(A^T)$, then $\|Ax\| = 0$, so $Ax=0$.\\ 
+Now, by 1, we can conclude that $Ker(A)^\perp \subset Im(A^T)$.
+
+\end{solution}
+\end{frame}
+
+
+
+
+\end{document}
