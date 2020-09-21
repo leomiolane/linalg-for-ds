@@ -19,10 +19,10 @@
 \begin{frame}
 	\frametitle{Contents}
 	\begin{enumerate}
-		\item Why do we care about all these things ? \below{Application to data science: image compression}
 		\item Norms \& inner-products
 		\item Orthogonality
 		\item Orthogonal projection
+		\item Orthogonal matrices
 		\item Proof of the Cauchy-Schwarz inequality
 	\end{enumerate}
 \end{frame}
@@ -30,71 +30,192 @@
 
 \setcounter{framenumber}{0}
 \setcounter{showSlideNumbers}{1}
+\section{Norms and inner-products}
+\begin{frame}[t]{Questions}
+	\grid 
+
+	\pause
+	\pause
+\end{frame}
 
 \section{Orthogonality}
 
-\begin{frame}{Definition}
-\begin{definition}[Orthogonality]
-	\begin{itemize}
-		\item We say that vectors $x$ and $y$ are \emph{orthogonal} if $\langle x,y \rangle = 0$. We write then $x \perp y$.
-		\item We say that a vector $x$ is orthogonal to a set of vectors $A \subset V$ if $x$ is orthogonal to all the vectors in $A$, i.e.\ $\forall y \in A, \ \langle x,y\rangle = 0$. We write then $x \perp A$.
-		\item More generality we say that $A \subset V$ and $B \subset V$ are orthogonal if $\langle x,y \rangle = 0$ for all $x \in A$ and all $y \in B$. As before, we write $A \perp B$.
-	\end{itemize}
-\end{definition}
+\begin{frame}[t]{Definition}
+	\grid 
+
+	\vspace{-0.4cm}
+	\begin{definition}
+		\begin{itemize}
+			\item We say that vectors $x$ and $y$ are \emph{orthogonal} if $\langle x,y \rangle = 0$. We write then $x \perp y$.
+			\item We say that a vector $x$ is orthogonal to a set of vectors $A$ if $x$ is orthogonal to all the vectors in $A$. We write then $x \perp A$.
+			%\item More generality we say that $A \subset V$ and $B \subset V$ are orthogonal if $\langle x,y \rangle = 0$ for all $x \in A$ and all $y \in B$. As before, we write $A \perp B$.
+		\end{itemize}
+	\end{definition}
 
 
-\begin{exercise}
-	If $x$ is orthogonal to $v_1, \dots, v_k$ then $x$ is orthogonal to any linear combination of these vectors i.e.\ $x \perp \Span(v_1, \dots, v_k)$.
-\end{exercise}
+	\textbf{Exercise:}
+		If $x$ is orthogonal to $v_1, \dots, v_k$ then $x$ is orthogonal to any linear combination of these vectors i.e.\ $x \perp \Span(v_1, \dots, v_k)$.
 \end{frame}
 
 \begin{frame}{Pythagorean Theorem}
 	\grid
 
-\begin{theorem}[Pythagorean theorem]
-	Let $x,y \in V$. Then
-	$$
-	x \perp y \ \Longleftrightarrow \|x+y\|^2 = \|x\|^2 + \|y\|^2.
-	$$
-\end{theorem}
-\begin{proof}
-	\vfill
-	\vspace{4cm}
-\end{proof}
+	\vspace{-0.4cm}
+	\begin{theorem}[Pythagorean theorem]
+		Let $x,y \in V$. Then
+		$$
+		x \perp y \ \Longleftrightarrow \|x+y\|^2 = \|x\|^2 + \|y\|^2.
+		$$
+	\end{theorem}
+	\begin{proof}
+		\vfill
+		\vspace{4cm}
+	\end{proof}
+\end{frame}
+
+\begin{frame}[t]{Application to random variables}
+	\grid
+
 \end{frame}
 
 \begin{frame}[t]{Orthogonal \& orthonormal families}
 	\grid
 
-\begin{definition}
-	Let $v_1, \dots, v_k$ be vectors of $V$. We say that the family of vectors $(v_1, \dots, v_k)$ is
-	\begin{itemize}
-		\item \emph{orthogonal} if the vectors $v_1, \dots, v_n$ are pairwise orthogonal, i.e.\ $\langle v_i, v_j \rangle = 0$ for all $i \neq j$.
-		\item \emph{orthonormal} if it is orthogonal and if all the $v_i$ have unit norm: $\|v_1\| = \dots = \|v_k\| = 1$.
-	\end{itemize}
-\end{definition}
+	\vspace{-0.4cm}
+	\begin{definition}
+		Let $v_1, \dots, v_k$ be vectors of $V$. We say that the family of vectors $(v_1, \dots, v_k)$ is
+		\begin{itemize}
+			\item \emph{orthogonal} if the vectors $v_1, \dots, v_n$ are pairwise orthogonal, i.e.\ $\langle v_i, v_j \rangle = 0$ for all $i \neq j$.
+			\item \emph{orthonormal} if it is orthogonal and if all the $v_i$ have unit norm: $\|v_1\| = \dots = \|v_k\| = 1$.
+		\end{itemize}
+	\end{definition}
 \end{frame}
 
-\begin{frame}[t]{A toy example}
-Orthonormal basis are particularly convenient for computing coordinates of vectors:
+\begin{frame}[t]{Coordinates in an orthonormal basis}
+	\grid
 
-\begin{block}{Proposition}
-	Assume that $\dim(V)=n$ and let $(v_1, \dots, v_n)$ be an \textbf{orthonormal} basis of $V$. Then the coordinates of a vector $x \in V$ in the basis $(v_1, \dots, v_n)$ are $(\langle v_1, x\rangle, \dots, \langle v_n,x \rangle)$:
+	\vspace{-0.4cm}
+	\begin{block}{Proposition}
+		Assume that $\dim(V)=n$ and let $(v_1, \dots, v_n)$ be an \textbf{orthonormal} basis of $V$. Then the coordinates of a vector $x \in V$ in the basis $(v_1, \dots, v_n)$ are $(\langle v_1, x\rangle, \dots, \langle v_n,x \rangle)$:
+		$$
+		x = \langle v_1, x \rangle v_1 + \cdots + \langle v_n, x \rangle v_n.
+		$$
+	\end{block}
+
+\end{frame}
+
+\section{Orthogonal projection}
+
+\begin{frame}[t]{Picture}
+	\grid
+
+\end{frame}
+
+\begin{frame}[t]{Orthogonal projection and distance to a subspace}
+	\begin{definition}
+		Let $S$ be a subspace of $\R^n$. The \emph{orthogonal projection} of a vector $x$ onto $S$ is defined as the vector $P_S(x)$ in $S$ that minimizes the distance to $x$:
+		$$
+		P_S(x) \defeq \argmin_{y \in S} \|x - y\|.
+		$$
+		The distance of $x$ to the subspace $S$ is then defined as
+		$$
+		d(x,S) \defeq \min_{y \in S} \| x - y \| = \|x - P_S(x)\|.
+		$$
+	\end{definition}
+\end{frame}
+
+\begin{frame}[t]{Important proposition}
+	\grid 
+
+	\vspace{-0.4cm}
+	\begin{block}{Proposition}
+		Let $S$ be a subspace of $\R^n$ and let $(v_1, \dots, v_k)$ be an \textbf{orthonormal basis} of $S$. Then for all $x \in \R^n$,
+		$$P_S(x) = \langle v_1, x \rangle v_1 + \cdots + \langle v_k, x \rangle v_k.$$
+	\end{block}
+\end{frame}
+
+
+
+\begin{frame}[t]{Consequence}
+	\grid
+
+	\vspace{-0.4cm}
+	\begin{block}{Corollary}
+		For all $x \in \R^n$,
+		\begin{itemize}
+			\item $x - P_S(x)$ is orthogonal to $S$.
+			\item $\|P_S(x) \| \leq \|x\|$.
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+
+\section{Orthogonal matrices}
+
+\begin{frame}[t]{Orthogonal matrices}
+	\grid
+
+	\begin{definition}
+		A matrix $A \in \R^{n \times n}$ is called an \emph{orthogonal matrix} if its columns are an orthonormal family (and therefore a basis of $\R^n$ because it is a linearly independent family of size $n = \dim(\R^n)$).
+	\end{definition}
+\end{frame}
+
+\begin{frame}[t]{A proposition}
+	\grid
+
+	\vspace{-0.4cm}
+	\begin{block}{Proposition}
+		Let $A \in \R^{n \times n}$. The following points are equivalent:
+		\begin{enumerate}
+			\item $A$ is orthogonal.
+			\item $A^{\sT} A = \Id_n$.
+			\item $A A^{\sT} = \Id_n$
+		\end{enumerate}
+	\end{block}
+\end{frame}
+
+\begin{frame}[t]{Orthogonal matrices \& norm}
+	\grid
+
+	\vspace{-0.4cm}
+	\begin{block}{Proposition}
+	Let $A \in \R^{n \times n}$ be an orthogonal matrix. Then $A$ preserves the dot product in the sense that for all $x,y \in \R^n$,
 	$$
-	x = \langle v_1, x \rangle v_1 + \cdots + \langle v_n, x \rangle v_n.
+	\langle Ax, Ay \rangle = \langle x,y\rangle.
 	$$
-	Moreover, for all $y \in V$, we have $\langle x,y \rangle = \langle v_1,x\rangle\langle v_1,y\rangle + \cdots + \langle v_n,x\rangle\langle v_n,y\rangle$. Taking $y=x$ leads to
-	$$
-	\|x\| = \sqrt{\langle v_1, x \rangle^2 + \cdots + \langle v_n, x \rangle^2}.
-	$$
+	In particular if we take $x=y$ we see that $A$ preserves the Euclidean norm: $\|Ax\| = \|x\|$.
 \end{block}
+\end{frame}
 
+\section{Proof of Cauchy-Schwarz inequality}
+\begin{frame}[t]{Cauchy-Schwarz inequality}
+	\grid
+
+	\vspace{-0.4cm}
+\begin{theorem}
+	Let $\| \cdot \|$ be the norm induced by the inner product $\langle \cdot , \cdot \rangle$ on the vector space $V$. Then for all $x,y \in V$:
+	\begin{equation}\label{eq:cauchy_schwarz}
+	| \langle x,y \rangle | \leq \|x\| \, \|y\|.
+	\end{equation}
+	Moreover, there is equality in \eqref{eq:cauchy_schwarz} if and only if $x$ and $y$ are linearly dependent, i.e.\ $x = \alpha y$ or $y = \alpha x$ for some $\alpha \in \R$.
+\end{theorem}
+\end{frame}
+\begin{frame}[t]
+	\frametitle{Proof}
+	\grid
+
+	\pause
+	\pause
 \end{frame}
 
 \appendix
 \backupbegin
-\begin{frame}
+\begin{frame}[t]
 	\frametitle{Questions?}
+	\grid
+
+	\pause
+	\pause
 \end{frame}
 \backupend
 
