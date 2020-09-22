@@ -1,7 +1,7 @@
 \documentclass[11pt,nocut]{article}
 
-\usepackage{../latex_style/packages}
-\usepackage{../latex_style/notations}
+\usepackage{../../latex_style/packages}
+\usepackage{../../latex_style/notations}
 
 \title{\vspace{-2.0cm}%
 	Optimization and Computational Linear Algebra for Data Science\\
@@ -14,15 +14,10 @@ Homework 5: Orthogonal matrices, eigenvalues and eigenvectors}
 \maketitle
 \input{./preamble_homeworks.tex}
 
-\begin{problem}[1 points]
-	Is the following matrix diagonalizable?
-	$$
-	M= 
-	\begin{pmatrix}
-		1 & \pi^2 \\
-		0 & 1
-	\end{pmatrix}.
-	$$
+\begin{problem}[2 points]
+	Let $A \in \R^{n \times n}$ be a symmetric matrix.
+	\\
+	Show that if $v_1, v_2 \in \R^n$ are two eigenvectors of $A$ associated to some eigenvalues $\lambda_1 \neq \lambda_2$ ($Av_1 = \lambda_1 v_1$ and $Av_2 = \lambda_2 v_2$), then $v_1 \perp v_2$.
 \end{problem}
 
 \vspace{1mm}
@@ -32,23 +27,27 @@ Homework 5: Orthogonal matrices, eigenvalues and eigenvectors}
 	\begin{enumerate}[label=\normalfont(\textbf{\alph*})]
 		\item Show that the matrix $M$ is orthogonal.
 		\item Show that if $\lambda \in \R$ is an eigenvalue of $M$, then $\lambda = 1$ or $\lambda=-1$.
-		\item Show that $M$ is diagonalizable.
-\end{problem}
-
-\vspace{1mm}
-
-\begin{problem}[3 points]
-	Let $A \in \R^{n \times n}$ be a symmetric matrix.
-	\begin{enumerate}[label=\normalfont(\textbf{\alph*})]
-		\item Show that if $v_1, v_2 \in \R^n$ are two eigenvectors of $A$ associated to some eigenvalues $\lambda_1 \neq \lambda_2$ ($Av_1 = \lambda_1 v_1$ and $Av_2 = \lambda_2 v_2$), then $v_1 \perp v_2$.
-		\item Show that if $A$ is diagonalizable, then there exists an orthonormal basis $(u_1, \dots, u_n)$ of eigenvectors of $A$.
 	\end{enumerate}
 \end{problem}
 
 \vspace{1mm}
 
-\begin{problem}[3 points]
-	Let $A \in \R^{n \times n}$ be a diagonalizable matrix. Let $(v_1, \dots, v_n)$ be a basis of $\R^n$ consisting of eigenvectors of $A$, and let $(\lambda_1, \dots, \lambda_n)$ be the associated eigenvalues. Assume that
+%\begin{problem}[1 points]
+	%Let $A \in \R^{n \times n}$ be a matrix that admits $k$ distinct eigenvalues $\lambda_1, \dots, \lambda_k$. For each $i \in \{1, \dots, k\}$ we denote by $m_i$ the multiplicity of the eigenvalues $\lambda_i$. Show that
+	%$$
+		%m_1 + \cdots + m_k \leq n.
+	%$$
+%\end{problem}
+
+%\vspace{1mm}
+
+\begin{problem}[5 points]
+	Let $A \in \R^{n \times n}$. We assume that there exists a basis $(v_1, \dots, v_n)$ of $\R^n$ consisting of eigenvectors of $A$:
+	$$
+	A v_i = \lambda_i v_i
+	$$
+	for all $i \in \{1, \dots, n\}$.
+	We assume that 
 	$$
 	\lambda_1 > |\lambda_i| \qquad \text{for all} \ i \in \{2, \dots, n\}.
 	$$
@@ -69,6 +68,7 @@ Homework 5: Orthogonal matrices, eigenvalues and eigenvectors}
 			\qquad \text{and} \qquad
 			\|A x_t\| \xrightarrow[t \to \infty]{} \lambda_1.
 			$$
+		\item Code the algorithm in \texttt{Python}: write a function \texttt{power\_iteration} that takes a matrix $A$ as input and outputs $x_t$ and $\|Ax_t\|$ for the first $t$ such that $\|x_{t}-x_{t-1}\| \leq 10^{-6}$. Here we assume that the matrix $A$ given as input verifies the assumption of this problem.
 	\end{enumerate}
 \end{problem}
 
@@ -80,7 +80,7 @@ Homework 5: Orthogonal matrices, eigenvalues and eigenvectors}
 	$$
 	\begin{array}{cccc}
 		f:& \R^n \setminus \{0\} & \to & \R \\
-				& x & \mapsto & \displaystyle \frac{x^{\sT} A x}{x^{\sT} x}.
+		  & x & \mapsto & \displaystyle \frac{x^{\sT} A x}{x^{\sT} x}.
 	\end{array}
 	$$
 	Show that $f$ has a maximum at some $x_{\star} \in \R^n \setminus \{0\}$ and that $x_{\star}$ verifies
