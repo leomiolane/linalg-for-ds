@@ -1,0 +1,59 @@
+\documentclass{beamer}
+
+\usepackage{../../../latex_style/beamerthemeExecushares}
+\usepackage{../../../latex_style/notations}
+
+\title{Lecture 5.2: Eigenvalues \& Eigenvectors}
+\subtitle{Optimization and Computational Linear Algebra for Data Science}
+\author{Léo Miolane}
+\date{}
+
+\setcounter{showSlideNumbers}{1}
+
+\begin{document}
+\setcounter{showProgressBar}{0}
+\setcounter{showSlideNumbers}{0}
+
+\frame{\titlepage}
+\setcounter{framenumber}{0}
+%\setcounter{showProgressBar}{1}
+\setcounter{showSlideNumbers}{1}
+
+\begin{frame}[t]{Intro}
+	\grid
+
+\end{frame}
+
+\begin{frame}[t]{Definition}
+	\grid
+
+	\vspace{-0.4cm}
+	\begin{definition}\label{def:eigen}
+		Let $A \in \R^{n \times n}$. A \textbf{non-zero} vector $v \in \R^n$ is said to be an \emph{eigenvector} of $A$ is there exists $\lambda \in \R$ such that
+		$$
+		A v = \lambda v.
+		$$
+		The scalar $\lambda$ is called the eigenvalue (of $A$) associated to $v$. 
+	\end{definition}
+\end{frame}
+
+\begin{frame}[t]{Matrix with no eigenvalues/vectors}
+	\grid
+
+\end{frame}
+
+\begin{frame}[t]{Eigenspaces}
+	\grid
+
+	\vspace{-0.4cm}
+	\begin{definition}
+		If $\lambda \in \R$ is an eigenvalue of $A \in \R^{n \times n}$, the set
+		$$
+		E_{\lambda}(A) = \big\{ x \in \R^n \, \big| \, Ax = \lambda x \big\} = \Ker(A-\lambda \Id)
+		$$
+		is called the eigenspace of $A$ associated to $\lambda$. The dimension of $E_{\lambda}(A)$ is called the multiplicity of the eigenvalue $\lambda$.
+	\end{definition}
+\end{frame}
+
+
+\end{document}
