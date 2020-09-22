@@ -22,7 +22,6 @@
 		\item Norms \& inner-products
 		\item Orthogonality
 		\item Orthogonal projection
-		\item Orthogonal matrices
 		\item Proof of the Cauchy-Schwarz inequality
 	\end{enumerate}
 \end{frame}
@@ -103,6 +102,11 @@
 	\end{block}
 
 \end{frame}
+\begin{frame}[t]{Coordinates in an orthonormal basis}
+	\grid
+
+\end{frame}
+
 
 \section{Orthogonal projection}
 
@@ -150,42 +154,6 @@
 \end{frame}
 
 
-\section{Orthogonal matrices}
-
-\begin{frame}[t]{Orthogonal matrices}
-	\grid
-
-	\begin{definition}
-		A matrix $A \in \R^{n \times n}$ is called an \emph{orthogonal matrix} if its columns are an orthonormal family (and therefore a basis of $\R^n$ because it is a linearly independent family of size $n = \dim(\R^n)$).
-	\end{definition}
-\end{frame}
-
-\begin{frame}[t]{A proposition}
-	\grid
-
-	\vspace{-0.4cm}
-	\begin{block}{Proposition}
-		Let $A \in \R^{n \times n}$. The following points are equivalent:
-		\begin{enumerate}
-			\item $A$ is orthogonal.
-			\item $A^{\sT} A = \Id_n$.
-			\item $A A^{\sT} = \Id_n$
-		\end{enumerate}
-	\end{block}
-\end{frame}
-
-\begin{frame}[t]{Orthogonal matrices \& norm}
-	\grid
-
-	\vspace{-0.4cm}
-	\begin{block}{Proposition}
-	Let $A \in \R^{n \times n}$ be an orthogonal matrix. Then $A$ preserves the dot product in the sense that for all $x,y \in \R^n$,
-	$$
-	\langle Ax, Ay \rangle = \langle x,y\rangle.
-	$$
-	In particular if we take $x=y$ we see that $A$ preserves the Euclidean norm: $\|Ax\| = \|x\|$.
-\end{block}
-\end{frame}
 
 \section{Proof of Cauchy-Schwarz inequality}
 \begin{frame}[t]{Cauchy-Schwarz inequality}
