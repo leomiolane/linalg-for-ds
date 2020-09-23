@@ -234,110 +234,12 @@ Now,\\
 \item \textit{Orthogonal} projections are a special kind of projection
 \begin{itemize}
 \item They preserve the original vector components (in the orthogonal basis)
-\item Practice question on this later
 
 \end{itemize}
 \end{itemize}
 
 \end{frame}
 
-\begin{frame}
-\frametitle{Idempotence}
-Lets take a step back.\medskip
-\begin{itemize}
-\item $P_S$ is an \textit{orthogonal} projection $\iff$ $P_S = VV^T$
-\begin{itemize}
- \item V has orthonormal columns that form a basis for $S$.\\
-\end{itemize}
-\item There is a more general definition of a projection - known as \textit{idempotence}.
-
-\begin{definition}[Idempotence]
-An matrix P is idempotent when $P^2=P$.
-\end{definition}
-\end{itemize}
-An idempotent matrix is also called a \textit{projection} or \textit{projection matrix}.
-\end{frame}
-
-\begin{frame}
-\frametitle{Questions 2: Orthogonal Projections vs Idempotence}
-\begin{definition}[Idempotence]
-An matrix P is idempotent when $P^2=P$.
-\end{definition}
-\bigskip
-\begin{enumerate}
-\item Show that $X(X^TX)^{-1}X^T$ is idempotent.
-\item Show that all orthogonal projections are idempotent.
-\item Give an example of an idempotent matrix that is not an orthogonal projection.  \\
-(Hint: Show that your matrix does not minimize the distance to subspace it projects onto.)
-\end{enumerate}
-\end{frame}
-
-\begin{frame}
-\frametitle{Solutions 2: Orthogonal Projections vs Idempotence}
-\begin{solution}
-\begin{enumerate}
-\item Show that $X(X^TX)^{-1}X^T$ is idempotent. \\
-\begin{align*}
-P^2 &= (X(X^TX)^{-1}X^T)(X(X^TX)^{-1}X^T) \\
-&= X(X^TX)^{-1}(X^TX)(X^TX)^{-1}X^T \\
-&= X(X^TX)^{-1}X^T
-\end{align*}
-\item Show that all orthogonal projections are idempotent.\\
-\medskip
-Let $P$ be an orthogonal projection.\\
-Recall that all orthogonal projections take the form $VV^T$, where $V\in \R^{n\times k}$ has orthonormal columns. \\
-Note that $V^TV = I_k$, the identity matrix in $\R^{k\times k}$. \\
-Then $P^2 = (VV^T)(VV^T) = V(V^TV)V^T = VI_kV^T = VV^T = P$
-
-\end{enumerate}
-\end{solution}
-\end{frame}
-
-\begin{frame}
-\frametitle{Solutions 2: Orthogonal Projections vs Idempotence}
-\begin{solution}
-\begin{enumerate}
-\item[3.] Give an example of an idempotent matrix that is not an orthogonal projection.  \\
-\fonteight
-
-Consider the matrix 
-$A = \begin{bmatrix}
-			1   & 1   \\
-			0   & 0\\
-		 \end{bmatrix}$\\
-It's easy to see $A^2 = A$, and
-$Im(A) = \{\begin{bmatrix}
-x  \\
-0  \\
-\end{bmatrix}\ | \ x\in \R\}$\\
-Consider the vector $v = \begin{bmatrix}
-			2\\
-			2\\
-		 \end{bmatrix}$\\
-The closest vector in Im(A) is $v_{Im(A)} = \begin{bmatrix}
-			2\\
-			0\\
-		 \end{bmatrix}$, but $Av=\begin{bmatrix}
-			4\\
-			0\\
-		 \end{bmatrix}$\\
-\medskip
-Note: Rigorously speaking, we need to prove that $v_{Im(A)} = \begin{bmatrix}
-			2\\
-			0\\
-		 \end{bmatrix}$
-
-is the closest vector in $Im(A)$. We can do this by constructing an orthogonal projection onto $Im(A)$,
-which is found by setting $V =\begin{bmatrix}
-			1\\
-			0\\
-\end{bmatrix}$, and calculating $VV^T = \begin{bmatrix}
-			1   & 0   \\
-			0   & 0\\
-		 \end{bmatrix}$\\
-\end{enumerate}
-\end{solution}
-\end{frame}
 
 
 \begin{frame}
@@ -359,7 +261,7 @@ which is found by setting $V =\begin{bmatrix}
 
 \begin{solution}
 \begin{enumerate}
-\item Let $v_1,...,v_k$ be a list of orthogonal vectors. Show that $v_1,...,v_k$ are linearly independent.\\ \medskip
+\item Let $v_1,...,v_k$ be a list of non-zero orthogonal vectors. Show that $v_1,...,v_k$ are linearly independent.\\ \medskip
 \fonteight
 Let $\alpha_1,...,\alpha_k \in \R$ s.t $\sum_{i=1}^k \alpha_i v_i = \vec{0}.$\\
 
@@ -501,7 +403,107 @@ Now, by 1, we can conclude that $Ker(A)^\perp \subset Im(A^T)$.
 \end{solution}
 \end{frame}
 
+\begin{frame}
+\frametitle{Appendix starts after here}
 
+\end{frame}
+\begin{frame}
+\frametitle{Idempotence}
+Lets take a step back.\medskip
+\begin{itemize}
+\item $P_S$ is an \textit{orthogonal} projection $\iff$ $P_S = VV^T$
+\begin{itemize}
+ \item V has orthonormal columns that form a basis for $S$.\\
+\end{itemize}
+\item There is a more general definition of a projection - known as \textit{idempotence}.
+
+\begin{definition}[Idempotence]
+An matrix P is idempotent when $P^2=P$.
+\end{definition}
+\end{itemize}
+An idempotent matrix is also called a \textit{projection} or \textit{projection matrix}.
+\end{frame}
+
+\begin{frame}
+\frametitle{Questions: Orthogonal Projections vs Idempotence}
+\begin{definition}[Idempotence]
+An matrix P is idempotent when $P^2=P$.
+\end{definition}
+\bigskip
+\begin{enumerate}
+\item Show that $X(X^TX)^{-1}X^T$ is idempotent.
+\item Show that all orthogonal projections are idempotent.
+\item Give an example of an idempotent matrix that is not an orthogonal projection.  \\
+(Hint: Show that your matrix does not minimize the distance to subspace it projects onto.)
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Solutions: Orthogonal Projections vs Idempotence}
+\begin{solution}
+\begin{enumerate}
+\item Show that $X(X^TX)^{-1}X^T$ is idempotent. \\
+\begin{align*}
+P^2 &= (X(X^TX)^{-1}X^T)(X(X^TX)^{-1}X^T) \\
+&= X(X^TX)^{-1}(X^TX)(X^TX)^{-1}X^T \\
+&= X(X^TX)^{-1}X^T
+\end{align*}
+\item Show that all orthogonal projections are idempotent.\\
+\medskip
+Let $P$ be an orthogonal projection.\\
+Recall that all orthogonal projections take the form $VV^T$, where $V\in \R^{n\times k}$ has orthonormal columns. \\
+Note that $V^TV = I_k$, the identity matrix in $\R^{k\times k}$. \\
+Then $P^2 = (VV^T)(VV^T) = V(V^TV)V^T = VI_kV^T = VV^T = P$
+
+\end{enumerate}
+\end{solution}
+\end{frame}
+
+\begin{frame}
+\frametitle{Solutions: Orthogonal Projections vs Idempotence}
+\begin{solution}
+\begin{enumerate}
+\item[3.] Give an example of an idempotent matrix that is not an orthogonal projection.  \\
+\fonteight
+
+Consider the matrix 
+$A = \begin{bmatrix}
+			1   & 1   \\
+			0   & 0\\
+		 \end{bmatrix}$\\
+It's easy to see $A^2 = A$, and
+$Im(A) = \{\begin{bmatrix}
+x  \\
+0  \\
+\end{bmatrix}\ | \ x\in \R\}$\\
+Consider the vector $v = \begin{bmatrix}
+			2\\
+			2\\
+		 \end{bmatrix}$\\
+The closest vector in Im(A) is $v_{Im(A)} = \begin{bmatrix}
+			2\\
+			0\\
+		 \end{bmatrix}$, but $Av=\begin{bmatrix}
+			4\\
+			0\\
+		 \end{bmatrix}$\\
+\medskip
+Note: Rigorously speaking, we need to prove that $v_{Im(A)} = \begin{bmatrix}
+			2\\
+			0\\
+		 \end{bmatrix}$
+
+is the closest vector in $Im(A)$. We can do this by constructing an orthogonal projection onto $Im(A)$,
+which is found by setting $V =\begin{bmatrix}
+			1\\
+			0\\
+\end{bmatrix}$, and calculating $VV^T = \begin{bmatrix}
+			1   & 0   \\
+			0   & 0\\
+		 \end{bmatrix}$\\
+\end{enumerate}
+\end{solution}
+\end{frame}
 
 
 \end{document}
