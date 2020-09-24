@@ -61,7 +61,8 @@
 
 	\vspace{-0.4cm}
 	\begin{theorem}[Pythagorean theorem]
-		Let $x,y \in V$. Then
+		Let $\| \cdot \|$ be the norm induced by $\langle \cdot, \cdot \rangle$.
+		For all $x,y \in V$ we have
 		$$
 		x \perp y \ \Longleftrightarrow \|x+y\|^2 = \|x\|^2 + \|y\|^2.
 		$$
@@ -82,7 +83,7 @@
 
 	\vspace{-0.4cm}
 	\begin{definition}
-		Let $v_1, \dots, v_k$ be vectors of $V$. We say that the family of vectors $(v_1, \dots, v_k)$ is
+		We say that a family of vectors $(v_1, \dots, v_k)$ is:
 		\begin{itemize}
 			\item \emph{orthogonal} if the vectors $v_1, \dots, v_n$ are pairwise orthogonal, i.e.\ $\langle v_i, v_j \rangle = 0$ for all $i \neq j$.
 			\item \emph{orthonormal} if it is orthogonal and if all the $v_i$ have unit norm: $\|v_1\| = \dots = \|v_k\| = 1$.
@@ -95,6 +96,9 @@
 
 	\vspace{-0.4cm}
 	\begin{block}{Proposition}
+		A vector space of finite dimension admits an orthonormal basis.
+	\end{block}
+	\begin{block}{Proposition}
 		Assume that $\dim(V)=n$ and let $(v_1, \dots, v_n)$ be an \textbf{orthonormal} basis of $V$. Then the coordinates of a vector $x \in V$ in the basis $(v_1, \dots, v_n)$ are $(\langle v_1, x\rangle, \dots, \langle v_n,x \rangle)$:
 		$$
 		x = \langle v_1, x \rangle v_1 + \cdots + \langle v_n, x \rangle v_n.
@@ -106,6 +110,10 @@
 	\grid
 
 \end{frame}
+\begin{frame}[t]{Proof}
+	\grid
+
+\end{frame}
 
 
 \section{Orthogonal projection}
@@ -113,6 +121,8 @@
 \begin{frame}[t]{Picture}
 	\grid
 
+	\vspace{-0.24cm}
+	From now, $\langle \cdot, \cdot \rangle$ denotes the Euclidean dot product, and $\| \cdot \|$ the Euclidean norm.
 \end{frame}
 
 \begin{frame}[t]{Orthogonal projection and distance to a subspace}
@@ -128,7 +138,7 @@
 	\end{definition}
 \end{frame}
 
-\begin{frame}[t]{Important proposition}
+\begin{frame}[t]{Computing orthogonal projections}
 	\grid 
 
 	\vspace{-0.4cm}
@@ -138,6 +148,14 @@
 	\end{block}
 \end{frame}
 
+\begin{frame}[t]{Proof}
+	\grid
+
+\end{frame}
+\begin{frame}[t]{Consequence}
+	\grid
+
+\end{frame}
 
 
 \begin{frame}[t]{Consequence}
@@ -173,7 +191,6 @@
 	\grid
 
 	\pause
-	\pause
 \end{frame}
 
 \appendix
@@ -183,7 +200,40 @@
 	\grid
 
 	\pause
-	\pause
+\end{frame}
+\begin{frame}[t]{Orthogonal matrices}
+	\grid
+
+	\begin{definition}
+		A matrix $A \in \R^{n \times n}$ is called an \emph{orthogonal matrix} if its columns are an orthonormal family.
+	\end{definition}
+\end{frame}
+
+\begin{frame}[t]{A proposition}
+	\grid
+
+	\vspace{-0.4cm}
+	\begin{block}{Proposition}
+		Let $A \in \R^{n \times n}$. The following points are equivalent:
+		\begin{enumerate}
+			\item $A$ is orthogonal.
+			\item $A^{\sT} A = \Id_n$.
+			\item $A A^{\sT} = \Id_n$
+		\end{enumerate}
+	\end{block}
+\end{frame}
+
+\begin{frame}[t]{Orthogonal matrices \& norm}
+	\grid
+
+	\vspace{-0.4cm}
+	\begin{block}{Proposition}
+	Let $A \in \R^{n \times n}$ be an orthogonal matrix. Then $A$ preserves the dot product in the sense that for all $x,y \in \R^n$,
+	$$
+	\langle Ax, Ay \rangle = \langle x,y\rangle.
+	$$
+	In particular if we take $x=y$ we see that $A$ preserves the Euclidean norm: $\|Ax\| = \|x\|$.
+\end{block}
 \end{frame}
 \backupend
 
