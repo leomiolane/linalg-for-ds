@@ -1,7 +1,7 @@
 \documentclass[11pt,nocut]{article}
 
-\usepackage{../latex_style/packages}
-\usepackage{../latex_style/notations}
+\usepackage{../../latex_style/packages}
+\usepackage{../../latex_style/notations}
 \externaldocument{../lecture_02/lecture_02}
 \externaldocument{../lecture_04/lecture_04}
 
@@ -101,6 +101,15 @@ It follows from Proposition~\ref{prop:eigen_indep}:
 \begin{corollary}
 	A $n \times n$ matrix $A$ admits at most $n$ different eigenvalues: $\# \Sp(A) \leq n$.
 \end{corollary}
+
+In fact, we have the following stronger result:
+
+\begin{proposition}
+	Let $A \in \R^{n \times n}$. If $\lambda_1, \dots, \lambda_k$ are distinct eigenvalues of $A$ of multiplicity $m_1, \dots, m_k$, then
+	$$
+	m_1 + \cdots + m_k \leq n.
+	$$
+\end{proposition}
 
 
 %\section{Diagonalizable matrices}
