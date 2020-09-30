@@ -29,7 +29,7 @@ A norm defines a distance $d(x,y) = \|x-y\|$ on the vector space $V$.
 \begin{definition}[Distance]
 	A distance $d$ on a set $S$ (not necessarily a vector space) is a function $d : S \times S \rightarrow \R$.
 	\begin{enumerate}
-		\item \emph{Positive definiteness}: if $d(x,y) \geq 0$ for all $x,y \in S$ and $d(x,y) \geq 0$ iff $x = y$. \hfill
+		\item \emph{Positive definiteness}: if $d(x,y) \geq 0$ for all $x,y \in S$ and $d(x,y) = 0$ iff $x = y$. \hfill
 		\item \emph{Symmetry}: $d(x,y) = d(y,x)$ for all $x, y \in S$. \hfill 
 		\item \emph{Triangle inequality}: $d(x,y) \leq d(x,z) + d(z,y)$ \hfill 
 	\end{enumerate}
@@ -49,7 +49,7 @@ A norm defines a distance $d(x,y) = \|x-y\|$ on the vector space $V$.
 \end{definition}
 \begin{itemize}
 \item Important: An inner product defines a norm $\|u\| = \sqrt{\langle u, u \rangle}$.
-\item Most used inner product: the Euclidean inner product: $\langle u,v \rangle = u^\top v$. The corresponding norm is $\|u\|= \sqrt{u^\top u} = \sqrt{}\sum_{i=1}^n u_i^2$.
+\item Most used inner product: the Euclidean inner product: $\langle u,v \rangle = u^\top v$. The corresponding norm is $\|u\|= \sqrt{u^\top u} = \sqrt{\sum_{i=1}^n u_i^2}$.
 \item Given an inner product, we can define the angle between two vectors: $cos(\theta) = \frac{ \langle u,v \rangle }{\|u\| \|v\|}$.
 \end{itemize}
 \end{frame}
@@ -69,7 +69,7 @@ A norm defines a distance $d(x,y) = \|x-y\|$ on the vector space $V$.
 \begin{frame}[t]
 \frametitle{Questions: Norms \& Inner Products}
 2. For $A \in \R^{m\times n}$ and $x\in \R^n$, prove that
-$$ \|Ax\| \leq \|x\|\sqrt{\sum_{i=1}^m \sum_{j=1}^n} A_{i,j}^2$$
+$$ \|Ax\| \leq \|x\|\sqrt{\sum_{i=1}^m \sum_{j=1}^n A_{i,j}^2}$$
 \pause
 \end{frame}
 
@@ -85,8 +85,8 @@ Exercises:
 \item Let $v_1,...,v_k$ be a list of orthogonal vectors. Show that $v_1,...,v_k$ are linearly independent.
 \item Let $U$ be the subspace of $\R^n$ with orthonormal basis $u_1,...,u_k$.
 \begin{enumerate}
- \item[i.] Prove that the orthogonal projection of $v \in \R^n$ onto $U$ can be expressed as $P_U  = \sum_{i=0}^k  \langle v,u_i \rangle u_i$. (Use the fact that the orthonormal basis for a subspace of $\R$ can be extended to obtain an orthonormal basis for $\R$).
- \item[ii.] Prove that $P_U(v)\leq \|v\|$.
+ \item[i.] Prove that the orthogonal projection of $v \in \R^n$ onto $U$ can be expressed as $P_U (v) = \sum_{i=0}^k  \langle v,u_i \rangle u_i$. (Use the fact that the orthonormal basis for a subspace of $\R$ can be extended to obtain an orthonormal basis for $\R$).
+ \item[ii.] Prove that $\|P_U(v)\| \leq \|v\|$.
  \item[iii.] Prove that $v-P_U(v)$ is orthogonal to $P_U(v)$.
 \end{enumerate}
 \end{enumerate}
@@ -102,8 +102,8 @@ Exercises:
 \frametitle{Questions: Orthogonality}
 2. Let $U$ be the subspace of $\R^n$ with orthonormal basis $u_1,...,u_k$.
 \begin{enumerate}
- \item[i.] Prove that the orthogonal projection of $v \in \R^n$ onto $U$ can be expressed as $P_U  = \sum_{i=0}^k  \langle v,u_i \rangle u_i$. (Use the fact that the orthonormal basis for a subspace of $\R$ can be extended to obtain an orthonormal basis for $\R$).
- \item[ii.] Prove that $P_U(v)\leq \|v\|$.
+ \item[i.] Prove that the orthogonal projection of $v \in \R^n$ onto $U$ can be expressed as $P_U(v)  = \sum_{i=0}^k  \langle v,u_i \rangle u_i$. (Use the fact that the orthonormal basis for a subspace of $\R$ can be extended to obtain an orthonormal basis for $\R$).
+ \item[ii.] Prove that $\|P_U(v)\| \leq \|v\|$.
  \item[iii.] Prove that $v-P_U(v)$ is orthogonal to $P_U(v)$.
  \end{enumerate}
 \pause
@@ -113,7 +113,7 @@ Exercises:
 \end{frame}
 
 \begin{frame}[t]
-\frametitle{Questions: Orthogonal Complements}
+\frametitle{Questions: Orthogonal Complement}
 \begin{enumerate}
 \item Let $S, U$ be subspaces of a vector space $V$.\\
 Prove the following statement:
@@ -127,14 +127,14 @@ Assume the Euclidean inner product. Prove that $Im(A^T) = Ker(A)^\perp$.
 \end{frame}
 
 \begin{frame}[t]
-\frametitle{Questions: Orthogonal Complements}
+\frametitle{Questions: Orthogonal Complement}
 1. Let $S, U$ be subspaces of a vector space $V$.\\
 Prove the following statement:
 $S\subset U \implies S^\perp \supset U^\perp$
 \end{frame}
 
 \begin{frame}[t]
-\frametitle{Questions: Orthogonal Complements}
+\frametitle{Questions: Orthogonal Complement}
 2. Let $A\in\R^{n\times m}$.
 Assume the Euclidean inner product. Prove that $Im(A^T) = Ker(A)^\perp$.
 
