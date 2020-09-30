@@ -1,0 +1,67 @@
+\documentclass{beamer}
+
+\usepackage{../../../latex_style/beamerthemeExecushares}
+\usepackage{../../../latex_style/notations}
+
+\title{Lecture 6.1: What we will not be talking about}
+\subtitle{Optimization and Computational Linear Algebra for Data Science}
+\author{Léo Miolane}
+\date{}
+
+\setcounter{showSlideNumbers}{1}
+
+\begin{document}
+\setcounter{showProgressBar}{0}
+\setcounter{showSlideNumbers}{0}
+
+\frame{\titlepage}
+\setcounter{framenumber}{0}
+%\setcounter{showProgressBar}{1}
+\setcounter{showSlideNumbers}{1}
+
+
+\begin{frame}{Warning}
+	\begin{center}
+		\includegraphics[width=10cm]{try.jpg}
+	\end{center}
+\end{frame}
+\begin{frame}[t]{The determinant}
+	\grid
+
+	There exists a function $\det: \R^{n \times n} \to \R$ called \emph{the determinant} that verifies
+	$$
+	\det(M) = 0 \qquad
+	\Longleftrightarrow
+	\qquad
+	M \quad \text{is not invertible.}
+	$$
+
+	\vspace{0.3cm}
+	The determinant can be computed using the following formula:
+	$$
+	\det(M)
+	= \sum_{\sigma \in \mathfrak{S}_n} \epsilon(\sigma) \prod_{i=1}^n
+	M_{i,\sigma(i)}
+	$$
+\end{frame}
+
+\begin{frame}[t]{Geometrical interpretation}
+	\grid
+
+\end{frame}
+
+\begin{frame}[t]{Link with eigenvalues}
+	\grid
+
+\end{frame}
+
+\begin{frame}[t]{The characteristic polynomial}
+	\grid
+
+\end{frame}
+
+\begin{frame}[t]{Example}
+	\grid
+
+\end{frame}
+\end{document}
