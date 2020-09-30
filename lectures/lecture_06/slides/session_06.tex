@@ -21,7 +21,7 @@
 	\begin{enumerate}
 		\item Orthogonal matrices
 		\item Eigenvalues \& eigenvectors
-		\item Properties
+		\item Properties of eigenvalues and eigenvectors
 		\item Markov chains
 	\end{enumerate}
 \end{frame}
@@ -30,7 +30,15 @@
 \setcounter{framenumber}{0}
 \setcounter{showSlideNumbers}{1}
 
-\begin{frame}[t]{Intro}
+\section{Orthogonal matrices}
+
+\begin{frame}[t]{Orthogonal matrices}
+	\grid
+
+\end{frame}
+
+\section{Eigenvalues \& eigenvectors}
+\begin{frame}[t]{Introduction}
 	\grid
 
 \end{frame}
@@ -76,18 +84,18 @@
 
 \section{Properties}
 
-\begin{frame}[t]{Let's talk about facts!}
+\begin{frame}[t]{Some useful facts}
 	\grid
 
 	\vspace{-0.2cm}
-		Let $A \in \R^{n \times n}$. 
-		Suppose that $A$ has an eigenvalue $\lambda \in \R$ and let $x \in \R^n$ be an eigenvector associated to $\lambda$.
-		\begin{block}{Fact \#\only<1>{1}\only<2>{2}\only<3>{3}\only<4>{4}}
-			\only<1>{For all $\alpha \in \R$, $\alpha \lambda$ is an eigenvalue of the matrix $\alpha A$ and $x$ is an associated eigenvector.}
-			\only<2>{For all $\alpha \in \R$, $\lambda + \alpha$ is an eigenvalue of the matrix $A + \alpha \Id$ and $x$ is an associated eigenvector.}
-			\only<3>{For all $k \in \N$, $\lambda^k$ is an eigenvalue of the matrix $A^k$ and $x$ is an associated eigenvector.}
-			\only<4>{If $A$ is invertible then $1/\lambda$ is an eigenvalue of the matrix inverse $A^{-1}$ and $x$ is an associated eigenvector.}
-		\end{block}
+	Let $A \in \R^{n \times n}$. 
+	Suppose that $A$ has an eigenvalue $\lambda \in \R$ and let $x \in \R^n$ be an eigenvector associated to $\lambda$.
+	\begin{block}{Fact \#\only<1>{1}\only<2>{2}\only<3>{3}\only<4>{4}}
+		\only<1>{For all $\alpha \in \R$, $\alpha \lambda$ is an eigenvalue of the matrix $\alpha A$ and $x$ is an associated eigenvector.}
+		\only<2>{For all $\alpha \in \R$, $\lambda + \alpha$ is an eigenvalue of the matrix $A + \alpha \Id$ and $x$ is an associated eigenvector.}
+		\only<3>{For all $k \in \N$, $\lambda^k$ is an eigenvalue of the matrix $A^k$ and $x$ is an associated eigenvector.}
+		\only<4>{If $A$ is invertible then $1/\lambda$ is an eigenvalue of the matrix inverse $A^{-1}$ and $x$ is an associated eigenvector.}
+	\end{block}
 
 \end{frame}
 
@@ -112,6 +120,25 @@
 	\end{block}
 \end{frame}
 
+\begin{frame}[t]{Proof of the proposition}
+	\grid
+
+\end{frame}
+
+\begin{frame}[t]{Even better!}
+	\grid
+
+	\begin{block}{Theorem}
+		A $n \times n$ matrix $A$ admits at most $n$ different eigenvalues: $\# \Sp(A) \leq n$.
+	\end{block}
+	\begin{block}{Theorem}
+		Let $A \in \R^{n \times n}$. If $\lambda_1, \dots, \lambda_k$ are distinct eigenvalues of $A$ of multiplicities $m_1, \dots, m_k$ respectively, then
+		$$
+		m_1 + \cdots + m_k \leq n.
+		$$
+	\end{block}
+
+\end{frame}
 
 \section{Markov chains}
 
@@ -123,13 +150,13 @@
 \begin{frame}[t]{Stochastic matrices}
 	\grid
 
-\begin{definition}
-	A matrix $P \in \R^{n \times n}$ is said to be \emph{stochastic} if:
-	\begin{enumerate}
-		\item $P_{i,j} \geq 0$ for all $1 \leq i,j \leq n$.
-		\item $\sum\limits_{i=1}^n P_{i,j} = 1$, for all $1 \leq j \leq n$.
-	\end{enumerate}
-\end{definition}
+	\begin{definition}
+		A matrix $P \in \R^{n \times n}$ is said to be \emph{stochastic} if:
+		\begin{enumerate}
+			\item $P_{i,j} \geq 0$ for all $1 \leq i,j \leq n$.
+			\item $\sum\limits_{i=1}^n P_{i,j} = 1$, for all $1 \leq j \leq n$.
+		\end{enumerate}
+	\end{definition}
 \end{frame}
 \begin{frame}[t]{Probability vectors}
 	\grid
@@ -141,13 +168,13 @@
 
 	\vspace{-0.4cm}
 	\begin{block}{Proposition}
-	For all $t \geq 0$
-	$$
-	x^{(t+1)} = P x^{(t)}
-	\quad \text{and consequently,} \quad
-	x^{(t)} =  P^t x^{(0)}.
-	$$
-\end{block}
+		For all $t \geq 0$
+		$$
+		x^{(t+1)} = P x^{(t)}
+		\quad \text{and consequently,} \quad
+		x^{(t)} =  P^t x^{(0)}.
+		$$
+	\end{block}
 
 \end{frame}
 
@@ -168,7 +195,7 @@
 \begin{frame}[t]
 	\frametitle{Questions?}
 	\grid
-	
+
 	\pause
 \end{frame}
 \backupend
