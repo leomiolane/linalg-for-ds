@@ -15,20 +15,32 @@ Homework 5: Orthogonal matrices, eigenvalues and eigenvectors}
 \input{./preamble_homeworks.tex}
 
 \begin{problem}[2 points]
-	Let $A \in \R^{n \times n}$ be a symmetric matrix.
-	\\
-	Show that if $v_1, v_2 \in \R^n$ are two eigenvectors of $A$ associated to some eigenvalues $\lambda_1 \neq \lambda_2$ ($Av_1 = \lambda_1 v_1$ and $Av_2 = \lambda_2 v_2$), then $v_1 \perp v_2$.
-\end{problem}
-
-\vspace{1mm}
-
-\begin{problem}[3 points]
 	Let $S$ be a subspace of $\R^n$ and let $P_S$ be the matrix of the orthogonal projection onto $S$. Let $M = \Id_n - 2 P_S$.
 	\begin{enumerate}[label=\normalfont(\textbf{\alph*})]
 		\item Show that the matrix $M$ is orthogonal.
 		\item Show that if $\lambda \in \R$ is an eigenvalue of $M$, then $\lambda = 1$ or $\lambda=-1$.
 	\end{enumerate}
 \end{problem}
+
+\vspace{1mm}
+
+
+\begin{problem}[2 points]
+	Let $v \in \R^n$ be a non-zero vector. What are the eigenvalues of the $n \times n$ matrix
+	$$
+		M = v v^{\sT}
+	$$
+	and their multiplicities ? (In the expression $vv^{\sT}$ we see $v$ as a matrix with $1$ column and $n$ rows).
+\end{problem}
+
+\vspace{1mm}
+\begin{problem}[2 points]
+	Let $A \in \R^{n \times n}$ be a symmetric matrix.
+	\\
+	Show that if $v_1, v_2 \in \R^n$ are two eigenvectors of $A$ associated to distinct eigenvalues $\lambda_1 \neq \lambda_2$ ($Av_1 = \lambda_1 v_1$ and $Av_2 = \lambda_2 v_2$), then $v_1 \perp v_2$.
+\end{problem}
+
+
 
 \vspace{1mm}
 
@@ -41,7 +53,7 @@ Homework 5: Orthogonal matrices, eigenvalues and eigenvectors}
 
 %\vspace{1mm}
 
-\begin{problem}[5 points]
+\begin{problem}[4 points]
 	Let $A \in \R^{n \times n}$. We assume that there exists a basis $(v_1, \dots, v_n)$ of $\R^n$ consisting of eigenvectors of $A$:
 	$$
 	A v_i = \lambda_i v_i
@@ -61,14 +73,13 @@ Homework 5: Orthogonal matrices, eigenvalues and eigenvectors}
 			$$
 			x_t = \frac{A^t x_0}{\|A^t x_0\|}.
 			$$
-		\item Assume that $x_0$ is a unit vector ($\|x_0\|=1$) whose direction is chosen uniformly at random (this basically means that all the possible directions for $x_0$ are equally likely to be chosen). Let $(\alpha_1, \dots, \alpha_n)$ be the coordinates of $x_0$ in the basis $(v_1, \dots, v_n)$. Explain why we can be sure that $\alpha_1 \neq 0$. You do not have to do a rigorous proof of that, just give an intuitive argument.
+		\item Assume that $x_0$ is a unit vector ($\|x_0\|=1$) whose direction is chosen uniformly at random (this basically means that all the possible directions for $x_0$ are equally likely to be chosen). Let $(\alpha_1, \dots, \alpha_n)$ be the coordinates of $x_0$ in the basis $(v_1, \dots, v_n)$. Explain we have $\alpha_1 \neq 0$ with probability $1$. You do not have to do a rigorous proof of that, just give an intuitive argument.
 		\item Show that
 			$$
 			x_t \xrightarrow[t \to \infty]{} \frac{\alpha_1 v_1}{\|\alpha_1 v_1\|}
 			\qquad \text{and} \qquad
 			\|A x_t\| \xrightarrow[t \to \infty]{} \lambda_1.
 			$$
-		\item Code the algorithm in \texttt{Python}: write a function \texttt{power\_iteration} that takes a matrix $A$ as input and outputs $x_t$ and $\|Ax_t\|$ for the first $t$ such that $\|x_{t}-x_{t-1}\| \leq 10^{-6}$. Here we assume that the matrix $A$ given as input verifies the assumption of this problem.
 	\end{enumerate}
 \end{problem}
 
@@ -76,14 +87,15 @@ Homework 5: Orthogonal matrices, eigenvalues and eigenvectors}
 
 
 \begin{problem}[$\star$]
-	Let $A \in \R^{n \times n}$ be a symmetric matrix. Define the function
+	Let $A \in \R^{n \times n}$ be a symmetric matrix. We define the function
 	$$
 	\begin{array}{cccc}
 		f:& \R^n \setminus \{0\} & \to & \R \\
 		  & x & \mapsto & \displaystyle \frac{x^{\sT} A x}{x^{\sT} x}.
 	\end{array}
 	$$
-	Show that $f$ has a maximum at some $x_{\star} \in \R^n \setminus \{0\}$ and that $x_{\star}$ verifies
+	We admit that $f$ has a maximum at some $x_{\star} \in \R^n \setminus \{0\}$.
+	Show that $x_{\star}$ verifies
 	$$
 	A x_{\star} = \lambda x_{\star}, \qquad \text{where} \quad \lambda = f(x_{\star}).
 	$$
