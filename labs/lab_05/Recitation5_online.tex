@@ -1,0 +1,188 @@
+\documentclass{beamer}
+
+\usepackage{../../latex_style/beamerthemeExecushares}
+\usepackage{../../latex_style/notations}
+
+\title{Recitation 5}
+\author{Carles Domingo}
+\date{Fall 2020}
+
+
+\begin{document}
+
+\frame{\titlepage} 
+
+\setcounter{showProgressBar}{0}
+\setcounter{showSlideNumbers}{1}
+
+\begin{frame}[t]
+\frametitle{Eigenvalues and eigenvectors}
+\begin{definition}\label{def:eigen}
+	Let $A \in \R^{n \times n}$. A \textbf{non-zero} vector $v \in \R^n$ is said to be an \emph{eigenvector} of $A$ is there exists $\lambda \in \R$ such that
+	$$
+	A v = \lambda v.
+	$$
+	The scalar $\lambda$ is called the \emph{eigenvalue} (of $A$) associated to $v$. The set
+	$$
+	E_{\lambda}(A) = \big\{ x \in \R^n \, \big| \, Ax = \lambda x \big\} = \Ker(A-\lambda \Id)
+	$$
+	is called the \emph{eigenspace} of $A$ associated to $\lambda$. The dimension of $E_{\lambda}(A)$ is called the multiplicity of the eigenvalue $\lambda$.
+\end{definition}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Eigenvalues and eigenvectors}
+Recall: 
+\begin{itemize}
+\item If a matrix $A \in \R^{n \times n}$ has eigenvalues $\lambda_1 < \dots < \lambda_k$ with eigenvectors $v_1, \dots, v_k$ resp., then $v_1, \dots, v_k$ are linearly independent. $\implies$ $A$ has at most $n$ different eigenvalues.
+\item More strongly, if $A \in \R^{n \times n}$ has eigenvalues $\lambda_1 < \dots < \lambda_k$
+\begin{align*}
+\sum_{i=1}^k \text{dim}(E_{\lambda_i}(A)) \leq n
+\end{align*}
+\end{itemize}
+Note: To compute eigenvalues and eigenvectors using determinants and characteristic polynomials, see L\'eo's video. Recommended but optional and not covered in this recitation.
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Questions: Eigendecomposition}
+\begin{enumerate}
+\item Let $V = \begin{bmatrix} v_1 & \cdots & v_n \end{bmatrix} \in \R^{n \times n}$. Show that a matrix $A \in \R^{n \times n}$ has eigenvalues $\lambda_1, \dots, \lambda_n$ with linearly independent eigenvectors $v_1, \dots, v_k$ iff $A = V^{-1} \text{diag}((\lambda_i)_{i=1}^n) V$. In this case, we say that $A$ is a \emph{diagonalizable} matrix.
+\item Show that if $A \in \R^{n \times n}$ has eigenvalues $\lambda_1 < \dots < \lambda_n$, $A$ is diagonalizable.
+\item Write the expression of a matrix in $\R^{2 \times 2}$ for which $[2,-1]$ is an eigenvector of eigenvalue $2$ and $[1,3]$ is an eigenvector of eigenvalue $-1$.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Questions: Eigendecomposition}
+1. Let $V = \begin{bmatrix} v_1 & \cdots & v_n \end{bmatrix} \in \R^{n \times n}$. Show that a matrix $A \in \R^{n \times n}$ has eigenvalues $\lambda_1, \dots, \lambda_n$ with linearly independent eigenvectors $v_1, \dots, v_k$ iff $A = V^{-1} \text{diag}((\lambda_i)_{i=1}^n) V$. In this case, $A$ is a \emph{diagonalizable} matrix.
+\pause
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Questions: Eigendecomposition}
+2. Show that if $A \in \R^{n \times n}$ has eigenvalues $\lambda_1 < \dots < \lambda_n$, $A$ is diagonalizable.
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Questions: Eigendecomposition}
+3. Write the expression of a matrix in $\R^{2 \times 2}$ for which $[2,-1]$ is an eigenvector of eigenvalue $2$ and $[1,3]$ is an eigenvector of eigenvalue $-1$.
+\pause
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Questions: Eigenvalues \& trace}
+\begin{enumerate}
+\item Show that the trace is invariant by change of basis, i.e. if $X \in \R^{n \times n}$ is invertible and $A \in \R^{n \times n}$, $\text{tr}(A) = \text{tr}(X A X^{-1})$. (Hint: $\text{tr}(BC) = \text{tr}(CB)$).
+\item Show that if $A \in \R^{n \times n}$ is diagonalizable and has eigenvalues eigenvalues $\lambda_1, \dots, \lambda_n$, then $\text{tr}(A) = \sum_{i=1}^n \lambda_i$.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Questions: Eigenvalues \& trace}
+1. Show that the trace is invariant by change of basis, i.e. if $X \in \R^{n \times n}$ is invertible and $A \in \R^{n \times n}$, $\text{tr}(A) = \text{tr}(X A X^{-1})$. (Hint: $\text{tr}(BC) = \text{tr}(CB)$).
+\pause
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Questions: Eigenvalues \& trace}
+2. Show that if $A \in \R^{n \times n}$ is diagonalizable and has eigenvalues eigenvalues $\lambda_1, \dots, \lambda_n$, then $\text{tr}(A) = \sum_{i=1}^n \lambda_i$.
+\pause
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Questions: No (real) eigenvalues}
+Some matrices do not admit (real) eigenvalues and eigenvectors. 
+\begin{enumerate}
+\item Show that if $\theta \in [0,2\pi)$,
+\begin{align*}
+\begin{bmatrix}
+\cos(\theta) & -\sin(\theta) \\
+\sin(\theta) & \cos(\theta)
+\end{bmatrix}
+\end{align*}
+does not admit real eigenvalues and eigenvectors in general.
+\item Find the matrices, and the real eigenvalues and eigenvectors for the values of $\theta$ for which they exist.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Questions: No (real) eigenvalues}
+1. Show that if $\theta \in [0,2\pi)$,
+\begin{align*}
+\begin{bmatrix}
+\cos(\theta) & -\sin(\theta) \\
+\sin(\theta) & \cos(\theta)
+\end{bmatrix}
+\end{align*}
+does not admit real eigenvalues and eigenvectors in general.
+\pause
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Questions: No (real) eigenvalues}
+2. Find the matrices, and the real eigenvalues and eigenvectors for the values of $\theta$ for which they exist.
+\pause
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Markov Chains}
+\begin{definition}[Markov chain]
+	A sequence of random variables $(X_0, X_1, \dots)$ is a Markov chain with state space $E$ and ``transition matrix'' $P$ if for all $t \geq 0$, 
+	$$
+	\P\big( X_{t+1} = y \, \big| \, X_0= x_0, \dots, X_t = x_t ) = P(x_t,y)
+	$$
+	for all $x_0, \dots, x_t$ such that $\P(X_0 = x_0, \dots, X_t = x_t) >0$.
+\end{definition}
+Stochastic matrix: $P_{ij} \geq 0$, $\sum_{i=1}^n P_{ij} = 1$ for all $1 \leq j \leq n$.
+\begin{definition}[Invariant measure]
+	A vector $\mu \in \Delta_n$ is called an invariant measure for the transition matrix $P$ if $\mu = P \mu$, i.e.\ if $\mu$ is an eigenvector of $P$ associated with the eigenvalue $1$.
+\end{definition}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Perron-Frobenius theorem}
+\begin{theorem}[Perron-Frobenius, stochastic case]\label{th:perron_frobenius}
+	Let $P$ be a stochastic matrix such that there exists $k \geq 1$ such that all the entries of $P^k$ are strictly positive. Then the following holds:
+	\begin{enumerate}
+		\item $1$ is an eigenvalue of $P$ and there exists an eigenvector $\mu \in \Delta_n$ associated to $1$.
+		\item The eigenvectors associated to $1$ are unique up to scalar multiple (i.e.\ $\Ker(P-\Id) = \Span(\mu)$).
+		\item For all $x \in \Delta_n$, $P^t x \xrightarrow[t \to \infty]{} \mu$.
+	\end{enumerate}
+\end{theorem}
+Is the condition "there exists $k \geq 1$ such that all the entries of $P^k$ are strictly positive" necessary? Let's see!
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Questions: Counterexamples}
+\begin{definition}[Irreducible Markov chain]
+If for all $1 \leq i,j \leq n$, there exists $k \geq 1$ such that $P^{k}_{ij} > 0$, we say that the Markov chain is irreducible.
+\end{definition}
+\begin{definition}[Aperiodic Markov chain]
+If for all $1 \leq i \leq n$, we have $\text{gcd}(\{k | P_{ii}^{k} > 0\}) = 1$, we say that the Markov chain is aperiodic.
+\end{definition}
+\begin{enumerate}
+\item Show that if "there exists $k \geq 1$ such that all the entries of $P^k$ are strictly positive", then the Markov chain is irreducible and aperiodic. The converse is also true but harder to prove (come to office hours if you want to know!).
+\item Show that irreducible non-aperiodic Markov chains have no invariant measure.
+\item Show that non-irreducible aperiodic Markov chains have several invariant measures.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Questions: Counterexamples}
+1. Show that if "there exists $k \geq 1$ such that all the entries of $P^k$ are strictly positive", then the Markov chain is irreducible and aperiodic. The converse is also true but harder to prove (come to office hours if you want to know!).
+\pause
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Questions: Counterexamples}
+2. Show that irreducible non-aperiodic Markov chains have no invariant measure.
+\pause
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Questions: Counterexamples}
+3. Show that non-irreducible aperiodic Markov chains have several invariant measures.
+\pause
+\end{frame}
+
+\end{document}
