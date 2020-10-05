@@ -20,9 +20,15 @@
 \begin{definition}[Orthogonal matrix]
 	Given a dot product $\langle \cdot, \cdot \rangle$, an orthogonal matrix is a real square matrix whose columns are \emph{orthonormal} vectors.
 \end{definition}
-Equivalently, $Q$ is an orthonormal matrix if its inverse is $Q^{T}$.
+Recall:
+\begin{itemize}
+\item $Q$ is an orthonormal matrix iff its inverse is $Q^{T}$.
+\item $\langle Q x, Q y \rangle = \langle x, y \rangle$ for all $x, y$ with the appropriate dimensions and $Q$ orthogonal.
+\item Show that $\|Qx\| = \|x\|$ for all $x$ and $Q$ orthogonal.
+\end{itemize}
 \end{frame}
 
+\iffalse
 \begin{frame}[t]
 \frametitle{Questions: Orthogonal matrices}
 \begin{enumerate}
@@ -33,17 +39,17 @@ Equivalently, $Q$ is an orthonormal matrix if its inverse is $Q^{T}$.
 \pause
 \end{enumerate}
 \end{frame}
+\fi
 
-\iffalse
 \begin{frame}[t]
 \frametitle{Questions: Gram-Schmidt and QR}
 \begin{enumerate}
-\item Let $A\in \R^{n\times n}$ have linearly independent columns. Show that there is a matrix $Q\in \R^{n \times m}$ and $R \in \R^{n\times n} $ s.t that $A=QR$, where $Q$ has orthonormal columns and $R$ is upper triangular. \\
-\medskip
-(Hint: Recall the ``linear combination of columns interpretation of matrix multiplication").
+\item Let $A\in \R^{n\times n}$ have linearly independent columns. Show that there is a matrix $Q\in \R^{n \times n}$ and $R \in \R^{n\times n} $ s.t that $A=QR$, where $Q$ has orthonormal columns and $R$ is upper triangular. \\
+(Hint: Recall the ``linear combination of columns interpretation of matrix multiplication"). What if the columns are not linearly independent?
 \end{enumerate}
+\pause
+\pause
 \end{frame}
-\fi
 
 \begin{frame}[t]
 \frametitle{Eigenvalues and eigenvectors}
@@ -76,7 +82,10 @@ Note: To compute eigenvalues and eigenvectors using determinants and characteris
 \begin{frame}[t]
 \frametitle{Questions: Eigendecomposition}
 \begin{enumerate}
-\item Let $V = \begin{bmatrix} v_1 & \cdots & v_n \end{bmatrix} \in \R^{n \times n}$. Show that a matrix $A \in \R^{n \times n}$ has eigenvalues $\lambda_1, \dots, \lambda_n$ with linearly independent eigenvectors $v_1, \dots, v_n$ iff $A = V \text{diag}((\lambda_i)_{i=1}^n) V^{-1}$. In this case, we say that $A$ is a \emph{diagonalizable} matrix.
+\item Let $V = \begin{bmatrix} v_1 & \cdots & v_n \end{bmatrix} \in \R^{n \times n}$. Show that a matrix $A \in \R^{n \times n}$ has eigenvalues $\lambda_1, \dots, \lambda_n$ with linearly independent eigenvectors $v_1, \dots, v_n$ iff $A = V \text{diag}((\lambda_i)_{i=1}^n) V^{-1}$.
+\begin{definition}
+We say that $A \in \R^{n \times n}$ is a \emph{diagonalizable} matrix if it has has eigenvalues $\lambda_1, \dots, \lambda_n$ with linearly independent eigenvectors $v_1, \dots, v_n$.
+\end{definition}
 \item Show that if $A \in \R^{n \times n}$ has eigenvalues $\lambda_1 < \dots < \lambda_n$, $A$ is diagonalizable.
 \item Write the expression of a matrix in $\R^{2 \times 2}$ for which $[2,-1]$ is an eigenvector of eigenvalue $2$ and $[1,3]$ is an eigenvector of eigenvalue $-1$.
 \end{enumerate}
@@ -137,14 +146,14 @@ does not admit real eigenvalues and eigenvectors in general.
 
 \begin{frame}[t]
 \frametitle{Questions: No (real) eigenvalues}
-1. Show that if $\theta \in [0,2\pi)$,
+1. For which values of $\theta \in [0,2\pi)$ does the rotation matrix
 \begin{align*}
 \begin{bmatrix}
 \cos(\theta) & -\sin(\theta) \\
 \sin(\theta) & \cos(\theta)
 \end{bmatrix}
 \end{align*}
-does not admit real eigenvalues and eigenvectors in general.
+admit real eigenvalues and eigenvectors?
 \pause
 \end{frame}
 
@@ -155,11 +164,7 @@ does not admit real eigenvalues and eigenvectors in general.
 \end{frame}
 
 \begin{frame}[t]
-\frametitle{Extra Q: Gram-Schmidt and QR}
-Let $A\in \R^{n\times n}$ have linearly independent columns. Show that there is a matrix $Q\in \R^{n \times m}$ and $R \in \R^{n\times n} $ s.t that $A=QR$, where $Q$ has orthonormal columns and $R$ is upper triangular. \\
-\medskip
-(Hint: Recall the ``linear combination of columns interpretation of matrix multiplication").
-\pause
+
 \end{frame}
 
 \iffalse
