@@ -16,6 +16,36 @@
 \setcounter{showSlideNumbers}{1}
 
 \begin{frame}[t]
+\frametitle{Orthogonal matrices}
+\begin{definition}[Orthogonal matrix]
+	Given a dot product $\langle \cdot, \cdot \rangle$, an orthogonal matrix is a real square matrix whose columns are \emph{orthonormal} vectors.
+\end{definition}
+Equivalently, $Q$ is an orthonormal matrix if its inverse is $Q^{T}$.
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Questions: Orthogonal matrices}
+\begin{enumerate}
+\item Show the equivalence of the previous page: that $Q$ is an orthogonal matrix iff $Q^{-1} = Q^{\top}$.
+\item Show that $\langle Q x, Q y \rangle = \langle x, y \rangle$ for all $x, y$ with the appropriate dimensions and $Q$ orthogonal.
+\item Show that $\|Qx\| = \|x\|$ for all $x$ and $Q$ orthogonal.
+\pause
+\pause
+\end{enumerate}
+\end{frame}
+
+\iffalse
+\begin{frame}[t]
+\frametitle{Questions: Gram-Schmidt and QR}
+\begin{enumerate}
+\item Let $A\in \R^{n\times n}$ have linearly independent columns. Show that there is a matrix $Q\in \R^{n \times m}$ and $R \in \R^{n\times n} $ s.t that $A=QR$, where $Q$ has orthonormal columns and $R$ is upper triangular. \\
+\medskip
+(Hint: Recall the ``linear combination of columns interpretation of matrix multiplication").
+\end{enumerate}
+\end{frame}
+\fi
+
+\begin{frame}[t]
 \frametitle{Eigenvalues and eigenvectors}
 \begin{definition}\label{def:eigen}
 	Let $A \in \R^{n \times n}$. A \textbf{non-zero} vector $v \in \R^n$ is said to be an \emph{eigenvector} of $A$ is there exists $\lambda \in \R$ such that
@@ -46,7 +76,7 @@ Note: To compute eigenvalues and eigenvectors using determinants and characteris
 \begin{frame}[t]
 \frametitle{Questions: Eigendecomposition}
 \begin{enumerate}
-\item Let $V = \begin{bmatrix} v_1 & \cdots & v_n \end{bmatrix} \in \R^{n \times n}$. Show that a matrix $A \in \R^{n \times n}$ has eigenvalues $\lambda_1, \dots, \lambda_n$ with linearly independent eigenvectors $v_1, \dots, v_k$ iff $A = V^{-1} \text{diag}((\lambda_i)_{i=1}^n) V$. In this case, we say that $A$ is a \emph{diagonalizable} matrix.
+\item Let $V = \begin{bmatrix} v_1 & \cdots & v_n \end{bmatrix} \in \R^{n \times n}$. Show that a matrix $A \in \R^{n \times n}$ has eigenvalues $\lambda_1, \dots, \lambda_n$ with linearly independent eigenvectors $v_1, \dots, v_n$ iff $A = V \text{diag}((\lambda_i)_{i=1}^n) V^{-1}$. In this case, we say that $A$ is a \emph{diagonalizable} matrix.
 \item Show that if $A \in \R^{n \times n}$ has eigenvalues $\lambda_1 < \dots < \lambda_n$, $A$ is diagonalizable.
 \item Write the expression of a matrix in $\R^{2 \times 2}$ for which $[2,-1]$ is an eigenvector of eigenvalue $2$ and $[1,3]$ is an eigenvector of eigenvalue $-1$.
 \end{enumerate}
@@ -54,7 +84,7 @@ Note: To compute eigenvalues and eigenvectors using determinants and characteris
 
 \begin{frame}[t]
 \frametitle{Questions: Eigendecomposition}
-1. Let $V = \begin{bmatrix} v_1 & \cdots & v_n \end{bmatrix} \in \R^{n \times n}$. Show that a matrix $A \in \R^{n \times n}$ has eigenvalues $\lambda_1, \dots, \lambda_n$ with linearly independent eigenvectors $v_1, \dots, v_k$ iff $A = V^{-1} \text{diag}((\lambda_i)_{i=1}^n) V$. In this case, $A$ is a \emph{diagonalizable} matrix.
+1. Let $V = \begin{bmatrix} v_1 & \cdots & v_n \end{bmatrix} \in \R^{n \times n}$. Show that a matrix $A \in \R^{n \times n}$ has eigenvalues $\lambda_1, \dots, \lambda_n$ with linearly independent eigenvectors $v_1, \dots, v_n$ iff $A = V \text{diag}((\lambda_i)_{i=1}^n) V^{-1}$. In this case, $A$ is a \emph{diagonalizable} matrix.
 \pause
 \end{frame}
 
@@ -73,7 +103,7 @@ Note: To compute eigenvalues and eigenvectors using determinants and characteris
 \frametitle{Questions: Eigenvalues \& trace}
 \begin{enumerate}
 \item Show that the trace is invariant by change of basis, i.e. if $X \in \R^{n \times n}$ is invertible and $A \in \R^{n \times n}$, $\text{tr}(A) = \text{tr}(X A X^{-1})$. (Hint: $\text{tr}(BC) = \text{tr}(CB)$).
-\item Show that if $A \in \R^{n \times n}$ is diagonalizable and has eigenvalues eigenvalues $\lambda_1, \dots, \lambda_n$, then $\text{tr}(A) = \sum_{i=1}^n \lambda_i$.
+\item Show that if $A \in \R^{n \times n}$ is diagonalizable and has eigenvalues $\lambda_1, \dots, \lambda_n$, then $\text{tr}(A) = \sum_{i=1}^n \lambda_i$.
 \end{enumerate}
 \end{frame}
 
@@ -85,7 +115,7 @@ Note: To compute eigenvalues and eigenvectors using determinants and characteris
 
 \begin{frame}[t]
 \frametitle{Questions: Eigenvalues \& trace}
-2. Show that if $A \in \R^{n \times n}$ is diagonalizable and has eigenvalues eigenvalues $\lambda_1, \dots, \lambda_n$, then $\text{tr}(A) = \sum_{i=1}^n \lambda_i$.
+2. Show that if $A \in \R^{n \times n}$ is diagonalizable and has eigenvalues $\lambda_1, \dots, \lambda_n$, then $\text{tr}(A) = \sum_{i=1}^n \lambda_i$.
 \pause
 \end{frame}
 
@@ -124,6 +154,15 @@ does not admit real eigenvalues and eigenvectors in general.
 \pause
 \end{frame}
 
+\begin{frame}[t]
+\frametitle{Extra Q: Gram-Schmidt and QR}
+Let $A\in \R^{n\times n}$ have linearly independent columns. Show that there is a matrix $Q\in \R^{n \times m}$ and $R \in \R^{n\times n} $ s.t that $A=QR$, where $Q$ has orthonormal columns and $R$ is upper triangular. \\
+\medskip
+(Hint: Recall the ``linear combination of columns interpretation of matrix multiplication").
+\pause
+\end{frame}
+
+\iffalse
 \begin{frame}[t]
 \frametitle{Markov Chains}
 \begin{definition}[Markov chain]
@@ -184,5 +223,6 @@ If for all $1 \leq i \leq n$, we have $\text{gcd}(\{k | P_{ii}^{k} > 0\}) = 1$, 
 3. Show that non-irreducible aperiodic Markov chains have several invariant measures.
 \pause
 \end{frame}
+\fi
 
 \end{document}
