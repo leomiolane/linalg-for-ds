@@ -1,0 +1,224 @@
+\documentclass{beamer}
+
+\usepackage{../../../latex_style/beamerthemeExecushares}
+\usepackage{../../../latex_style/notations}
+
+\title{Session 6 bis: Markov Chains and PageRank}
+\subtitle{Optimization and Computational Linear Algebra for Data Science}
+\author{Léo Miolane}
+\date{}
+
+\setcounter{showSlideNumbers}{1}
+
+\begin{document}
+\setcounter{showProgressBar}{0}
+\setcounter{showSlideNumbers}{0}
+
+\frame{\titlepage}
+
+\begin{frame}
+	\frametitle{Contents}
+	\begin{enumerate}
+		\item Markov chains
+		\item Perron-Frobenius Theorem
+		\item Application: PageRank
+		\item A first look at the Spectral theorem.
+	\end{enumerate}
+\end{frame}
+
+
+\setcounter{framenumber}{0}
+\setcounter{showSlideNumbers}{1}
+
+
+\section{Markov chains}
+
+\begin{frame}[t]{An example}
+	\grid
+
+\end{frame}
+
+\begin{frame}[t]{Stochastic matrices}
+	\grid
+
+	\begin{definition}
+		A matrix $P \in \R^{n \times n}$ is said to be \emph{stochastic} if:
+		\begin{enumerate}
+			\item $P_{i,j} \geq 0$ for all $1 \leq i,j \leq n$.
+			\item $\sum\limits_{i=1}^n P_{i,j} = 1$, for all $1 \leq j \leq n$.
+		\end{enumerate}
+	\end{definition}
+\end{frame}
+\begin{frame}[t]{Probability vectors}
+	\grid
+
+\end{frame}
+
+\begin{frame}[t]{The key equation}
+	\grid
+
+	\vspace{-0.4cm}
+	\begin{block}{Proposition}
+		For all $t \geq 0$
+		$$
+		x^{(t+1)} = P x^{(t)}
+		\quad \text{and consequently,} \quad
+		x^{(t)} =  P^t x^{(0)}.
+		$$
+	\end{block}
+
+\end{frame}
+
+\begin{frame}[t]{Long-term behavior}
+	\grid
+
+
+\end{frame}
+
+\section{Perron-Frobenius Theorem}
+
+\begin{frame}[t]{Invariant measure}
+	\grid
+	\begin{definition}
+		A vector $\mu \in \Delta_n$ is called an invariant measure for the transition matrix $P$ if $\mu = P \mu$, i.e.\ if $\mu$ is an eigenvector of $P$ associated with the eigenvalue $1$.
+	\end{definition}
+
+
+\end{frame}
+
+\begin{frame}[t]{Perron-Frobenius Theorem}
+	\grid
+	\begin{block}{Theorem}
+		Let $P$ be a stochastic matrix such that there exists $k \geq 1$ such that all the entries of $P^k$ are strictly positive. Then the following holds:
+		\begin{enumerate}
+			\vspace{0.3cm}
+		\item $1$ is an eigenvalue of $P$ and there exists an eigenvector $\mu \in \Delta_n$ associated to $1$.
+			\vspace{0.3cm}
+		\item The eigenvalue $1$ has multiplicity $1$, i.e.\ $\Ker(P-\Id) = \Span(\mu)$.
+			\vspace{0.3cm}
+		\item For all $x \in \Delta_n$, $P^t x \xrightarrow[t \to \infty]{} \mu$.
+	\end{enumerate}
+\end{block}
+\end{frame}
+
+
+\begin{frame}[t]{Consequence}
+	\grid
+	\begin{block}{Corollary}
+		Let $P$ be a stochastic matrix such that there exists $k \geq 1$ such that all the entries of $P^k$ are strictly positive. 
+		\\
+
+		Then there exists a unique invariant measure $\mu$ and for all initial condition $x^{(0)} \in \Delta_n$,
+		$$
+		x^{(t)} = P^t x^{(0)} \xrightarrow[t \to \infty]{} \mu.
+		$$
+	\end{block}
+\end{frame}
+
+\begin{frame}[t]{Proof: Geometrical observations}
+	\grid
+
+\end{frame}
+
+\begin{frame}[t]{Proof: contraction}
+	\grid
+
+	\vspace{-0.3cm}
+	We will prove the theorem in the case where $P_{i,j} > 0$ for all $i,j$.
+	\vspace{-0.3cm}
+	\begin{lemma}\label{lem:contract}
+		The mapping 
+		$$
+		\begin{array}{cccc}
+			\varphi:& \Delta_n &\to& \Delta_n \\
+					& x & \mapsto & Px
+		\end{array}
+		$$
+		is a contraction mapping for the $\ell_1$-norm: there exists $c \in (0,1)$ such that for all $x,y \in \Delta_n$:
+		$$
+		\| Px - Py \|_1 \leq c \| x-y\|_1.
+		$$
+	\end{lemma}
+
+\end{frame}
+\begin{frame}[t]{End of the proof}
+	\grid
+	\pause
+	\pause
+\end{frame}
+
+\section{PageRank}
+\begin{frame}[t]{Ordering the Web}
+	\grid
+\end{frame}
+
+\begin{frame}[t]{The random surfer}
+	\grid
+	\pause
+\end{frame}
+
+\begin{frame}[t]{PageRank Algorithm}
+	\grid
+\end{frame}
+
+\begin{frame}[t]{Application: ranking Tennis players}
+	\grid
+
+	\textbf{Goal: ranking the following players}
+	\begin{center}
+		Federer, Nadal, Djokovic, Murray, Del Potro, Roddick, Coria, Zverev, Ferrer, Soderling, Tsonga, Nishikori, Raonic, Nalbandian, Wawrinka, Berdych, Hewitt, Tsitsipas, Monfils, Gonzalez, Thiem, Ljubicic, Davydenko, Cilic, Pouille, Safin, Isner, Dimitrov, Medvedev, Ferrero, Goffin, Bautista Agut, Sock, Gasquet, Simon, Blake, Monaco, Coric, Stepanek, Khachanov, Almagro, Robredo, Verdasco, Anderson, Youzhny, Baghdatis, Dolgopolov, Kohlschreiber, Fognini, Melzer, Paire, Querrey, Tomic, Basilashvili.
+	\end{center}
+
+	\textbf{Data: Head-to Head records} (number of times that player $x$ has defeated player $y$)
+
+\end{frame}
+
+\begin{frame}[t]{Ranking by \% of victories}
+	\grid
+
+	\vspace{-1.0cm}
+	\begin{center}
+		\hspace*{-1.1cm}
+		\includegraphics[width=13cm]{../st_tennis.pdf}
+	\end{center}
+\end{frame}
+
+\begin{frame}[t]{The random spectator}
+	\grid
+
+\end{frame}
+
+\begin{frame}[t]{Naive ranking vs PageRank}
+	\grid
+
+	\vspace{-1.0cm}
+	\begin{center}
+		\hspace*{-1.3cm}
+		\includegraphics[width=13.5cm]{../pagerank_tennis.pdf}
+	\end{center}
+\end{frame}
+
+\section{The Spectral Theorem}
+
+\begin{frame}[t]{The spectral theorem}
+	\grid
+	
+	\vspace{-0.3cm}
+	\begin{block}{Theorem}
+	Let $A \in \R^{n \times n}$ be a \textbf{symmetric} matrix. Then there is a orthonormal basis of $\R^n$ composed of eigenvectors of $A$.
+	\end{block}
+\end{frame}
+
+
+
+\appendix
+\backupbegin
+\begin{frame}[t]
+	\frametitle{Questions?}
+	\grid
+
+	\pause
+\end{frame}
+\backupend
+
+\end{document}
