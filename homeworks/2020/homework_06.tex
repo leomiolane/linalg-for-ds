@@ -1,13 +1,13 @@
 \documentclass[11pt,nocut]{article}
 
-\usepackage{../latex_style/packages}
-\usepackage{../latex_style/notations}
+\usepackage{../../latex_style/packages}
+\usepackage{../../latex_style/notations}
 
 \title{\vspace{-2.0cm}%
 	Optimization and Computational Linear Algebra for Data Science\\
 Homework 6: Eigenvectors and Markov chains}
 %\author{Léo \textsc{Miolane} \ $\cdot$ \ \texttt{leo.miolane@gmail.com}}
-\date{\vspace{-1cm}Due on October 15, 2019}
+\date{\vspace{-1cm}Due on October 18, 2020}
 \setcounter{section}{6}
 
 \begin{document}
@@ -19,7 +19,7 @@ Homework 6: Eigenvectors and Markov chains}
 %\color{green}
 
 \begin{problem}[2 points]
-	Let $A \in \R^{n \times n}$ be a symmetric matrix. Show that $A$ is orthogonal if and only if its eigenvalues all have absolute value 1.
+	Let $A \in \R^{n \times n}$ be a symmetric matrix. Show that $A$ is orthogonal if and only if its eigenvalues all have absolute value 1 (i.e.\ are either $+1$ or $-1$).
 \end{problem}
 
 \vspace{1mm}
@@ -30,7 +30,7 @@ Homework 6: Eigenvectors and Markov chains}
 	x^{\sT} M x \geq 0.
 	$$
 	\begin{enumerate}[label=\normalfont(\textbf{\alph*})]
-		\item Let $A \in \R^{n \times k}$. Show that $A A^{\sT}$ is positive semi-definite.
+		\item Let $A \in \R^{n \times k}$. Show that $A A^{\sT}$ is symmetric, positive semi-definite.
 		\item Show that a symmetric matrix $M \in \R^{n \times n}$ is positive semi-definite if and only if all its eigenvalues are non-negative.
 		\item Let $M \in \R^{n \times n}$ be a (symmetric) positive semi-definite matrix. Let $r = \rank(M)$. Show that there exists $A \in \R^{n \times r}$ such that $M = AA^{\sT}$.
 	\end{enumerate}
@@ -41,18 +41,8 @@ Homework 6: Eigenvectors and Markov chains}
 
 
 \begin{problem}[5 points]
-	The CSV file \texttt{nba17-18.csv} contains the scores of all the games of the NBA baskeball 2017-2018 season, playoffs/finals included. 
-	The \emph{Jupyter notebook} \texttt{nba.ipynb} contains functions to read the CSV file and construct the $30 \times 30$ (there is $30$ teams) matrix \texttt{winLoss} where
-	$$
-	\texttt{winLoss}_{i,j} = \text{number of wins of team $i$ against team $j$.}
-	$$
-	Using this information, the NBA teams are ranked in \texttt{nba.ipynb} according to their win-loss percentage.
-	\begin{enumerate}[label=\normalfont(\textbf{\alph*})]
-		\item \label{item:a} Rank the NBA teams according the ``PageRank inspired ranking'' described in Section 4.2 of the lecture notes \#6.
-		\item The ranking of question \ref{item:a} uses the number of wins and losses, but not the scores of the games. Propose an evolution of the ranking method of question \ref{item:a} in order to takes the scores into account, and compute the corresponding ranking.
-	\end{enumerate}
-
-	\textbf{It is intented that you code in Python and use the provided Jupyter Notebook. Your answers to this problem have to be submitted inside the provided Jupyter notebook. Please make use of comments/markdown cells (where you can type in Latex) in order to make your code/answers readable.}
+	Download the Jupyter notebook \texttt{tennis\_rank.ipynb} and the two files \texttt{atp.csv} and \texttt{wta.csv}. These two files contain the outcome of all the tennis games on the professional circuit of the last two decades.
+	Follow the instructions and questions on the notebook to find out who are the best players!
 \end{problem}
 
 
