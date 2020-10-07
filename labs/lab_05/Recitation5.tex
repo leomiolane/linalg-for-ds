@@ -90,57 +90,56 @@
 \begin{frame}
 \frametitle{Questions: Orthogonal Matrices}
 \begin{enumerate}
-\item Let $Q \in \R^{n \times n}$ be an orthogonal matrix. Let $x,y \in \R^n$.
+\item Let $Q,U \in \R^{n \times n}$ be an orthogonal matrix. Let $x,y \in \R^n$.
 \begin{enumerate}
-\item[i.]  Show that $\|Qx\| = \|x\|.$
-\item[ii.] Show that $\langle Qx, Qy \rangle = \langle x, y \rangle.$
+\item[i.] Show that $\langle Qx, Qy \rangle = \langle x, y \rangle.$ 
+\item[ii.] Show that $\|Qx\| = \|x\|.$
+\item[iii.] Show that $QU$ is orthogonal.
 \end{enumerate}
 \end{enumerate}
 \end{frame}
+
 
 \begin{frame}
 \frametitle{Solutions 1: Orthogonal Matrices}
 \begin{enumerate}
-\item Let $Q \in \R^{n \times n}$ be an orthogonal matrix. Let $x,y \in \R^n$.
-\begin{enumerate}
-\item[i.]  Show that $\|Qx\| = \|x\|.$\\
-\begin{solution}
-Note: Recall the ``lin. comb. of columns'' method of matrix multiplication.\\
-Let $Q = \begin{bmatrix}
-|     &        & |    \\
-\mathbf{q_1}  & \hdots &  \mathbf{q_n} \\
-|     &        & |    \\
-\end{bmatrix}$ and 
-$x =\begin{bmatrix}
-x_1    \\
-\vdots \\
-x_n    \\
-\end{bmatrix}$.
-Then $Qx = \begin{bmatrix}
-|       \\
-\sum_{i=1}^n x_1\mathbf{q_i} \\
-|
-\end{bmatrix}$, and \\
-\qquad $\|Qx\| = \langle \sum_{i=1}^n x_i\mathbf{q_i}, \sum_{i=1}^n x_i\mathbf{q_i} \rangle$\\
-\qquad $\|Qx\| = \sum_{i=1}^n \langle\ x_i \mathbf{q_i}, x_i \mathbf{q_i} \rangle + 2\sum_{i\neq j} \langle\ x_i \mathbf{q_i}, x_j \mathbf{q_j} \rangle$\\
-\qquad $\|Qx\| = \sum_{i=1}^n  x_i^2 \|q_i\|$ \qquad by orthogonality of $q_i$\\
-\qquad $\|Qx\| = \sum_{i=1}^n x_i^2$ \qquad by normality of $q_i$.
-\\
-\qquad $\|Qx\| = \|x\|$.
-\end{solution}
-\end{enumerate}
-\end{enumerate}
-\end{frame}
-
-\begin{frame}
-\frametitle{Solutions 2: Orthogonal Matrices}
-\begin{enumerate}
-\item Let $Q \in \R^{n \times n}$ be an orthogonal matrix. Let $x,y \in \R^n$.
+\item Let $Q,U \in \R^{n \times n}$ be an orthogonal matrix. Let $x,y \in \R^n$.
 \begin{enumerate}
 \item[ii.]  Show that $\langle Qx, Qy \rangle = \langle x, y \rangle.$
 \begin{solution}
 $\langle Qx, Qy \rangle = x^TQ^TQy = x^T I y = x^Ty = \langle x, y \rangle$
 
+\end{solution}
+\end{enumerate}
+\end{enumerate}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Solutions 2: Orthogonal Matrices}
+\begin{enumerate}
+\item Let $Q,U \in \R^{n \times n}$ be an orthogonal matrix. Let $x,y \in \R^n$.
+\begin{enumerate}
+\item[ii.] Show that $\|Qx\| = \|x\|.$\\
+\begin{solution}
+$\|Qx\| = \langle Qx, Qx \rangle = x^TQ^TQx = x^T I x = x^Tx = \langle x, x \rangle = \|x\|$
+\end{solution}
+\end{enumerate}
+\end{enumerate}
+\end{frame}
+\begin{frame}
+\frametitle{Solutions 3: Orthogonal Matrices}
+\begin{enumerate}
+\item Let $Q,U \in \R^{n \times n}$ be an orthogonal matrix. Let $x,y \in \R^n$.
+\begin{enumerate}
+\item[iii.] Show that $QU$ is orthogonal.
+\begin{solution}
+Start by noticing that $(QU)^T = U^TQ^T.$ \\
+Now,\\
+\qquad $(QU)^T(QU) = U^TQ^TQU = U^T I U = I$\\
+and \\
+\qquad $(QU)(QU)^T = QUU^TQ^T = Q I Q^T = I$ \\
+Then $QU$ is orthogonal.
 \end{solution}
 \end{enumerate}
 \end{enumerate}
@@ -176,6 +175,8 @@ $\langle Qx, Qy \rangle = x^TQ^TQy = x^T I y = x^Ty = \langle x, y \rangle$
 \begin{frame}
 
 \begin{enumerate}
+\frametitle{Solutions: GS Process and QR Factorization}
+
 \item Let $A\in \R^{m\times n}$ have linearly independent columns. Show that there is a matrix $Q\in \R^{m\times m}$ and $R \in \R^{m\times n} $ s.t that $A=QR$, where $Q$ has orthonormal columns and $R$ is upper triangular. \\
 \begin{solution}
 First, let $v_1,...,v_n$ be the columns of $A$.\\
@@ -186,11 +187,13 @@ First, let $v_1,...,v_n$ be the columns of $A$.\\
   Then this exactly saying that $A=QR$, where $R$ contains the coefficients that transforms $u_1,...,u_i$ into $v_1,...,v_i\ \forall i \in \{1,...,n\}$!
 \end{solution}
 \end{enumerate}
+(!Check the next slide!)
 \end{frame}
 
 
 \begin{frame}
 \frametitle{More M.M.M: Linear Combination of Columns}
+(From Recitation 2) \\ 
 Each column of the $AB$ is a linear combination of the columns of $A$.\\
 \medskip
 %{>{\columncolor{red!20}}c>{\columncolor{blue!20}}c>{\columncolor{green!20}}cc >{\columncolor{yellow!20}}c}
@@ -281,17 +284,22 @@ $
 \begin{frame}
 \frametitle{$Av=\lambda v$. So what's the big deal?}
 \begin{itemize}
-\item Square matrices are important enough to get their own name - \textit{operators}.
-\item Sometimes a matrix A `prefers' certain directions
+\item Square matrices get their own name - \textit{operators}.
+\begin{itemize}
+\item Can construct powers of operators ($A^k$)
+\item Operators can be invertible
+\item Operators can be symmetric
+\end{itemize}
+\item Sometimes an matrix A `prefers' certain directions
 \item (!!!) These directions act as \textit{anchors} for understanding the action of a matrix.
-\item We will see how to exploit these directions in order to simplify our understanding of matrices. (Lec 7)
+\item We will see how to exploit these directions in order to simplify our understanding of matrices. (Diagonalizability, Lec 7)
 \end{itemize}
 \end{frame}
 
 
 
 \begin{frame}
-\frametitle{Questions 1: Eigen}
+\frametitle{Questions: Eigen}
 Let $A \in \R^{n\times n}$ have eigenvalue $\lambda$ associated to eigenvector $v$.
 Show that:
 \begin{enumerate}
@@ -302,7 +310,7 @@ Also, assume that $\lambda_1>...>\lambda_n$.\\
 Prove that $v_1,...,v_n$ are linearly independent.\\
 
 \medskip
-Hint: First assume that all $\lambda_i$ are positive.
+Hint: First assume transform all $\lambda_i$ to be positive.
 \end{enumerate}
 \end{frame}
 
@@ -327,7 +335,7 @@ So $\lambda+\alpha$ is an eigenvalue of $A+\alpha I$ with eigenvector $v$.
 
 
 \begin{frame}
-\frametitle{Solutions 1: Eigen}
+\frametitle{Solutions 2: Eigen}
 Let $A \in \R^{n\times n}$ have eigenvalue $\lambda$ associated to eigenvector $v$.
 Show that:
 \begin{enumerate}
@@ -346,7 +354,7 @@ So $\lambda^k$ is an eigenvalue of $A^k$ with eigenvector $v$.
 \end{frame}
 
 \begin{frame}
-\frametitle{Solutions 1: Eigen}
+\frametitle{Solutions 3: Eigen}
 
 \begin{enumerate}
 
@@ -357,7 +365,7 @@ Prove that $v_1,...,v_n$ are linearly independent.
 \fontten
 Let $B = A + |\lambda_n|I$. (This is so all eigenvalues of $B$ are $\geq 0$.) \\
 Let $\gamma_i = \lambda_i+|\lambda_n|$
-(Problem 1, eigenvecs of $B$ are also eigenvecs of $A$. \\
+(Problem 1, eigenvecs of $B$ are also eigenvecs of $A$). \\
 Let $\alpha_1,...,\alpha_n \in \R$ s.t $\sum_{i=1}^n \alpha_i v_i = 0$. We will show that all $\alpha_i=0$.\\
 Consider $0 = B^k (\sum_{i=1}^n \alpha_i v_i)$. \\
 \qquad $0 = B^k (\sum_{i=1}^n \alpha_i v_i)$ \\
@@ -366,7 +374,7 @@ Consider $0 = B^k (\sum_{i=1}^n \alpha_i v_i)$. \\
 \qquad $0 = \gamma_1^k  \sum_{i=1}^n (\frac{\gamma_i}{\gamma_1})^k \alpha_i v_i$  \\ 
 \qquad $0 = \lim_{k \rightarrow \infty} \gamma_1^k  \sum_{i=1}^n (\frac{\gamma_i}{\gamma_1})^k \alpha_i v_i$ \\
 \qquad $0 = \alpha_1v_1$ \quad since $\frac{\gamma_i}{\gamma_1} < 1$ for $ i \neq 1$ \\
-Then $0 = (\sum_{\mathbf{i=2}}^n \alpha_i v_i)$. Repeat the previous logic to find that each $\alpha_iv_i=0$. Then all $\alpha_1=0$. So $v_1,...,v_n$ are linearly independent. 
+Then $0 = (\sum_{\mathbf{i=2}}^n \alpha_i v_i)$. Repeat the previous logic to find that each $\alpha_iv_i=0$. Then all $\alpha_i=0$. So $v_1,...,v_n$ are linearly independent. 
 \end{solution}
 \end{enumerate}
 \end{frame}
@@ -392,8 +400,8 @@ Let $Q\in \R^{n\times n}$ be orthogonal.
 \begin{solution}
 No, consider the matrix 
 $Q=\begin{bmatrix}
-1 & 0 \\
 0 & -1 \\
+1 & 0 \\
 \end{bmatrix}$
 (90 deg CCW rotation in $\R^2$).
 \end{solution}
