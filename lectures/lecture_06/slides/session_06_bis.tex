@@ -94,7 +94,7 @@
 			\vspace{0.3cm}
 		\item $1$ is an eigenvalue of $P$ and there exists an eigenvector $\mu \in \Delta_n$ associated to $1$.
 			\vspace{0.3cm}
-		\item The eigenvalue $1$ has multiplicity $1$, i.e.\ $\Ker(P-\Id) = \Span(\mu)$.
+		\item The eigenvalue $1$ has multiplicity $1$: $\Ker(P-\Id) = \Span(\mu)$.
 			\vspace{0.3cm}
 		\item For all $x \in \Delta_n$, $P^t x \xrightarrow[t \to \infty]{} \mu$.
 	\end{enumerate}
@@ -140,6 +140,9 @@
 		$$
 	\end{lemma}
 
+\end{frame}
+\begin{frame}[t]{Geometric picture}
+	\grid
 \end{frame}
 \begin{frame}[t]{End of the proof}
 	\grid
@@ -209,6 +212,17 @@
 	\end{block}
 \end{frame}
 
+\begin{frame}[t]{Matrix formulation}
+	\grid
+	
+	\vspace{-0.3cm}
+	\begin{block}{Theorem}
+	Let $A \in \R^{n \times n}$ be a \textbf{symmetric} matrix. Then there exists an orthogonal matrix $P$ and a diagonal matrix $D$ of sizes $n \times n$ such that
+	$$
+		A = P D P^{\sT}.
+	$$
+	\end{block}
+\end{frame}
 
 
 \appendix
