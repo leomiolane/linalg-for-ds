@@ -79,8 +79,14 @@
 
 \begin{frame}[t]{Invariant measure}
 	\grid
+
+	\vspace{0.2cm}
 	\begin{definition}
-		A vector $\mu \in \Delta_n$ is called an invariant measure for the transition matrix $P$ if $\mu = P \mu$, i.e.\ if $\mu$ is an eigenvector of $P$ associated with the eigenvalue $1$.
+		A vector $\mu \in \Delta_n$ is called an invariant measure for the transition matrix $P$ if 
+		$$
+		\mu = P \mu,
+		$$
+		i.e.\ if $\mu$ is an eigenvector of $P$ associated with the eigenvalue $1$.
 	\end{definition}
 
 
@@ -94,7 +100,7 @@
 			\vspace{0.3cm}
 		\item $1$ is an eigenvalue of $P$ and there exists an eigenvector $\mu \in \Delta_n$ associated to $1$.
 			\vspace{0.3cm}
-		\item The eigenvalue $1$ has multiplicity $1$: $\Ker(P-\Id) = \Span(\mu)$.
+		\item The eigenvalue $1$ has multiplicity $1$: \ $\Ker(P-\Id) = \Span(\mu)$.
 			\vspace{0.3cm}
 		\item For all $x \in \Delta_n$, $P^t x \xrightarrow[t \to \infty]{} \mu$.
 	\end{enumerate}
@@ -144,9 +150,8 @@
 \begin{frame}[t]{Geometric picture}
 	\grid
 \end{frame}
-\begin{frame}[t]{End of the proof}
+\begin{frame}[t]{Proof of Perron-Frobenius}
 	\grid
-	\pause
 	\pause
 \end{frame}
 
@@ -155,22 +160,57 @@
 	\grid
 \end{frame}
 
+\begin{frame}[t]{Naive attempt}
+	\grid
+
+	\textbf{First idea:} rank the webpages according to their number of \emph{incomming links}. (The more incomming links, the more the webpage is important).
+\end{frame}
+
 \begin{frame}[t]{The random surfer}
 	\grid
-	\pause
 \end{frame}
 
 \begin{frame}[t]{PageRank Algorithm}
 	\grid
+
+	This defines a Markov chain of transition matrix:
+	$$
+	P_{i,j} 
+	= 
+	\begin{cases}
+		1 / \deg(j) & \text{if there is a link} \ j \to i \\
+		0 & \text{otherwise},
+	\end{cases}
+	$$
+
+	\vspace{0.6cm}
+	\begin{itemize}
+		\item After a long time, the surfer is more likely to be on an \emph{important webpage}.
+			\vspace{0.3cm}
+		\item If $\mu$ is the invariant measure of $P$ (provided $P$ verifies the hypotheses of Perron-Frobenius), we take
+			$$
+			\mu_i  \ = \ \text{<< importance of webpage}  \ \ i \ \ \text{>>}.
+			$$
+	\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}[t]{PageRank Algorithm}
+	\grid
+
+
 \end{frame}
 
 \begin{frame}[t]{Application: ranking Tennis players}
 	\grid
 
-	\textbf{Goal: ranking the following players}
+	\vspace{0.5cm}
+	\textbf{Goal: rank the following players:}
 	\begin{center}
 		Federer, Nadal, Djokovic, Murray, Del Potro, Roddick, Coria, Zverev, Ferrer, Soderling, Tsonga, Nishikori, Raonic, Nalbandian, Wawrinka, Berdych, Hewitt, Tsitsipas, Monfils, Gonzalez, Thiem, Ljubicic, Davydenko, Cilic, Pouille, Safin, Isner, Dimitrov, Medvedev, Ferrero, Goffin, Bautista Agut, Sock, Gasquet, Simon, Blake, Monaco, Coric, Stepanek, Khachanov, Almagro, Robredo, Verdasco, Anderson, Youzhny, Baghdatis, Dolgopolov, Kohlschreiber, Fognini, Melzer, Paire, Querrey, Tomic, Basilashvili.
 	\end{center}
+	\vspace{0.5cm}
 
 	\textbf{Data: Head-to Head records} (number of times that player $x$ has defeated player $y$)
 
@@ -189,6 +229,30 @@
 \begin{frame}[t]{The random spectator}
 	\grid
 
+	\vspace{-0.15cm}
+
+	Imagine the following << random spectator >>:
+
+	\vspace{0.15cm}
+	\begin{itemize}
+		\item At time $t$, the spectator believes that player $j$ is the best: $X_t = j$.
+	\vspace{0.3cm}
+		\item Then, he picks a game of player $j$ uniformly at random:
+	\vspace{0.3cm}
+
+			\begin{itemize}
+				\item if player $j$ wins, then the spectator still believes that $j$ is the best: $X_{t+1}=j$.
+	\vspace{0.2cm}
+				\item otherwise, the spectator changes his mind and now believes that player $i$ who defeated $j$ is the best: $X_{t+1}=i$.
+			\end{itemize}
+	\end{itemize}
+
+	\pause
+	\vspace{0.5cm}
+This defines a transition matrix $P$. We rank the players according to the stationary distribution $\mu$ of
+$$
+M = \alpha P + \frac{1-\alpha}{N} J
+$$
 \end{frame}
 
 \begin{frame}[t]{Naive ranking vs PageRank}
@@ -210,6 +274,11 @@
 	\begin{block}{Theorem}
 	Let $A \in \R^{n \times n}$ be a \textbf{symmetric} matrix. Then there is a orthonormal basis of $\R^n$ composed of eigenvectors of $A$.
 	\end{block}
+\end{frame}
+
+\begin{frame}[t]{The spectral theorem}
+	\grid
+	
 \end{frame}
 
 \begin{frame}[t]{Matrix formulation}
