@@ -1,0 +1,167 @@
+\documentclass{beamer}
+
+\usepackage{../../../latex_style/beamerthemeExecushares}
+\usepackage{../../../latex_style/notations}
+
+\title{Lecture 7.1: Consequences of the spectral theorem}
+\subtitle{Optimization and Computational Linear Algebra for Data Science}
+\author{Léo Miolane}
+\date{}
+
+\setcounter{showSlideNumbers}{1}
+
+\begin{document}
+\setcounter{showProgressBar}{0}
+\setcounter{showSlideNumbers}{0}
+
+\frame{\titlepage}
+\setcounter{framenumber}{0}
+%\setcounter{showProgressBar}{1}
+\setcounter{showSlideNumbers}{1}
+
+
+\begin{frame}[t]{The Spectral theorem}
+	\begin{block}{Theorem}
+	Let $A \in \R^{n \times n}$ be a \textbf{symmetric} matrix. Then there is a orthonormal basis of $\R^n$ composed of eigenvectors of $A$.
+	\end{block}
+
+	That means that if $A$ is symmetric, then there exists an orthonormal basis $(v_1, \dots, v_n)$ of $\R^n$ and $\lambda_1,\dots, \lambda_n \in \R$ such that
+	$$
+	Av_i = \lambda_i v_i \qquad \text{for all } \ \ i \in \{1, \dots, n\}.
+	$$
+
+	\begin{block}{Theorem (Matrix formulation)}
+	Let $A \in \R^{n \times n}$ be a \textbf{symmetric} matrix. Then there exists an orthogonal matrix $P$ and a diagonal matrix $D$ of sizes $n \times n$ such that
+	$$
+		A = P D P^{\sT}.
+	$$
+	\end{block}
+\end{frame}
+
+
+\begin{frame}[t]{Consequences}
+	If 
+	$$
+	A = P
+	\begin{pmatrix}
+		\lambda_1 & 0 & \cdots & 0 \\
+		0 & \lambda_2 & & \vdots \\
+		\vdots &  & \ddots & 0 \\
+		0 & \cdots & 0 & \lambda_n \\
+	\end{pmatrix}
+	P^{\sT}
+	$$
+	for some orthogonal matrix $P$ then:
+
+	\vspace{1cm}
+
+\textbf{Consequence \#1}: $\lambda_1, \dots, \lambda_n$ are the only eigenvalues of $A$, and the number of time that an eigenvalue appear on the diagonal equals its multiplicity.
+\end{frame}
+
+\begin{frame}[t]{Proof sketch on an example}
+	\grid
+
+	Consider $n=3$ and 
+	$$
+	A = P
+	\begin{pmatrix}
+		3 & 0 &  0 \\
+		0 & 3 & 0 \\
+		0 & 0 & -1 
+	\end{pmatrix}
+	P^{\sT}
+	\qquad
+	\text{where}
+	\qquad
+	P=
+	\begin{pmatrix}
+		| & | &  | \\
+		v_1 & v_2 & v_3 \\
+		| & | & |
+	\end{pmatrix}
+	$$
+	is an orthogonal matrix.
+\\
+
+\end{frame}
+\begin{frame}[t]{Consequences}
+	If 
+	$$
+	A = P
+	\begin{pmatrix}
+		\lambda_1 & 0 & \cdots & 0 \\
+		0 & \lambda_2 & & \vdots \\
+		\vdots &  & \ddots & 0 \\
+		0 & \cdots & 0 & \lambda_n \\
+	\end{pmatrix}
+	P^{\sT}
+	$$
+	for some orthogonal matrix $P$ then:
+
+	\vspace{1cm}
+
+\textbf{Consequence \#2}: The rank of $A$ equals to the number of non-zero $\lambda_i$'s on the diagonal:
+$$
+\rank(A) = \# \big\{ i \, \big| \, \lambda_i \neq 0 \big\}.
+$$
+\end{frame}
+\begin{frame}[t]{Proof}
+	\grid
+
+\end{frame}
+\begin{frame}[t]{Consequences}
+	If 
+	$$
+	A = P
+	\begin{pmatrix}
+		\lambda_1 & 0 & \cdots & 0 \\
+		0 & \lambda_2 & & \vdots \\
+		\vdots &  & \ddots & 0 \\
+		0 & \cdots & 0 & \lambda_n \\
+	\end{pmatrix}
+	P^{\sT}
+	$$
+	for some orthogonal matrix $P$ then:
+
+	\vspace{1cm}
+
+	\textbf{Consequence \#3}: $A$ is invertible if and only if $\lambda_i \neq 0$ for all $i$. In such case
+	$$
+	A^{-1} = P
+	\begin{pmatrix}
+		1/\lambda_1 & 0 & \cdots & 0 \\
+		0 & 1/\lambda_2 & & \vdots \\
+		\vdots &  & \ddots & 0 \\
+		0 & \cdots & 0 & 1/\lambda_n \\
+	\end{pmatrix}
+	P^{\sT}
+	$$
+\end{frame}
+
+\begin{frame}[t]{Proof}
+	\grid
+
+\end{frame}
+
+\begin{frame}[t]{Consequences}
+	\grid
+
+	If 
+	$$
+	A = P
+	\begin{pmatrix}
+		\lambda_1 & 0 & \cdots & 0 \\
+		0 & \lambda_2 & & \vdots \\
+		\vdots &  & \ddots & 0 \\
+		0 & \cdots & 0 & \lambda_n \\
+	\end{pmatrix}
+	P^{\sT}
+	$$
+	for some orthogonal matrix $P$ then:
+
+	\vspace{1cm}
+
+	\textbf{Consequence \#4}: \ \ $\Tr(A) = \lambda_1 + \cdots + \lambda_n$.
+\end{frame}
+
+\end{document}

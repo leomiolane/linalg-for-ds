@@ -78,7 +78,31 @@ By multiplying by $P^{\sT}$ on both sides, we get $A P P^{\sT} = P D P^{\sT}$. R
 	$$
 \end{remark}
 
-\subsection*{Positive matrices}
+\subsection{Some consequences}
+
+For $\lambda_1, \dots, \lambda_n \in \R$, we introduce the notation
+$$
+\Diag(\lambda_1, \dots, \lambda_n) \defeq
+\begin{pmatrix}
+	\lambda_1 & 0 & \cdots & 0 \\
+	0 & \lambda_2 & & \vdots \\
+	\vdots & & \ddots & 0 \\
+	0 & \cdots &  0 & \lambda_n
+\end{pmatrix} \in \R^{n\times n}.
+$$
+
+
+\begin{proposition}
+	Let $A = P \Diag(\lambda_1,\dots,\lambda_n) P^{\sT}$ (where $P \in \R^{n \times n}$ is orthogonal). Then
+	\begin{enumerate}
+		\item $\lambda_1, \dots, \lambda_n$ are the eigenvalues of $A$, and the number of time that an eigenvalue appear on the diagonal equals its multiplicity.
+		\item $\rank(A) = \# \{ i \, | \, \lambda_i \neq 0 \}$.
+		\item $\Tr(A) = \sum_{i=1}^n \lambda_i$.
+		\item $A$ is invertible if and only if $\lambda_i \neq 0$ for all $i$. In such case, $A^{-1} = P \Diag(\lambda_1^{-1}, \dots, \lambda_n^{-1}) P^{\sT}$.
+	\end{enumerate}
+\end{proposition}
+
+\subsection{Positive matrices}
 
 \begin{definition}
 	A symmetric matrix $A \in \R^{n \times n}$ is said to be \emph{positive semi-definite} if 
@@ -111,6 +135,7 @@ By multiplying by $P^{\sT}$ on both sides, we get $A P P^{\sT} = P D P^{\sT}$. R
 		\item Let $M$ be a $n \times n$ symmetric positive semi-definite matrix. Show that there exists $A \in \R^{n \times n}$ such that $M = A^{\sT} A$.
 	\end{enumerate}
 \end{exercise}
+
 
 \section{Application: Principal Component Analysis (PCA)}
 
