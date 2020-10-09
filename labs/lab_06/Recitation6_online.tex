@@ -1,0 +1,186 @@
+\documentclass{beamer}
+
+\usepackage{../../latex_style/beamerthemeExecushares}
+\usepackage{../../latex_style/notations}
+
+\title{Recitation 6}
+\author{Carles Domingo}
+\date{Fall 2020}
+
+
+\begin{document}
+
+\frame{\titlepage} 
+
+\setcounter{showProgressBar}{0}
+\setcounter{showSlideNumbers}{1}
+
+\begin{frame}[t]
+\frametitle{Markov Chains}
+\begin{definition}[Markov chain]
+	A sequence of random variables $(X_0, X_1, \dots)$ is a Markov chain with state space $E$ and ``transition matrix'' $P$ if for all $t \geq 0$, 
+	$$
+	\P\big( X_{t+1} = y \, \big| \, X_0= x_0, \dots, X_t = x_t ) = P(x_t,y)
+	$$
+	for all $x_0, \dots, x_t$ such that $\P(X_0 = x_0, \dots, X_t = x_t) >0$.
+\end{definition}
+Stochastic matrix: $P_{ij} \geq 0$, $\sum_{i=1}^n P_{ij} = 1$ for all $1 \leq j \leq n$.
+\begin{definition}[Invariant measure]
+	A vector $\mu \in \Delta_n$ is called an invariant measure for the transition matrix $P$ if $\mu = P \mu$, i.e.\ if $\mu$ is an eigenvector of $P$ associated with the eigenvalue $1$.
+\end{definition}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Perron-Frobenius theorem}
+\begin{theorem}[Perron-Frobenius, stochastic case]\label{th:perron_frobenius}
+	Let $P$ be a stochastic matrix such that there exists $k \geq 1$ such that all the entries of $P^k$ are strictly positive. Then the following holds:
+	\begin{enumerate}
+		\item $1$ is an eigenvalue of $P$ and there exists an eigenvector $\mu \in \Delta_n$ associated to $1$.
+		\item The eigenvectors associated to $1$ are unique up to scalar multiple (i.e.\ $\Ker(P-\Id) = \Span(\mu)$).
+		\item For all $x \in \Delta_n$, $P^t x \xrightarrow[t \to \infty]{} \mu$.
+	\end{enumerate}
+\end{theorem}
+Is the condition "there exists $k \geq 1$ such that all the entries of $P^k$ are strictly positive" necessary? Let's see!
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Questions: Counterexamples}
+\begin{definition}[Irreducible Markov chain]
+If for all $1 \leq i,j \leq n$, there exists $k \geq 1$ such that $P^{k}_{ij} > 0$, we say that the Markov chain is irreducible.
+\end{definition}
+\begin{definition}[Aperiodic Markov chain]
+If for all $1 \leq i \leq n$, we have $\text{gcd}(\{k | P_{ii}^{k} > 0\}) = 1$, we say that the Markov chain is aperiodic.
+\end{definition}
+\begin{enumerate}
+\item Show that if "there exists $k \geq 1$ such that all the entries of $P^k$ are strictly positive", then the Markov chain is irreducible and aperiodic. The converse is also true but harder to prove (come to office hours if you want to know!).
+\item Show that irreducible non-aperiodic Markov chains have no invariant measure.
+\item Show that non-irreducible aperiodic Markov chains have several invariant measures.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Questions: Counterexamples}
+1. Show that if "there exists $k \geq 1$ such that all the entries of $P^k$ are strictly positive", then the Markov chain is irreducible and aperiodic. The converse is also true but harder to prove (come to office hours if you want to know!).
+\pause
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Questions: Counterexamples}
+2. Show that irreducible non-aperiodic Markov chains have no invariant measure.
+\pause
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Questions: Counterexamples}
+3. Show an example of a non-irreducible aperiodic Markov chains that has several invariant measures.
+\pause
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Questions: Counterexamples}
+4. Remember from the lecture that the PageRank algorithm actually computes the invariant measure of the transition matrix
+\begin{align*}
+G = \alpha P + \frac{1-\alpha}{N} 
+\begin{bmatrix} 
+1 & \cdots & 1 \\
+\vdots & \cdots & \vdots \\
+1 & \cdots & 1
+\end{bmatrix}
+\end{align*}
+with $\alpha \approx 0.85$. Given the previous questions, what would be the problems in taking $\alpha = 1$? 
+\pause
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Spectral theorem}
+\begin{theorem}[Spectral theorem]
+Let $A \in \R^{n \times n}$ be a symmetric matrix. Then, $A$ has $n$ orthogonal eigenvectors $q_1, \dots, q_n$ and we can write $A = Q \Lambda Q^\top$, where $Q = \begin{bmatrix} q_1 & \cdots & q_n \end{bmatrix}$ and $\Lambda$ is diagonal.
+\end{theorem}
+
+Remember that a matrix $A$ is diagonalizable iff it has $n$ linearly independent eigenvectors (equivalently $A = V \Lambda V^{-1}$). Thus, the spectral theorem says that symmetric matrices are diagonalizable in an orthogonal basis.
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Questions: Spectral theorem}
+1. Let $A, B \in \R^{n \times n}$ be symmetric matrices. Show that $AB = BA$ iff $A$ and $B$ diagonalize in the same basis. Does the same hold if we just assume that $A,B$ are diagonalizable?
+\pause
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Questions: Spectral theorem}
+%\vspace{-10pt}
+\begin{theorem}[Courant-Fischer principle]
+The eigenvalues $\lambda_1 \geq \cdots \geq \lambda_n$ of a symmetric matrix $A$ are given by
+\begin{align*}
+\lambda_k = \max_{\substack{S \subset \R^n \\ \text{dim}(S) = k}} \min_{\substack{x \in S \\ x \neq 0}} \frac{x^\top A x}{x^\top x} = \min_{\substack{S' \subset \R^n \\ \text{dim}(S') = n-k+1}} \max_{\substack{x \in S' \\ x \neq 0}} \frac{x^\top A x}{x^\top x}
+\end{align*}
+\end{theorem}
+We will show this theorem. Seems like a lot, but we'll go step by step! We will only show the first equality as the argument for the second one is analogous.
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Questions: Spectral theorem}
+\vspace{-10pt}
+\begin{align*}
+\lambda_k = \max_{\substack{S \subset \R^n \\ \text{dim}(S) = k}} \min_{\substack{x \in S \\ x \neq 0}} \frac{x^\top A x}{x^\top x} = \min_{\substack{S' \subset \R^n \\ \text{dim}(S') = n-k+1}} \max_{\substack{x \in S' \\ x \neq 0}} \frac{x^\top A x}{x^\top x}
+\end{align*}
+Let $v_1, \cdots, v_n$ be the orthogonal basis of eigenvectors (resp.).
+\begin{enumerate}[(i)]
+\item Show that for $S_k = \text{span}(v_1, \dots, v_k)$, $\min_{x \in S, x \neq 0} \frac{x^\top A x}{x^\top x} \geq \lambda_k$.
+\item Show that for all $x \in S_k' = \text{span}(v_k, \dots, v_n)$ such that $x \neq 0$, we have  $\frac{x^\top A x}{x^\top x} \leq \lambda_k$.
+\item Check that for any subspace $S$ with $\text{dim}(S) = k$, $S \cup S_k' \neq \{0\}$.
+\item Conclude.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Questions: Spectral theorem}
+\vspace{-15pt}
+\begin{align*}
+\lambda_k = \max_{\substack{S \subset \R^n \\ \text{dim}(S) = k}} \min_{\substack{x \in S \\ x \neq 0}} \frac{x^\top A x}{x^\top x} = \min_{\substack{S' \subset \R^n \\ \text{dim}(S') = n-k+1}} \max_{\substack{x \in S' \\ x \neq 0}} \frac{x^\top A x}{x^\top x}
+\end{align*}
+Let $v_1, \cdots, v_n$ be the orthogonal basis of eigenvectors (resp.).
+
+(i) Show that for $S_k = \text{span}(v_1, \dots, v_k)$, $\min_{x \in S, x \neq 0} \frac{x^\top A x}{x^\top x} \geq \lambda_k$.
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Questions: Spectral theorem}
+\vspace{-15pt}
+\begin{align*}
+\lambda_k = \max_{\substack{S \subset \R^n \\ \text{dim}(S) = k}} \min_{\substack{x \in S \\ x \neq 0}} \frac{x^\top A x}{x^\top x} = \min_{\substack{S' \subset \R^n \\ \text{dim}(S') = n-k+1}} \max_{\substack{x \in S' \\ x \neq 0}} \frac{x^\top A x}{x^\top x}
+\end{align*}
+Let $v_1, \cdots, v_n$ be the orthogonal basis of eigenvectors (resp.).
+
+(ii) Show that for all $x \in S_k' = \text{span}(v_k, \dots, v_n)$ such that $x \neq 0$, we have  $\frac{x^\top A x}{x^\top x} \leq \lambda_k$.
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Questions: Spectral theorem}
+\vspace{-15pt}
+\begin{align*}
+\lambda_k = \max_{\substack{S \subset \R^n \\ \text{dim}(S) = k}} \min_{\substack{x \in S \\ x \neq 0}} \frac{x^\top A x}{x^\top x} = \min_{\substack{S' \subset \R^n \\ \text{dim}(S') = n-k+1}} \max_{\substack{x \in S' \\ x \neq 0}} \frac{x^\top A x}{x^\top x}
+\end{align*}
+Let $v_1, \cdots, v_n$ be the orthonormal basis of eigenvectors (resp.).
+
+(ii) Check that for any subspace $S$ with $\text{dim}(S) = k$, $S \cup S_k' \neq \{0\}$.
+
+(iv) Conclude.
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Extra question: Spectral theorem}
+For a symmetric matrix, show how you can use a modification of Gaussian elimination to find a decomposition $A = V \Lambda V^\top$ for some diagonal matrix $\Lambda$.
+\end{frame}
+
+\begin{frame}[t]
+
+\end{frame}
+
+\begin{frame}[t]
+
+\end{frame}
+
+\end{document}
+
+
