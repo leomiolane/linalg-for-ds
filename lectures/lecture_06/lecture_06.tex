@@ -349,6 +349,31 @@ P^{kt} P^{\ell} x \xrightarrow[t \to \infty]{} \mu.
 $$
 Since this holds for all $\ell \leq k-1$ we obtain that $P^r x \xrightarrow[r \to \infty]{} \mu$ using the Euclidean division of $r$ by $k$.
 
+\subsection{About the condition <<$P^k > 0$>>}
+
+We discuss in this section why the condition 
+\begin{center}
+	<< there exists $k \geq 1$ such that all the entries of $P^k$ are strictly positive >>
+\end{center}
+is needed in the Perron-Frobenius Theorem. Consider for instance the transition matrix
+$$
+P = 
+\begin{pmatrix}
+	0 & 1 \\
+	1 & 0
+\end{pmatrix}.
+$$
+This matrix does not verify the condition above since we have for all $k \geq 1$:
+$$
+P^k = 
+\begin{cases}
+	\Id_2 & \text{if $k$ is even,} \\
+	P & \text{otherwise.}
+\end{cases}
+$$
+Eventhough $P$ admits an invariant measure $\mu = (1/2, 1/2)$, we see that for $x_0 = (1,0)$, $P^t x_0$ does not converges to $\mu$ as $t \to \infty$. Hence \ref{item:iii} of Theorem \ref{th:perron_frobenius} does not hold.
+
+
 \section{Example: Google's PageRank algorithm}
 
 \subsection{The PageRank algorithm}
