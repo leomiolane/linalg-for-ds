@@ -43,6 +43,7 @@ Stochastic matrix: $P_{ij} \geq 0$, $\sum_{i=1}^n P_{ij} = 1$ for all $1 \leq j 
 Is the condition "there exists $k \geq 1$ such that all the entries of $P^k$ are strictly positive" necessary? Let's see!
 \end{frame}
 
+\iffalse
 \begin{frame}[t]
 \frametitle{Questions: Counterexamples}
 \begin{definition}[Irreducible Markov chain]
@@ -75,6 +76,65 @@ If for all $1 \leq i \leq n$, we have $\text{gcd}(\{k | P_{ii}^{k} > 0\}) = 1$, 
 3. Show an example of a non-irreducible aperiodic Markov chains that has several invariant measures.
 \pause
 \end{frame}
+\fi
+
+\begin{frame}[t]
+\frametitle{Questions: Counterexamples}
+\vspace{-10pt}
+\begin{definition}[Irreducible Markov chain]
+If for all $1 \leq i,j \leq n$, there exists $k \geq 1$ such that $P^{k}_{ij} > 0$, we say that the Markov chain is irreducible.
+\end{definition}
+\begin{enumerate}
+\item Show that the assumption "there exists $k \geq 1$ such that all the entries of $P^k$ are strictly positive" implies that the Markov chain is irreducible.
+\item Find an example of a non-irreducible Markov chain for which several invariant measures exist.
+\item But irreducibility is not enough for the Perron-Frobenius statements to hold. Show that a Markov chain with transition matrix
+\begin{align*}
+P = 
+\begin{bmatrix}
+0 & 1 \\
+1 & 0
+\end{bmatrix}
+\end{align*}
+is irreducible but does not fulfill "for all $x \in \Delta_2$,  $P^t x \xrightarrow[t \to \infty]{} \mu$".
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Questions: Counterexamples}
+\vspace{-10pt}
+\begin{definition}[Irreducible Markov chain]
+If for all $1 \leq i,j \leq n$, there exists $k \geq 1$ such that $P^{k}_{ij} > 0$, we say that the Markov chain is irreducible.
+\end{definition}
+1. Show that the assumption "there exists $k \geq 1$ such that all the entries of $P^k$ are strictly positive" implies that the Markov chain is irreducible.
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Questions: Counterexamples}
+\vspace{-10pt}
+\begin{definition}[Irreducible Markov chain]
+If for all $1 \leq i,j \leq n$, there exists $k \geq 1$ such that $P^{k}_{ij} > 0$, we say that the Markov chain is irreducible.
+\end{definition}
+2. Find an example of a non-irreducible Markov chain for which several invariant measures exist.
+\pause
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Questions: Counterexamples}
+\vspace{-10pt}
+\begin{definition}[Irreducible Markov chain]
+If for all $1 \leq i,j \leq n$, there exists $k \geq 1$ such that $P^{k}_{ij} > 0$, we say that the Markov chain is irreducible.
+\end{definition}
+3. But irreducibility is not enough for the Perron-Frobenius statements to hold. Show that a Markov chain with transition matrix
+\begin{align*}
+P = 
+\begin{bmatrix}
+0 & 1 \\
+1 & 0
+\end{bmatrix}
+\end{align*}
+is irreducible but does not fulfill "for all $x \in \Delta_2$,  $P^t x \xrightarrow[t \to \infty]{} \mu$".
+\pause
+\end{frame}
 
 \begin{frame}[t]
 \frametitle{Questions: Counterexamples}
@@ -92,6 +152,34 @@ with $\alpha \approx 0.85$. Given the previous questions, what would be the prob
 \end{frame}
 
 \begin{frame}[t]
+\frametitle{Questions: Stochastic matrices}
+Remember that  $P$ is a stochastic matrix when $P_{i,j} \geq 0$ for all $1 \leq i,j \leq n$ and $\sum_{i=1}^n P_{i,j} = 1$ for all $j$. 
+\begin{enumerate}
+\item Show that $1$ is an eigenvalue of $P$.
+\item Show that all eigenvalues of $P$ have absolute value less or equal than $P$.
+\end{enumerate}
+\pause
+\pause
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Questions: Random walks}
+Let us consider a variant of PageRank in which the edges are non-oriented, i.e. if page $i$ contains a link to page $j$, then page $j$ contains a link to page $i$. If we define the transition 
+\begin{align*}
+P_{i,j} =
+\begin{cases}
+1/\text{deg}(j) &\text{if link } i \leftrightarrow j  \\
+0 &\text{otherwise}
+\end{cases}
+\end{align*}
+\begin{enumerate}
+\item Show that $\pi$ defined as $\pi_j = \text{deg}(j)$ is an eigenvector of $P$ of eigenvalue 1.
+\item Conclude that $x \in \Delta_n$,  $P^t x \xrightarrow[t \to \infty]{} \mu$ if the Perron-Frobenius assumption holds.
+\item Extra Question: Show that if each page has a link to itself and for any pair of pages $i,j$, there is a path of linked pages joining $i$ and $j$, the Perron-Frobenius assumption holds.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[t]
 \frametitle{Spectral theorem}
 \begin{theorem}[Spectral theorem]
 Let $A \in \R^{n \times n}$ be a symmetric matrix. Then, $A$ has $n$ orthogonal eigenvectors $q_1, \dots, q_n$ and we can write $A = Q \Lambda Q^\top$, where $Q = \begin{bmatrix} q_1 & \cdots & q_n \end{bmatrix}$ and $\Lambda$ is diagonal.
@@ -106,6 +194,7 @@ Remember that a matrix $A$ is diagonalizable iff it has $n$ linearly independent
 \pause
 \end{frame}
 
+\iffalse
 \begin{frame}[t]
 \frametitle{Questions: Spectral theorem}
 %\vspace{-10pt}
@@ -167,11 +256,14 @@ Let $v_1, \cdots, v_n$ be the orthonormal basis of eigenvectors (resp.).
 
 (iv) Conclude.
 \end{frame}
+\fi
 
+\iffalse
 \begin{frame}[t]
 \frametitle{Extra question: Spectral theorem}
 For a symmetric matrix, show how you can use a modification of Gaussian elimination to find a decomposition $A = V \Lambda V^\top$ for some diagonal matrix $\Lambda$.
 \end{frame}
+\fi
 
 \begin{frame}[t]
 
