@@ -180,6 +180,32 @@ P_{i,j} =
 \end{frame}
 
 \begin{frame}[t]
+\frametitle{Questions: Random walks}
+\vspace{-10pt}
+\begin{align*}
+P_{i,j} =
+\begin{cases}
+1/\text{deg}(j) &\text{if link } i \leftrightarrow j  \\
+0 &\text{otherwise}
+\end{cases}
+\end{align*}
+1. Show that $\pi$ defined as $\pi_j = \text{deg}(j)$ is an eigenvector of $P$ of eigenvalue 1.
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Questions: Random walks}
+\vspace{-10pt}
+\begin{align*}
+P_{i,j} =
+\begin{cases}
+1/\text{deg}(j) &\text{if link } i \leftrightarrow j  \\
+0 &\text{otherwise}
+\end{cases}
+\end{align*}
+2. Conclude that $x \in \Delta_n$,  $P^t x \xrightarrow[t \to \infty]{} \mu$ if the Perron-Frobenius assumption holds.
+\end{frame}
+
+\begin{frame}[t]
 \frametitle{Spectral theorem}
 \begin{theorem}[Spectral theorem]
 Let $A \in \R^{n \times n}$ be a symmetric matrix. Then, $A$ has $n$ orthogonal eigenvectors $q_1, \dots, q_n$ and we can write $A = Q \Lambda Q^\top$, where $Q = \begin{bmatrix} q_1 & \cdots & q_n \end{bmatrix}$ and $\Lambda$ is diagonal.
