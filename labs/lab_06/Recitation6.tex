@@ -1,0 +1,405 @@
+\documentclass{beamer}
+\usepackage{amsthm}
+\usepackage[utf8]{inputenc}
+\usetheme{Madrid}
+\usepackage{../latex_style/packages_old}
+\usepackage{../latex_style/notations_old}
+\usepackage{outlines}
+\usepackage{enumitem}
+\renewenvironment{itemize}
+\usefonttheme{serif}
+\def\labelenumi{\theenumi}
+\usefonttheme{serif}
+\usepackage{comment}
+
+%\setbeamertemplate{itemize items}[default]
+%\setbeamertemplate{enumerate items}[default]
+
+% define smaller font command
+\newcommand*{\horzbar}{\rule[.5ex]{2.5ex}{0.5pt}}
+\newcommand\fonteight{\fontsize{8}{9.6}\selectfont}
+\newcommand\fontten{\fontsize{10}{1.2}\selectfont}
+
+%define enumerate with periods
+\renewenvironment{enumerate}%
+{\begin{list}{\arabic{enumi}.}%  \langle ------ dot here
+      {\setlength{\leftmargin}{2.5em}%
+       \setlength{\itemsep}{-\parsep}%
+       \setlength{\topsep}{-\parskip}%%
+       \usecounter{enumi}}%
+ }{\end{list}}
+%define itemize with arrows
+\renewenvironment{itemize}%
+{\begin{list}{$\blacktriangleright$}%  \langle ------ dot here
+      {\setlength{\leftmargin}{2.5em}%
+       \setlength{\itemsep}{-\parsep}%
+       \setlength{\topsep}{-\parskip}%%
+       \usecounter{enumi}}%
+ }{\end{list}}
+
+%Information to be included in the title page:
+\title{Recitation 6}
+\author{Alex Dong}
+\institute{CDS, NYU}
+\date{Fall 2020}
+
+
+\makeatletter
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.4\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\insertshortauthor\expandafter\ifblank\expandafter{\beamer@shortinstitute}{}{~~(\insertshortinstitute)}
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.3\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.3\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+    \insertframenumber{} / \inserttotalframenumber\hspace*{2ex} 
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\setbeamertemplate{navigation symbols}{}
+\makeatother
+
+\begin{document}
+%1
+\frame{\titlepage} 
+%2
+
+\begin{frame}
+\frametitle{Stochastic Processes Rabbit Hole}
+\begin{itemize}
+\item Markov Chains are a topic in \textit{stochastic processes}
+\item Stochastic Processes (\&)
+\begin{itemize}
+\item Finite Markov Chains (Discrete time, Discrete space)
+\item Infinite Markov Chains (Discrete time, inf. discrete space)
+\item Poisson Process (Continuous time, Discrete space)
+\item Brownian Motion (Continuous time, continuous space)
+\end{itemize}
+\item Main Assumption: Markov Property (Memoryless)
+\item Lots of Linear Algebra!
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Questions: Stochastic Matrices}
+Let $A,B\in \R^{n\times n}$ be  stochastic matrices.
+True or False for 1,2,3.
+\begin{enumerate}
+\item $A$ is always invertible
+\item The eigenvector corresponding to the largest eigenvalue of $A$ is unique
+\item $A$ cannot have zero has its eigenvalue
+\item Prove that $AB$ is a stochastic matrix.
+\end{enumerate}
+
+Hint for 4. Is there a way express the "sum of each column is 1" property as a matrix multiplication?
+\end{frame}
+
+\begin{frame}
+\frametitle{Solutions 1: Stochastic Matrices}
+Let $A$ be a stochastic matrix.
+True or False for 1,2,3.
+\begin{solution}
+\begin{enumerate}
+\item $A$ is always invertible\\
+False 
+$\begin{bmatrix}
+1 & 1 \\
+0 & 0 \\
+\end{bmatrix}$
+\item The eigenvector corresponding to the largest eigenvalue of $A$ is unique.
+False 
+$\begin{bmatrix}
+1 & 0 \\
+0 & 1 \\
+\end{bmatrix}$
+\item $A$ cannot have zero has its eigenvalue.
+False:
+$\begin{bmatrix}
+1 & 1 \\
+0 & 0 \\
+\end{bmatrix}$
+\end{enumerate}
+\end{solution}
+\end{frame}
+
+\begin{frame}
+\frametitle{Solutions 2: Stochastic Matrices}
+\begin{enumerate}
+\item[4.] Prove that the product of two stochastic matrices is a stochastic matrix.
+\begin{solution}
+Let $A,B$ be stochastic matrices in $\R^n$. \\
+Each entry is non-negative: \\
+$AB_{i,j} = \sum_{k=1}^n A_{i,k}B_{k,j}$\\
+This summation is a sum of non-negative products, hence it is also non-negative.
+
+Sum of each columns is 1: \\
+
+Note that the property of each column summing to 1 can be seen as: \\
+A matrix $A$ is stochastic when \\
+$\begin{bmatrix}
+1& \hdots &1 \end{bmatrix} A = \begin{bmatrix}
+1& \hdots &1 \end{bmatrix}$. 
+\\
+Then \\
+$  
+\begin{bmatrix}
+1& \hdots &1 \end{bmatrix} AB = \begin{bmatrix}
+1& \hdots &1 \end{bmatrix}A = \begin{bmatrix}
+1& \hdots &1 \end{bmatrix}$. \\
+So $AB$ is stochastic.
+\end{solution}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Change of Basis}
+\begin{itemize}
+\item Sometimes, a  matrix $A$ `prefers' certain directions (\textit{eigenvectors})
+\item (!!!) These directions act as \textit{anchors} for understanding the action of a matrix.
+\item These are directions that we will \textit{orient} or \textit{change our basis} to.
+\item This is related to $P^{-1}DP$, or diagonalization (Lec 7). 
+\begin{itemize}
+\item Defined as $P^{-1}DP$ or $PDP^{-1}$, depending on which text/notes you reference. 
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Question: Change of Basis}
+Let $A$ have eigenvectors $v_1,...,v_n$ with corresponding eigenvalues $\lambda_1,...,\lambda_n$.
+Let $\mathcal{B} = \{v_1,...,v_n\}$ be a basis of $\R^n$. Let $x = \sum_{i=1}^n \alpha_iv_i$
+\begin{enumerate}
+\item Let $P$ be a linear transformation that maps (canoncial basis vectors) $e_i$ to $v_i$, for all $i\in{1,...,n}$. Write the matrix $P$.
+\item What is $PDP^{-1} x?$
+\item Let $k\in \N$. What is $(PDP^{-1})^kx$?
+\item If $A = PDP^{-1}$, give an interpretation for the action of $A$.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Solutions 1: Change of Basis}
+Let $A$ have eigenvectors $v_1,...,v_n$ with corresponding eigenvalues $\lambda_1,...,\lambda_n$.
+Let $\mathcal{B} = \{v_1,...,v_n\}$ be a basis of $\R^n$. Let $x = \sum_{i=1}^n \alpha_iv_i$
+\begin{solution}
+\begin{enumerate}
+
+\item Let $P$ be a linear transformation that maps (canoncial basis vectors) $e_i$ to $v_i$, for all $i\in{1,...,n}$. Write the matrix $P$.
+
+$P = 
+\begin{bmatrix}
+\vert & & \vert \\
+v_1 & \hdots & v_n \\
+\vert & & \vert \\
+\end{bmatrix}
+$
+\item Let $D = Diag(\lambda_1,...,\lambda_n)$. What is $PDP^{-1} x?$\\
+\qquad $P^{-1}x = P^{-1}\sum_{i=1}^n \alpha_i v_i =  \sum_{i=1}^n \alpha_i e_i$ \\
+\qquad $DP^{-1}x = D(\sum_{i=1}^n \alpha_i e_i) =  \sum_{i=1}^n \lambda_i\alpha_i e_i$\\
+\qquad $PDP^{-1}x = P(\sum_{i=1}^n \lambda_i\alpha_i e_i) =  \sum_{i=1}^n \lambda_i\alpha_i v_i$\\
+
+\end{enumerate}
+
+\end{solution}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Solutions 2: Change of Basis}
+Let $A$ have eigenvectors $v_1,...,v_n$ with corresponding eigenvalues $\lambda_1,...,\lambda_n$.
+Let $\mathcal{B} = \{v_1,...,v_n\}$ be a basis of $\R^n$. Let $x = \sum_{i=1}^n \alpha_iv_i$
+\begin{solution}
+\begin{enumerate}
+
+\item[3.] Let $k\in \N$ What is $(PDP^{-1})^kx$?\\
+\qquad $(PDP^{-1})^2 = PDP^{-1}PDP^{-1} = PD^2P^{-1}$ \\
+Likewise,\\
+\qquad $(PDP^{-1})^k = PD^kP^{-1}$ \\
+
+\item[4.] If $A = PDP^{-1}$, give an interpretation for the action of $A$ on a vector $x$.\\
+First view $x$ as a vector in the coordinates of basis $v_1,...,v_n$. \\ 
+$P^{-1}$ transforms these coordinates into the standard basis. \\
+$D$ stretches the new coordinate $e_i$ by the eigenvalue $\lambda_i$. \\
+$P$ transforms these coordinates back into the basis of $v_1,...,v_n$ \\
+
+\end{enumerate}
+\end{solution}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Questions: Spectral Theorem}
+
+\begin{enumerate}
+\item Let $A\in\R^{n\times n}$ be a symmetric matrix.
+ Give a vector $v$ with $\|v\|=1$ such that $\|Av\|$ is maximized.\\
+ \medskip
+\item Let $A\in \R^{n \times m}, B \in \R^{n \times n}$, and $C \in \R^{m\times m}$. Prove that if $B$ and $C$ are invertible, then $rank(A)=rank(BAC)$.\\
+\medskip 
+\item Let $A = P^{-1}DP$, where $P$ is invertible and $D$ is diagonal, and $A,D,P \in \R^{n \times n}$. Prove that $Tr(A) = Tr(D)$.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Solutions 1: Spectral Theorem}
+
+\begin{enumerate}
+\item Let $A\in\R^{n\times n}$ be a symmetric matrix. Give a vector $v$ with $\|v\|=1$ such that $\|Av\|$ is maximized.
+\begin{solution}
+
+Let $A = U \Lambda U^T$, where $U$ is orthogonal with columns $u_1,...,u_n$, and $\Lambda$ is diagonal with entries $\lambda_1,...,\lambda_n$. \\
+Let $v = \sum_{i=1}^n \alpha_i u_i$, where $\sum_{i=1}^n \alpha_i^2 = 1$\\  
+Then,\\
+\qquad $U^Tv = \sum_{i=1}^n \alpha_i e_i$.\\
+\qquad $\Lambda U^Tv = \sum_{i=1}^n \lambda_i \alpha_i e_i$ \\
+\qquad $U \Lambda U^Tv = \sum_{i=1}^n \lambda_i \alpha_i u_i$ \\
+\qquad $\|U \Lambda U^Tv\| = \|\sum_{i=1}^n \lambda_i \alpha_i u_i\|$ \\
+\qquad $\|U \Lambda U^Tv\| = \sum_{i=1}^n \lambda_i^2 \alpha_i^2 \|u_i\|$ \qquad by orthonormality \\
+\qquad $\|U \Lambda U^Tv\| = \sum_{i=1}^n \lambda_i^2 \alpha_i^2$\\
+Maximize this quantity by setting $\alpha_j = 1$,  where $j$ is the index with the largest magnitude eigenvalue.
+ 
+\end{solution}
+\end{enumerate}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Solutions 2 : Spectral Theorem}
+
+\begin{enumerate}
+\item[2.] Let $A\in \R^{n \times m}, B \in \R^{n \times n}$, and $C \in \R^{m\times m}$. Prove that if $B$ and $C$ are invertible, then $rank(A)=rank(BAC)$.
+\begin{solution}
+From Hw 3: \\
+If $M$ is invertible, then \\
+ $rank(MA) = rank(A)$, and $rank(AM) = rank(A)$.\\
+Then,\\
+$rank(BAC) = rank((B)(AC)) = rank(AC) = rank(A)$.
+\end{solution}
+
+\end{enumerate}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Solutions 3 : Spectral Theorem}
+
+\begin{enumerate}
+
+\item[3.] Let $A = P^{-1}DP$, where $P$ is invertible and $D$ is diagonal, and $A,D,P \in \R^{n \times n}$. Prove that $Tr(A) = Tr(D)$.
+\begin{solution}
+From Hw3: $Tr(AB) = Tr(BA)$.\\
+
+Then \\
+$Tr(A) = Tr(P^{-1}DP) = Tr((P^{-1}D)P) = Tr(P(P^{-1}D)) = Tr(D)$.
+
+\end{solution}
+\end{enumerate}
+\end{frame}
+
+
+\begin{comment}
+\begin{frame}
+\frametitle{Solution 1: Change of Basis 1}
+
+Let $\mathcal{B} = \{v_1,...,v_n\}$ be a basis of $\R^n$.
+\begin{solution}
+\begin{enumerate}
+\item  \\ 
+$P = 
+\begin{bmatrix}
+\vert & & \vert \\
+v_1 & \hdots & v_n \\
+\vert & & \vert \\
+\end{bmatrix}
+$\\
+\smallskip
+\item Is $P$ invertible?\\ 
+Since $v_1,...,v_n$ are linearly indepedent, $rank(P) = n$ so $P$ is invertible.\\
+\smallskip 
+
+\end{enumerate}
+\end{solution}
+\end{frame}
+
+\begin{frame}
+\frametitle{Solution 2: Change of Basis 1}
+
+Let $\mathcal{B} = \{v_1,...,v_n\}$ be a basis of $R^n$.
+\begin{solution}
+\begin{enumerate}
+
+\item[3.] Let $x\in \R^n$ s.t $x = \sum_{i=1}^n \alpha_i e_i$. Write an expression for $Px$ in terms of $v_i$.\\
+$Px = P(\sum_{i=1}^n \alpha_i e_i) = \sum_{i=1}^n \alpha_i P(e_i) = \sum_{i=1}^n \alpha_i v_i$ \\
+So,
+$x = 
+\begin{bmatrix}
+\alpha_1 \\
+\vdots \\
+\alpha_n \\
+\end{bmatrix}
+$ and 
+$Px = 
+\begin{bmatrix}
+\vert \\
+\sum_{i=1}^n \alpha_i v_i \\
+\vert \\
+\end{bmatrix}$
+ or 
+$Px = \begin{bmatrix}
+\sum_{i=1}^n \alpha_i v_i[1] \\
+\vdots \\
+\sum_{i=1}^n \alpha_i v_i[n] \\
+\end{bmatrix}
+$
+\end{enumerate}
+\end{solution}
+\end{frame}
+
+\begin{frame}
+\frametitle{Solution 2: Change of Basis 1}
+
+Let $\mathcal{B} = \{v_1,...,v_n\}$ be a basis of $R^n$.
+\begin{solution}
+\begin{enumerate}
+
+\item[4.] Describe what the action of $D$
+If we think of a vector $x$ as a sum of $/alpha_ie_i$, P transforms each $e_i$ into $v_i$
+
+\end{enumerate}
+\end{solution}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Questions: Change of Basis 2}
+
+Let $\mathcal{B} = \{v_1,...,v_n\}$ be a basis of $\R^n$, and $P = v_1,...,v_n$. and $D = Diag(\lambda_1,...,\lambda_n)$
+\begin{enumerate}
+\item Conceptually, describe the action of $D$.
+\item Conceptually, describe the action of $P^{-1}DP$
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Solutions: Change of Basis 2}
+
+Let $\mathcal{B} = \{v_1,...,v_n\}$ be a basis of $\R^n$, and $P = v_1,...,v_n$. and $D = Diag(\lambda_1,...,\lambda_n)$
+\begin{enumerate}
+\begin{solution}
+\item Conceptually, describe the action of $D$. \\
+$D$ stretches each $e_i$th component by a factor of $\lambda_i$. \\ 
+\item Conceptually, describe the action of $P^{-1}DP$ \\
+First, $P$ transforms vectors from the canonical basis to the basis of vectors $v_1,...,v_n$ . $D$ then stretches the  $v_1,...,v_n$ \textbf{components} by $\lambda_1,...,\lambda_n$. 
+\end{solution}
+\end{enumerate}
+\end{frame}
+\end{comment}
+
+\end{document}
