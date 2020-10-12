@@ -1,0 +1,213 @@
+\documentclass{beamer}
+
+\usepackage{../../../latex_style/beamerthemeExecushares}
+\usepackage{../../../latex_style/notations}
+
+\title{Session 7: Spectral Theorem, PCA and SVD}
+\subtitle{Optimization and Computational Linear Algebra for Data Science}
+\author{Léo Miolane}
+\date{}
+
+\setcounter{showSlideNumbers}{1}
+
+\begin{document}
+\setcounter{showProgressBar}{0}
+\setcounter{showSlideNumbers}{0}
+
+\frame{\titlepage}
+
+\begin{frame}
+	\frametitle{Contents}
+	\begin{enumerate}
+		\item Orthogonal matrices
+		\item Eigenvalues \& eigenvectors
+		\item Properties of eigenvalues and eigenvectors
+		\item Markov chains
+	\end{enumerate}
+\end{frame}
+
+
+\setcounter{framenumber}{0}
+\setcounter{showSlideNumbers}{1}
+
+\section{The Spectral Theorem}
+
+\begin{frame}[t]{The spectral theorem}
+	\grid
+
+	\vspace{-0.3cm}
+	\begin{block}{Theorem}
+		Let $A \in \R^{n \times n}$ be a \textbf{symmetric} matrix. Then there is a orthonormal basis of $\R^n$ composed of eigenvectors of $A$.
+	\end{block}
+
+	\vspace{1.3cm}
+	\begin{block}{Theorem (Matrix formulation)}
+		Let $A \in \R^{n \times n}$ be a \textbf{symmetric} matrix. Then there exists an orthogonal matrix $P$ and a diagonal matrix $D$ of sizes $n \times n$ such that
+		$$
+		A = P D P^{\sT}.
+		$$
+	\end{block}
+\end{frame}
+
+\begin{frame}[t]{Geometric interpretation}
+	\grid
+
+\end{frame}
+
+\begin{frame}[t]{A key result}
+	\grid
+
+	\vspace{-0.4cm}
+	\begin{block}{Proposition}
+		Let $A$ be a $n \times n$ symmetric matrix and let $\lambda_1 \geq \cdots \geq \lambda_n$ be its $n$ eigenvalues and $v_1, \dots, v_n$ be an associated orthonormal family of eigenvectors. Then 
+		$$
+		\lambda_1 = \max_{\|v\| = 1} v^{\sT} A v
+		\qquad \text{and} \qquad
+		v_1 = \argmax_{\|v\| = 1} v^{\sT} A v\,.
+		$$
+		Moreover, for $k=2,\dots,n$:
+		$$
+		\lambda_{k} = \max_{\|v\| = 1, \, v \perp v_1, \dots, v_{k-1}} v^{\sT} A v\,,
+		\quad \text{and} \quad
+		v_{k} = \argmax_{\|v\| = 1, \, v \perp v_1, \dots, v_{k-1}} v^{\sT} A v.
+		$$
+	\end{block}
+\end{frame}
+
+\begin{frame}[t]{Proof}
+	\grid
+
+	\pause
+\end{frame}
+
+\section{Principal Component Analysis}
+\begin{frame}[t]{Empirical mean and covariance}
+	\grid
+
+	We are given a dataset of $n$ points $a_1, \dots, a_n \in \R^d$
+	\vspace*{0.4cm}
+	\begin{columns}
+		\hspace*{-0.6cm}
+		\begin{column}{0.45\textwidth}
+			\vspace*{-1.7cm}
+			\begin{center}
+				\underline{$d=1$}
+			\end{center}
+
+			\begin{itemize}
+				\item \textbf{Mean}
+					$$
+					\mu = \frac{1}{n}\sum_{i=1}^n a_i \quad \in \R
+					$$
+				\item \textbf{Variance}
+					$$
+					\sigma^2 = \frac{1}{n} \sum_{i=1}^n (a_i - \mu)^2 \quad \in \R
+					$$
+			\end{itemize}
+		\end{column}
+		\vrule
+		\begin{column}{0.5\textwidth}
+			\vspace*{-0.5cm}
+			\pause
+			\begin{center}
+				\underline{$d \geq 2$}
+			\end{center}
+			\begin{itemize}
+				\item \textbf{Mean}
+					$$
+					\mu = \frac{1}{n}\sum_{i=1}^n a_i \quad {\color{ExecusharesRed} \in \R^d}
+					$$
+				\item \textbf{Covariance matrix}
+					\begin{align*}
+						S &= \frac{1}{n} \sum_{i=1}^n (a_i - \mu)(a_i - \mu)^{\sT} \quad {\color{ExecusharesRed} \in \R^{d \times d}}
+						\\
+						  &= \frac{1}{n} \sum_{i=1}^n a_i a_i ^{\sT} \qquad {\color{ExecusharesRed} \text{if  } \mu=0.}
+					\end{align*}
+			\end{itemize}
+		\end{column}
+	\end{columns}
+\end{frame}
+\begin{frame}[t]{PCA}
+	\grid
+
+	\begin{itemize}
+		\item We are given a dataset of $n$ points $a_1, \dots, a_n \in \R^d$, where $d$ is <<large>>.
+			\vspace{0.1cm}
+		\item \textbf{Goal:} represent this dataset in lower dimension, i.e.\ find $\widetilde{a}_1, \dots, \widetilde{a}_n \in \R^k$ where $k \ll d$.
+			\vspace{0.1cm}
+		\item Assume that the dataset is centered: $\sum_{i=1}^n a_i = 0$.
+			\vspace{0.1cm}
+		\item Then, $S$ can be simply written as:
+			$$
+			S = \sum_{i=1}^n a_i a_i^{\sT}
+			= A^{\sT} A.
+			$$
+			where $A$ is the $n\times d$ ``data matrix'':
+			$$
+			A =
+			\begin{pmatrix}
+				- \ a_1 \ - \\
+				\vdots  \\
+				- \ a_n \ -
+			\end{pmatrix}
+			.
+			$$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[t]{Direction of maximal variance}
+	\grid
+	\pause
+
+\end{frame}
+\begin{frame}[t]{2nd direction of maximal variance}
+	\grid
+
+\end{frame}
+
+\begin{frame}[t]{Which value of $k$ should we take?}
+	\grid
+
+\end{frame}
+
+
+\section{Singular Value Decomposition}
+
+
+\begin{frame}[t]{Singular values/vectors}
+	\grid
+
+
+\end{frame}
+\begin{frame}[t]{Singular Value decomposition}
+	\grid
+
+	\begin{block}{Theorem}
+		Let $A \in \R^{n \times m}$. Then there exists two orthogonal matrices $U \in \R^{n \times n}$ and $V \in \R^{m \times m}$ and a matrix $\Sigma \in \R^{n \times m}$ such that $\Sigma_{1,1} \geq \Sigma_{2,2}  \geq \cdots \geq 0$ and $\Sigma_{i,j} = 0$ for $i\neq j$, that verify
+		$$
+		A = U \Sigma V^{\sT}.
+		$$
+	\end{block}
+
+\end{frame}
+
+\begin{frame}[t]{Geometric interpretation of \ $U\Sigma V^{\sT}$}
+\begin{figure}[H]
+	\begin{center}
+	\includegraphics[width = 0.6\linewidth]{../figures/svd.pdf}
+	\end{center}
+\end{figure}
+
+\end{frame}
+
+\appendix
+\backupbegin
+\begin{frame}[t]
+	\frametitle{Questions?}
+	\grid
+
+	\pause
+\end{frame}
+\backupend
+
+\end{document}

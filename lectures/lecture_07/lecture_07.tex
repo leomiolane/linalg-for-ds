@@ -62,7 +62,7 @@ By multiplying by $P^{\sT}$ on both sides, we get $A P P^{\sT} = P D P^{\sT}$. R
 \end{theorem}
 
 \begin{proposition}\label{prop:eigen_var}
-	Let $A$ be a $n \times n$ symmetric matrix and let $\lambda_1 \geq \cdots \geq \lambda_n$ be its $n$ eigenvalues and $v_1, \dots, v_n$ be the associated orthonormal family of eigenvectors. Then 
+	Let $A$ be a $n \times n$ symmetric matrix and let $\lambda_1 \geq \cdots \geq \lambda_n$ be its $n$ eigenvalues and $v_1, \dots, v_n$ be an associated orthonormal family of eigenvectors. Then 
 	$$
 	v_1 = \argmax_{\|v\| = 1} v^{\sT} A v\,,
 	\qquad \text{and for} \ k=2, \dots n, \qquad
@@ -185,7 +185,7 @@ $$
 \sum_{i=1}^n \langle v, a_i \rangle
 = \Big\langle v, \sum_{i=1}^n a_i \Big\rangle = \langle v,0 \rangle = 0.
 $$
-The variance of the $\alpha_i$ is then simply
+The variance of the $\alpha_i$ is then simply (up to a $1/n$ factor)
 $$
 \sum_{i=1}^n \langle a_i, v \rangle^2
 =
