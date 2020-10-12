@@ -1,13 +1,13 @@
 \documentclass[11pt,nocut]{article}
 
-\usepackage{../latex_style/packages}
-\usepackage{../latex_style/notations}
+\usepackage{../../latex_style/packages}
+\usepackage{../../latex_style/notations}
 
 \title{\vspace{-2.0cm}%
 	Optimization and Computational Linear Algebra for Data Science\\
 Homework 7: Principal component analysis}
 %\author{Léo \textsc{Miolane} \ $\cdot$ \ \texttt{leo.miolane@gmail.com}}
-\date{\vspace{-1cm}Due on November 5, 2019}
+\date{\vspace{-1cm}Due on October 25, 2020}
 \setcounter{section}{7}
 
 \begin{document}
@@ -15,10 +15,44 @@ Homework 7: Principal component analysis}
 \input{./preamble_homeworks.tex}
 
 %DRAFT
+\vspace{5mm}
 
 %\color{green}
+\begin{problem}[2 points]
+	We say that a symmetric matrix $M \in \R^{n \times n}$ is positive definite if for all \textbf{non-zero} $x \in \R^n$,
+	$$
+	x^{\sT} M x > 0.
+	$$
+	If a matrix $M$ is positive definite, then $M$ is also positive semi-definite, but the converse is not true. One of the goals of this problem is to prove one of the implications of Proposition~1.2 of the notes (Lecture~7). You are of course not allowed to use this proposition to solve this problem.
+	\begin{enumerate}[label=\normalfont(\textbf{\alph*})]
+		\item Let $M \in \R^{n \times n}$ be a positive definite matrix. Show that its eigenvalues are all strictly positive and that $M$ is invertible. 
+		\item Let $M \in \R^{n \times n}$ be a symmetric matrix. Show that there exists $\alpha > 0$ such that the matrix $M + \alpha \Id_n$ is positive definite.
+	\end{enumerate}
+\end{problem}
+
+\vspace{5mm}
 
 \begin{problem}[3 points]
+	Using PCA, we reduce the dimension of a dataset $a_1, \dots, a_n \in \R^d$ of mean zero, to get a <<dimensionally reduced dataset>> $b_1 , \dots, b_n \in \R^k$, for some $1 \leq k \leq d$.
+	\begin{enumerate}[label=\normalfont(\textbf{\alph*})]
+		\item Show that the dataset $b_1, \dots, b_n$ is centered: $\sum_{i = 1}^n b_i = 0$.
+		\item Show that for all $i,j \in \{1, \dots, n\}$, we have
+			$$
+				\|b_i - b_j\| \leq \|a_i - a_j\| \,.
+			$$
+			This means that PCA shrinks the distances.
+		\item For $i \in \{1, \dots, k\}$ we let
+			$$
+			f^{(i)} = (b_{1,i}, b_{2,i}, \dots, b_{n,i}) \in \R^n
+			$$
+			be the vector made of all $i^{\rm th}$ components of the vectors $b_1, \dots, b_n$.
+			Show that for $i \neq j$, $f^{(i)} \perp f^{(j)}$. This means that the new features computed using PCA are uncorrelated.
+	\end{enumerate}
+\end{problem}
+
+\newpage
+
+\begin{problem}[2 points]
 	Let $A \in \R^{n \times m}$. The Singular Values Decomposition (SVD) tells us that there exists two orthogonal matrices $U \in \R^{n \times n}$ and $V \in \R^{m \times m}$ and a matrix $\Sigma \in \R^{n \times m}$ such that $\Sigma_{1,1} \geq \Sigma_{2,2}  \geq \cdots \geq 0$ and $\Sigma_{i,j} = 0$ for $i\neq j$
 	$$
 	A = U \Sigma V^{\sT}.
@@ -44,29 +78,14 @@ Homework 7: Principal component analysis}
 	\end{enumerate}
 \end{problem}
 
-\vspace{1mm}
+\vspace{5mm}
 
 \begin{problem}[3 points]
-	We say that a symmetric matrix $M \in \R^{n \times n}$ is positive definite if for all \textbf{non-zero} $x \in \R^n$,
-	$$
-	x^{\sT} M x > 0.
-	$$
-	If a matrix $M$ is positive definite, then $M$ is also positive semi-definite, but the converse is not true. One of the goals of this problem is to prove one of the implications of Proposition~1.2 of the notes (Lecture~7). You are of course not allowed to use this proposition to solve this problem.
-	\begin{enumerate}[label=\normalfont(\textbf{\alph*})]
-		\item Let $M \in \R^{n \times n}$ be a positive definite matrix. Show that its eigenvalues are all strictly positive and that $M$ is invertible. 
-		\item Let $M \in \R^{n \times n}$ be a symmetric matrix. Show that there exists $\alpha > 0$ such that the matrix $M + \alpha \Id_n$ is positive definite.
-	\end{enumerate}
-\end{problem}
-
-\vspace{1mm}
-
-
-\begin{problem}[4 points]
-	You have been given a mysterious dataset that may contain important informations! This dataset is a collection of $n=3000$ points of dimension $d=1000$.
+	You have been given a mysterious dataset that may contain important informations! This dataset is a collection of $n=6439$ points of dimension $d=1000$.
 	Investigate the structure of this dataset using PCA/plots... , and find out if the dataset contains any information.
 	\\
 
-	The \texttt{zip} file \texttt{mysterious\_data.zip} contains a text file containing the $3000 \times 1000$ data matrix.
+	The \texttt{zip} file \texttt{mysterious\_data.zip} contains a text file containing the $6439\times 1000$ data matrix.
 	The \emph{Jupyter notebook} \texttt{mysterious\_data.ipynb} contains a function to read the text file.
 	The numpy function \texttt{numpy.linalg.eigh} is great to compute eigenvalues and eigenvectors of a symmetric matrix. 
 	\\
@@ -75,13 +94,7 @@ Homework 7: Principal component analysis}
 \end{problem}
 
 
-\vspace{1mm}
-
-%\begin{problem}[3 points]
-%\end{problem}
-
-%\vspace{1mm}
-
+\vspace{5mm}
 
 \begin{problem}[$\star$]
 	Let $M \in \R^{n \times n}$ be a symmetric matrix. Let $\lambda_1 \geq \dots \geq \lambda_n$ be the eigenvalues of $M$. Show that for all $d \leq n$:
