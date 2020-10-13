@@ -233,6 +233,26 @@ $P$ transforms these coordinates back into the basis of $v_1,...,v_n$ \\
 \end{solution}
 \end{frame}
 
+\begin{frame}
+\frametitle{Spectral Theorem}
+
+\begin{theorem}[Spectral Theorem (!!!)]\label{th:spectral}
+	Let $A \in \R^{n \times n}$ be a \textbf{symmetric} matrix. Then there is a orthonormal basis of $\R^n$ composed of eigenvectors of $A$.
+\end{theorem}
+
+\begin{itemize}
+\item One of most important theorems in Linear Algebra
+\item Symmetric matrices induce an orthonormal basis of eigenvectors
+\item Makes analyzing the behavior of a symmetric matrix very easy
+\item Many examples of 'natural' symmetric matrices
+\begin{itemize}
+\item Covariance Matrix
+\end{itemize}
+\item Proved in Homework 5
+\end{itemize}
+\end{frame}
+
+
 
 \begin{frame}
 \frametitle{Questions: Spectral Theorem}
@@ -241,13 +261,13 @@ $P$ transforms these coordinates back into the basis of $v_1,...,v_n$ \\
 \item Let $A\in\R^{n\times n}$ be a symmetric matrix.
  Give a vector $v$ with $\|v\|=1$ such that $\|Av\|$ is maximized.\\
  \medskip
-\item Let $A\in \R^{n \times m}, B \in \R^{n \times n}$, and $C \in \R^{m\times m}$. Prove that if $B$ and $C$ are invertible, then $rank(A)=rank(BAC)$.\\
-\medskip 
-\item Let $A = P^{-1}DP$, where $P$ is invertible and $D$ is diagonal, and $A,D,P \in \R^{n \times n}$. Prove that $Tr(A) = Tr(D)$.
+\item Let $A\in\R^{n\times n}$ be a symmetric matrix, with eigenvalues $\lambda_1,...,\lambda_n$, and orthonormal family of associated eigenvectors $u_1,...,u_n$. Give an orthonormal basis of $Ker(A)$ and $Im(A)$ in terms of the $u_i$'s.
 \end{enumerate}
 \end{frame}
 
 \begin{frame}
+
+
 \frametitle{Solutions 1: Spectral Theorem}
 
 \begin{enumerate}
@@ -274,32 +294,20 @@ Maximize this quantity by setting $\alpha_j = 1$,  where $j$ is the index with t
 \frametitle{Solutions 2 : Spectral Theorem}
 
 \begin{enumerate}
-\item[2.] Let $A\in \R^{n \times m}, B \in \R^{n \times n}$, and $C \in \R^{m\times m}$. Prove that if $B$ and $C$ are invertible, then $rank(A)=rank(BAC)$.
+\item[2.] Let $A\in\R^{n\times n}$ be a symmetric matrix, with eigenvalues $\lambda_1,...,\lambda_n$, and orthonormal family of associated eigenvectors $u_1,...,u_n$. Give an orthonormal basis of $Ker(A)$ and $Im(A)$ in terms of the $u_i$'s.
 \begin{solution}
-From Hw 3: \\
-If $M$ is invertible, then \\
- $rank(MA) = rank(A)$, and $rank(AM) = rank(A)$.\\
-Then,\\
-$rank(BAC) = rank((B)(AC)) = rank(AC) = rank(A)$.
+Since $A$ is symmetric, then $A$ induces an orthonormal basis of eigenvectors $u_1,...,u_n$ with eigenvalues $\lambda_1,...,\lambda_n$, and $A = U\Lambda U^T$.\\
+Let $v = \sum_{i=1}^n \alpha_i u_i$ \\  
+Then by the previous question,\\
+\qquad $U \Lambda U^Tv = \sum_{i=1}^n \lambda_i \alpha_i u_i$ \\
+Now, consider all $j$ s.t $\lambda_j = 0$. \\
+$Av = \sum_{i=1}^n \lambda_i \langle v,u_i\rangle = 0$ when $v \in Span(\{u_j| \lambda_j=0,\text{ for } j\in 1,...,n\})$.\\
+So $Ker(A) = Span(\{u_j| \lambda_j=0,\text{ for }j\in 1,...,n\})$.\\
+Likewise,\\ 
+$Im(A) = Span(\{u_k | \lambda_k \neq 0,\text{ for } k\in 1,...,n\} )$
+
 \end{solution}
 
-\end{enumerate}
-\end{frame}
-
-
-\begin{frame}
-\frametitle{Solutions 3 : Spectral Theorem}
-
-\begin{enumerate}
-
-\item[3.] Let $A = P^{-1}DP$, where $P$ is invertible and $D$ is diagonal, and $A,D,P \in \R^{n \times n}$. Prove that $Tr(A) = Tr(D)$.
-\begin{solution}
-From Hw3: $Tr(AB) = Tr(BA)$.\\
-
-Then \\
-$Tr(A) = Tr(P^{-1}DP) = Tr((P^{-1}D)P) = Tr(P(P^{-1}D)) = Tr(D)$.
-
-\end{solution}
 \end{enumerate}
 \end{frame}
 

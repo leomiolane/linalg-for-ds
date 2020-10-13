@@ -246,7 +246,7 @@ Now,\\
 
 \frametitle{Questions: Orthogonality}
 \begin{enumerate}
-\item Let $v_1,...,v_k$ be a list of orthogonal vectors. Show that $v_1,...,v_k$ are linearly independent.
+\item Let $v_1,...,v_k$ be a list of non-zero orthogonal vectors. Show that $v_1,...,v_k$ are linearly independent.
 \item Let U be the subspace of $\R^n$ with orthonormal basis $u_1,...,u_k$.
 \begin{enumerate}
  \item[i.] Prove that the orthogonal projection of $v \in \R^n$ onto $U$ can be expressed as $P_U  = \sum_{i=0}^k  \langle v,u_i \rangle u_i$. (Use the fact that the orthonormal basis for a subspace of $\R$ can be extended to obtain an orthonormal basis for $\R$)
@@ -293,7 +293,7 @@ Let U be the subspace of $\R^n$ with orthonormal basis $u_1,...,u_k$.
 \begin{enumerate}
 \item[2i.] Prove that the orthogonal projection of $v \in \R^n$ onto $U$ can be expressed as $P_U(v)  = \sum_{i=0}^k  \langle v,u_i \rangle u_i$. \\
 
-Let $u_{k+1},...,u_n$ be an orthonormal basis extension for $ u_1,...,u_k$.\\
+Let $u_{k+1},...,u_n$ be an orthonormal basis extension for $ u_1,...,u_n$.\\
 Then $u_1,...,u_k,u_{k+1},...,u_n$ form an orthonormal basis for $\R^n$\\
 Now, let $v = \sum_{i=1}^n \alpha_i u_i$ where $\alpha_i=\  \langle v,u_i \rangle $ and let $x\in U$, where $x=\sum_{j=1}^k  \beta_i u_i$.\\
 We want to find $\argmin_{x\in U} \|v-x\|$.
@@ -304,7 +304,7 @@ We want to find $\argmin_{x\in U} \|v-x\|$.
 \end{align*}
 $\|v-x\|$ is minimized when $\alpha_i = \beta_i \quad \forall i \in \{1,...,k\}$\\
 This implies that $\beta_i =  \langle v,u_i \rangle $.\\
- So $P_U(v)=argmin_{x\in U}\|v-x\| = \sum_{i=0}^k  \langle v,u_i \rangle u_i$.
+ So $\|P_U(v)\|=argmin_{x\in U}\|v-x\| = \sum_{i=0}^k  \langle v,u_i \rangle u_i$.
 \end{enumerate}
 \end{solution}
 \end{frame}
