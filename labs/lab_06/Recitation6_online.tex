@@ -156,7 +156,7 @@ with $\alpha \approx 0.85$. Given the previous questions, what would be the prob
 Remember that  $P$ is a stochastic matrix when $P_{i,j} \geq 0$ for all $1 \leq i,j \leq n$ and $\sum_{i=1}^n P_{i,j} = 1$ for all $j$. 
 \begin{enumerate}
 \item Show that $1$ is an eigenvalue of $P$.
-\item Show that all eigenvalues of $P$ have absolute value less or equal than $P$.
+\item Show that all eigenvalues of $P$ have absolute value less or equal than $1$.
 \end{enumerate}
 \pause
 \pause
@@ -174,7 +174,7 @@ P_{i,j} =
 \end{align*}
 \begin{enumerate}
 \item Show that $\pi$ defined as $\pi_j = \text{deg}(j)$ is an eigenvector of $P$ of eigenvalue 1.
-\item Conclude that $x \in \Delta_n$,  $P^t x \xrightarrow[t \to \infty]{} \mu$ if the Perron-Frobenius assumption holds.
+\item Conclude that $x \in \Delta_n$,  $P^t x \xrightarrow[t \to \infty]{} \tilde{\pi}$ if the Perron-Frobenius assumption holds, where $\tilde{\pi}_i = \pi_i / (\sum_{j=1}^n \pi_j)$ is the scaled multiple of $\pi$ belonging to $\Delta_n$.
 \item Extra Question: Show that if each page has a link to itself and for any pair of pages $i,j$, there is a path of linked pages joining $i$ and $j$, the Perron-Frobenius assumption holds.
 \end{enumerate}
 \end{frame}
@@ -202,7 +202,7 @@ P_{i,j} =
 0 &\text{otherwise}
 \end{cases}
 \end{align*}
-2. Conclude that $x \in \Delta_n$,  $P^t x \xrightarrow[t \to \infty]{} \mu$ if the Perron-Frobenius assumption holds.
+2. Conclude that $x \in \Delta_n$,  $P^t x \xrightarrow[t \to \infty]{} \tilde{\pi}$ if the Perron-Frobenius assumption holds, where $\tilde{\pi}_i = \pi_i / (\sum_{j=1}^n \pi_j)$ is the scaled multiple of $\pi$ belonging to $\Delta_n$.
 \end{frame}
 
 \begin{frame}[t]
@@ -216,7 +216,7 @@ Remember that a matrix $A$ is diagonalizable iff it has $n$ linearly independent
 
 \begin{frame}[t]
 \frametitle{Questions: Spectral theorem}
-1. Let $A, B \in \R^{n \times n}$ be symmetric matrices. Show that $AB = BA$ iff $A$ and $B$ diagonalize in the same basis. Does the same hold if we just assume that $A,B$ are diagonalizable?
+1. Let $A, B \in \R^{n \times n}$ be symmetric matrices. Show that $AB = BA$ iff $A$ and $B$ diagonalize in the same basis. 
 \pause
 \end{frame}
 
@@ -290,6 +290,14 @@ Let $v_1, \cdots, v_n$ be the orthonormal basis of eigenvectors (resp.).
 For a symmetric matrix, show how you can use a modification of Gaussian elimination to find a decomposition $A = V \Lambda V^\top$ for some diagonal matrix $\Lambda$.
 \end{frame}
 \fi
+
+\begin{frame}[t]
+
+\end{frame}
+
+\begin{frame}[t]
+
+\end{frame}
 
 \begin{frame}[t]
 
