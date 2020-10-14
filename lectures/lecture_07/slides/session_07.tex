@@ -39,7 +39,7 @@
 		Let $A \in \R^{n \times n}$ be a \textbf{symmetric} matrix. Then there is a orthonormal basis of $\R^n$ composed of eigenvectors of $A$.
 	\end{block}
 
-	\vspace{1.3cm}
+	\vspace{2.7cm}
 	\begin{block}{Theorem (Matrix formulation)}
 		Let $A \in \R^{n \times n}$ be a \textbf{symmetric} matrix. Then there exists an orthogonal matrix $P$ and a diagonal matrix $D$ of sizes $n \times n$ such that
 		$$
@@ -53,16 +53,16 @@
 
 \end{frame}
 
-\begin{frame}[t]{A key result}
+\begin{frame}[t]{The Theorem behind PCA}
 	\grid
 
-	\vspace{-0.4cm}
-	\begin{block}{Proposition}
+	\vspace{-0.3cm}
+	\begin{block}{Theorem}
 		Let $A$ be a $n \times n$ symmetric matrix and let $\lambda_1 \geq \cdots \geq \lambda_n$ be its $n$ eigenvalues and $v_1, \dots, v_n$ be an associated orthonormal family of eigenvectors. Then 
 		$$
-		\lambda_1 = \max_{\|v\| = 1} v^{\sT} A v
+		\lambda_1 = \max_{\|v\| = 1}\ \, v^{\sT} A v
 		\qquad \text{and} \qquad
-		v_1 = \argmax_{\|v\| = 1} v^{\sT} A v\,.
+		v_1 = \argmax_{\|v\| = 1}\ \, v^{\sT} A v\,.
 		$$
 		Moreover, for $k=2,\dots,n$:
 		$$
@@ -76,6 +76,7 @@
 \begin{frame}[t]{Proof}
 	\grid
 
+	\pause
 	\pause
 \end{frame}
 
@@ -159,7 +160,20 @@
 	\pause
 
 \end{frame}
+\begin{frame}[t]{Direction of maximal variance}
+	\grid
+
+	\textbf{Good news:} \ $S = AA^{\sT}$ is symmetric.
+	\\
+
+	\textbf{Spectral Theorem:} \ let $\lambda_1 \geq \lambda_2 \geq \cdots \geq \lambda_n$ be the eigenvalues of $S$ and $(v_1, \dots, v_n)$ an associated orthonormal basis of eigenvectors.
+
+\end{frame}
 \begin{frame}[t]{2nd direction of maximal variance}
+	\grid
+
+\end{frame}
+\begin{frame}[t]{$k^{\rm th}$ direction of maximal variance}
 	\grid
 
 \end{frame}
