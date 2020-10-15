@@ -1,0 +1,119 @@
+\documentclass[11pt,nocut]{article}
+
+\usepackage{../../latex_style/packages}
+\usepackage{../../latex_style/notations}
+
+\title{\vspace{-2.0cm}%
+	Optimization and Computational Linear Algebra for Data Science\\
+Midterm review problems}
+%\author{Léo \textsc{Miolane} \ $\cdot$ \ \texttt{leo.miolane@gmail.com}}
+\date{}
+
+\setcounter{section}{*}
+
+\begin{document}
+\maketitle
+
+
+\begin{problem}
+	Let $A,B \in \R^{n \times n}$. For each the following subset of $\R^n$ below, say whether it is a subspace of $\R^n$ and justify your answer:
+	\begin{enumerate}
+		\item $E_1 = \{ x \in \R^n \, | \, Ax = 0 \}$.
+		\item $E_2 = \{ x \in \R^n \, | \, Ax = Bx \}$.
+		\item $E_3 = \{ x \in \R^n \, | \, Ax = e_1 \}$.
+		\item $E_4 = \{ x \in \R^n \, | \, Ax \in \Span(e_1) \}$.
+	\end{enumerate}
+\end{problem}
+\vspace{0.2cm}
+
+\begin{problem}
+	\textbf{True or False}: There exists matrices $M \in \R^{2 \times 3}$ such that $\dim(\Ker(M))=1$ and $\rank(M)=2$.
+\end{problem}
+\vspace{0.2cm}
+
+\begin{problem}
+	Let $n>m$ and $A \in \R^{n \times m}$. Assume that $A$ has ``full rank'', meaning that $\rank(A)=\min(n,m)=m$.
+	\begin{enumerate}
+		\item Does $Ax=b$ has a solution for all $b \in \R^n$ ? (Prove or give a counter example)
+		\item Can there exists two vectors $x \neq x'$ such that $Ax=Ax'$ ? (Prove or give a counter example).
+	\end{enumerate}
+\end{problem}
+\vspace{0.2cm}
+\begin{problem}
+	Let $n<m$ and $A \in \R^{n \times m}$. Assume that $A$ has ``full rank'', meaning that $\rank(A)=\min(n,m)=n$.
+	\begin{enumerate}
+		\item Does $Ax=b$ has a solution for all $b \in \R^n$ ? (Prove or give a counter example)
+		\item Can there exists two vectors $x \neq x'$ such that $Ax=Ax'$ ? (Prove or give a counter example).
+	\end{enumerate}
+\end{problem}
+
+\vspace{0.2cm}
+\begin{problem}
+	\textbf{True or False}: There exists a family of $k$ non-zero orthogonal vectors of $\R^n$, for some $k>n$.
+\end{problem}
+\vspace{0.2cm}
+\begin{problem}
+	Let $A \in \R^{n \times m}$.
+	\begin{enumerate}
+		\item Prove that $\Ker(A^{\sT})$ and $\Im(A)$ are orthogonal to each other, i.e.\ that for all $x \in \Ker(A^{\sT})$ and $y \in \Im(A)$ we have $x \perp y$.
+		\item Show that $\Ker(A^{\sT}) = \Im(A)^{\perp}$.
+	\end{enumerate}
+\end{problem}
+\vspace{0.2cm}
+\begin{problem}
+	\textbf{True or False}: The matrix of an orthogonal projection is symmetric.
+\end{problem}
+\vspace{0.2cm}
+\begin{problem}
+	\textbf{True or False}: The matrix of an orthogonal projection is orthogonal.
+\end{problem}
+\vspace{0.2cm}
+\begin{problem}
+	Let $S$ be a subspace of $\R^n$ and let $P_S$ be the orthogonal projection onto $S$. Show that $\dim(S) = \Tr(P_S)$.
+\end{problem}
+\vspace{0.2cm}
+\begin{problem}
+	\textbf{True or False}: Let $A,B \in \R^{n \times n}$. Assume that $v \in \R^n$ is an eigenvector of $A$ and $B$.
+	\begin{enumerate}
+		\item Is $v$ an eigenvector of $A+B$ ?
+		\item Is $v$ an eigenvector of $AB$ ?
+	\end{enumerate}
+\end{problem}
+\vspace{0.2cm}
+\begin{problem}
+	Let $A\in \R^{n \times n}$ and let $v_1,v_2 \in \R^n$ be two eigenvectors of $A$, associated with the same eigenvalue $\lambda$.
+	\\
+	Show that any non-zero eigenvector in $\Span(v_1,v_2)$ is an eigenvector of $A$, associated with $\lambda$.
+\end{problem}
+\vspace{0.2cm}
+\begin{problem}
+	Let $A\in \R^{n \times n}$ be a symmetric matrix.
+	Let $(v_1,v_2, \dots, v_n)$ be an orthonormal family of eigenvectors of $A$, associated to the eigenvalues $\lambda_1, \dots, \lambda_n$. Give an orthonormal basis of $\Ker(A)$ and $\Im(A)$ in terms of the $v_i$'s.
+\end{problem}
+\vspace{0.2cm}
+\begin{problem}
+	Let $A\in \R^{n \times n}$ be a symmetric matrix, that satisfies $A^2 = \Id$.
+	Show that the matrix 
+	$$
+	M = \frac{1}{2}(A+\Id)
+	$$
+	is the matrix of an orthogonal projection.
+\end{problem}
+\vspace{0.2cm}
+\begin{problem}
+	Let $\rho \in (0,1)$.
+	Let $v_1, \dots, v_k \in \R^n$ such that
+	$$
+\|v_i\| = 1
+\qquad \text{and} \qquad
+\langle v_i, v_j \rangle = \rho
+\qquad \text{for all} \quad i \neq j.
+	$$
+	Show that $k \leq n$.
+\end{problem}
+\vspace{1cm}
+\centerline{\pgfornament[width=7cm]{87}}
+
+%\bibliographystyle{plain}
+%\bibliography{./references.bib}
+\end{document}
