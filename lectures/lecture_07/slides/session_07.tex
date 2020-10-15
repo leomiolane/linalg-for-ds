@@ -146,9 +146,9 @@
 			$$
 			A =
 			\begin{pmatrix}
-				- \ a_1 \ - \\
+				- \ a_1^{\sT} \ - \\
 				\vdots  \\
-				- \ a_n \ -
+				- \ a_n^{\sT} \ -
 			\end{pmatrix}
 			.
 			$$
@@ -163,7 +163,7 @@
 \begin{frame}[t]{Direction of maximal variance}
 	\grid
 
-	\textbf{Good news:} \ $S = AA^{\sT}$ is symmetric.
+	\textbf{Good news:} \ $S = A^{\sT} A$ is symmetric.
 	\\
 
 	\textbf{Spectral Theorem:} \ let $\lambda_1 \geq \lambda_2 \geq \cdots \geq \lambda_n$ be the eigenvalues of $S$ and $(v_1, \dots, v_n)$ an associated orthonormal basis of eigenvectors.
@@ -173,14 +173,58 @@
 	\grid
 
 \end{frame}
-\begin{frame}[t]{$k^{\rm th}$ direction of maximal variance}
+\begin{frame}[t]{$j^{\rm th}$ direction of maximal variance}
+	\grid
+
+	\begin{itemize}
+		\item The << $j^{\rm th}$ direction of maximal variance >> is $v_j$ since $v_j$ is solution of
+			\vspace{0.3cm}
+$$
+			\hspace{-1cm}
+\text{maximize} \ \ v^{\sT} S v, \qquad \text{subject to} \ \ \|v\| = 1, \ \ v \perp v_1, v \perp v_2, \dots, v \perp v_{j-1}.
+$$
+\vspace{0.1cm}
+\item The dimensionally reduced dataset is then
+$$
+\begin{pmatrix}
+	\langle v_1, a_1 \rangle \\
+	\langle v_2, a_1 \rangle \\
+	\vdots \\
+	\langle v_k, a_1 \rangle \\
+\end{pmatrix}
+,
+\begin{pmatrix}
+	\langle v_1, a_2 \rangle \\
+	\langle v_2, a_2 \rangle \\
+	\vdots \\
+	\langle v_k, a_2 \rangle \\
+\end{pmatrix}
+,
+\begin{pmatrix}
+	\langle v_1, a_3 \rangle \\
+	\langle v_2, a_3 \rangle \\
+	\vdots \\
+	\langle v_k, a_3 \rangle \\
+\end{pmatrix}
+\dots
+\begin{pmatrix}
+	\langle v_1, a_n \rangle \\
+	\langle v_2, a_n \rangle \\
+	\vdots \\
+	\langle v_k, a_n \rangle \\
+\end{pmatrix}.
+$$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[t]{Recap}
 	\grid
 
 \end{frame}
-
 \begin{frame}[t]{Which value of $k$ should we take?}
 	\grid
 
+	\pause
 \end{frame}
 
 
@@ -195,6 +239,7 @@
 \begin{frame}[t]{Singular Value decomposition}
 	\grid
 
+	\vspace{-0.3cm}
 	\begin{block}{Theorem}
 		Let $A \in \R^{n \times m}$. Then there exists two orthogonal matrices $U \in \R^{n \times n}$ and $V \in \R^{m \times m}$ and a matrix $\Sigma \in \R^{n \times m}$ such that $\Sigma_{1,1} \geq \Sigma_{2,2}  \geq \cdots \geq 0$ and $\Sigma_{i,j} = 0$ for $i\neq j$, that verify
 		$$
