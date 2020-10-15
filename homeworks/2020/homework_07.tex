@@ -81,12 +81,15 @@ Homework 7: Principal component analysis}
 \vspace{5mm}
 
 \begin{problem}[3 points]
-	You have been given a mysterious dataset that may contain important informations! This dataset is a collection of $n=6439$ points of dimension $d=1000$.
+	You have been given a mysterious dataset that may contain important informations! This dataset is a collection of $n=6344$ points of dimension $d=1000$.
 	Investigate the structure of this dataset using PCA/plots... , and find out if the dataset contains any information.
 	\\
 
-	The \texttt{zip} file \texttt{mysterious\_data.zip} contains a text file containing the $6439\times 1000$ data matrix.
+	The \texttt{zip} file \texttt{mysterious\_data.zip} contains a text file containing the $6344\times 1000$ data matrix.
 	The \emph{Jupyter notebook} \texttt{mysterious\_data.ipynb} contains a function to read the text file.
+\\
+
+	You are not allowed to use any builtin PCA function: you have to do the all process by yourself (centering the data, computing the covariance matrix...). Of course, for computing eigenvalues/eigenvectors you will need to use the numpy library.
 	The numpy function \texttt{numpy.linalg.eigh} is great to compute eigenvalues and eigenvectors of a symmetric matrix. 
 	\\
 
