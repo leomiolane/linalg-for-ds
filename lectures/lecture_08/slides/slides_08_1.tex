@@ -1,0 +1,71 @@
+\documentclass{beamer}
+
+\usepackage{../../../latex_style/beamerthemeExecushares}
+\usepackage{../../../latex_style/notations}
+
+\title{Lecture 8.1: Singular Value Decomposition}
+\subtitle{Optimization and Computational Linear Algebra for Data Science}
+\author{Léo Miolane}
+\date{}
+
+\setcounter{showSlideNumbers}{1}
+
+\begin{document}
+\setcounter{showProgressBar}{0}
+\setcounter{showSlideNumbers}{0}
+
+\frame{\titlepage}
+\setcounter{framenumber}{0}
+%\setcounter{showProgressBar}{1}
+\setcounter{showSlideNumbers}{1}
+
+
+
+\begin{frame}[t]{PCA}
+	\grid
+	
+	\begin{itemize}
+		\item Data matrix \quad $A \in \R^{n \times m}$
+			\vspace{1mm}
+		\item ``Covariance matrix''\quad $S = A^{\sT} A \in \R^{m \times m}$.
+			\vspace{1mm}
+		\item $S$ is symmetric positive semi-definite.
+			\vspace{1mm}
+		\item \textbf{Spectral Theorem:} there exists an orthonormal basis $v_1, \dots, v_m$ of $\R^m$ such that the $v_i$'s are eigenvectors of $S$ associated with the eigenvalues $\lambda_1 \geq \cdots \geq \lambda_m \geq 0$.
+	\end{itemize}
+
+\end{frame}
+
+\begin{frame}[t]{Singular values/vectors}
+	\grid
+
+\end{frame}
+\begin{frame}[t]{Singular Value decomposition}
+	\grid
+
+	\vspace{-0.3cm}
+	\begin{block}{Theorem}
+		Let $A \in \R^{n \times m}$. Then there exists two orthogonal matrices $U \in \R^{n \times n}$ and $V \in \R^{m \times m}$ and a matrix $\Sigma \in \R^{n \times m}$ such that $\Sigma_{1,1} \geq \Sigma_{2,2}  \geq \cdots \geq 0$ and $\Sigma_{i,j} = 0$ for $i\neq j$, that verify
+		$$
+		A = U \Sigma V^{\sT}.
+		$$
+	\end{block}
+
+\end{frame}
+
+\begin{frame}[t]{Geometric interpretation of \ $U\Sigma V^{\sT}$}
+\begin{figure}[H]
+	\begin{center}
+	\includegraphics[width = 0.6\linewidth]{./svd.pdf}
+	\end{center}
+\end{figure}
+
+\end{frame}
+
+\begin{frame}[t]{Example}
+	\grid
+
+\end{frame}
+
+
+\end{document}
