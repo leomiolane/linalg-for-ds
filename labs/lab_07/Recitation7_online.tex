@@ -1,0 +1,162 @@
+\documentclass{beamer}
+
+\usepackage{../../latex_style/beamerthemeExecushares}
+\usepackage{../../latex_style/notations}
+
+\title{Recitation 6}
+\author{Carles Domingo}
+\date{Fall 2020}
+
+
+\begin{document}
+
+\frame{\titlepage} 
+
+\setcounter{showProgressBar}{0}
+\setcounter{showSlideNumbers}{1}
+
+\begin{frame}[t]
+\frametitle{Matrices as maps vs. data}
+Previously in the course,
+\begin{itemize}
+\item Matrices are \textit{linear tranformations} that act on vectors.
+\end{itemize}
+In PCA,
+\begin{itemize}
+\item Matrices as \textit{data matrix}, where rows are instances of data and columns are features.
+\end{itemize}
+Remark the two different interpretations of matrices!
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Recap questions on PCA}
+\vspace{-5pt}
+Let $x_1,...,x_n\in\R^d$. You want to represent these data points in $k < d$ dimensions.
+\begin{enumerate}
+\item Explain how to do this using PCA.
+\item How can you implement PCA using SVD?
+\item How do we determine an `optimal' value for k?
+\pause
+\pause
+\pause
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Review: SVD}
+\begin{theorem}
+Let $A \in \R^{n \times m}$. Then there exists two orthogonal matrices $U \in R^{n \times n}$ and $V \in \R^{m \times m}$ and a
+matrix $\Sigma \in \R^{n \times m}$ such that $\Sigma_{1,1} \geq \Sigma_{2,2} \geq \cdots \geq 0$ and $\Sigma_{i,j} =0$ for $i \neq j, \ A = U \Sigma V^{\top}$.
+The columns $u_1,...,u_n$ of $U$ (respectively the columns $v_1, \dots, v_m$ of $V$) are called the left (resp. right) singular vectors of $A$. The non-negative numbers $\Sigma_{i,i}$ are the singular values of $A$. Moreover $\text{rank}(A) = \#\{i | \Sigma_{i,i} \neq 0\}$.
+\end{theorem}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Reminder of Courant-Fisher}
+\begin{theorem} [Courant-Fisher principle]
+Let $A$ be a $n \times n$ symmetric matrix and let $\lambda_1 \geq \cdots \geq \lambda_n$ be its $n$ eigenvalues and $v_1,\dots,v_n$ be an associated orthonormal family of eigenvectors. Then
+\begin{align*}
+v_1 = \argmax_{\|v\|=1} v^\top A v, \text{ and } \forall k = [2:n], \ v_k = \argmax_{\|v\|=1, v \perp v_1,\dots, v_{k-1}} v^\top A v.
+\end{align*}
+\begin{align*}
+v_n = \argmin_{\|v\|=1} v^\top A v, \ \forall k = [1:(n-1)], \ v_k = \argmin_{\|v\|=1, v \perp v_{k+1},\dots, v_{n}} v^\top A v.
+\end{align*}
+\end{theorem}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Courant-Fisher \& SVD}
+\begin{theorem} [Corollary of Courant-Fisher principle]
+Let $A$ be a $n \times m$ matrix and let $A=U \Sigma V^\top$ be a singular eigenvalue decomposition of $A$. Then
+\begin{align*}
+v_1 &= \argmax_{\|v\|=1} \|A v\|, \ \sigma_1 = \max_{\|v\|=1} \|A v\|, \\ \forall k = [2:n], \ v_k &= \argmax_{\|v\|=1, v \perp v_1,\dots, v_{k-1}} \|A v\|,  \sigma_k = \max_{\|v\|=1, v \perp v_1,\dots, v_{k-1}} \|A v\|
+\end{align*}
+\begin{align*}
+v_n &= \argmin_{\|v\|=1} \|A v\|, \ \sigma_n = \min_{\|v\|=1} \|A v\|, \\ \forall k = [1:(n-1)], \ v_k &= \argmin_{\|v\|=1, v \perp v_{k+1},\dots, v_{n}} \|A v\|, \\  \sigma_k &= \min_{\|v\|=1, v \perp v_{k+1},\dots, v_{n}} \|A v\|
+\end{align*}
+\end{theorem}
+\end{frame}
+
+
+\begin{frame}[t]
+\frametitle{Question: Courant-Fisher \& SVD}
+Suppose that we are given data $\{(x_i,y_i)\}_{i=1}^n$, and we hypothesize that the data approximately satisfy an affine relation of the form $a x_i + b y_i = c$, where $(a,b,c) \neq 0$. Define the matrix $A \in \R^{n \times 3}$ as
+\begin{align*}
+A = 
+\begin{bmatrix}
+x_1 & y_1 & -1 \\
+\vdots & \vdots & \vdots \\ 
+x_n & y_n & -1
+\end{bmatrix}.
+\end{align*}
+Assume that you have access to its SVD: $A = U \Sigma V^{\top}$.
+\begin{enumerate}
+\item Prove that for a general matrix $B$ with SVD $B = \tilde{U} \tilde{\Sigma} \tilde{V}^{\top}$, $Ker(B) = \text{span}(\{ \tilde{v}_i | \tilde{\sigma}_i = 0 \})$.
+\item Use this to show that the data $\{(x_i,y_i)\}_{i=1}^n$ satisfies an affine relation exactly iff some singular value of $A$ is zero.
+\item How do we find the best vector $(a,b,c)$ when all the singular values are larger than zero? How do we know if the approximation is good?
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Question: Courant-Fisher \& SVD}
+1. Prove that for a general matrix $B$ with SVD $B = \tilde{U} \tilde{\Sigma} \tilde{V}^{\top}$, $Ker(B) = \text{span}(\{ \tilde{v}_i | \tilde{\sigma}_i = 0 \})$. 
+\pause
+\pause
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Question: Courant-Fisher \& SVD}
+\vspace{-20pt}
+\begin{align*}
+A = 
+\begin{bmatrix}
+x_1 & y_1 & -1 \\
+\vdots & \vdots & \vdots \\ 
+x_n & y_n & -1
+\end{bmatrix}.
+\end{align*}
+2. Use this to show that the data $\{(x_i,y_i)\}_{i=1}^n$ satisfies an affine relation exactly iff some singular value of $A$ is zero.
+\pause
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Question: Courant-Fisher \& SVD}
+\vspace{-20pt}
+\begin{align*}
+A = 
+\begin{bmatrix}
+x_1 & y_1 & -1 \\
+\vdots & \vdots & \vdots \\ 
+x_n & y_n & -1
+\end{bmatrix}.
+\end{align*}
+3. How do we find the best vector $(a,b,c)$ when all the singular values are larger than zero? How do we know if the approximation is good?
+\pause
+\pause
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Question: Courant-Fisher \& SVD}
+Extra Question: How is this exercise related to the "Best Fitting Subspace" Subsection of the notes of Lecture 7?
+\pause
+\end{frame}
+
+
+
+\begin{frame}[t]
+\frametitle{Question: SVD and ellipsoids}
+Explain the following statement: For any $A \in \R^{m \times n}$, the set $\{ Ax : \|x| = 1 \}$ is an ellipsoid. In other words, the image of the sphere under a linear transformation is always an ellipsoid.
+\pause
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Next week}
+Next week the recitation will be about review exercises for the midterm.
+
+\end{frame}
+
+
+
+\end{document}
+
+
