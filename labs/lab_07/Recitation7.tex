@@ -1,0 +1,309 @@
+\documentclass{beamer}
+\usepackage{amsthm}
+\usepackage[utf8]{inputenc}
+\usetheme{Madrid}
+\usepackage{../latex_style/packages_old}
+\usepackage{../latex_style/notations_old}
+\usepackage{outlines}
+\usepackage{enumitem}
+\renewenvironment{itemize}
+\usefonttheme{serif}
+\def\labelenumi{\theenumi}
+\usefonttheme{serif}
+\usepackage{comment}
+
+%\setbeamertemplate{itemize items}[default]
+%\setbeamertemplate{enumerate items}[default]
+
+% define smaller font command
+\newcommand*{\horzbar}{\rule[.5ex]{2.5ex}{0.5pt}}
+\newcommand\fonteight{\fontsize{8}{9.6}\selectfont}
+\newcommand\fontten{\fontsize{10}{1.2}\selectfont}
+
+%define enumerate with periods
+\renewenvironment{enumerate}%
+{\begin{list}{\arabic{enumi}.}%  \langle ------ dot here
+      {\setlength{\leftmargin}{2.5em}%
+       \setlength{\itemsep}{-\parsep}%
+       \setlength{\topsep}{-\parskip}%%
+       \usecounter{enumi}}%
+ }{\end{list}}
+%define itemize with arrows
+\renewenvironment{itemize}%
+{\begin{list}{$\blacktriangleright$}%  \langle ------ dot here
+      {\setlength{\leftmargin}{2.5em}%
+       \setlength{\itemsep}{-\parsep}%
+       \setlength{\topsep}{-\parskip}%%
+       \usecounter{enumi}}%
+ }{\end{list}}
+
+%Information to be included in the title page:
+\title{Recitation 7}
+\author{Alex Dong}
+\institute{CDS, NYU}
+\date{Fall 2020}
+
+
+\makeatletter
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.4\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\insertshortauthor\expandafter\ifblank\expandafter{\beamer@shortinstitute}{}{~~(\insertshortinstitute)}
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.3\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.3\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+    \insertframenumber{} / \inserttotalframenumber\hspace*{2ex} 
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\setbeamertemplate{navigation symbols}{}
+\makeatother
+
+\begin{document}
+%1
+\frame{\titlepage} 
+%2
+
+\begin{frame}
+\frametitle{Interpretation of Matrices/Matrix Multiplication}
+Previously in the course...
+\begin{itemize}
+\item Matrices as \textit{linear tranformations}
+\item Matrices \textit{act} on vectors
+\end{itemize}
+Now...
+\begin{itemize}
+\item Matrices as \textit{data matrix}
+\begin{itemize}
+\item rows are instances of data, columns are features
+\end{itemize}
+\item Not as interpretable to think of linear transformations
+\item Matrix multiplications used to condense calculations...
+\item That being said, it can be useful to think of data matrices as linear transformations.
+\item (!) Think about which framework makes sense in your proofs!
+\end{itemize}
+
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Questions: Principal Component Analysis}
+Let $x_1,...,x_n\in\R^d$. You want to represent these data points in$ k < d$ dimensions.
+\begin{enumerate}
+\item Explain how to do this using PCA.
+\item How can you implement PCA using SVD?
+\item How do we determine an `optimal' value for k?
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Solutions 1: PCA}
+Let $x_1,...,x_n\in\R^d$. You want to represent these data points in$ k < d$ dimensions.
+\begin{enumerate}
+\item Explain how to do this using PCA.
+\begin{solution}
+\begin{enumerate}
+\item Center your data: Let $X\in \R^{n\times d}$ be your data matrix.\\
+If $X = {\tiny
+\begin{bmatrix}
+\horzbar & x_1 & \horzbar \\
+& \vdots & \\
+\horzbar & x_n & \horzbar \\
+\end{bmatrix} }
+$. Then, $X_{c} = X - {\tiny
+\begin{bmatrix}
+\horzbar & \frac{1}{n}\sum_{i=1}^n x_i & \horzbar \\
+& \vdots & \\
+\horzbar & \frac{1}{n}\sum_{i=1}^n x_i & \horzbar 
+\end{bmatrix} }$
+\item Construct the covariance matrix $S= X_c^T X_c \in \R^{d\times d}$
+\item Take the Spectral Decomposition of $S: S = V\Lambda V^T$.
+\item Choose the top $k$ eigenval-vecs $\lambda_1  , ... , \lambda_k$ from $\Lambda$ and $v_1,...,v_k$ from $V$. 
+\item Construct your new data matrix as\\
+ $X_{new}= X_c V_k = {\tiny
+\begin{bmatrix}
+\horzbar & x_1 & \horzbar \\
+& \vdots & \\
+\horzbar & x_n & \horzbar \\
+\end{bmatrix} 
+\begin{bmatrix}
+\vert &  & \vert \\
+v_1   & \hdots & v_k \\
+\vert &  & \vert \\
+\end{bmatrix} 
+}$
+\end{enumerate} 
+\end{solution}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Solutions 2: PCA}
+Let $x_1,...,x_n\in\R^d$. You want to represent these data points in $k < d$ dimensions.
+\begin{solution}
+\begin{enumerate}
+\item[2.] How can you implement PCA using SVD?
+Let $X$ be our \textit{centered} data matrix. Let $X = U\Sigma V^T$.\\
+$X^TX = V \Sigma^T U^T U\Sigma V^T = V\Sigma^T \Sigma V^T.$\\
+From the framework of the previous question, we can set $\Lambda = \Sigma^T\Sigma$, and $V=V$. Then $\lambda_i = \sigma_i^2$, and $v_i$ as before.
+
+\item[3.] How do we determine an `optimal' value for $k$?
+\begin{enumerate}
+\item[i.] Scree Plot
+\item[ii.] Fraction of variance explained by top $k$ eigenvalues.
+\end{enumerate}
+\end{enumerate}
+\end{solution}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Considerations of PCA}
+\begin{itemize}
+\item Loss of interpretibility. 
+\begin{itemize}
+\item Each principal component is a linear combination of all other features.
+\item E.g $v_1 = 0.8x_1 + 0.3 x_2 + 0.3 x_3 + 0.3 x_4 + 0.3 x_5$
+\end{itemize}
+\item To standardize or not to standardize?
+\begin{itemize}
+\item Depends on your data. (No easy answers here)
+\end{itemize}
+\item Linearity
+\begin{itemize}
+\item PCA assumes that the components are linear combinations of all other features.
+\end{itemize}
+\end{itemize}
+
+\end{frame}
+
+
+
+
+\begin{frame}
+\frametitle{Question: Prelude to SVD}
+Let $X \in \R^{n\times d}$. Let $X^TX$ have Spectral Decomposition $X^TX = V\Lambda V^T$;\\
+where $\lambda_1,...,\lambda_d > 0$ are the entries of $\Lambda$; $v_1,...,v_n$ are the columns of $V$.\\ 
+\medskip
+Let $\sigma_i = \sqrt{\lambda_i},\quad \forall i\in \{1,...,d\}$ .\\
+Let $u_i = \frac{1}{\sigma_i} Xv_i\quad \forall i\in \{1,...,d\}.$
+
+\begin{enumerate}
+\item Show that $u_1,...,u_d$ form an orthonormal basis.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Solution: Prelude to SVD}
+Let $X \in \R^{n\times d}$. Let $X^TX$ have Spectral Decomposition $X^TX = V\Lambda V^T$;\\
+where $\lambda_1,...,\lambda_d > 0$ are the entries of $\Lambda$; $v_1,...,v_n$ are the columns of $V$.\\ 
+\medskip
+Let $\sigma_i = \sqrt{\lambda_i},\quad \forall i\in \{1,...,d\}$ .\\
+Let $u_i = \frac{1}{\sigma_i} Xv_i\quad \forall i\in \{1,...,d\}.$
+
+\begin{enumerate}
+\item Show that $u_1,...,u_d$ form an orthonormal basis.
+\begin{solution}
+$\langle u_i,u_j \rangle = \langle \frac{1}{\sigma_i}Av_i,\frac{1}{\sigma_j}Av_j \rangle = \frac{1}{\sigma_i\sigma_j}v_i^TA^TAv_j =  \frac{1}{\sigma_ i\sigma_j} \lambda_j v_i^Tv_j$.\\
+When $i \neq j$, $\langle u_i,u_j \rangle = 0$\quad (by orthogonality of $v_i,v_j$)\\
+When $i = j$, $\langle u_i,u_j \rangle = 1$ \quad (by normality of of $v_i$, and $\sigma_i^2 = \lambda_i$)
+\end{solution}
+\end{enumerate}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Review Questions 1}
+A matrix $M\in \R^{n\times n}$ is diagonalizable if $M$ has a basis of eigenvectors that span $\R^n$.
+True or False:
+\begin{itemize}
+\item If $M$ is diagonalizable, then $M$ is invertible.
+\item If $M$ is invertible, then $M$ is diagonalizable.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Solutions: Review Questions 1}
+A matrix $M\in \R^{n\times n}$ is diagonalizable if $M$ has a basis of eigenvectors that span $\R^n$.
+True or False:
+\begin{solution}
+\begin{itemize}
+\item If $M$ is diagonalizable, then $M$ is invertible.\\
+False: Consider $M = \begin{bmatrix}
+1 & 1\\
+0 & 0\\
+\end{bmatrix}$ Eigenvectors are $\begin{bmatrix}
+1 \\
+1 \\
+\end{bmatrix}$ and $\begin{bmatrix}
+1\\
+-1 \\
+\end{bmatrix}$
+\item If $M$ is invertible, then $M$ is diagonalizable.\\
+False. Consider a rotation matrix \\
+$M = \begin{bmatrix}
+0 & -1\\
+1 & 0\\
+\end{bmatrix}$
+\end{itemize}
+\end{solution}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Review Questions 2}
+True or False:
+\begin{enumerate}
+\item There can exist a set of $n$ non-zero orthogonal vectors in $\R^m$ if $n > m$
+\item The matrix corresponding to an orthogonal projection is symmetric
+\item The matrix corresponding to an orthogonal projection is orthogonal
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Solutions: Review Questions 2}
+True or False:
+\begin{solution}
+\begin{enumerate}
+\item There can exist a set of $n$ non-zero mutually orthogonal vectors in $\R^m$ if $n > m$\\
+False, $\R^m$ can at most contain $m$ linearly independent vectors.\\
+\item The matrix corresponding to an orthogonal projection is symmetric.\\
+True. All orthogonal projections can be expressed as $VV^T$.
+\item The matrix corresponding to an orthogonal projection is orthogonal\\
+False. Orthogonal matrices have full rank. Orthogonal projections (usually) don't.
+\end{enumerate}
+\end{solution}
+\end{frame}
+
+\begin{frame}
+\frametitle{Midterm Review Tips}
+\begin{itemize}
+\item Start studying early. Don't try to cram.
+\item Open book midterm, but \textit{don't assume your notes will help}
+\begin{itemize}
+\item Consider notes as \textit{reference only}
+\item Organize notes beforehand
+\item Exam has a notable amount of ``time pressure"
+\end{itemize}
+\item Understand the proofs of the major theorems from lecture. 
+\item Realistically, you will have enough time for one to two ``attempts" per question.
+\item Review: (Suggested order) 
+\begin{itemize}
+\item Midterm Practice Questions
+\item Midterm 2019
+\item Homework Questions (especially proofs)
+\item Recitation Questions
+\item Midterm 2018
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\end{document}
