@@ -1,7 +1,7 @@
 \documentclass[11pt,nocut]{article}
 
-\usepackage{../latex_style/packages}
-\usepackage{../latex_style/notations}
+\usepackage{../../latex_style/packages}
+\usepackage{../../latex_style/notations}
 %\externaldocument{../lecture_02/lecture_02}
 \externaldocument{../lecture_07/lecture_07}
 
@@ -64,7 +64,7 @@ Notice that $A$ is a symmetric matrix.
 	The matrix $L$ satisfies the following properties:
 	\begin{enumerate}
 		\item $L$ is symmetric and positive semi-definite.
-		\item The smallest eigenvalue of $L$ is $0$, the corresponding eigenvector is the constant one vector $\1 \defeq (1,1, \dots, 1)$.
+		\item The smallest eigenvalue of $L$ is $0$ and a corresponding eigenvector is the constant one vector $\1 \defeq (1,1, \dots, 1)$.
 		\item $L$ has $n$ non-negative eigenvalues $0 = \lambda_1 \leq \lambda_2 \leq \dots \leq \lambda_n$.
 	\end{enumerate}
 \end{proposition}
@@ -102,7 +102,7 @@ Exercise: show that $\lambda_2$ increases when one adds edges to $G$.
 	\lambda_2 \leq v(G) \leq e(G).
 	$$
 \end{proposition}
-We will only prove the first inequality, the second if a standard fact from graph theory.
+We will only prove the first inequality, the second is a standard fact from graph theory.
 \begin{lemma}\label{lem:rem}
 	Let $G^{-}$ be a graph obtained from $G$ by removing one vertex (and all the edges linked to it). Then $\lambda_2(G^{-}) \geq \lambda_2(G) - 1$.
 \end{lemma}

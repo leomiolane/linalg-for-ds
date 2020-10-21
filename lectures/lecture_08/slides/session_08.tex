@@ -1,0 +1,170 @@
+\documentclass{beamer}
+
+\usepackage{../../../latex_style/beamerthemeExecushares}
+\usepackage{../../../latex_style/notations}
+%\usepackage{../../../latex_style/packages_list}
+
+\title{Session 8: SVD, linear algebra \& graphs}
+\subtitle{Optimization and Computational Linear Algebra for Data Science}
+\author{Léo Miolane}
+\date{}
+
+
+\setcounter{showSlideNumbers}{1}
+
+\begin{document}
+\setcounter{showProgressBar}{0}
+\setcounter{showSlideNumbers}{0}
+
+\frame{\titlepage}
+
+\begin{frame}
+	\frametitle{Contents}
+	\begin{enumerate}
+		\item Singular Value Decomposition
+		\item Graphs
+		\item Graph Laplacian
+		\item Spectral clustering
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}{Midterm next week}
+	\begin{itemize}
+		\item Thu.\ Oct.\ 29, the questions have to be downloaded from Gradescope between 00:01 AM and 9:59 PM.
+			\vspace{2mm}
+		\item \textbf{Duration:} 1 hour and 40 minutes to work on the problems + 20 minutes to scan and upload your work.
+			\vspace{2mm}
+		\item Upload your work \textbf{as a single PDF}.
+			\vspace{2mm}
+		\item In case the upload does not work for you, \textbf{email me your work}.
+	\end{itemize}
+\end{frame}
+
+\setcounter{framenumber}{0}
+\setcounter{showSlideNumbers}{1}
+
+
+\section{Singular Value Decomposition}
+
+
+\begin{frame}[t]{Singular Value decomposition}
+	\grid
+
+	\vspace{-0.3cm}
+	\begin{block}{Theorem}
+		Let $A \in \R^{n \times m}$. Then there exists two orthogonal matrices $U \in \R^{n \times n}$ and $V \in \R^{m \times m}$ and a matrix $\Sigma \in \R^{n \times m}$ such that $\Sigma_{1,1} \geq \Sigma_{2,2}  \geq \cdots \geq 0$ and $\Sigma_{i,j} = 0$ for $i\neq j$, that verify
+		$$
+		A = U \Sigma V^{\sT}.
+		$$
+	\end{block}
+\end{frame}
+
+\begin{frame}[t]{Low-rank approximation}
+	\grid
+
+\end{frame}
+
+\section{Graphs}
+
+\section{Graph Laplacian}
+
+\begin{frame}[t]{Graph Laplacian}
+	\grid
+
+	\vspace{-0.4cm}
+	\begin{definition}
+		The Laplacian matrix of $G$ is defined as
+		$$
+		L = D - A.
+		$$
+	\end{definition}
+
+	\pause
+	\vspace{-0.4cm}
+	\begin{exampleblock}{}
+		For all $x \in \R^n$,
+		$$
+		x^{\sT} L x = \sum_{i \sim j} (x_i - x_j)^2, 
+		\vspace{-0.2cm}
+		$$
+	\end{exampleblock}
+\end{frame}
+
+
+\begin{frame}[t]{Properties of the Laplacian}
+	\grid
+
+	\vspace{-0.8cm}
+	\begin{exampleblock}{}
+		For all $x \in \R^n$,
+		$\displaystyle \qquad
+		x^{\sT} L x = \sum_{i \sim j} (x_i - x_j)^2.
+		%\vspace{-0.3cm}
+		$
+	\end{exampleblock}
+
+
+	\pause
+	\pause
+\end{frame}
+
+\section{Spectal clustering with the Laplacian}
+
+\begin{frame}[t]{Algorithm}
+	\grid
+
+	\vspace{-0.2cm}
+	\textbf{Input:} Graph Laplacian $L$, number of clusters $k$
+	\begin{enumerate}
+		\item Compute the first $k$ eigenvectors $v_1, \dots, v_k$ of the Laplacian matrix $L$.
+			\vspace{0.1cm}
+		\item Associate to each node $i$ the vector $\ x_i = \big(v_{2}(i), \dots, v_k(i) \big)$.
+			\vspace{0.1cm}
+		\item Cluster the points $x_1, \dots, x_n$ with (for instance) the $k$-means algorithm.
+			\vspace{0.1cm}
+		\item Deduce a clustering of the nodes of the graph.
+	\end{enumerate}
+
+\end{frame}
+
+\begin{frame}[t]{The case of two groups}
+	\grid
+
+	\textbf{For $k=2$ groups:}
+	\begin{enumerate}
+		\item Compute the second eigenvector $v_2$ of the Laplacian matrix $L$.
+			\vspace{0.1cm}
+		\item Associate to each node $i$ the number $\ x_i = v_{2}(i)$.
+			\vspace{0.1cm}
+		\item Cluster the nodes in:
+			$$
+			S = \{ i \, | \, v_2(i) \geq \delta \} \qquad \text{and} \qquad
+			S^c = \{ i \, | \, v_2(i) < \delta \},
+			$$
+			for some $\delta \in \R$.
+	\end{enumerate}
+
+\end{frame}
+
+\begin{frame}[t]{Why does this work ?}
+	\grid
+
+\end{frame}
+\begin{frame}[t]{Spectral clustering as a <<relaxation>>}
+	\grid
+
+\end{frame}
+
+
+
+\appendix
+\backupbegin
+\begin{frame}[t]
+	\frametitle{Questions?}
+	\grid
+
+	\pause
+\end{frame}
+\backupend
+
+\end{document}
