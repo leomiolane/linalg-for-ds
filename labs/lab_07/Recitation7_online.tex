@@ -3,7 +3,7 @@
 \usepackage{../../latex_style/beamerthemeExecushares}
 \usepackage{../../latex_style/notations}
 
-\title{Recitation 6}
+\title{Recitation 7}
 \author{Carles Domingo}
 \date{Fall 2020}
 
@@ -69,9 +69,7 @@ v_n = \argmin_{\|v\|=1} v^\top A v, \ \forall k = [1:(n-1)], \ v_k = \argmin_{\|
 \begin{theorem} [Corollary of Courant-Fisher principle]
 Let $A$ be a $n \times m$ matrix and let $A=U \Sigma V^\top$ be a singular eigenvalue decomposition of $A$. Then
 \begin{align*}
-v_1 &= \argmax_{\|v\|=1} \|A v\|, \ \sigma_1 = \max_{\|v\|=1} \|A v\|, \\ \forall k = [2:n], \ v_k &= \argmax_{\|v\|=1, v \perp v_1,\dots, v_{k-1}} \|A v\|,  \sigma_k = \max_{\|v\|=1, v \perp v_1,\dots, v_{k-1}} \|A v\|
-\end{align*}
-\begin{align*}
+v_1 &= \argmax_{\|v\|=1} \|A v\|, \ \sigma_1 = \max_{\|v\|=1} \|A v\|, \\ \forall k = [2:n], \ v_k &= \argmax_{\|v\|=1, v \perp v_1,\dots, v_{k-1}} \|A v\|,  \\ \sigma_k &= \max_{\|v\|=1, v \perp v_1,\dots, v_{k-1}} \|A v\|, \\ 
 v_n &= \argmin_{\|v\|=1} \|A v\|, \ \sigma_n = \min_{\|v\|=1} \|A v\|, \\ \forall k = [1:(n-1)], \ v_k &= \argmin_{\|v\|=1, v \perp v_{k+1},\dots, v_{n}} \|A v\|, \\  \sigma_k &= \min_{\|v\|=1, v \perp v_{k+1},\dots, v_{n}} \|A v\|
 \end{align*}
 \end{theorem}
@@ -91,7 +89,8 @@ x_n & y_n & -1
 \end{align*}
 Assume that you have access to its SVD: $A = U \Sigma V^{\top}$.
 \begin{enumerate}
-\item Prove that for a general matrix $B$ with SVD $B = \tilde{U} \tilde{\Sigma} \tilde{V}^{\top}$, $Ker(B) = \text{span}(\{ \tilde{v}_i | \tilde{\sigma}_i = 0 \})$.
+\item %Prove that for a general matrix $B$ with SVD $B = \tilde{U} \tilde{\Sigma} \tilde{V}^{\top}$, $Ker(B) = \text{span}(\{ \tilde{v}_i | \tilde{\sigma}_i = 0 \})$.
+Prove that $\text{Ker}(A) = \text{span}(\{ v_i | \sigma_i = 0 \})$.
 \item Use this to show that the data $\{(x_i,y_i)\}_{i=1}^n$ satisfies an affine relation exactly iff some singular value of $A$ is zero.
 \item How do we find the best vector $(a,b,c)$ when all the singular values are larger than zero? How do we know if the approximation is good?
 \end{enumerate}
@@ -99,7 +98,7 @@ Assume that you have access to its SVD: $A = U \Sigma V^{\top}$.
 
 \begin{frame}[t]
 \frametitle{Question: Courant-Fisher \& SVD}
-1. Prove that for a general matrix $B$ with SVD $B = \tilde{U} \tilde{\Sigma} \tilde{V}^{\top}$, $Ker(B) = \text{span}(\{ \tilde{v}_i | \tilde{\sigma}_i = 0 \})$. 
+1. Prove that $\text{Ker}(A) = \text{span}(\{ \tilde{v}_i | \tilde{\sigma}_i = 0 \})$.
 \pause
 \pause
 \end{frame}
@@ -155,6 +154,13 @@ Next week the recitation will be about review exercises for the midterm.
 
 \end{frame}
 
+\begin{frame}[t]
+
+\end{frame}
+
+\begin{frame}[t]
+
+\end{frame}
 
 
 \end{document}
