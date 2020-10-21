@@ -90,7 +90,7 @@
 	\end{definition}
 
 	\pause
-	\vspace{-0.4cm}
+	\vspace{-0.5cm}
 	\begin{exampleblock}{}
 		For all $x \in \R^n$,
 		$\displaystyle \qquad
@@ -118,6 +118,23 @@
 	\pause
 \end{frame}
 
+\begin{frame}[t]{Algebraic connectivity}
+	\grid
+
+	\begin{block}{Proposition}
+		The graph $G$ is connected if and only if $\lambda_2 > 0$.
+		\\
+		More generally, the multiplicity of the eigenvalue $0$ of $L$ (i.e.\ the number of $i$ such that $\lambda_i = 0$) is equal to the number of connected components of $G$.
+\end{block}
+
+\vspace{0.3cm}
+$\lambda_2$ is sometimes called the <<algebraic connectivity>> of $G$ and measure (heuristically) how well $G$ is connected.
+\\
+
+\vspace{0.3cm}
+\textbf{Exercise}: show that $\lambda_2$ increases when one adds edges to $G$.
+\end{frame}
+
 \section{Spectal clustering with the Laplacian}
 
 \begin{frame}[t]{Algorithm}
@@ -126,7 +143,7 @@
 	\vspace{-0.2cm}
 	\textbf{Input:} Graph Laplacian $L$, number of clusters $k$
 	\begin{enumerate}
-		\item Compute the first $k$ eigenvectors $v_1, \dots, v_k$ of the Laplacian matrix $L$.
+		\item Compute the first $k$ orthonormal eigenvectors $v_1, \dots, v_k$ of the Laplacian matrix $L$.
 			\vspace{0.1cm}
 		\item Associate to each node $i$ the vector $\ x_i = \big(v_{2}(i), \dots, v_k(i) \big)$.
 			\vspace{0.1cm}
@@ -156,7 +173,11 @@
 
 \end{frame}
 
-\begin{frame}[t]{Why does this work ?}
+\begin{frame}[t]{Cut of a partition}
+	\grid
+
+\end{frame}
+\begin{frame}[t]{Minimal cut problem}
 	\grid
 
 \end{frame}
