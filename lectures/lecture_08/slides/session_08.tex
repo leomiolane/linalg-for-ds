@@ -4,7 +4,7 @@
 \usepackage{../../../latex_style/notations}
 %\usepackage{../../../latex_style/packages_list}
 
-\title{Session 8: SVD, linear algebra \& graphs}
+\title{Session 8: SVD, spectral clustering on graphs}
 \subtitle{Optimization and Computational Linear Algebra for Data Science}
 \author{Léo Miolane}
 \date{}
@@ -22,8 +22,7 @@
 	\frametitle{Contents}
 	\begin{enumerate}
 		\item Singular Value Decomposition
-		\item Graphs
-		\item Graph Laplacian
+		\item Graphs and Graph Laplacian
 		\item Spectral clustering
 	\end{enumerate}
 \end{frame}
@@ -59,7 +58,7 @@
 	\end{block}
 \end{frame}
 
-\begin{frame}[t]{Comments}
+\begin{frame}[t]{Remarks}
 	\grid
 
 \end{frame}
@@ -69,14 +68,12 @@
 
 \end{frame}
 
-\section{Graphs}
+\section{Graphs and Graph Laplacian}
 
-\begin{frame}[t]{Graphs, degree}
+\begin{frame}[t]{Graphs}
 	\grid
 
 \end{frame}
-
-\section{Graph Laplacian}
 
 \begin{frame}[t]{Graph Laplacian}
 	\grid
@@ -115,29 +112,31 @@
 
 
 	\pause
-	\pause
 \end{frame}
 
 \begin{frame}[t]{Algebraic connectivity}
 	\grid
 
 	\begin{block}{Proposition}
-		The graph $G$ is connected if and only if \ $\lambda_2 > 0$.
-		\\
-		More generally, the multiplicity of the eigenvalue $0$ of $L$ (i.e.\ the number of $i$ such that $\lambda_i = 0$) is equal to the number of connected components of $G$.
+\begin{itemize}
+	\item The multiplicity of the eigenvalue $0$ of $L$ (i.e.\ the number of $i$ such that $\lambda_i = 0$) is equal to the number of connected components of $G$.
+	\item In particular, $G$ is connected if and only if \ $\lambda_2 > 0$.
+\end{itemize}
 \end{block}
 
 \vspace{0.5cm}
-$\lambda_2$ is sometimes called the <<algebraic connectivity>> of $G$ and measures somehow how well $G$ is connected.
-\\
+\begin{itemize}
+	\item $\lambda_2$ is sometimes called the <<algebraic connectivity>> of $G$ and measures somehow how well $G$ is connected.
+	\item From now, we assume that $G$ is connected, i.e.\ $\lambda_2 >0$.
+\end{itemize}
 
 \vspace{0.5cm}
 \textbf{Exercise}: show that $\lambda_2$ increases when one adds edges to $G$.
 \end{frame}
 
-\section{Spectal clustering with the Laplacian}
+\section{Spectral clustering with the Laplacian}
 
-\begin{frame}[t]{Algorithm}
+\begin{frame}[t]{Spectral \ clustering \ algorithm}
 	\grid
 
 	\vspace{-0.2cm}
@@ -181,12 +180,50 @@ $\lambda_2$ is sometimes called the <<algebraic connectivity>> of $G$ and measur
 	\grid
 
 \end{frame}
-\begin{frame}[t]{Spectral clustering as a <<relaxation>>}
+
+\begin{frame}[t]{<< Min-Cut >> is NP-Hard}
 	\grid
+	\vspace{-0.8cm}
+	\begin{exampleblock}{}
+		\textbf{Goal:}
+		$\displaystyle \qquad \text{minimize}
+		\qquad
+		x^{\sT} L x 
+		\qquad
+		\text{subject to}
+		\ \
+		\begin{cases}
+			x \in \{-1,1\}^n \\
+			x \perp (1, \dots, 1).
+		\end{cases}
+		$
+	\end{exampleblock}
 
 \end{frame}
 
+\begin{frame}[t]{Spectral clustering as a <<relaxation>>}
+	\grid
 
+	\vspace{-0.8cm}
+	\begin{exampleblock}{}
+		\textbf{Idea:} \ We first solve the << relaxed >> problem:
+		\vspace{-0.2cm}
+		$$
+		\text{minimize}
+		\qquad
+		v^{\sT} L v 
+		\qquad
+		\text{subject to}
+		\ \
+		\begin{cases}
+			\|v\| = \sqrt{n} \\
+			v \perp (1, \dots, 1).
+		\end{cases}
+		\vspace{-0.4cm}
+		$$
+	\end{exampleblock}
+
+\end{frame}
 
 \appendix
 \backupbegin
