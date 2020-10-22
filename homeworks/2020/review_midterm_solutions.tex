@@ -1,0 +1,315 @@
+\documentclass[11pt,nocut]{article}
+
+\usepackage{../../latex_style/packages}
+\usepackage{../../latex_style/notations}
+
+\title{\vspace{-2.0cm}%
+	Optimization and Computational Linear Algebra for Data Science\\
+Midterm review problems}
+%\author{Léo \textsc{Miolane} \ $\cdot$ \ \texttt{leo.miolane@gmail.com}}
+\date{}
+
+\setcounter{section}{*}
+
+\begin{document}
+\maketitle
+
+
+\begin{problem}
+	Let $A,B \in \R^{n \times n}$. For each the following subset of $\R^n$ below, say whether it is a subspace of $\R^n$ and justify your answer:
+	\begin{enumerate}
+		\item $E_1 = \{ x \in \R^n \, | \, Ax = 0 \}$.
+		\item $E_2 = \{ x \in \R^n \, | \, Ax = Bx \}$.
+		\item $E_3 = \{ x \in \R^n \, | \, Ax = e_1 \}$.
+		\item $E_4 = \{ x \in \R^n \, | \, Ax \in \Span(e_1) \}$.
+	\end{enumerate}
+\end{problem}
+
+\textbf{Solution:}
+	\begin{enumerate}
+		\item $E_1 = \{ x \in \R^n \, | \, Ax = 0 \} = \Ker(A)$ is a subspace of $\R^n$.
+		\item $E_2 = \{ x \in \R^n \, | \, Ax = Bx \}= \Ker(A-B)$ is a subspace of $\R^n$.
+		\item $E_3 = \{ x \in \R^n \, | \, Ax = e_1 \}$ is not a subspace of $\R^n$ since $0 \not\in E_3$.
+		\item $E_4 = \{ x \in \R^n \, | \, Ax \in \Span(e_1) \}$ is a subspace. Indeed, 
+			\begin{itemize}
+				\item $E_4 \neq \emptyset$, since $A0 = 0 \in \Span(e_1)$: \ $0 \in E_4$.
+				\item If $u,v \in E_4$ then $A(u+v) = Au + Av \in Span(e_1)$ because $Au, Av \in \Span(e_1)$ and $\Span(e_1)$ is a subspace.
+				\item If $u\in E_4$ and $\lambda \in \R$ then $A(\lambda u) = \lambda Au \in Span(e_1)$ because $Au \in \Span(e_1)$ and $\Span(e_1)$ is a subspace.
+			\end{itemize}
+	\end{enumerate}
+
+\vspace{0.2cm}
+
+\begin{problem}
+	\textbf{True or False}: There exists matrices $M \in \R^{2 \times 3}$ such that $\dim(\Ker(M))=1$ and $\rank(M)=2$.
+\end{problem}
+
+\textbf{Solution:}
+For $M \in \R^{2 \times 3}$, the rank-nullity theorem states that
+$$
+\rank(M) + \dim(\Ker(M)) = 2.
+$$
+Hence the statement is False:
+There does not exist matrices $M \in \R^{2 \times 3}$ such that $\dim(\Ker(M))=1$ and $\rank(M)=2$.
+
+\vspace{0.2cm}
+
+\begin{problem}
+	Let $n>m$ and $A \in \R^{n \times m}$. Assume that $A$ has ``full rank'', meaning that $\rank(A)=\min(n,m)=m$.
+	\begin{enumerate}
+		\item Does $Ax=b$ has a solution for all $b \in \R^n$ ? (Prove or give a counter example)
+		\item Can there exists two vectors $x \neq x'$ such that $Ax=Ax'$ ? (Prove or give a counter example).
+	\end{enumerate}
+\end{problem}
+
+\textbf{Solution:}
+
+	\begin{enumerate}
+		\item $\Im(A) \subset \R^n$ and $\dim(\Im(A)) = m < n$. Hence $\Im(A) \neq \R^n$, so there exists vectors $b \in \R^n$ that does not belong to $\Im(A)$, i.e.\ for which there exists no $x$ such that $Ax=b$.
+		\item The rank-nullity theorem gives that $\dim(\Ker(A)) = m - \rank(A) = 0$. Hence $\Ker(A) = \{0\}$. If $Ax = Ax'$ for some $x,x' \in \R^m$, then $x-x' \in \Ker(A)$ which implies that $x-x' = 0$: $x=x'$.
+		Therefore there can not exists two vectors $x \neq x'$ such that $Ax=Ax'$.
+	\end{enumerate}
+
+\vspace{0.2cm}
+
+\begin{problem}
+	Let $n<m$ and $A \in \R^{n \times m}$. Assume that $A$ has ``full rank'', meaning that $\rank(A)=\min(n,m)=n$.
+	\begin{enumerate}
+		\item Does $Ax=b$ has a solution for all $b \in \R^n$ ? (Prove or give a counter example)
+		\item Can there exists two vectors $x \neq x'$ such that $Ax=Ax'$ ? (Prove or give a counter example).
+	\end{enumerate}
+\end{problem}
+
+\textbf{Solution:}
+
+	\begin{enumerate}
+		\item $\Im(A) \subset \R^n$ and $\dim(\Im(A)) = n$. Hence $\Im(A) = \R^n$, for all $b \in \R^n$ there exists $x \in \R^m$ such that $Ax=b$.
+		\item The rank-nullity theorem gives that $\dim(\Ker(A)) = m - \rank(A) = m-n > 0$. Hence there exists $x \neq 0$ such that $Ax=0=A0$.
+	\end{enumerate}
+
+\vspace{0.2cm}
+\begin{problem}
+	\textbf{True or False}: There exists a family of $k$ non-zero orthogonal vectors of $\R^n$, for some $k>n$.
+\end{problem}
+
+\textbf{Solution:}
+An orthogonal family of non-zero vectors if linearly independent. Since there is no linearly independent family of vectors of $\R^n$ that contains strictly more than $n$ vectors, the statement is false.
+
+\vspace{0.2cm}
+
+\begin{problem}
+	Let $A \in \R^{n \times m}$.
+	\begin{enumerate}
+		\item Prove that $\Ker(A^{\sT})$ and $\Im(A)$ are orthogonal to each other, i.e.\ that for all $x \in \Ker(A^{\sT})$ and $y \in \Im(A)$ we have $x \perp y$.
+		\item Show that $\Ker(A^{\sT}) = \Im(A)^{\perp}$.
+	\end{enumerate}
+\end{problem}
+
+\textbf{Solution:}
+	\begin{enumerate}
+		\item Let $x \in \Ker(A^{\sT})$ and $y \in \Im(A)$. There exists $v \in \R^m$ such that $y = Av$. Compute now:
+			$$
+			\langle y,x \rangle = 
+			\langle Av,x \rangle = 
+			v^{\sT} A^{\sT} x = 0
+			$$
+			because $x \in \Ker(A^{\sT})$. Hence $x \perp y$.
+		\item The first question shows that $\Ker(A^{\sT}) \subset \Im(A)^{\perp}$. Since we know from the homework that 
+			$$
+			\dim(\Im(A)^{\perp}) = n - \dim(\Im(A)) = n - \dim(\Im(A^{\sT}))
+			= \dim(\Ker(A^{\sT}))
+			$$
+			where we used the the fact that $\rank(A) = \rank(A^{\sT})$ and the rank-nullity Theorem. We conclude that $\Ker(A^{\sT}) = \Im(A)^{\perp}$.
+	\end{enumerate}
+
+\vspace{0.2cm}
+
+\begin{problem}
+	\textbf{True or False}: The matrix of an orthogonal projection is symmetric.
+\end{problem}
+
+\textbf{Solution:}
+True: Let $P_S$ be the matrix of the orthogonal projection onto a subspace $S$.
+We know that if $V$ is a matrix whose columns forms an orthonormal basis of $S$, then $P_S = VV^{\sT}$, which is symmetric.
+\vspace{0.2cm}
+
+\begin{problem}
+	\textbf{True or False}: The matrix of an orthogonal projection is orthogonal.
+\end{problem}
+\textbf{Solution:}
+False. Consider for instance (for $n \geq 1$) the orthogonal projection $P$ onto the subspace $\{0\}$. For all $x \in \R^n$, $Px = 0$. Hence $P$ is the zero matrix which is not orthogonal.
+
+\vspace{0.2cm}
+
+\begin{problem}
+	Let $S$ be a subspace of $\R^n$ and let $P_S$ be the orthogonal projection onto $S$. Show that $\dim(S) = \Tr(P_S)$.
+\end{problem}
+
+\textbf{Solution:}
+Let $k = \dim(S)$ and let $v_1, \dots, v_k$ be an orthonormal basis of $S$. Let 
+$$
+V=
+\begin{pmatrix}
+	| & & | \\
+	v_1 & \cdots & v_k \\
+	| & & | 
+\end{pmatrix}
+\in \R^{n \times k}.
+$$
+We know from the lectures that then $P_S= VV^{\sT}$. Compute
+$$
+\Tr(P_S) = \Tr(VV^{\sT}) = \Tr(V^{\sT} V) = \Tr(\Id_k) = k = \dim(S),
+$$
+where $V^{\sT} V = \Id_k$ because the columns of $V$ form an orthonormal family.
+
+
+\vspace{0.2cm}
+
+\begin{problem}
+	\textbf{True or False}: Let $A,B \in \R^{n \times n}$. Assume that $v \in \R^n$ is an eigenvector of $A$ and $B$.
+	\begin{enumerate}
+		\item Is $v$ an eigenvector of $A+B$ ?
+		\item Is $v$ an eigenvector of $AB$ ?
+	\end{enumerate}
+\end{problem}
+
+\textbf{Solution:}
+Since $v \in \R^n$ is an eigenvector of $A$ and $B$, there exists $\lambda, \lambda' \in \R$ such that $Av= \lambda v$ and $Bv = \lambda' v$.
+	\begin{enumerate}
+		\item $v$ an eigenvector of $A+B$ because  
+			$$
+			(A+B)v = Av + Bv =
+			\lambda v + \lambda' v = (\lambda + \lambda') v.
+			$$
+		\item $v$ an eigenvector of $AB$ because
+			$$
+			ABv = 
+			A(\lambda' v) = \lambda' Av = \lambda \lambda' v.
+			$$
+	\end{enumerate}
+
+
+
+
+\vspace{0.2cm}
+
+
+\begin{problem}
+	Let $A\in \R^{n \times n}$ and let $v_1,v_2 \in \R^n$ be two eigenvectors of $A$, associated with the same eigenvalue $\lambda$.
+	\\
+	Show that any non-zero eigenvector in $\Span(v_1,v_2)$ is an eigenvector of $A$, associated with $\lambda$.
+\end{problem}
+\textbf{Solution:}
+Let $x \in \Span(v_1,v_2) \setminus \{0\}$. There exists $\alpha, \beta \in \R$ such that $x=\alpha v_1 + \beta v_2$. Compute
+$$
+Ax = A(\alpha v_1 + \beta v_2) 
+= \alpha Av_1 + \beta Av_2
+= \alpha \lambda v_1 + \beta \lambda v_2
+= \lambda (\alpha v_1 + \beta v_2)
+= \lambda x.
+$$
+Recall  that $x\neq 0$: we conclude that $x$ is an eigenvector of $A$ associated with the eigenvalue $\lambda$.
+
+\vspace{0.2cm}
+\begin{problem}
+	Let $A\in \R^{n \times n}$ be a symmetric matrix.
+	Let $(v_1,v_2, \dots, v_n)$ be an orthonormal family of eigenvectors of $A$, associated to the eigenvalues $\lambda_1, \dots, \lambda_n$. Give an orthonormal basis of $\Ker(A)$ and $\Im(A)$ in terms of the $v_i$'s.
+\end{problem}
+
+\textbf{Solution:}
+Let $I = \{i \in \{1, \dots, n \} \, | \, \lambda_i = 0 \}$ and $k = \#I$.
+\\
+
+For $i \in I$, we have $Av_i = 0$. Hence the familiy $(v_i)_{i \in I}$ is a familiy of $k$ linearly independent vectors (because the $v_i$'s are orthonormal) of $\Ker(A)$. Therefore $\dim(\Ker(A)) \geq k$.
+\\
+
+For $i \not\in I$, we have $v_i = \frac{1}{\lambda_i} A v_i \in \Im(A)$. Hence the familiy $(v_i)_{i \not\in I}$ is a familiy of $n-k$ linearly independent vectors (because the $v_i$'s are orthonormal) of $\Im(A)$. Therefore $\dim(\Im(A)) \geq n-k$.
+\\
+
+The rank-nullity Theorem gives that $\dim(\Ker(A)) + \dim(\Im(A)) = n$. This implies (together with the two inequalities above) that
+$\dim(\Ker(A)) = k$ and $\dim(\Im(A)) = n-k$.
+\\
+
+Recall that the familiy $(v_i)_{i \in I}$ is a familiy of $k$ linearly independent vectors of $\Ker(A)$: it is therefore a basis of $\Ker(A)$.
+Recall that the familiy $(v_i)_{i \not\in I}$ is a familiy of $n-k$ linearly independent vectors of $\Im(A)$: it is therefore a basis of $\Im(A)$.
+
+
+\vspace{0.2cm}
+\begin{problem}
+	Let $A\in \R^{n \times n}$ be a symmetric matrix, that satisfies $A^2 = \Id$.
+	Show that the matrix 
+	$$
+	M = \frac{1}{2}(A+\Id)
+	$$
+	is the matrix of an orthogonal projection.
+\end{problem}
+\textbf{Solution:}
+Let $\lambda$ be an eigenvalue of $A$ and $v$ an associated eigenvector. We have $v = A^2 v = \lambda^2 v$, hence $\lambda^2 = 1$, i.e.\ $\lambda \in \{-1,1\}$.
+\\
+
+Let $k$ be the multiplicity of the eigenvalue $1$. $A$ is symmetric, so the spectral theorem gives that there exists an orthogonal matrix $V$ sucht that
+$$
+A = V \Diag(1, \dots, 1, -1, \dots, -1) V^{\sT},
+$$
+with $k$ $1$ and $n-k$ $-1$. Since $VV^{\sT} = \Id$, we get that
+	$$
+	M = \frac{1}{2}(A+\Id)
+= V \Diag(1, \dots, 1, 0, \dots, 0) V^{\sT},
+	$$
+with $k$ $1$ and $n-k$ $0$.
+Let $V_{(k)}$ be the matrix consisting of the first $k$ colums of $V$. We have
+	$$
+	M=V \Diag(1, \dots, 1, 0, \dots, 0) V^{\sT} = V_{(k)} V_{(k)}^{\sT}.
+	$$
+	$V$ is orthogonal so its colums forms an orthonormal family. We conclude that $M$ is the orthogonal projection onto the span of the first $k$ colums of $V$.
+
+\vspace{0.2cm}
+
+\begin{problem}
+	Let $\rho \in (0,1)$.
+	Let $v_1, \dots, v_k \in \R^n$ such that
+	$$
+\|v_i\| = 1
+\qquad \text{and} \qquad
+\langle v_i, v_j \rangle = \rho
+\qquad \text{for all} \quad i \neq j.
+	$$
+	Show that $k \leq n$.
+\end{problem}
+
+\textbf{Solution:}
+Let
+$$
+V=
+\begin{pmatrix}
+	| & & | \\
+	v_1 & \cdots & v_k \\
+	| & & | 
+\end{pmatrix}
+\in \R^{n \times k}.
+$$
+We have
+$$
+V^{\sT} V =
+\begin{pmatrix}
+	1 & \rho & \dots & \rho \\
+	\rho & 1 & & \vdots \\
+	\vdots &  & \ddots & \rho \\
+	\rho & \cdots & \rho & 1 \\
+\end{pmatrix}
+= (1-\rho) \Id_k + \rho J
+$$
+where $J\in \R^{k \times k}$ is the all-ones matrix. The eigenvalues of $J$ are $0$ and $k$ (from the homework) hence the eigenvalues of $V^{\sT} V = (1-\rho) \Id_k + \rho J$ are all strictly positive (because $(1-\rho) > 0$). This gives that $\rank(V^{\sT}V) = k$, i.e.\ $\Ker(V^{\sT}V) = \{0\}$.
+\\
+
+For all $x \in \Ker(V)$ we have $V^{\sT}V x = 0$ so $x \in \Ker(V^{\sT}V) = \{0\}$. We get that $\Ker(V)= \{0\}$, hence the rank-nullity theorem gives that $\rank(V) = k$. This means that $v_1, \dots, v_k$ are $k$ linearly independent vectors of $\R^n$: $k \leq n$.
+
+
+
+
+\vspace{1cm}
+\centerline{\pgfornament[width=7cm]{87}}
+
+%\bibliographystyle{plain}
+%\bibliography{./references.bib}
+\end{document}
