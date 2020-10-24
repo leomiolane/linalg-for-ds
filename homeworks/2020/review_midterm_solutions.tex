@@ -33,8 +33,8 @@ Midterm review problems}
 		\item $E_4 = \{ x \in \R^n \, | \, Ax \in \Span(e_1) \}$ is a subspace. Indeed, 
 			\begin{itemize}
 				\item $E_4 \neq \emptyset$, since $A0 = 0 \in \Span(e_1)$: \ $0 \in E_4$.
-				\item If $u,v \in E_4$ then $A(u+v) = Au + Av \in Span(e_1)$ because $Au, Av \in \Span(e_1)$ and $\Span(e_1)$ is a subspace.
-				\item If $u\in E_4$ and $\lambda \in \R$ then $A(\lambda u) = \lambda Au \in Span(e_1)$ because $Au \in \Span(e_1)$ and $\Span(e_1)$ is a subspace.
+				\item If $u,v \in E_4$ then $A(u+v) = Au + Av \in \Span(e_1)$ because $Au, Av \in \Span(e_1)$ and $\Span(e_1)$ is a subspace.
+				\item If $u\in E_4$ and $\lambda \in \R$ then $A(\lambda u) = \lambda Au \in \Span(e_1)$ because $Au \in \Span(e_1)$ and $\Span(e_1)$ is a subspace.
 			\end{itemize}
 	\end{enumerate}
 
@@ -45,12 +45,20 @@ Midterm review problems}
 \end{problem}
 
 \textbf{Solution:}
-For $M \in \R^{2 \times 3}$, the rank-nullity theorem states that
+True, take for instance the matrix
 $$
-\rank(M) + \dim(\Ker(M)) = 2.
+M = 
+\begin{pmatrix}
+	1 & 0 & 0 \\
+	0 & 1 & 0
+\end{pmatrix}.
 $$
-Hence the statement is False:
-There does not exist matrices $M \in \R^{2 \times 3}$ such that $\dim(\Ker(M))=1$ and $\rank(M)=2$.
+%For $M \in \R^{2 \times 3}$, the rank-nullity theorem states that
+%$$
+%\rank(M) + \dim(\Ker(M)) = 2.
+%$$
+%Hence the statement is False:
+%There does not exist matrices $M \in \R^{2 \times 3}$ such that $\dim(\Ker(M))=1$ and $\rank(M)=2$.
 
 \vspace{0.2cm}
 
@@ -93,7 +101,7 @@ There does not exist matrices $M \in \R^{2 \times 3}$ such that $\dim(\Ker(M))=1
 \end{problem}
 
 \textbf{Solution:}
-An orthogonal family of non-zero vectors if linearly independent. Since there is no linearly independent family of vectors of $\R^n$ that contains strictly more than $n$ vectors, the statement is false.
+An orthogonal family of non-zero vectors is linearly independent. Since there is no linearly independent family of vectors of $\R^n$ that contains strictly more than $n$ vectors, the statement is false.
 
 \vspace{0.2cm}
 
@@ -299,10 +307,10 @@ V^{\sT} V =
 \end{pmatrix}
 = (1-\rho) \Id_k + \rho J
 $$
-where $J\in \R^{k \times k}$ is the all-ones matrix. The eigenvalues of $J$ are $0$ and $k$ (from the homework) hence the eigenvalues of $V^{\sT} V = (1-\rho) \Id_k + \rho J$ are all strictly positive (because $(1-\rho) > 0$). This gives that $\rank(V^{\sT}V) = k$, i.e.\ $\Ker(V^{\sT}V) = \{0\}$.
+where $J\in \R^{k \times k}$ is the all-ones matrix. The eigenvalues of $J$ are $0$ and $k$ (from the homework) hence the eigenvalues of $V^{\sT} V = (1-\rho) \Id_k + \rho J$ are all strictly positive (because $(1-\rho) > 0$). This gives that $\rank(V^{\sT}V) = k$.
 \\
 
-For all $x \in \Ker(V)$ we have $V^{\sT}V x = 0$ so $x \in \Ker(V^{\sT}V) = \{0\}$. We get that $\Ker(V)= \{0\}$, hence the rank-nullity theorem gives that $\rank(V) = k$. This means that $v_1, \dots, v_k$ are $k$ linearly independent vectors of $\R^n$: $k \leq n$.
+Since $\rank(V^{\sT} V) \leq \rank(V) \leq k$ (recall that $V$ is $n \times k$), we get $\rank(V) = k$. This means that $v_1, \dots, v_k$ are $k$ linearly independent vectors of $\R^n$: $k \leq n$.
 
 
 
