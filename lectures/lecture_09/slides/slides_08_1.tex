@@ -1,0 +1,116 @@
+\documentclass{beamer}
+
+\usepackage{../../../latex_style/beamerthemeExecushares}
+\usepackage{../../../latex_style/notations}
+
+\title{Lecture 8.1: Functions of $n$ variables}
+\subtitle{Optimization and Computational Linear Algebra for Data Science}
+\author{Léo Miolane}
+\date{}
+
+\setcounter{showSlideNumbers}{1}
+
+\begin{document}
+\setcounter{showProgressBar}{0}
+\setcounter{showSlideNumbers}{0}
+
+\frame{\titlepage}
+\setcounter{framenumber}{0}
+%\setcounter{showProgressBar}{1}
+\setcounter{showSlideNumbers}{1}
+
+
+\begin{frame}[t]{Derivative / Gradient}
+	\grid 
+
+	\begin{columns}
+		\begin{column}{0.47\textwidth}
+			\vspace{-0.5cm}
+			$$
+			\begin{array}{cccc}
+				f: & \R & \to & \R \\
+				   & x & \mapsto & f(x)
+			\end{array}
+			\vspace{0.15cm}
+			$$
+			Derivative at \ $x \in \R$:
+			\vspace{0.35cm}
+			$$
+			f'(x) \in \R
+			$$
+
+	\end{column}
+	\hspace{-1cm}
+	\vrule
+	\hspace{0.5cm}
+	\begin{column}{0.53\textwidth}
+			$$
+			\begin{array}{cccl}
+				f: & \R^n & \to & \R \\
+				   & x & \mapsto & f(x) = f(x_1, \dots, x_n)
+			\end{array}
+			$$
+			Gradient at \ $x \in \R^n$:
+			$$
+			\nabla f(x) = 
+			\begin{pmatrix}
+				\frac{\partial f}{\partial x_1}(x) \\
+				\vdots \\
+				\frac{\partial f}{\partial x_n}(x)
+			\end{pmatrix}
+			\in \R^n
+			$$
+	\end{column}
+	\end{columns}
+
+\end{frame}
+
+\begin{frame}[t]{Gradient and contour lines}
+	\grid
+
+
+\end{frame}
+
+\begin{frame}[t]{Hessian matrix}
+	\grid 
+
+	What is the equivalent of the second derivative for function of $n$ variables ?
+			$$
+			\begin{array}{cccl}
+				f: & \R^n & \to & \R \\
+				   & x & \mapsto & f(x) = f(x_1, \dots, x_n)
+			\end{array}
+			$$
+			Hessian at \ $x \in \R^n$:
+			\vspace{0.4cm}
+			{\small
+				$$
+				H_f(x) = 
+				\begin{pmatrix}
+					\dfrac {\partial ^{2}f}{\partial x_{1}^{2}}(x)&{\dfrac {\partial ^{2}f}{\partial x_{1}\,\partial x_{2}}}(x)&\cdots &{\dfrac {\partial ^{2}f}{\partial x_{1}\,\partial x_{n}}(x)}\\[2.2ex]{\dfrac {\partial ^{2}f}{\partial x_{2}\,\partial x_{1}}(x)}&{\dfrac {\partial ^{2}f}{\partial x_{2}^{2}}(x)}&\cdots &{\dfrac {\partial ^{2}f}{\partial x_{2}\,\partial x_{n}}(x)}\\[2.2ex]\vdots &\vdots &\ddots &\vdots \\[2.2ex]{\dfrac {\partial ^{2}f}{\partial x_{n}\,\partial x_{1}}(x)}&{\dfrac {\partial ^{2}f}{\partial x_{n}\,\partial x_{2}}(x)}&\cdots &{\dfrac {\partial ^{2}f}{\partial x_{n}^{2}}(x)}
+				\end{pmatrix}
+				\in \R^{n \times n}
+				$$
+			}
+
+\end{frame}
+
+\begin{frame}[t]{Example}
+	\grid
+
+\end{frame}
+
+\begin{frame}[t]{Schwarz's Theorem}
+	\grid
+
+	\begin{block}{Theorem}
+		If $f: \R^n \to \R$ is <<twice differentiable>>, then for all $x \in \R^n$ and all $i,j \in \{1, \dots, n\}$ we have:
+$$
+\frac{\partial }{\partial x_i}\left(\frac{\partial f}{\partial x_j}\right)(x) =
+\frac{\partial }{\partial x_j}\left(\frac{\partial f}{\partial x_i}\right)(x).
+$$
+	\end{block}
+
+\end{frame}
+
+\end{document}
