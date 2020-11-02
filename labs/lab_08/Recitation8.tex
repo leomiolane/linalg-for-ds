@@ -1,0 +1,321 @@
+\documentclass{beamer}
+\usepackage{amsthm}
+\usepackage[utf8]{inputenc}
+\usetheme{Madrid}
+\usepackage{../latex_style/packages_old}
+\usepackage{../latex_style/notations_old}
+\usepackage{outlines}
+\usepackage{enumitem}
+\renewenvironment{itemize}
+\usefonttheme{serif}
+\def\labelenumi{\theenumi}
+\usefonttheme{serif}
+\usepackage{comment}
+
+%\setbeamertemplate{itemize items}[default]
+%\setbeamertemplate{enumerate items}[default]
+
+% define smaller font command
+\newcommand*{\horzbar}{\rule[.5ex]{2.5ex}{0.5pt}}
+\newcommand\fonteight{\fontsize{8}{9.6}\selectfont}
+\newcommand\fontten{\fontsize{10}{1.2}\selectfont}
+
+%define enumerate with periods
+\renewenvironment{enumerate}%
+{\begin{list}{\arabic{enumi}.}%  \langle ------ dot here
+      {\setlength{\leftmargin}{2.5em}%
+       \setlength{\itemsep}{-\parsep}%
+       \setlength{\topsep}{-\parskip}%%
+       \usecounter{enumi}}%
+ }{\end{list}}
+%define itemize with arrows
+\renewenvironment{itemize}%
+{\begin{list}{$\blacktriangleright$}%  \langle ------ dot here
+      {\setlength{\leftmargin}{2.5em}%
+       \setlength{\itemsep}{-\parsep}%
+       \setlength{\topsep}{-\parskip}%%
+       \usecounter{enumi}}%
+ }{\end{list}}
+
+%Information to be included in the title page:
+\title{Recitation 8}
+\author{Alex Dong}
+\institute{CDS, NYU}
+\date{Fall 2020}
+
+
+\makeatletter
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.4\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\insertshortauthor\expandafter\ifblank\expandafter{\beamer@shortinstitute}{}{~~(\insertshortinstitute)}
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.3\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.3\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+    \insertframenumber{} / \inserttotalframenumber\hspace*{2ex} 
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\setbeamertemplate{navigation symbols}{}
+\makeatother
+
+\begin{document}
+%1
+\frame{\titlepage} 
+%2
+
+\begin{frame}
+\frametitle{Singular Value Decomposition}
+\begin{itemize}
+\item $A = U\Sigma V^T$
+\begin{itemize}
+\item $A, \Sigma \in \R^{n \times m},\quad U \in \R^{n\times n},\quad V \in \R^{m\times m}$
+\item $U,V$ are orthogonal
+\begin{itemize}
+\item ($U,V$ not necessarily the same dimension)
+\end{itemize}
+\item $\Sigma$ is ``almost diagonal". 
+\begin{itemize}
+\item All entries off the main diagonal are 0.
+\end{itemize}
+\end{itemize}
+\item (!!) \textit{Every} matrix has a SVD.
+\item SVD provides a framework for understanding the properties of $A$.
+\item Can use the SVD to create matrices (Psuedo-Inverse, Lec 10).
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Questions: SVD}
+\begin{enumerate}
+\item Explain what the SVD says about the action of any matrix $A$.
+\medskip
+
+\item Recall from Recitation 3 the proof we used to show\\
+\qquad $rank(A) = rank(A^TA)$.\\
+ Use the SVD to show that:\\
+ \qquad $rank(A)=rank(A^TA)=rank(AA^T)=rank(A^T)$.
+\medskip
+\end{enumerate}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Solutions 1: SVD}
+\begin{enumerate}
+\item Explain what the SVD says about the action of any matrix $A$.
+\begin{solution}
+Let $A$ have SVD $A=U\Sigma V^T$.\\
+Transforming any vector $x$ by $A$ is equivalent to transforming it by $V^T$, $\Sigma$ and then $U$. \\
+Applying $V^T$ is applying a rotation/flipping.\\
+Applying $\Sigma$ scales/squashes each (standard basis) axis, and also transforms $V^Tx$ to a different space.\\
+Applying $U$ also applies a rotation/flipping.
+\end{solution}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Solutions 2: SVD}
+\begin{enumerate}
+\item[2.] Recall from Recitation 3 the proof we used to show\\
+\qquad $rank(A) = rank(A^TA)$.\\
+Use the SVD to show that:\\
+\qquad $rank(A)=rank(A^TA)=rank(AA^T)=rank(A^T)$.
+\begin{solution}
+Recall that if B,C are invertible, then rank(BAC) = rank(A).
+$A = U\Sigma V^T$ \\
+$A^TA = V\Sigma^T \Sigma V^T$ \\
+$AA^T = U\Sigma \Sigma^T U^T$ \\
+$A^T = V\Sigma^T U^T$ \\
+Based on the definition of $\Sigma$, we can easily do the matrix multiplication, and see
+that:\\
+\qquad $rank(\Sigma)=rank(\Sigma^T\Sigma)=rank(\Sigma\Sigma^T)=rank(\Sigma^T)$.\\
+We can then deduce that:\\
+\qquad $rank(A)=rank(A^TA)=rank(AA^T)=rank(A^T)$.
+\end{solution}
+\end{enumerate}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Questions: More SVD}
+\smallskip
+\begin{enumerate}
+\item Give basis transformations for $U$, $\Sigma$, $V^T$.\\
+(Your answer should look like $T(a) = b$. where you select convenient $a$'s that form a basis for the origin space of T.  Be careful about the dimensions w/ $\Sigma$!)
+
+\medskip
+\item Let $x\in \R^m$ s.t $x = \sum_{i=1}^m\alpha_i v_i$, where $v_i$ are the columns of $V$.\\
+ and write the expressions for $V^Tx$, $\Sigma V^Tx$, and $U\Sigma V^Tx$.
+\medskip
+\item Which vectors span the $Im(A)$? Which vectors span the $Ker(A)$? Which vectors span $Im(A^T)$? Which vectors span $Ker(A^T)$?
+\end{enumerate}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Solutions 1: More SVD}
+Let $A\in \R^{n\times m}$, where $n>m$, have SVD $A=U\Sigma V^T$.\\ 
+Let $e_{i,m}, e_{i,n}$ denote the $i$th standard basis vector in $\R^m$, and $\R^n$.
+\begin{enumerate}
+\item Give basis transformations for $U$, $\Sigma$, $V^T$.\\
+(Your answer should look like $T(a) = b$. where you select convenient $a$'s that form a basis for the origin space of T.  Be careful about the dimensions w/ $\Sigma$!)
+\begin{solution}
+$V^T(v_i) = e_{i,m}$ \quad for $i\in\{1,...,m\}$ \\
+$\Sigma(e_{i,m}) = \sigma_i e_{i,n}$ \quad for $i \in \{1, ..., m\}$ (Note the $m$ here) \\
+$U(e_{i,n}) = u_{i}$ \quad for $i \in \{1, ..., n\}$ \\
+\end{solution}
+\end{enumerate}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Solutions 2: More SVD}
+Let $A\in \R^{n\times m}$, where $n>m$, have SVD $A=U\Sigma V^T$.\\ 
+Let $e_{i,m}, e_{i,n}$ denote the $i$th standard basis vector in $\R^m$, and $\R^n$.
+\begin{enumerate}
+\item[2.] Let $x\in \R^m$ s.t $x = \sum_{i=1}^m\alpha_i v_i$, where $v_i$ are the columns of $V$.\\ Write the expressions for $V^Tx$ $\Sigma V^Tx$, and $U\Sigma V^Tx$.
+\begin{solution}
+Let $e_{i,m}$ denote the $i$th standard basis vector in $\R^m$. \\
+$x = \sum_{i=1}^m\alpha_i v_i$\\
+$V^Tx = \sum_{i=1}^m\alpha_i e_{i,m}$ \\
+$\Sigma V^Tx = \sum_{i=1}^{min(m,n)} \sigma_i \alpha_i e_{i,n}$ \\
+$U \Sigma V^Tx = \sum_{i=1}^{min(m,n)} \sigma_i \alpha_i u_i$ \\
+\end{solution}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Solutions 3: More SVD}
+Let $A\in \R^{n\times m}$, where $n>m$, have SVD $A=U\Sigma V^T$.\\ 
+Let $e_{i,m}, e_{i,n}$ denote the $i$th standard basis vector in $\R^m$, and $\R^n$.
+\begin{enumerate}
+\item[3.] Which vectors span the $Im(A)$? Which vectors span the $Ker(A)$? Which vectors span $Im(A^T)$? Which vectors span $Ker(A^T)$?
+\begin{solution}
+Let $\sigma_1,...,\sigma_k > 0$ , and $\sigma_{k+1},...,\sigma_{min(m,n)} = 0$.\\
+Let $u_1,...,u_n$ be the columns of $U$ and $v_1,...,v_m$ be the columns of $V$.\\
+\medskip
+
+$u_1,...,u_k$ span the $Im(A)$.\\
+$v_{k+1},..., v_m$ span $Ker(A)$. \\
+\medskip
+$v_1,...,v_k$ span $Im(A^T)$. \\
+$u_{k+1},...,u_n$ span $Ker(A^T)$.\\
+\end{solution}
+Note the $u$'s and $v$'s!
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Questions: SVD, Midterm, Regression}
+Midterm Q6 using SVD
+Let $M\in \R^{n\times m}$. Let $n>m$, and $M$ have full rank. Let $M$ have SVD $M= U\Sigma V^T$.
+\begin{enumerate}
+
+\item Show that $M^TM$ is invertible.
+\item Which vectors span the $Im(M)$? Write the matrix of orthogonal projection onto $Im(M)$ and give a basis transformation for that matrix.
+\item Let $w\in \R^n$, and $u$ be the orthgonal projection of $w$ onto $Im(M)$. Show that $M^Tu = M^Tw$.
+\item Show that $M(M^TM)^{-1}M^T$ is the matrix of an orthogonal projection onto $Im(M)$.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Solutions 1: SVD, Midterm, Regression}
+Midterm Q6 using SVD
+Let $M\in \R^{n\times m}$. Let $n>m$, and $M$ have full rank. Let $M$ have SVD $M= U\Sigma V^T$.
+\begin{solution}
+\begin{enumerate}
+\item Show that $M^TM$ is invertible.\\
+``Questions: SVD" Question 2 earlier in recitation. \\
+M is full rank in this case.
+\medskip
+\item Which vectors span the $Im(M)$? Write the matrix of orthogonal projection onto $Im(M)$ and give a basis transformation for that matrix.\\
+``Questions: More SVD" Question 3 earlier in recitation.\\
+$u_1,...,u_m$ span $Im(M)$.
+ $P_{Im(M)} = U_rU_r^T$ where:\\
+${\fonteight U_r = \begin{bmatrix}
+\vert &        & \vert \\
+u_1   & \hdots & u_m \\
+\vert &        & \vert \\
+\end{bmatrix}
+}$\\
+$U_rU_r^T(u_i) = u_i$ for $i\in \{1,...,m\}$.\\
+$U_rU_r^T(u_i) = 0$ for $i\in \{m+1,...,n\}$.
+
+\end{enumerate}
+\end{solution}
+\end{frame}
+
+\begin{frame}
+\frametitle{Solutions 2: SVD, Midterm, Regression}
+Midterm Q6 using SVD
+Let $M\in \R^{n\times m}$. Let $n>m$, and $M$ have full rank. Let $M$ have SVD $M= U\Sigma V^T$.
+\begin{enumerate}
+\item[3.] Let $w\in \R^n$, and $u$ be the orthgonal projection of $w$ onto $Im(M)$. Show that $M^Tu = M^Tw$.\\
+\begin{solution}
+
+\medskip
+Let $w = \sum_{i=1}^n \alpha_i u_i$.\\
+$u = P_{Im(M)}(w)$, so \\
+\quad $u = U_rU_r^Tw$, and\\
+\quad $u = \sum_{i=1}^m \alpha_i u_i$. (note change in summation).\\
+Now,\\
+\quad $M^Tu = \sum_{i=1}^{m} \sigma_i \alpha_i v_i$, and\\
+\quad $M^Tw = \sum_{i=1}^{min(m,n)} \sigma_i \alpha_i v_i$ \quad (From More SVD Q2) \\
+Since $n>m$, $M^Tu = M^Tw$.
+\item[4.] Show that $M(M^TM)^{-1}M^T$ is the matrix of an orthogonal projection onto $Im(M)$.
+\end{solution}
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Solutions 2: SVD, Midterm, Regression}
+Midterm Q6 using SVD
+Let $M\in \R^{n\times m}$. Let $n>m$, and $M$ have full rank. Let $M$ have SVD $M= U\Sigma V^T$.
+\begin{enumerate}
+\item[4.] Show that $M(M^TM)^{-1}M^T$ is the matrix of an orthogonal projection onto $Im(M)$.
+\begin{solution}
+First, note that $(M^TM)^{-1} = (V \Sigma^T \Sigma V^T)$, and that $\Sigma^T \Sigma$ has rank $m$ and is invertible, where the diagonal entries of $(\Sigma^T \Sigma)^{-1}$ are reciprocals of the entries in $(\Sigma^T \Sigma)$. \\
+Now,  \\
+\quad $M(M^TM)^{-1}M^T = (U \Sigma V^T)(V (\Sigma^T \Sigma)^{-1} V^T)(V \Sigma^T U^T) $ \\ 
+\quad $M(M^TM)^{-1}M^T = U \Sigma (\Sigma^T \Sigma)^{-1} \Sigma^T U^T $ \\ 
+Doing the matrix multiplication of  $\Sigma (\Sigma^T \Sigma)^{-1} \Sigma^T $ gives \\
+
+\quad $\Sigma (\Sigma^T \Sigma)^{-1}) \Sigma^T = I_{m,n}$,\\
+where $I_{m,n}$ is the $n\times n$ matrix where the first $m$ diagonal entries are $1$. \\
+Finally, its easy to show that $UI_{m,n}U^T = U_rU_r^T$.
+
+
+\end{solution}
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Concluding Remarks}
+\begin{itemize}
+\item Throughout the course, we've emphasized viewing problems from different points of view
+\item Matrix multiplication
+\begin{itemize}
+\item Inner product interpretation
+\item Linear combination of columns interpretation
+\end{itemize}
+
+\item Linear transformations
+\begin{itemize}
+\item as matrices (matrix mechanics)
+\item as letters (transformations on basis vectors)
+\end{itemize}
+\item This recitation really emphasizes fluid switching between all of these frameworks
+\item All the things we've covered are deeply connected to eachother.
+\end{itemize}
+\end{frame}
+\end{document}
