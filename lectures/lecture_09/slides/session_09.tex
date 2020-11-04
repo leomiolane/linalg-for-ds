@@ -1,0 +1,254 @@
+\documentclass{beamer}
+
+\usepackage{../../../latex_style/beamerthemeExecushares}
+\usepackage{../../../latex_style/notations}
+
+\title{Session 9: Convex functions}
+\subtitle{Optimization and Computational Linear Algebra for Data Science}
+\author{Léo Miolane}
+\date{}
+
+\setcounter{showSlideNumbers}{1}
+
+\begin{document}
+\setcounter{showProgressBar}{0}
+\setcounter{showSlideNumbers}{0}
+
+\frame{\titlepage}
+\setcounter{framenumber}{0}
+%\setcounter{showProgressBar}{1}
+\setcounter{showSlideNumbers}{1}
+
+\begin{frame}
+	\frametitle{Contents}
+	\begin{enumerate}
+		\item Recap of the videos
+		\item Convex sets and convex functions
+		\item Convex functions and derivatives
+		\item Jensen's inequality
+	\end{enumerate}
+\end{frame}
+\begin{frame}[t]{Optimization}
+	In machine learning, we often have to minimize functions
+	$$
+	f(\theta) = {\rm Loss}\big( {\rm data}, {\rm model}_{\theta}\big)
+	\quad \text{with respect to} \quad \theta \in \R^n.
+	$$
+	\begin{itemize}
+		\item For $n=1,2$, one could plot $f$ to find the minimizer.
+		\item This is intractable for larger dimension.
+	\end{itemize}
+
+	\vspace{0.2cm}
+	\begin{block}{We will}
+		\begin{itemize}
+			\item focus on convex cost functions $f$.
+			\item study gradient descent algorithms to minimize $f$.
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+
+\begin{frame}[t]{Gradient/Hessian}
+	\grid 
+
+	\vspace{-0.4cm}
+	For $f: \R^n \to \R$:
+	\vspace{0.2cm}
+	\begin{itemize}
+		\item Gradient at \ $x \in \R^n$:
+			$$
+			\nabla f(x) = 
+			\begin{pmatrix}
+				\frac{\partial f}{\partial x_1}(x) \\
+				\vdots \\
+				\frac{\partial f}{\partial x_n}(x)
+			\end{pmatrix}
+			\in \R^n
+			$$
+		\item Hessian at \ $x \in \R^n$:
+			\vspace{0.4cm}
+			{\small
+				$$
+				H_f(x) = 
+				\begin{pmatrix}
+					\dfrac {\partial ^{2}f}{\partial x_{1}^{2}}(x)&{\dfrac {\partial ^{2}f}{\partial x_{1}\,\partial x_{2}}}(x)&\cdots &{\dfrac {\partial ^{2}f}{\partial x_{1}\,\partial x_{n}}(x)}\\[2.2ex]{\dfrac {\partial ^{2}f}{\partial x_{2}\,\partial x_{1}}(x)}&{\dfrac {\partial ^{2}f}{\partial x_{2}^{2}}(x)}&\cdots &{\dfrac {\partial ^{2}f}{\partial x_{2}\,\partial x_{n}}(x)}\\[2.2ex]\vdots &\vdots &\ddots &\vdots \\[2.2ex]{\dfrac {\partial ^{2}f}{\partial x_{n}\,\partial x_{1}}(x)}&{\dfrac {\partial ^{2}f}{\partial x_{n}\,\partial x_{2}}(x)}&\cdots &{\dfrac {\partial ^{2}f}{\partial x_{n}^{2}}(x)}
+				\end{pmatrix}
+				\in \R^{n \times n}
+				$$
+			}
+	\end{itemize}
+
+\end{frame}
+
+\begin{frame}[t]{Taylor's formulas}
+	\grid
+
+	Let $x \in \R^n$. Heuristically, for $h \in \R^n$ "small", we have
+	$$
+	f(x+h) \ \ \simeq  \ \ f(x) + \langle \nabla f(x), h \rangle.
+	$$
+\end{frame}
+\begin{frame}[t]{Taylor's formulas}
+	\grid
+
+	Let $x \in \R^n$. Heuristically, for $h \in \R^n$ "small", we have
+	$$
+	f(x+h) \ \ \simeq  \ \ f(x) + \langle \nabla f(x), h \rangle + \frac{1}{2} h^{\sT} H_f(x) h.
+	$$
+\end{frame}
+
+\section{Convex sets}
+
+\begin{frame}[t]{Convex set}
+	\grid
+
+	\begin{block}{Definition}
+		A set $S \subset \R^n$ is called a convex set if for all $x,y \in C$ and all $\alpha \in [0,1]$,
+		$$
+		\alpha x + (1-\alpha) y \in C.
+		$$
+	\end{block}
+
+\end{frame}
+
+\begin{frame}[t]{Exercise}
+	\grid
+
+	\begin{enumerate}
+		\item Show that any subspace of $\R^n$ is convex.
+		\item Let $\| \cdot \|$ be a (arbitrary) norm and $r \geq 0$.
+			Show that the "ball" of radius $r$:
+			$$
+			B(r) = \big\{ x \in \R^n \, \big| \, \|x\| \leq r \big\}
+			$$
+			is convex.
+	\end{enumerate}
+
+\end{frame}
+
+\section{Convex functions}
+
+\begin{frame}[t]{Convex / concave functions}
+	\grid
+
+	\vspace{-0.4cm}
+
+	\begin{definition}
+		A function $f: \R^n \to \R$ is convex if for all $x,y \in \R^n$ and all $\alpha \in [0,1]$,
+		\begin{equation}\label{eq:def_convex}
+			f(\alpha x + (1-\alpha) y) \leq \alpha f(x) + (1-\alpha) f(y).
+		\end{equation}
+	\end{definition}
+	\begin{itemize}
+		\item We say that $f$ is \emph{strictly convex} is there is strict inequality in \eqref{eq:def_convex} whenever $x \neq y$ and $\alpha \in (0,1)$.
+		\item A function $f$ is called concave if $-f$ is convex.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[t]{Exercise}
+	\grid
+
+	\vspace{-0.4cm}
+
+	\begin{enumerate}
+		\item Show that any linear map $f:\R^n \to \R$ is convex and concave.
+		\item Show that a norm $\| \cdot \|$ is convex.
+		\item Show that the sum of two convex functions is also a convex function.
+	\end{enumerate}
+\end{frame}
+
+
+
+\section{Convex functions and derivatives}
+
+\begin{frame}[t]{Convex functions \ \ vs \ \ their tangents}
+	\grid
+
+	\vspace{-0.4cm}
+
+	\begin{block}{Proposition}
+		A differentiable function $f: \R^n \to \R$ is convex if and only if for all $x,y \in \R^n$
+		$$
+		f(y) \geq f(x) + \langle \nabla f(x), (y-x) \rangle.
+		$$
+	\end{block}
+
+\end{frame}
+\begin{frame}[t]{Proof}
+	\grid
+
+	\pause
+\end{frame}
+
+
+\begin{frame}[t]{Minimizers of a convex function}
+	\grid
+
+	\vspace{-0.4cm}
+
+	\begin{block}{Corollary}
+	Let $f: \R^n \to \R$ be a differentiable convex function and $x \in \R^n$. Then
+	$$
+	x \ \ \ \text{is a minimizer of} \ \ \ f
+	\quad \Longleftrightarrow \quad \nabla f(x) = 0.
+	$$
+	\end{block}
+
+\end{frame}
+
+\begin{frame}[t]{Hessian of convex function}
+	\grid
+
+	\vspace{-0.4cm}
+
+	\begin{block}{Proposition}
+	Let $f: \R^n \to \R$ be a twice-differentiable function. 
+	Then $f$ is convex if and only if for all $x \in \R^n$, $H_f(x)$ is positive semi-definite.
+	\end{block}
+
+\end{frame}
+
+\section{Jensen's inequality}
+
+
+\begin{frame}[t]{Jensen's inequality}
+	\grid
+
+	\vspace{-0.4cm}
+
+	\begin{block}{Theorem}
+	Let $f: \R^n \to \R$ be a convex function. Then for all $x_1, \dots, x_k \in \R^n$ and all $\alpha_1, \dots, \alpha_k \geq 0$ such that $\sum_{i=1}^k \alpha_i = 1$ we have
+	$$
+	f\left(\sum_{i=1}^k \alpha_i x_i \right) \leq \sum_{i=1}^k \alpha_i f(x_i).
+	$$
+	More generally, if $X$ is a random variable that takes value in $\R^n$ we have
+	$$
+	f\big(\E [X]\big) \leq \E \big[f(X)\big].
+	$$
+	\end{block}
+
+\end{frame}
+
+
+\begin{frame}[t]{Examples}
+	\grid
+
+\end{frame}
+
+
+
+\appendix
+\backupbegin
+\begin{frame}[t]
+	\frametitle{Questions?}
+	\grid
+
+	\pause
+\end{frame}
+\backupend
+
+
+
+
+\end{document}
