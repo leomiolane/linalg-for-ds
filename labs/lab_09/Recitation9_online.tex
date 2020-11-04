@@ -1,0 +1,114 @@
+\documentclass{beamer}
+
+\usepackage{../../latex_style/beamerthemeExecushares}
+\usepackage{../../latex_style/notations}
+\usepackage{dsfont}
+
+\title{Recitation 9}
+\author{Carles Domingo}
+\date{Fall 2020}
+
+
+\begin{document}
+
+\frame{\titlepage} 
+
+\setcounter{showProgressBar}{0}
+\setcounter{showSlideNumbers}{1}
+
+\begin{frame}[t]
+\frametitle{Adjacency matrix and Laplacian}
+\begin{definition}[Adjacency matrix]
+We define the adjacency matrix $A \in \R^{n \times n}$ of a graph $G$ with $n$ nodes as
+\begin{equation*} 
+A_{ij} = \begin{cases}
+1 &\text{if } i \sim j \\
+0 &\text{otherwise}
+\end{cases}
+\end{equation*}
+\end{definition}
+
+\begin{definition}[Laplacian of a matrix]
+The Laplacian matrix of $G$ is defined as
+\begin{equation*} 
+L = D - A
+\end{equation*}
+where $D$ is the degree matrix $D = \text{diag}(\text{deg}(1), \dots, \text{deg}(n))$.
+\end{definition}
+Remember that $A$ is symmetric and positive semidefinite, and 1 is an eigenvalue of $A$ with eigenvector $\mathds{1}$.
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Laplacian}
+The Fiedler eigenvalue $\lambda_2$ is the smallest eigenvalue of $L$ larger than 0.
+\begin{enumerate}
+\item Show that when we add an edge to the graph, the Fiedler eigenvalue increases.
+\end{enumerate}
+\pause
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Normalized Laplacian}
+\vspace{-10pt}
+A bipartite graph is a graph such that the set of nodes can be split into two subsets such that all the edges of the graph are between nodes in different subsets.
+
+2. Show that the largest eigenvalue of $L_{norm} = D^{-1/2} L D^{-1/2}$ is less or equal than 2.
+
+3. Show that the largest eigenvalue of $L_{norm}$ is equal to 2 if and only if the graph has some bipartite connected component.
+\pause
+\pause
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Adjacency matrix}
+Show that the largest eigenvalue $\lambda_n$ of the adjacency matrix $A$ is larger or equal than the average of the degrees of the nodes and smaller or equal than the maximum degree. 
+\pause
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Complete graphs}
+\begin{enumerate}
+\item What are the eigenvalues of the Laplacian of the complete graph over $n$ nodes?
+\end{enumerate}
+\pause
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Spectral clustering}
+Reminder of the spectral clustering algorithm:
+
+Input: Graph Laplacian $G$, number of clusters $k$.
+\begin{enumerate}
+\item Compute the first $k$ eigenvectors of the graph Laplacian.
+\item Associate to each node $i$ the vector $x_i = (v_2(i), \dots, v_k(i))$.
+\item Cluster the points $x_1, \dots, x_n$ with $k$-means, for example.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Extra SVD Question}
+Midterm 2019 Q6: Let $M\in \R^{n\times m}$. Let $n \geq m$, and $M$ have full rank. Let $M$ have SVD $M= U\Sigma V^T$.
+\begin{enumerate}
+\item Show that $M^TM$ is invertible.
+\item Which vectors span the $Im(M)$? Write the matrix of orthogonal projection onto $Im(M)$ and give a basis transformation for that matrix.
+\item Let $w\in \R^n$, and $u$ be the orthogonal projection of $w$ onto $Im(M)$. Show that $M^Tu = M^Tw$.
+\item Show that $M(M^TM)^{-1} M^T$ is the matrix of an orthogonal projection onto $Im(M)$.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Extra SVD Question}
+\pause
+\pause
+\pause
+\pause
+\end{frame}
+
+\begin{frame}[t]
+\pause
+\end{frame}
+
+
+\end{document}
+
+
