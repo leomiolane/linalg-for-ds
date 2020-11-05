@@ -29,6 +29,8 @@
 	\end{enumerate}
 \end{frame}
 \begin{frame}[t]{Optimization}
+	\grid
+
 	In machine learning, we often have to minimize functions
 	$$
 	f(\theta) = {\rm Loss}\big( {\rm data}, {\rm model}_{\theta}\big)
@@ -103,6 +105,7 @@
 \begin{frame}[t]{Convex set}
 	\grid
 
+	\vspace{-0.4cm}
 	\begin{block}{Definition}
 		A set $S \subset \R^n$ is called a convex set if for all $x,y \in C$ and all $\alpha \in [0,1]$,
 		$$
@@ -115,8 +118,9 @@
 \begin{frame}[t]{Exercise}
 	\grid
 
+	\vspace{-0.3cm}
 	\begin{enumerate}
-		\item Show that any subspace of $\R^n$ is convex.
+		\item Show that any subspace $S$ of $\R^n$ is convex.
 		\item Let $\| \cdot \|$ be a (arbitrary) norm and $r \geq 0$.
 			Show that the "ball" of radius $r$:
 			$$
@@ -132,14 +136,16 @@
 \begin{frame}[t]{Convex / concave functions}
 	\grid
 
-	\vspace{-0.4cm}
+	\vspace{-0.5cm}
 
 	\begin{definition}
 		A function $f: \R^n \to \R$ is convex if for all $x,y \in \R^n$ and all $\alpha \in [0,1]$,
 		\begin{equation}\label{eq:def_convex}
-			f(\alpha x + (1-\alpha) y) \leq \alpha f(x) + (1-\alpha) f(y).
+			f\big(\alpha x + (1-\alpha) y\big) \ \ \ \leq \ \ \ \alpha f(x) + (1-\alpha) f(y).
+	\vspace{-0.3cm}
 		\end{equation}
 	\end{definition}
+	\vspace{-0.1cm}
 	\begin{itemize}
 		\item We say that $f$ is \emph{strictly convex} is there is strict inequality in \eqref{eq:def_convex} whenever $x \neq y$ and $\alpha \in (0,1)$.
 		\item A function $f$ is called concave if $-f$ is convex.
@@ -179,6 +185,7 @@
 	\grid
 
 	\pause
+	\pause
 \end{frame}
 
 
@@ -207,6 +214,7 @@
 	Then $f$ is convex if and only if for all $x \in \R^n$, $H_f(x)$ is positive semi-definite.
 	\end{block}
 
+	\pause
 \end{frame}
 
 \section{Jensen's inequality}
