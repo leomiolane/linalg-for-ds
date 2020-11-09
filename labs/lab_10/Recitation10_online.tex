@@ -1,0 +1,164 @@
+\documentclass{beamer}
+
+\usepackage{../../latex_style/beamerthemeExecushares}
+\usepackage{../../latex_style/notations}
+\usepackage{dsfont}
+
+\title{Recitation 10}
+\author{Carles Domingo}
+\date{Fall 2020}
+
+
+\begin{document}
+
+\frame{\titlepage} 
+
+\setcounter{showProgressBar}{0}
+\setcounter{showSlideNumbers}{1}
+
+\begin{frame}[t]
+\frametitle{Gradient and Hessian}
+\vspace{-10pt}
+\begin{definition}[Gradient and Hessian of a function]
+Let $f : \R^n \rightarrow \R$ be a function. If it exists, its gradient at a point $x \in \R^n$ is defined as
+\begin{equation*} 
+\nabla f(x) = 
+\begin{bmatrix}
+\frac{\partial f}{\partial x_1}(x) \\
+\vdots \\
+\frac{\partial f}{\partial x_n}(x)
+\end{bmatrix}
+\end{equation*}
+If it exists, its Hessian at a point $x \in \R^n$ is defined as
+\begin{equation*} 
+H f(x) = 
+\begin{bmatrix}
+\frac{\partial^2 f}{\partial x_1^2}(x) & \frac{\partial^2 f}{\partial x_1 \partial x_2}(x) & \cdots & \frac{\partial^2 f}{\partial x_1 \partial x_n}(x) \\ 
+\frac{\partial^2 f}{\partial x_2 \partial x_1}(x) & \frac{\partial^2 f}{\partial x_2^2}(x) & \cdots & \frac{\partial^2 f}{\partial x_2 \partial x_n}(x) \\ 
+\vdots &  \vdots & \cdots & \vdots \\ 
+\frac{\partial^2 f}{\partial x_2 \partial x_1}(x) & \frac{\partial^2 f}{\partial x_2^2}(x) & \cdots & \frac{\partial^2 f}{\partial x_2 \partial x_n}(x)
+\end{bmatrix}
+\end{equation*}
+\end{definition}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Convex sets and convex functions}
+\vspace{-10pt}
+\begin{definition}[Convex set]
+A set $C \subseteq \R^n$ if for all $x,y \in C$, and all $\alpha \in [0,1]$,
+\begin{equation*} 
+\alpha x + (1-\alpha) y \in C.
+\end{equation*}
+\end{definition}
+
+\begin{definition}[Convex function (and strictly convex function)]
+A function $f : \R^n \rightarrow \R$ is convex if and only if for all $x, y \in \R^n$ and all $\alpha \in [0,1]$ it holds that 
+\begin{align}
+f(\alpha x + (1-\alpha) y) \leq \alpha f(x) + (1-\alpha) f(y).
+\end{align}
+It is strictly convex if moreover $\forall \alpha \in (0,1)$,
+\begin{align}
+f(\alpha x + (1-\alpha) y) < \alpha f(x) + (1-\alpha) f(y).
+\end{align}
+\end{definition}
+\end{frame}
+
+\begin{frame}[t] 
+\frametitle{Convex sets}
+\vspace{-10pt}
+1. Which of the following sets are convex?
+\begin{enumerate}
+\item $\{x \in \R^2 : \|x\|=1\}$ 
+\item $\{x \in \R^2 : \|x\| \leq 1\}$ 
+\item $\{x \in \R^2 : \|x\| \geq 1\}$ 
+\item $\{x \in \R^2 : \|x\| < 1\}$ 
+\item $\{x \in \R^2 : v^\top x \geq a\}$  for fixed $v \in \R^2$ and $a \in \R$.  
+\item $\{x \in \R^2 : v^\top x = a\}$  for fixed $v \in \R^2$ and $a \in \R$.  
+\item $\{x \in \R^2 : x_2 \geq x_{1}^2 \}$ 
+\item $\{x \in \R^2 : x_2 \leq x_{1}^2 \}$
+\end{enumerate}
+\pause
+\pause
+\pause
+\end{frame}
+
+\begin{frame}[t] 
+\frametitle{Convex sets}
+\vspace{-10pt}
+1. Which of the following sets are convex?
+\begin{enumerate}
+\item $\{x \in \R^2 : \|x\|=1\}$ 
+\item $\{x \in \R^2 : \|x\| \leq 1\}$ 
+\item $\{x \in \R^2 : \|x\| \geq 1\}$ 
+\item $\{x \in \R^2 : \|x\| < 1\}$ 
+\item $\{x \in \R^2 : v^\top x \geq a\}$  for fixed $v \in \R^2$ and $a \in \R$.  
+\item $\{x \in \R^2 : v^\top x = a\}$  for fixed $v \in \R^2$ and $a \in \R$.  
+\item $\{x \in \R^2 : x_2 \geq x_{21} \}$ 
+\item $\{x \in \R^2 : x_2 \leq x_{21} \}$
+\end{enumerate}
+\pause
+\pause
+\pause
+\end{frame}
+
+\begin{frame}[t] 
+\frametitle{Convex functions and convex sets}
+\vspace{-5pt}
+For $f : \R^n \rightarrow \R$, define the epigraph $\text{epi}(f) \subset \R^{n+1}$ to be the set of all points above the graph of $f$: $\text{epi}(f) := \{(x,t) \in \R^{n+1} \ | \ t \geq f(x) \}.$
+\begin{enumerate}
+\item Prove that $f$ is convex if and only if $\text{epi}(f)$ is convex.
+\item Prove that if $f,g$ are convex functions, then $h(x) =\max(f(x),g(x))$ is convex.
+\end{enumerate}
+\pause
+\pause
+\pause
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Convex functions and Hessians}
+\vspace{-5pt}
+Reminder: If $f$ is a twice-differentiable function from $\R^n$ to $\R$, $f$ is convex if and only if its Hessian matrix $H_f(x)$ is positive semidefinite at all points $x \in \R^n$.
+
+Reminder: If for all $x \in \R^n$, the Hessian matrix $H_f(x)$ is positive definite, then $f$ is strictly convex. Show that the reverse is not true, i.e. find a strictly convex twice-differentiable function such that the Hessian matrix $H_f(x)$ is not positive definite everywhere.
+\pause
+\pause
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Convex functions and minima}
+Let $f : \R^n \rightarrow \R$ be a convex function. Show that if for a certain $x \in \R^n$, there exists $\epsilon > 0$ such that $f(x) = \min \{f(y) \ | \ \|x-y\| < \epsilon \}$, then $f(x) = \min_{y \in \R^n} f(y)$.
+\pause
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Strictly convex functions \& minima}
+Let $f : \R^n \rightarrow \R$ be a convex function. Show that there exists a unique $x^{\star}$ such that $f(x^{\star}) = \min_{y \in \R^n} f(y)$.
+\pause
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Gradients and Hessians}
+\vspace{-10pt}
+Calculate the gradients and the Hessians of the following functions $f : \R^n \rightarrow \R$:
+\begin{enumerate}
+\item $f(x) = \|x\|^2$.
+\item $f(x) = \|Ax\|^2$.
+\item $f(x) = x^\top A x$.
+\end{enumerate}
+For the functions 2 and 3, give necessary and sufficient conditions to have convexity and strict convexity.
+\pause
+\pause
+\pause
+\end{frame}
+
+\begin{frame}[t]
+\pause
+\pause
+\pause
+\end{frame}
+
+
+\end{document}
+
+
