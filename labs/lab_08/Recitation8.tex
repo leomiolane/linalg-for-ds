@@ -86,7 +86,7 @@
 \end{itemize}
 \item (!!) \textit{Every} matrix has a SVD.
 \item SVD provides a framework for understanding the properties of $A$.
-\item Can use the SVD to create matrices (Pseudo-Inverse, Lec 10).
+\item Can use the SVD to create matrices (Psuedo-Inverse, Lec 10).
 \end{itemize}
 \end{frame}
 
@@ -145,8 +145,9 @@ We can then deduce that:\\
 
 \begin{frame}
 \frametitle{Questions: More SVD}
-\smallskip
-\begin{enumerate}
+Let $A\in \R^{n\times m}$, where $n>m$, have SVD $A=U\Sigma V^T$.\\ 
+Let $e_{i,m}, e_{i,n}$ denote the $i$th standard basis vector in $\R^m$, and $\R^n$.\begin{enumerate}
+
 \item Give basis transformations for $U$, $\Sigma$, $V^T$.\\
 (Your answer should look like $T(a) = b$. where you select convenient $a$'s that form a basis for the origin space of T.  Be careful about the dimensions w/ $\Sigma$!)
 
@@ -283,7 +284,7 @@ Let $M\in \R^{n\times m}$. Let $n>m$, and $M$ have full rank. Let $M$ have SVD $
 \begin{enumerate}
 \item[4.] Show that $M(M^TM)^{-1}M^T$ is the matrix of an orthogonal projection onto $Im(M)$.
 \begin{solution}
-First, note that $(M^TM)^{-1} = (V \Sigma^T \Sigma V^T)$, and that $\Sigma^T \Sigma$ has rank $m$ and is invertible, where the diagonal entries of $(\Sigma^T \Sigma)^{-1}$ are reciprocals of the entries in $(\Sigma^T \Sigma)$. \\
+First, note that $(M^TM)^{-1} = (V (\Sigma^T \Sigma)^{-1} V^T)$, and that $\Sigma^T \Sigma$ has rank $m$ and is invertible, where the diagonal entries of $(\Sigma^T \Sigma)^{-1}$ are reciprocals of the entries in $(\Sigma^T \Sigma)$. \\
 Now,  \\
 \quad $M(M^TM)^{-1}M^T = (U \Sigma V^T)(V (\Sigma^T \Sigma)^{-1} V^T)(V \Sigma^T U^T) $ \\ 
 \quad $M(M^TM)^{-1}M^T = U \Sigma (\Sigma^T \Sigma)^{-1} \Sigma^T U^T $ \\ 
