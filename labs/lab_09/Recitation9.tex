@@ -1,0 +1,219 @@
+\documentclass{beamer}
+\usepackage{amsthm}
+\usepackage[utf8]{inputenc}
+\usetheme{Madrid}
+\usepackage{../latex_style/packages_old}
+\usepackage{../latex_style/notations_old}
+\usepackage{outlines}
+\usepackage{enumitem}
+\renewenvironment{itemize}
+\usefonttheme{serif}
+\def\labelenumi{\theenumi}
+\usefonttheme{serif}
+\usepackage{comment}
+
+%\setbeamertemplate{itemize items}[default]
+%\setbeamertemplate{enumerate items}[default]
+
+% define smaller font command
+\newcommand*{\horzbar}{\rule[.5ex]{2.5ex}{0.5pt}}
+\newcommand\fonteight{\fontsize{8}{9.6}\selectfont}
+\newcommand\fontten{\fontsize{10}{1.2}\selectfont}
+
+%define enumerate with periods
+\renewenvironment{enumerate}%
+{\begin{list}{\arabic{enumi}.}%  \langle ------ dot here
+      {\setlength{\leftmargin}{2.5em}%
+       \setlength{\itemsep}{-\parsep}%
+       \setlength{\topsep}{-\parskip}%%
+       \usecounter{enumi}}%
+ }{\end{list}}
+%define itemize with arrows
+\renewenvironment{itemize}%
+{\begin{list}{$\blacktriangleright$}%  \langle ------ dot here
+      {\setlength{\leftmargin}{2.5em}%
+       \setlength{\itemsep}{-\parsep}%
+       \setlength{\topsep}{-\parskip}%%
+       \usecounter{enumi}}%
+ }{\end{list}}
+
+%Information to be included in the title page:
+\title{Recitation 9}
+\author{Alex Dong}
+\institute{CDS, NYU}
+\date{Fall 2020}
+
+
+\makeatletter
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.4\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\insertshortauthor\expandafter\ifblank\expandafter{\beamer@shortinstitute}{}{~~(\insertshortinstitute)}
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.3\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.3\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+    \insertframenumber{} / \inserttotalframenumber\hspace*{2ex} 
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\setbeamertemplate{navigation symbols}{}
+\makeatother
+\newcommand{\x}{\vec{x} } 
+\newcommand{\y}{\vec{y} } 
+
+\begin{document}
+%1
+\frame{\titlepage} 
+%2
+
+\begin{frame}
+\frametitle{Convexity and Optimization}
+\begin{itemize}
+\item We are temporarily stepping away from \textit{Linearity}
+\item Two types of convexity
+\begin{itemize}
+\item Convexity for functions (we care about this)
+\item Convexity for sets
+\item They are related! (see epigraph question)
+\end{itemize}
+\item Convexity implies if a min exists, it must be a global min
+\begin{itemize}
+\item Optimization is the process to find the minimum
+\end{itemize}
+\item Convexity is a \textit{global} property
+\item Contrast to differentiable, which is a \textit{local} property
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Questions: Convexity and Epigraph}
+Let $f: \R^n \rightarrow \R$.\\
+Define the epigraph $epi(f)\subset \R^{n+1}$ to be set of all the points above the graph of $f$:\\
+\quad $epi(f) = \{[\x,c] \in \R^{n+1}\ |\ c \geq f(\x) \}$ \\
+where [$\bullet,\bullet$] denotes a vector concatentation\\
+
+\begin{enumerate}
+\item[0.] For the function  $f: \R^2 \rightarrow \R$, s.t $f(x,y)=x^2+y^2$,\\ draw $epi(f)$
+\medskip
+\item[1.] Prove that $f$ is convex if and only if $epi(f)$ is convex\\
+(Warning, this problem has \textit{really tricky} notation)\\
+(Hint $\impliedby$ is easier than $\implies$)
+\end{enumerate}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Solutions 1: Convexity and Epigraph}
+\begin{solution}
+$epi(f)$ is convex $\implies$ $f$ is convex.\\
+\medskip 
+Assume $epi(f)$ is convex. Let $\x,\y \in \R^n, t\in[0,1]$.\\
+Consider $t(f(\x)+(1-t)f(\y)$, \quad convex combo of $f(\vec{x})$,$f(\y)$\\
+Since $[\x,f(\x)],[\y,f(\y)]\in epi(f)$, and $epi(f)$ is convex, then,\\
+\medskip
+\quad $t[\x,f(\x)]+(1-t)[\y,f(\y)] \in epi(f)$ \qquad \quad convexity of $epi(f)$\\
+\quad $[t \x +(1-t)\y\ ,\ t f(\x )+(1-t)f(\y )] \in epi(f)$ \qquad add vectors \\
+\medskip 
+Therefore, by definition of $epi(f)$, we have $\forall x,y\in \R^n$, $t \in [0,1]$ \\
+\quad $t f(\x )+(1-t)f(\y ) \geq t \x +(1-t)\y$
+So $f$ is convex.
+
+\end{solution}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Solutions 2:  Convexity and Epigraph}
+\begin{solution}
+$f$ is convex $\implies$ $epi(f)$ is convex.\\
+Assume $f$ is convex.\\
+ Let $[x,c],[y,d] \in epi(f), t\in[0,1]$. \\
+Since $[\x,c],[\y,d)]\in epi(f)$,then we have \\
+\quad $c \geq f(\x)$ and $d \geq f(\y)$ \\
+and this directly implies\\
+\quad $tc \geq tf(\x)$ and $(1-t)d \geq (1-t) f(\y)$ \quad \qquad (*)\\
+Now, consider $t[\x,c]+(1-t)[\y,d])$, \quad convex combo of $[\x,c],[\y,d]$ \\
+From (*), we have \\
+\quad $t[\x,c]+(1-t)[\y,d]) \geq tf(\x) + (1-t) f(\y)$ \\
+and since $f$ is convex, then\\
+\quad $t[\x,c]+(1-t)[\y,d]) \geq tf(\x) + (1-t) f(\y) \geq f(t\x + (1-t)\y )$\\
+\quad $t[\x,c]+(1-t)[\y,d]) \geq f(t\x + (1-t)\y )$ \\
+So $t[\x,c]+(1-t)[\y,d])\in epi(f)$.\\
+Since this applies $\forall x,y\in \R^n$, $t \in [0,1]$, $epi(f)$ is convex.
+\end{solution}
+\end{frame}
+
+
+\begin{frame}
+
+\frametitle{Questions: True and False}
+\begin{enumerate}
+
+\item If $f$ has only $1$ global min and no local min, then $f$ is convex
+\item Linear combination of two convex functions is convex
+\item Convex functions are differentiable at all points
+\item Norms are convex functions
+\item If $f$ is convex, then g(x) = $f(Ax-b)$ is also convex. ($A\in\R^{n\times n}$ , $b\in \R^n$)
+\item Sum of a non-convex function w/ another function can never be convex
+\item Union of convex sets is convex
+\item Intersection of convex sets is convex
+\item Maximum of two convex functions is convex
+\item Every subspace is a convex set
+\item Every convex set is a subspace
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Questions: True and False}
+\begin{enumerate}
+\item False, $cos(\theta)$, $\theta\in[0,\pi]$
+\item False, negative of convex function is not convex
+\item False, f(x) = |x|
+\item True, Triangle inequality (Prove it!)
+\item True, convexity is a global property, so the $Ax-b$ doesnt matter.
+\item False sum of f and -f is 0, which is a convex function.
+\item False, Easy counter-example
+\item True,  True, intersection preserves convexity properties
+\item True, Use epigraph proof
+\item True, convex combinations are in the subspace by property of subspaces.
+\item False, convex sets do not need to contain 0.
+\end{enumerate}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Questions: Quadratic Forms}
+Let $f: \R^n \rightarrow \R$ be given by $f(x) = x^T Ax$ for some symmetric matrix $A \in\R^{n\times n}$. 
+\begin{enumerate}
+\item Give conditions on $A$ so that $0$ is the global minimizer of $f$
+\end{enumerate}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Solutions: Quadratic Forms}
+Let $f: \R^n \rightarrow \R$ be given by $f(x) = x^T Ax$ for some symmetric matrix $A \in\R^{n\times n}$. 
+\begin{enumerate}
+\item Give conditions on $A$ so that $0$ is the global minimizer of $f$
+\begin{solution}
+Let $A$ have spectral decomposition $A= U\Lambda U^T$.\\
+Let $y\in \R^n$ s.t $y = U^Tx$.\\
+Then $f(x)= x^TAx = x^TU\Lambda U^Tx = y^T\Lambda y$, and\\
+\quad $y^T\Lambda y = \sum_{i=1}^n \lambda_i y_i^2$\\
+ We can see that 0 will be the global minimzer of $f$ if A is positive semi-definite.
+
+\end{solution}
+\end{enumerate}
+\end{frame}
+
+
+
+\end{document}
+
+
+

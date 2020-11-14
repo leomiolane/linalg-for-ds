@@ -1,0 +1,242 @@
+\documentclass{beamer}
+
+\usepackage{../../../latex_style/beamerthemeExecushares}
+\usepackage{../../../latex_style/notations}
+
+\title{Session 10: Linear regression}
+\subtitle{Optimization and Computational Linear Algebra for Data Science}
+\author{Léo Miolane}
+\date{}
+
+\setcounter{showSlideNumbers}{1}
+
+\begin{document}
+\setcounter{showProgressBar}{0}
+\setcounter{showSlideNumbers}{0}
+
+\frame{\titlepage}
+\setcounter{framenumber}{0}
+%\setcounter{showProgressBar}{1}
+\setcounter{showSlideNumbers}{1}
+
+\begin{frame}
+	\frametitle{Contents}
+	\begin{enumerate}
+		\item Ordinary least squares
+		\item Penalized linear regression
+		\item Matrix norms
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}[t]{Introduction}
+	\grid
+
+	\vspace{-0.2cm}
+	\begin{itemize}
+		\item We have $n$  \ << feature vectors >> \ \ \ $a_1, \dots, a_n \in \R^d$.
+		\item Each point $a_i$ comes with a \ << target variable >> \ \ \ $y_i \in \R$.
+	\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}[t]{Solving $Ax=y$ is a bad idea}
+	\grid
+
+	The system $Ax = y$ may have:
+	\begin{itemize}
+		\item No solution.
+			\vspace{3cm}
+		\item Infinitely many solutions.
+	\end{itemize}
+
+\end{frame}
+
+\section{Ordinary least squares}
+
+\begin{frame}[t]{Least squares problem}
+	\grid
+
+	\vspace{-0.6cm}
+	\begin{exampleblock}
+		$$
+		\textbf{(LS)} \quad \text{Minimize} \quad f(x) = \| Ax - y \|^2 \quad \text{with respect to} \quad x \in \R^d.
+		$$
+	\end{exampleblock}
+
+\end{frame}
+\begin{frame}[t]{The Moore-Penrose pseudo-inverse}
+	\grid
+
+	\vspace{-0.4cm}
+	\begin{definition}
+		Let $A = U \Sigma V^{\sT}$ be the SVD of $A$.
+		The matrix $A^{\dagger} \defeq V \Sigma' U^{\sT}$ is called the (Moore-Penrose) pseudo-inverse of $A$, where $\Sigma'$ is the $d \times n$ matrix given by 
+		\vspace{-0.4cm}
+		$$
+		\Sigma'_{i,i} =
+		\begin{cases}
+			1 / \Sigma_{i,i} & \text{if} \ \Sigma_{i,i} \neq 0, \\
+			0 & \text{otherwise},
+		\end{cases}
+		\vspace{-0.2cm}
+		$$
+		and $\Sigma'_{i,j} = 0$ for $i \neq j$.
+	\end{definition}
+
+\end{frame}
+
+\begin{frame}[t]{Solving $A^{\sT} A x = A^{\sT} y$}
+	\grid
+
+	\vspace{-0.1cm}
+	\textbf{Claim:} The vector \ $x^{\rm LS} \ \defeq  \ A^{\dagger} y$ \ is a solution of $A^{\sT} A x = A^{\sT} y$
+
+	\vspace{2cm}
+
+	\begin{block}{Theorem}
+		The set of the minimizers of \ $f(x) = \|Ax - y\|^2$ \ is
+		$$
+		A^{\dagger} y + \Ker(A) = \Big\{ x^{\rm LS} + v \, \Big| \, v \in \Ker(A) \Big\}.
+		$$
+	\end{block}
+\end{frame}
+
+\section{Penalized least squares}
+
+\begin{frame}[t]{Ridge regression}
+	\grid
+
+	\vspace{-0.2cm}
+	Ridge regression consists in adding a << $\ell_2$ penalty >> :
+	\vspace{-0.5cm}
+	\begin{exampleblock}
+		$$
+		\textbf{(Ridge)} \quad \text{Minimize} \quad f(x) = \| Ax - y \|^2 + \lambda \|x\|^2 \quad \text{w.r.t.} \quad x \in \R^d
+		$$
+	\end{exampleblock}
+	for some fixed $\lambda > 0$.
+
+\end{frame}
+
+\begin{frame}[t]{Lasso}
+	\grid
+
+	\vspace{-0.2cm}
+	The Lasso adds a << $\ell_1$ penalty >> :
+	\vspace{-0.5cm}
+	\begin{exampleblock}
+		$$
+		\textbf{(Lasso)} \quad \text{Minimize} \quad f(x) = \| Ax - y \|^2 + \lambda \|x\|_1 \quad \text{w.r.t.} \quad x \in \R^d
+		$$
+	\end{exampleblock}
+	for some fixed $\lambda > 0$.
+
+\end{frame}
+
+\begin{frame}[t]{Intuition behind feature selection}
+	\grid
+
+	\vspace{-0.4cm}
+	\begin{block}{Lemma}
+		Let $x^{\rm Lasso}$ be a minimizer of the Lasso cost function and let $r=\|x^{\rm Lasso}\|_1$. Then $x^{\rm Lasso}$ is a solution to the constrained optimization problem:
+		$$
+		\text{minimize} \quad \|Ax-y\|^2 \quad
+		\text{subject to} \quad \|x\|_1 \leq r.
+		$$
+	\end{block}
+
+\end{frame}
+
+\begin{frame}[t]{Application: compressed sensing}
+	\grid
+
+	\only<1>{
+		\begin{itemize}
+			\item In homework 4 we have seen that we can compress images very well.
+			\item Most of the data can be thrown away !
+		\end{itemize}
+	}
+	\pause
+
+\end{frame}
+
+
+\section{Matrix norms}
+
+\begin{frame}[t]{Frobenius norm}
+	\grid
+
+	\begin{block}{Definition}
+		The Frobenius norm of a matrix $A \in \R^{n \times m}$ is defined as
+		$$
+		\|A\|_F = \sqrt{\sum_{i=1}^n \sum_{j=1}^m A_{i,j}^2}
+		$$
+	\end{block}
+	\begin{block}{Proposition}
+		$$
+		\|A\|_F = \sqrt{\sum_{i=1}^{\min(n,m)} \sigma_i(A)^2}
+		$$
+	\end{block}
+\end{frame}
+\begin{frame}[t]{The spectral norm}
+	\grid
+
+	\vspace{-0.4cm}
+	\begin{block}{Definition}
+		The spectral norm of a matrix $A \in \R^{n \times m}$ is defined as
+		$$
+		\|A\|_{\Sp} = \max_{\|x\| = 1}	\|Ax\|.
+		\vspace{-0.3cm}
+		$$
+	\end{block}
+	\begin{block}{Proposition}
+		\vspace{-0.3cm}
+		$$
+		\|A\|_{\Sp} = \sigma_1(A).
+		$$
+	\end{block}
+\end{frame}
+
+\begin{frame}[t]{The nuclear norm}
+	\grid
+
+	\vspace{-0.4cm}
+	\begin{block}{Definition}
+		The nuclear norm of a matrix $A \in \R^{n \times m}$ is defined as
+		$$
+		\|A\|_{\star} = \sum_{i=1}^{\min(n,m)} \sigma_i(A).
+		\vspace{-0.3cm}
+		$$
+	\end{block}
+\end{frame}
+
+\begin{frame}[t]{Application to matrix completion}
+	\grid
+
+	\only<1>{
+		We have a data matrix $M \in \R^{n \times m}$ that we only observe partially. That is we only have access to 
+		$$
+		M_{i,j} \quad \text{for} \ (i,j) \in \Omega,
+		$$
+		where $\Omega \subset \{1, \dots, n\} \times \{1, \dots m\}$ is a subset of the complete set of the entries.
+	}
+
+	\pause
+
+\end{frame}
+
+\appendix
+\backupbegin
+\begin{frame}[t]
+	\frametitle{Questions?}
+	\grid
+
+	\pause
+\end{frame}
+\backupend
+
+
+
+
+\end{document}
