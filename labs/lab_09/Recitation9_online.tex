@@ -28,14 +28,14 @@ A_{ij} = \begin{cases}
 \end{equation*}
 \end{definition}
 
-\begin{definition}[Laplacian of a matrix]
+\begin{definition}[Laplacian matrix of a graph]
 The Laplacian matrix of $G$ is defined as
 \begin{equation*} 
 L = D - A
 \end{equation*}
 where $D$ is the degree matrix $D = \text{diag}(\text{deg}(1), \dots, \text{deg}(n))$.
 \end{definition}
-Remember that $A$ is symmetric and positive semidefinite, and 1 is an eigenvalue of $A$ with eigenvector $\mathds{1}$.
+Remember that $L$ is symmetric and positive semidefinite, and 0 is an eigenvalue of $L$ with eigenvector $\mathds{1}$.
 \end{frame}
 
 \begin{frame}[t]
@@ -55,7 +55,17 @@ A bipartite graph is a graph such that the set of nodes can be split into two su
 2. Show that the largest eigenvalue of $L_{norm} = D^{-1/2} L D^{-1/2}$ is less or equal than 2.
 
 3. Show that the largest eigenvalue of $L_{norm}$ is equal to 2 if and only if the graph has some bipartite connected component.
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Normalized Laplacian}
+2. Show that the largest eigenvalue of $L_{norm} = D^{-1/2} L D^{-1/2}$ is less or equal than 2.
 \pause
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Normalized Laplacian}
+3. Show that the largest eigenvalue of $L_{norm}$ is equal to 2 if and only if the graph has some bipartite connected component.
 \pause
 \end{frame}
 
