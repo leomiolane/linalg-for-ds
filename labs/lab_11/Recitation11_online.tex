@@ -1,0 +1,195 @@
+\documentclass{beamer}
+
+\usepackage{../../latex_style/beamerthemeExecushares}
+\usepackage{../../latex_style/notations}
+\usepackage{dsfont}
+
+\title{Recitation 11}
+\author{Carles Domingo}
+\date{Fall 2020}
+
+
+\begin{document}
+
+\frame{\titlepage} 
+
+\setcounter{showProgressBar}{0}
+\setcounter{showSlideNumbers}{1}
+
+\begin{frame}[t]
+\frametitle{Least squares}
+\vspace{-10pt}
+Remember: The least squares problems can be written as 
+\begin{align} \label{eq:least_sq}
+\min_{x \in \R^d} \|Ax - y\|^2,
+\end{align}
+where $A \in \R^{n \times d}$. And by the first order condition for minimizers of convex functions,
+\begin{align*}
+x \text{ is a solution of (1)} \iff  A^\top A x = A^\top y
+\end{align*}
+\begin{definition}[Moore-Penrose pseudo-inverse]
+If $A = U \Sigma V^{\top}$, then $A^{\dagger} = V \Sigma' U^\top \in \R^{d \times n}$ is the Moore-Penrose pseudo-inverse of $A$, where $\Sigma' \in \R^{d \times n}$ is defined as
+\begin{align*}
+\Sigma'_{ii} = 
+\begin{cases}
+1/\Sigma_{ii}  & \text{when } \Sigma_{ii} \neq 0 \\
+0 & \text{otherwise}
+\end{cases}, \quad
+\Sigma'_{ij} = 0 \text{ when } i \neq j
+\end{align*}
+\end{definition}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Least squares}
+\vspace{-10pt}
+\begin{theorem} [Unregularized least squares]
+The set of solutions of the minimization problem $\min_{x \in \R^d} \|Ax - y\|^2$ is
+$A^{\dagger} y + \text{Ker}(A)$.
+\end{theorem}
+
+\begin{theorem} [Ridge regression]
+For any $\lambda > 0$, the unique solution of the minimization problem $\min_{x \in \R^d} \{ \|Ax - y\|^2 + \lambda \|x\|^2 \}$ is
+\begin{align*}
+x^{\text{ridge}} = (A^{\top} A + \lambda \text{Id} )^{-1} A^{\top} y
+\end{align*}
+\end{theorem}
+
+\begin{definition} [Lasso]
+The Lasso $x^{\text{Lasso}}$ is defined as $x^{\text{Lasso}} = \argmin_{x \in \R^d} \{  \|Ax - y\|^2 + \lambda \|x\|_1 \}$.
+\end{definition}
+\end{frame}
+
+
+
+\begin{frame}[t] 
+\frametitle{Ridge regression}
+\vspace{-10pt}
+Show that the solution $x^{\text{ridge}}$ of ridge regression is given by the formula in the previous slide, i.e.
+\begin{align*}
+x^{\text{ridge}} = (A^{\top} A + \lambda \text{Id} )^{-1} A^{\top} y
+\end{align*}
+\pause
+\end{frame}
+
+\begin{frame}[t] 
+\frametitle{Lasso for orthogonal $A$}
+\vspace{-10pt}
+1. For $x_0 \in \R$, let $f_{x_0} : \R \rightarrow \R$ be defined as $f_{x_0}(x) = \frac{1}{2}x^2 - x_0 x + \lambda |x|$. Show that the function $f_{x_0}$ admits a unique minimizer given by $x^{*} = \eta(x_0; \lambda)$, where $\eta$ is the \textit{soft-thresholding} function:
+\begin{align*}
+\eta(x_0; \lambda) = 
+\begin{cases}
+x_0 - \lambda & \text{if } x_0 \geq \lambda \\
+0 & \text{if } -\lambda \leq x_0 \leq \lambda \\
+x_0 + \lambda & \text{if } x_0 \leq  - \lambda
+\end{cases}
+\end{align*}
+\pause
+\end{frame}
+
+\begin{frame}[t] 
+\frametitle{Lasso for orthogonal $A$}
+\vspace{-10pt}
+2. Let $A \in \R^{n \times d}$ be a matrix such that its columns are orthonormal (i.e. $A^\top A = \text{Id}$). Show that the Lasso solution $x^{\text{Lasso}} = \argmin_{x \in \R^d} \{  \|Ax - y\|^2 + \lambda \|x\|_1 \}$ satisfies
+\begin{align*}
+x_j^{\text{Lasso}} = \eta(x_j^{\text{LS}}; \lambda), \quad \forall j \in 1, \dots, d,
+\end{align*}
+where $x^{\text{LS}} = A^{\dagger} y$.
+\pause
+\end{frame}
+
+\begin{frame}[t] 
+\frametitle{Moore-Penrose pseudo-inverse}
+\vspace{-5pt}
+In this exercise we will show that for $A \in \R^{n \times d}$, the Moore-Penrose pseudo-inverse $A^{\dagger} \in \R^{d \times n}$ of $A$ is the only matrix in $\R^{d \times n}$ such that
+\begin{enumerate}
+\item $A A^{\dagger} A = A$.
+\item $A^{\dagger} A A^{\dagger} = A^{\dagger}$.
+\item $A A^{\dagger} \in \R^{n \times n}$ and $A^{\dagger} A \in \R^{d \times n}$ are symmetric matrices.
+\end{enumerate}
+We do this in two steps:
+\begin{enumerate}
+\item Show that the Moore-Penrose pseudo-inverse as defined in the second slide fulfills (1), (2), (3).
+\item Show that for a given $A \in \R^{n \times d}$, there exists a unique matrix $A^{\dagger} \in \R^{d \times n}$ fulfilling (1), (2), (3).
+\end{enumerate}
+\pause
+\end{frame}
+
+\begin{frame}[t] 
+\frametitle{Moore-Penrose pseudo-inverse}
+\vspace{-5pt}
+\begin{enumerate}
+\item $A A^{\dagger} A = A$.
+\item $A^{\dagger} A A^{\dagger} = A^{\dagger}$.
+\item $A A^{\dagger} \in \R^{n \times n}$ and $A^{\dagger} A \in \R^{d \times n}$ are symmetric matrices.
+\end{enumerate}
+Show that the Moore-Penrose pseudo-inverse as defined in the second slide fulfills (1), (2), (3).
+\pause
+\pause
+\end{frame}
+
+\begin{frame}[t] 
+\frametitle{Moore-Penrose pseudo-inverse}
+\vspace{-5pt}
+\begin{enumerate}
+\item $A A^{\dagger} A = A$.
+\item $A^{\dagger} A A^{\dagger} = A^{\dagger}$.
+\item $A A^{\dagger} \in \R^{n \times n}$ and $A^{\dagger} A \in \R^{d \times n}$ are symmetric matrices.
+\end{enumerate}
+Show that for a given $A \in \R^{n \times d}$, there exists a unique matrix $A^{\dagger} \in \R^{d \times n}$ fulfilling (1), (2), (3).
+\pause
+\pause
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Proximal operators}
+The ridge and lasso solutions admit a generalization in a certain sense. We define the proximal operator $prox_f : \R^d \rightarrow \R_d$ as
+\begin{align*}
+\text{prox}_f(v) = \argmin_{x \in \R^d} \|x-v\|^2 + f(x)
+\end{align*}
+1. Show that when $A=\text{Id}$, we have $x^{\text{ridge}} = \text{prox}_{\lambda \|\cdot\|_2^2}(y)$ and $x^{\text{Lasso}} = \text{prox}_{\lambda \|\cdot\|_1}(v)$.
+\pause
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Strong convexity \& Prox operators}
+\vspace{-5pt}
+The ridge and lasso solutions admit a generalization in a certain sense. We define the proximal operator $\text{prox}_f : \R^d \rightarrow \R_d$ as
+\begin{align*}
+\text{prox}_f(v) = \argmin_{x \in \R^d} \|x-v\|^2 + f(x)
+\end{align*}
+\begin{enumerate}
+\item Remember that a function $f$ is strongly convex if there exists $\alpha > 0$ such that $g(x) = f(x) - \frac{\alpha}{2} \|x\|^2$ is convex. Prove that if $f : \R^d \rightarrow \R$ is strongly convex differentiable function, then it has a unique minimizer. (Hint: Use the Weierstrass extreme value theorem: every continuous function defined in a closed bounded set has a minimum. Note: the differentiability assumption can be removed.)
+\item Let $f : \R^n \rightarrow \R$ be a convex function. Show that $\text{prox}_f : \R^n \rightarrow \R$ is well defined (that is, the sets where the argmin is achieved are singletons).
+\item Show that when $A=\text{Id}$, we have $x^{\text{ridge}} = \text{prox}_{\lambda \|\cdot\|_2^2}(y)$ and $x^{\text{Lasso}} = \text{prox}_{\lambda \|\cdot\|_1}(v)$.
+\end{enumerate}
+\pause
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Strong convexity \& Prox operators}
+\vspace{-5pt}
+1. Remember that a function $f$ is strongly convex if there exists $\alpha > 0$ such that $g(x) = f(x) - \frac{\alpha}{2} \|x\|^2$ is convex. Prove that if $f : \R^d \rightarrow \R$ is strongly convex differentiable function, then it has a unique minimizer. (Hint: Use the Weierstrass extreme value theorem: every continuous function defined in a closed bounded set has a minimum. Note: the differentiability assumption can be removed.)
+\pause
+\pause
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Strong convexity \& Prox operators}
+\vspace{-25pt}
+\begin{align*}
+\text{prox}_f(v) = \argmin_{x \in \R^d} \|x-v\|^2 + f(x)
+\end{align*}
+2. Let $f : \R^n \rightarrow \R$ be a convex function. Show that $\text{prox}_f : \R^n \rightarrow \R$ is well defined (that is, the sets where the argmin is achieved are singletons).
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Strong convexity \& Prox operators}
+\vspace{-5pt}
+3. Show that when $A=\text{Id}$, we have $x^{\text{ridge}} = \text{prox}_{\lambda \|\cdot\|_2^2}(y)$ and $x^{\text{Lasso}} = \text{prox}_{\lambda \|\cdot\|_1}(v)$.
+\end{frame}
+
+
+\end{document}
+
+
