@@ -36,7 +36,7 @@ H f(x) =
 \frac{\partial^2 f}{\partial x_1^2}(x) & \frac{\partial^2 f}{\partial x_1 \partial x_2}(x) & \cdots & \frac{\partial^2 f}{\partial x_1 \partial x_n}(x) \\ 
 \frac{\partial^2 f}{\partial x_2 \partial x_1}(x) & \frac{\partial^2 f}{\partial x_2^2}(x) & \cdots & \frac{\partial^2 f}{\partial x_2 \partial x_n}(x) \\ 
 \vdots &  \vdots & \cdots & \vdots \\ 
-\frac{\partial^2 f}{\partial x_2 \partial x_1}(x) & \frac{\partial^2 f}{\partial x_2^2}(x) & \cdots & \frac{\partial^2 f}{\partial x_2 \partial x_n}(x)
+\frac{\partial^2 f}{\partial x_n \partial x_1}(x) & \frac{\partial^2 f}{\partial x_n \partial x_2}(x) & \cdots & \frac{\partial^2 f}{\partial x_n^2}(x)
 \end{bmatrix}
 \end{equation*}
 \end{definition}
@@ -133,7 +133,7 @@ Let $f : \R^n \rightarrow \R$ be a convex function. Show that if for a certain $
 
 \begin{frame}[t]
 \frametitle{Strictly convex functions \& minima}
-Let $f : \R^n \rightarrow \R$ be a convex function. Show that there exists a unique $x^{\star}$ such that $f(x^{\star}) = \min_{y \in \R^n} f(y)$.
+Let $f : \R^n \rightarrow \R$ be a strictly convex function. Show that there exists a unique $x^{\star}$ such that $f(x^{\star}) = \min_{y \in \R^n} f(y)$.
 \pause
 \end{frame}
 
