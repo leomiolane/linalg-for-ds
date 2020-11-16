@@ -1,0 +1,263 @@
+\documentclass{beamer}
+\usepackage{amsthm}
+\usepackage[utf8]{inputenc}
+\usetheme{Madrid}
+\usepackage{../latex_style/packages_old}
+\usepackage{../latex_style/notations_old}
+\usepackage{outlines}
+\usepackage{enumitem}
+\renewenvironment{itemize}
+\usefonttheme{serif}
+\def\labelenumi{\theenumi}
+\usefonttheme{serif}
+\usepackage{comment}
+
+%\setbeamertemplate{itemize items}[default]
+%\setbeamertemplate{enumerate items}[default]
+
+% define smaller font command
+\newcommand*{\horzbar}{\rule[.5ex]{2.5ex}{0.5pt}}
+\newcommand\fonteight{\fontsize{8}{9.6}\selectfont}
+\newcommand\fontten{\fontsize{10}{1.2}\selectfont}
+
+%define enumerate with periods
+\renewenvironment{enumerate}%
+{\begin{list}{\arabic{enumi}.}%  \langle ------ dot here
+      {\setlength{\leftmargin}{2.5em}%
+       \setlength{\itemsep}{-\parsep}%
+       \setlength{\topsep}{-\parskip}%%
+       \usecounter{enumi}}%
+ }{\end{list}}
+%define itemize with arrows
+\renewenvironment{itemize}%
+{\begin{list}{$\blacktriangleright$}%  \langle ------ dot here
+      {\setlength{\leftmargin}{2.5em}%
+       \setlength{\itemsep}{-\parsep}%
+       \setlength{\topsep}{-\parskip}%%
+       \usecounter{enumi}}%
+ }{\end{list}}
+
+%Information to be included in the title page:
+\title{Recitation 10}
+\author{Alex Dong}
+\institute{CDS, NYU}
+\date{Fall 2020}
+
+
+\makeatletter
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.4\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\insertshortauthor\expandafter\ifblank\expandafter{\beamer@shortinstitute}{}{~~(\insertshortinstitute)}
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.3\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.3\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+    \insertframenumber{} / \inserttotalframenumber\hspace*{2ex} 
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\setbeamertemplate{navigation symbols}{}
+\makeatother
+
+\begin{document}
+%1
+\frame{\titlepage} 
+%2
+
+\begin{frame}
+\frametitle{Linear Regression}
+\begin{itemize}
+\item Deep topic, there are entire courses on Linear Regression and friends
+\item Very nice to analyze mathematically. Guaranteed solutions via convexity.
+\item Combine with \textit{convex} functions for regularization
+\item Lasso, $L_1$ penalty
+\begin{itemize}
+\item Good for variable selection
+\end{itemize}
+\item Ridge, $L_2$ penalty
+\begin{itemize}
+\item The go-to baseline in most cases
+\end{itemize}
+\item (\& ) In practice, don't use linear regression w/out regularization.
+\begin{itemize}
+\item See Intro to Data Science, Machine Learning
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Questions: Linear Regression Warm Up}
+When solving the least squares problem, the optimization problem is $min_\beta \|X\beta - y \|_2^2$, $X\in \R^{n\times d}$, $y \in\R^n$, $\beta\in\R^d$.
+$n\geq d$
+
+\begin{enumerate}
+\item Explain what $X,\beta, y$ represent
+\item Geometrically, what are we trying to do?
+\item How can we obtain the normal equation $X^TX\beta = X^Ty$ from this geometric intuition?\\
+Hint $Im(A)^{\perp} = Ker(A^T)$
+\item Under what conditions is $X^TX$ invertible? If $X^TX$ is not invertible, do the normal equations still have a solution?
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Solutions 1: Linear Regression Warm Up}
+When solving the least squares problem, the optimization problem is $min_\beta \|X\beta - y \|_2^2$, $X\in \R^{n\times d}$, $y \in\R^n$, $\beta\in\R^d$.
+$n\geq d$
+\begin{solution}
+\begin{enumerate}
+\item Explain what $X,\beta, y$ represent.\\
+X contains the independent variable observations on in each row, and the features in each column.\\
+$y$ contains the corresponding dependent variable observations.\\
+$\beta$ contains the coefficients that transform the independent variable into the dependent variable.\\
+\medskip
+\item Geometrically, what are we trying to do?\\
+
+Thinking of this from the framework of linear transformations,
+we are trying to find a point $\hat{\beta}\in \R^d$, s.t $X\beta \in Im(X) \subset \R^n$ is closest to $y$.
+\end{enumerate}
+\end{solution}
+
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Solutions 2: Linear Regression Warm Up}
+When solving the least squares problem, the optimization problem is $min_\beta \|X\beta - y \|_2^2$, $X\in \R^{n\times d}$, $y \in\R^n$, $\beta\in\R^d$.
+$n\geq d$
+\begin{solution}
+\begin{enumerate}
+\item[3.] How can we obtain the normal equation $X^TX\beta = X^Ty$ from this geometric intuition?\\
+The point closest to $y$ in $\Im(X)$ is the projection of $y$ onto $Im(X)$. Let $P_{Im(X)}y= X\hat{\beta}$\\
+\quad $X\hat{\beta} - y \perp \Im(X)$ \\
+\quad $X\hat{\beta} - y \in \Ker(X^T)$ \quad since $Im(A)^{\perp} = Ker(A^T)$\\
+\quad $X^T(X \hat{\beta} - y) = 0$\\
+\quad $X^TX \hat{\beta} = X^Ty$\\
+
+
+\item[4.] Under what conditions is $X^TX$ invertible? If $X^TX$ is not invertible, do the normal equations still have a solution?\\
+$X^TX$ is invertible if $rank(X)=d$. There is always a solution since  $Im(X^TX) = Im(X^T)$ (use SVD, check Rec 8).
+\end{enumerate}
+\end{solution}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Questions: Linear Regression vs PCA}
+Let $(\vec{x_1},y_1),...,(\vec{x_n},y_n) \in \R^{d+1}$ be a centered dataset. Each $\vec{x_i}\in\R^d.$\\
+Let $\beta \in \R^d$. Let $X\in\R^{n\times d}$ (containing $\vec{x_1},..,\vec{x_n}$) have full rank).\\
+Let $y$ be the vector containing $y_1,..,y_n$.\\
+The OLS solution is given by $\hat{\beta} = (X^TX)^{-1}X^Ty$.  \\
+We can use this to generate predictions $\hat{y} = X(X^TX)^{-1}X^T\vec{y}$.\\
+
+\begin{enumerate}
+\item Recall that $X(X^TX)^{-1}X^T$ is an orthogonal projection, which subspace is this an orthogonal projection onto? 
+\medskip
+\item Let $n = 1$; consider the subspace generated by the first principal component (from PCA) and the line generated by linear regression solution for $\vec{y}=\vec{x}\beta$.
+Are these the same line? If not, what is the difference?
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Solutions 1: Linear Regression vs PCA}
+Let $(\vec{x_1},y_1),...,(\vec{x_n},y_n) \in \R^{d+1}$ be a centered dataset.\\
+Each $\vec{x_i}\in\R^d.$ Let $\beta \in \R^n$. Let $X\in\R^{n\times d}$ be the design matrix.\\
+Let $y$ be the vector containing $y_1,..,y_n$.\\
+The OLS solution is given by $\hat{\beta} = (X^TX)^{-1}X^Ty$.  \\
+We can use this to generate predictions $\hat{y} = X(X^TX)^{-1}X^T\vec{y}$.\\
+
+\begin{enumerate}
+\item Recall that $X(X^TX)^{-1}X^T$ is an orthogonal projection, which subspace is this an orthogonal projection onto? 
+\begin{solution}
+Using SVD, let $X$ have SVD $X = U \Sigma V^T$, then
+\quad $X(X^TX)^{-1}X^T = U U^T$
+So $X(X^TX)^{-1}X^T$ is an orthogonal projection onto the columns of U, which span $Im(X)$. \\
+Note: $X\in \R^{n\times d}$, and  $Im(X)$ is a $d$ dimensional subspace in $\R^n$.
+Question for you! How interpretable is this? (Answer... not very)
+\end{solution}
+
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Solutions 2 : Linear Regression vs PCA}
+Let $(\vec{x_1},y_1),...,(\vec{x_n},y_n) \in \R^{d+1}$ be a centered dataset.\\
+Each $\vec{x_i}\in\R^d.$ Let $\beta \in \R^n$. Let $X\in\R^{n\times d}$ be the design matrix.\\
+Let $y$ be the vector containing $y_1,..,y_n$.\\
+The OLS solution is given by $\hat{\beta} = (X^TX)^{-1}X^Ty$.  \\
+We can use this to generate predictions $\hat{y} = X(X^TX)^{-1}X^T\vec{y}$.\\
+\begin{enumerate}
+\item[2.] Let $n = 1$; consider the subspace generated by the first principal component (from PCA) and the line generated by linear regression solution for $\vec{y}=\vec{x}\beta$.
+Are these the same line? If not, what is the difference?
+\begin{solution}
+(Check notebook on github)\\
+They are not the same line. PCA is an orthogonal projection that minimizes the $L_2$ orthogonal distance to the line,
+ while linear regression minimizes the $L_2$ distance \textbf{parallel to the y-axis} to the line.
+\end{solution}
+\end{enumerate}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Questions: Ridge Regression}
+Let $X \in \R^{n\times d}$, $n>d$, and \textit{not have full rank}. ($X$ is a data matrix) \\
+Recall that the OLS solution is $\hat{x} = (X^TX)^{-1}X^Ty$.
+\begin{enumerate}
+\item Since $X$ is not full rank, what does this say about the features?
+\item What is the issue with the OLS solution?
+\item The ridge regression solution is given by $(X^TX+\lambda Id_d)^{-1}X^Ty$. How does this fix the issue?
+\item Suppose that $X$ has SVD $X=U\Sigma V^T$, and $X$ has singular values $\sigma_1,...,\sigma_d$. What are the eigenvalues of 
+$X^TX + \lambda Id_d$?
+\item How does increasing $\lambda$ affect the condition number of $(X^TX + \lambda Id_d)$?
+\end{enumerate}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Solutions: Ridge Regression and Multicollinearity}
+Let $X \in \R^{n\times d}$, $n>d$, and \textit{not have full rank}. ($X$ is a data matrix) \\
+Recall that the OLS solution is $\hat{x} = (X^TX)^{-1}X^Ty$.
+\begin{solution}
+\begin{enumerate}
+\item Since $X$ is not full rank, what does this say about the features?\\
+Columns of $X$ are not linearly independent, so some of the features can be perfectly explained by other features.
+\item What is the issue with the OLS solution? \\
+Since $X$ does not have full rank, $X^TX$ doesn't have full rank and is not invertible. So the OLS solution is not well-defined.
+\item The ridge regression solution is given by $(X^TX+\lambda Id_d)^{-1}X^Ty$. How does this fix the issue? \\
+Adding $\lambda Id_d$ to $X^TX$ shifts its eigenvalues up, which makes $(X^TX+\lambda Id_d)$ invertible.
+\end{enumerate}
+\end{solution}
+\end{frame}
+
+\begin{frame}
+\frametitle{Solutions: Ridge Regression and Multicollinearity}
+Let $X \in \R^{n\times d}$, $n>d$, and \textit{not have full rank}. ($X$ is a data matrix) \\
+Recall that the OLS solution is $\hat{x} = (X^TX)^{-1}X^Ty$.
+\begin{solution}
+\begin{enumerate}
+\item[4.] Suppose that $X$ has SVD $X=U\Sigma V^T$, and $X$ has singular values $\sigma_1,...,\sigma_d$. What are the eigenvalues of 
+$X^TX + \lambda Id_d$? \\
+Note that $X^TX = V\Sigma^T \Sigma V^T$\\
+Eigvals of $X^TX$: $\sigma_1^2,...,\sigma_d^2$, (Note: $X$ isn't full rank, so $\sigma_d = 0$) \\
+Eigvals of $X^TX+\lambda Id_d$: $\sigma_1^2 + \lambda ,..., \sigma_d^2+\lambda$.\\
+\item[5.] How does increasing $\lambda$ affect the condition number of $(X^TX + \lambda Id_d)$ vs $X^TX$?\\
+Condition number of $X^TX = \frac{\sigma_1^2}{\sigma_d^2} = \infty$ \\
+Condition number of $(X^TX + \lambda Id_d) = \frac{\sigma_1^2+\lambda}{\sigma_d^2+\lambda}$\\
+Furthermore, for $\lambda_1 > \lambda_2$, we get the relationship \\
+\quad $ \frac{\sigma_1^2+\lambda_1}{\sigma_d^2+\lambda_1} <  \frac{\sigma_1^2+\lambda_2}{\sigma_d^2+\lambda_2}$
+\end{enumerate}
+\end{solution}
+\end{frame}
+
+
+
+
+
+\end{document}
