@@ -161,14 +161,28 @@
 	\grid
 
 	Constrained optimization problems take the form:
-	\begin{equation}\label{eq:problem}
+	$$
+	\begin{array}{lll}
+		\text{minimize} & f(x) & \\
+		\text{subject to} & g_i(x) \leq 0, & i=1, \dots, m \\
+						  & h_i(x) = 0, & i=1, \dots, p,
+	\end{array}
+	$$
+	with variable $x \in \R^n$.
+\end{frame}
+
+\begin{frame}[t]{Question}
+	\grid
+
+	If $x$ is a solution to
+	$$
 		\begin{array}{lll}
 			\text{minimize} & f(x) & \\
 			\text{subject to} & g_i(x) \leq 0, & i=1, \dots, m \\
 							  & h_i(x) = 0, & i=1, \dots, p,
 		\end{array}
-	\end{equation}
-	with variable $x \in \R^n$.
+		$$
+	do we have $\nabla f(x) = 0$ ?
 \end{frame}
 
 \begin{frame}[t]{Feasible points}
@@ -202,6 +216,17 @@
 
 \end{frame}
 
+\begin{frame}[t]{Example}
+	\grid
+
+	Let $u \in \R^n$. Solve:
+	$$
+		\begin{array}{lll}
+			\text{minimize} & \langle x,u \rangle & \\
+			\text{subject to} & \|x\|^2 = 1.
+		\end{array}
+	$$
+\end{frame}
 
 
 \section{Convex constrained optimization}
@@ -239,6 +264,17 @@
 	\end{block}
 
 \end{frame}
+\begin{frame}[t]{Lagragian}
+	\grid
+
+	Define the Lagragian:
+\begin{equation}
+	L(x,\lambda,\nu) = 
+	f(x) + \sum_{i=1}^m \lambda_i g_i(x) + \sum_{i=1}^p \nu_i h_i(x),
+\end{equation}
+	 
+\end{frame}
+
 \begin{frame}[t]{Example}
 	\grid
 
