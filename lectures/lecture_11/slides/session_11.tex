@@ -183,20 +183,6 @@
 	with variable $x \in \R^n$.
 \end{frame}
 
-\begin{frame}[t]{Question}
-	\grid
-
-	If $x$ is a solution to
-	$$
-		\begin{array}{lll}
-			\text{minimize} & f(x) & \\
-			\text{subject to} & g_i(x) \leq 0, & i=1, \dots, m \\
-							  & h_i(x) = 0, & i=1, \dots, p,
-		\end{array}
-		$$
-	do we have $\nabla f(x) = 0$ ?
-\end{frame}
-
 \begin{frame}[t]{Feasible points}
 	\grid
 	\begin{definition}
@@ -205,6 +191,21 @@
 
 
 \end{frame}
+
+\begin{frame}[t]{Question}
+	\grid
+
+	If $x$ is a solution to
+	$$
+	\begin{array}{lll}
+		\text{minimize} & f(x) & \\
+		\text{subject to} & g_i(x) \leq 0, & i=1, \dots, m \\
+						  & h_i(x) = 0, & i=1, \dots, p,
+	\end{array}
+	$$
+	do we have $\nabla f(x) = 0$ ?
+\end{frame}
+
 
 \begin{frame}[t]{First order optimality condition}
 	\grid
@@ -221,9 +222,9 @@
 	\begin{block}{Theorem}
 		If $x$ is a solution and if $\nabla h_1(x), \dots, \nabla h_p(x), \{\nabla g_i(x) \, | \, g_i(x) = 0 \}$ are linearly independent,
 		then there exists $\lambda_1, \dots, \lambda_m \geq 0$ and $\nu_1, \dots, \nu_p \in \R$ such that:
-		\begin{equation}\label{eq:kkt1}
-			\nabla f(x) \ + \ \sum_{i=1}^m \lambda_i \nabla g_i(x) \ + \ \sum_{i=1}^p \nu_i \nabla h_i(x)  \ = \ 0.
-		\end{equation}
+		$$
+		\nabla f(x) \ + \ \sum_{i=1}^m \lambda_i \nabla g_i(x) \ + \ \sum_{i=1}^p \nu_i \nabla h_i(x)  \ = \ 0.
+		$$
 		Moreover, for all  $i\in \{1, \dots, m\}$, if $g_i(x) < 0$ then $\lambda_i = 0$.
 	\end{block}
 
@@ -235,10 +236,10 @@
 	\vspace{-0.2cm}
 	Let $u \in \R^n$ be a non-zero vector. \quad
 	$
-		\begin{array}{lll}
-			\text{Minimize} & \langle x,u \rangle & \\
-			\text{subject to} & \|x\|^2 = 1.
-		\end{array}
+	\begin{array}{lll}
+		\text{Minimize} & \langle x,u \rangle & \\
+		\text{subject to} & \|x\|^2 = 1.
+	\end{array}
 	$
 	\pause
 \end{frame}
@@ -251,21 +252,21 @@
 	\grid
 
 	We say that the constrained optimization problem
-	\begin{equation}
+	$$
 		\begin{array}{lll}
 			\text{minimize} & f(x) & \\
 			\text{subject to} & g_i(x) \leq 0, & i=1, \dots, m \\
 							  & h_i(x) = 0, & i=1, \dots, p,
 		\end{array}
-	\end{equation}
+		$$
 	is convex when $f$, $g_1, \dots, g_m$ are convex and $h_1, \dots, h_p$ are affine.
 \end{frame}
 
-\begin{frame}[t]{First order optimality condition}
+\begin{frame}[t]{Karush-Kuhn-Tucker Theorem}
 	\grid
 
 	\vspace{-0.4cm}
-	\begin{block}{Theorem}
+	\begin{block}{Theorem (KKT)}
 		Assume that the problem is convex and that there exists a feasible point $x_0$ such that $g_i(x_0) < 0$ for all $i$.
 
 		Then $x$ is a solution if and only if $x$ is feasible and there exists $\lambda_1, \dots, \lambda_m \geq 0$, $\nu_1, \dots, \nu_p \in \R$ such that:
@@ -276,6 +277,7 @@
 			\lambda_i g_i(x) = 0, \ \ \text{for all} \ \ i \in \{1, \dots, p\}.
 		\end{cases}
 		$$
+		\vspace{-0.3cm}
 	\end{block}
 
 \end{frame}
@@ -288,11 +290,13 @@
 		\end{array}
 		$$
 	 
+		\pause
 \end{frame}
 
 \begin{frame}[t]{Example}
 	\grid
 
+	\vspace{-0.2cm}
 	\only<1>{
 	Let $u,v \in \R^n$ such that $\|v\|=1$. Solve:
 	$$
