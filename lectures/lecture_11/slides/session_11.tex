@@ -34,7 +34,7 @@
 
 	\vspace{-0.2cm}
 	\begin{itemize}
-		\item Global minimizer $\implies$ local minimizer $\implies$ saddle point.
+		\item Global minimizer $\implies$ local minimizer $\implies$ critical point.
 		\item Critical point + positive definite Hessian $\implies$ local minimizer.
 	\end{itemize}
 
@@ -51,28 +51,32 @@
 		\end{column}
 		\hspace*{0.2cm}
 		\begin{column}{0.29\textwidth}
-			The Hessian at $x$ is:
+			The eigenvalues of the Hessian at $x$ are
 			\begin{enumerate}
-				\item $\displaystyle
-					\begin{pmatrix}
-						1 & 0 \\
-						0 & -1
-					\end{pmatrix}$
-				\item $\displaystyle
-					\begin{pmatrix}
-						1 & 0 \\
-						0 & 1
-					\end{pmatrix}$
-				\item $\displaystyle
-					\begin{pmatrix}
-						2 & 0 \\
-						0 & 1
-					\end{pmatrix}$
-				\item $\displaystyle
-					\begin{pmatrix}
-						-1 & 0 \\
-						0 & -1
-					\end{pmatrix}$
+				\item $
+					\begin{cases}
+						\lambda_1 = 1 \\
+						\lambda_2 = -1
+					\end{cases}
+					$
+				\item $
+					\begin{cases}
+						\lambda_1 = 1 \\
+						\lambda_2 = 1
+					\end{cases}
+					$
+				\item $
+					\begin{cases}
+						\lambda_1 = 2 \\
+						\lambda_2 = 1
+					\end{cases}
+					$
+				\item $
+					\begin{cases}
+						\lambda_1 = -1 \\
+						\lambda_2 = -1
+					\end{cases}
+					$
 			\end{enumerate}
 		\end{column}
 	\end{columns}
@@ -89,28 +93,32 @@
 		\end{column}
 		\hspace*{0.2cm}
 		\begin{column}{0.29\textwidth}
-			The Hessian at $x$ is:
+			The eigenvalues of the Hessian at $x$ are
 			\begin{enumerate}
-				\item $\displaystyle
-					\begin{pmatrix}
-						1 & 0 \\
-						0 & -3
-					\end{pmatrix}$
-				\item $\displaystyle
-					\begin{pmatrix}
-						2 & 0 \\
-						0 & 2
-					\end{pmatrix}$
-				\item $\displaystyle
-					\begin{pmatrix}
-						1 & 0 \\
-						0 & 3
-					\end{pmatrix}$
-				\item $\displaystyle
-					\begin{pmatrix}
-						-1 & 0 \\
-						0 & -1
-					\end{pmatrix}$
+				\item $
+					\begin{cases}
+						\lambda_1 = 1 \\
+						\lambda_2 = -3
+					\end{cases}
+					$
+				\item $
+					\begin{cases}
+						\lambda_1 = 2 \\
+						\lambda_2 = 2
+					\end{cases}
+					$
+				\item $
+					\begin{cases}
+						\lambda_1 = 1 \\
+						\lambda_2 = 3
+					\end{cases}
+					$
+				\item $
+					\begin{cases}
+						\lambda_1 = -1 \\
+						\lambda_2 = -1
+					\end{cases}
+					$
 			\end{enumerate}
 		\end{column}
 	\end{columns}
@@ -127,28 +135,32 @@
 		\end{column}
 		\hspace*{0.2cm}
 		\begin{column}{0.29\textwidth}
-			The Hessian at $x$ is:
+			The eigenvalues of the Hessian at $x$ are
 			\begin{enumerate}
-				\item $\displaystyle
-					\begin{pmatrix}
-						1 & 0 \\
-						0 & -3
-					\end{pmatrix}$
-				\item $\displaystyle
-					\begin{pmatrix}
-						2 & 0 \\
-						0 & 2
-					\end{pmatrix}$
-				\item $\displaystyle
-					\begin{pmatrix}
-						1 & 0 \\
-						0 & 3
-					\end{pmatrix}$
-				\item $\displaystyle
-					\begin{pmatrix}
-						-1 & 0 \\
-						0 & -1
-					\end{pmatrix}$
+				\item $
+					\begin{cases}
+						\lambda_1 = 1 \\
+						\lambda_2 = -3
+					\end{cases}
+					$
+				\item $
+					\begin{cases}
+						\lambda_1 = 2 \\
+						\lambda_2 = 2
+					\end{cases}
+					$
+				\item $
+					\begin{cases}
+						\lambda_1 = 1 \\
+						\lambda_2 = 3
+					\end{cases}
+					$
+				\item $
+					\begin{cases}
+						\lambda_1 = -1 \\
+						\lambda_2 = -1
+					\end{cases}
+					$
 			\end{enumerate}
 		\end{column}
 	\end{columns}
@@ -199,6 +211,7 @@
 
 	\pause
 	\pause
+	\pause
 \end{frame}
 
 \begin{frame}[t]{First order optimality condition}
@@ -219,13 +232,15 @@
 \begin{frame}[t]{Example}
 	\grid
 
-	Let $u \in \R^n$. Solve:
-	$$
+	\vspace{-0.2cm}
+	Let $u \in \R^n$ be a non-zero vector. \quad
+	$
 		\begin{array}{lll}
-			\text{minimize} & \langle x,u \rangle & \\
+			\text{Minimize} & \langle x,u \rangle & \\
 			\text{subject to} & \|x\|^2 = 1.
 		\end{array}
-	$$
+	$
+	\pause
 \end{frame}
 
 
@@ -264,27 +279,29 @@
 	\end{block}
 
 \end{frame}
-\begin{frame}[t]{Lagragian}
+\begin{frame}[t]{Example: Ridge regression}
 	\grid
-
-	Define the Lagragian:
-\begin{equation}
-	L(x,\lambda,\nu) = 
-	f(x) + \sum_{i=1}^m \lambda_i g_i(x) + \sum_{i=1}^p \nu_i h_i(x),
-\end{equation}
+	$$
+		\begin{array}{lll}
+			\text{minimize} & \|Ax-y\|^2 & \\
+			\text{subject to} & \|x\|^2 \leq r^2.
+		\end{array}
+		$$
 	 
 \end{frame}
 
 \begin{frame}[t]{Example}
 	\grid
 
+	\only<1>{
 	Let $u,v \in \R^n$ such that $\|v\|=1$. Solve:
-	\begin{equation}
+	$$
 		\begin{array}{lll}
 			\text{minimize} & \|x-u\|^2 & \\
 			\text{subject to} & x \perp v.
 		\end{array}
-	\end{equation}
+		$$
+	}
 
 	\pause
 
