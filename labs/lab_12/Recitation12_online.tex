@@ -1,0 +1,309 @@
+\documentclass{beamer}
+
+\usepackage{../../latex_style/beamerthemeExecushares}
+\usepackage{../../latex_style/notations}
+\usepackage{dsfont}
+
+\title{Recitation 12}
+\author{Carles Domingo}
+\date{Fall 2020}
+
+
+\begin{document}
+
+\frame{\titlepage} 
+
+\setcounter{showProgressBar}{0}
+\setcounter{showSlideNumbers}{1}
+
+\begin{frame}[t]
+\frametitle{Unconstrained optimization}
+
+We want to minimize a differentiable function $f : \R^n \rightarrow \R$. 
+Remember: We say that $x \in \R^n$ is
+\begin{itemize}
+\item a critical point of $f$ if $\nabla f(x) = 0$.
+\item a global minimizer of $f$ if $\forall x' \in \R^n$, $f(x) \leq f(x')$.
+\item a local minimizer of $f$ if there exists $\delta > 0$ such that for all $x'  \in B(x,\delta)$, $f(x) \leq  f(x')$, where $B(x, \delta) = \{x' | \|x'-x\| \leq \delta \}$.
+\end{itemize}
+
+\begin{theorem} [First order necessary conditions]
+Let $x \in \R^n$ be a point at which $f$ is differentiable. Then,
+\begin{align*}
+x \text{ is a local minimizer of } f \implies \nabla f (x) = 0
+\end{align*}
+\end{theorem}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Unconstrained optimization}
+\begin{theorem} [Second order sufficient conditions]
+Let $f : \R^n \rightarrow \R$ be a twice-differentiable function. Let $x \in \R^n$ be a critical point of $f$, i.e. $\nabla f(x) = 0$. Then, 
+\begin{itemize}
+\item If $Hf (x)$ is positive definite (that is, if all the eigenvalues of $Hf (x)$ are strictly positive), then $x$ is a local minimizer of $f$.
+\item If $Hf(x)$ is negative definite (that is, if all the eigenvalues of $Hf(x)$ are strictly negative), then $x$ is a local maximizer of $f$.
+\item If $Hf(x)$ admits strictly positive eigenvalues and strictly negative eigenvalues, then $x$ is neither a local maximum nor a local minimum. We call $x$ a saddle point.
+\end{itemize}
+\end{theorem}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Unconstrained optimization}
+The theorem in the previous slide begs for a study of the case in which $x \in \R^n$ is a critical point of $f$ such that $Hf (x)$ is positive semidefinite (and similarly negative semidefinite).
+\begin{enumerate}
+\item Give an example of a twice-differentiable function $f : \R^2 \rightarrow \R$ with a local minimizer $x$ such that $Hf(x)$ is positive semidefinite.
+\item Give an example of a twice-differentiable function $f : \R^2 \rightarrow \R$ with a critical point $x$ of $f$ that is not a local minimizer and such that $Hf(x)$ is positive semidefinite.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Unconstrained optimization}
+\begin{enumerate}
+\setcounter{enumi}{0}
+\item Give an example of a twice-differentiable function $f : \R^2 \rightarrow \R$ with a local minimizer $x$ such that $Hf(x)$ is positive semidefinite.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Unconstrained optimization}
+\begin{enumerate}
+\setcounter{enumi}{1}
+\item Give an example of a twice-differentiable function $f : \R^2 \rightarrow \R$ with a critical point $x$ of $f$ that is not a local minimizer and such that $Hf(x)$ is positive semidefinite.
+\pause
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Constrained optimization}
+\vspace{-12pt}
+Remember: The problem we consider is
+\begin{align} 
+\begin{split} \label{eq:constrained_opti}
+\text{minimize} \quad &f(x) \\
+\text{subject to} \quad &g_i(x) \leq 0, \quad i = 1,  \dots, m, \\
+                            &h_i(x) = 0, \quad i = 1, \dots, p.
+\end{split}
+\end{align}
+with a variable $x \in \R^n$.
+\begin{theorem}[KKT necessary conditions]
+Assume that the functions $f, g_1, \dots, g_m, h_1, \dots, h_p$ are continuously differentiable. Assume that $x$ is a solution of \eqref{eq:constrained_opti} with $\{\nabla g_i(x) | g_i(x) = 0 \} \cup \{ \nabla f_i(x) | i \in \{1,\dots,p\} \}$ a linearly independent set of vectors. Then there exists $\lambda_1, \dots, \lambda_m \geq 0$ and $\nu_1, \dots, \nu_p \in \R$ such that:
+\begin{align*}
+\nabla f(x) + \sum_{i=1}^m \lambda_i \nabla g_i(x) + \sum_{i=1}^p \nu_i \nabla h_i(x) = 0
+\end{align*}
+and for all $i \in \{1, \dots, m\}, \ \lambda_i = 0$ if $g_i(x) < 0$.
+\end{theorem}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Constrained optimization}
+\vspace{-12pt}
+Using the KKT necessary conditions, find the minimum and the minimizer(s) of the following problem:
+\begin{align*} 
+\begin{split} 
+\text{minimize} \quad &x_1^2 + x_2^2 \\
+\text{subject to} \quad & 4 - (x_1+1)^2 - x_2^2 \leq 0
+\end{split}
+\end{align*}
+\pause
+\pause
+\end{frame}
+
+
+\begin{frame}[t]
+\frametitle{Constrained optimization}
+\vspace{-10pt}
+\begin{definition} [Lagrangian]
+The Lagrangian of problem \eqref{eq:constrained_opti} is defined as:
+\vspace{-5pt}
+\begin{align*}
+L(x, \mu, \nu) = f(x) + \sum_{i=1}^m \lambda_i \nabla g_i(x) + \sum_{i=1}^p \nu_i \nabla h_i(x) 
+\end{align*}
+\vspace{-5pt}
+\end{definition}
+\vspace{-5pt}
+\begin{definition} [Lagrange dual function and dual problem]
+The Lagrange dual function is defined as 
+\vspace{-5pt}
+\begin{align*}
+\ell(\mu,\nu) = \inf_{x \in \R^n} L(x, \mu, \nu)
+\end{align*}
+\vspace{-5pt}
+and the dual problem is defined as
+\vspace{-5pt}
+\begin{align} 
+\begin{split} \label{eq:dual}
+\text{maximize} \quad &\ell(\mu,\nu) \\
+\text{subject to} \quad &\lambda_i \geq 0, \quad i = 1, \dots, m \\
+                            &\nu_i \in \R, \quad i = 1, \dots, p.
+\end{split}                            
+\end{align}
+\vspace{-5pt}
+\end{definition}
+\end{frame}
+
+
+
+\begin{frame}[t] 
+\frametitle{Constrained optimization}
+\vspace{-10pt}
+\begin{theorem}[Weak duality]
+The optimal value $p^{\star}$ of the primal problem \eqref{eq:constrained_opti} is larger or equal than the optimal value $d^{\star}$ of the dual problem \eqref{eq:dual}:
+\begin{align*}
+d^{\star} = \sup_{\lambda \geq 0, \nu} \inf_{x \in \R^n} L(x, \lambda, \nu) \leq \inf_{x \in \R^n}  \sup_{\lambda \geq 0, \nu} L(x, \lambda, \nu) = p^{\star}
+\end{align*}
+\end{theorem}
+
+\begin{theorem}[Slater's condition and strong duality]
+We say that the problem \eqref{eq:constrained_opti} verifies Slater’s condition if there exists a feasible point $x$ such
+that $g_i(x) < 0$ for all $i \in \{1,...,m \}$. If the problem \eqref{eq:constrained_opti} is convex and verifies Slater’s condition, then strong duality holds: $p^{\star} = d^{\star}$. Moreover if $p^{\star} = d^{\star}$ is finite then the optimal value of the dual problem is attained at some $(\lambda, \nu) \in \R^m_{\geq 0} \times \R^p$.
+\end{theorem}
+\end{frame}
+
+\begin{frame}[t] 
+\frametitle{Constrained optimization}
+\begin{theorem}[KKT necessary and sufficient conditions]
+Assume that the functions $f, g_1, \dots, g_m$ are convex, differentiable and that $h_1, \dots, h_p$ are affine. Assume that strong duality holds, that $p^{\star} = d^{\star}$ is finite, and that the optimal value of the dual problem is attained at some $(\lambda, \nu) \in \R^m_{\geq 0} \times \R^p$. (This is for instance the case under Slater's condition).
+
+Then $x \in \R^n$ is a solution of \eqref{eq:constrained_opti} if and only if $x$ is feasible and
+\begin{align*}
+\begin{cases}
+\nabla f (x) + \sum_{i=1}^m \lambda_i \nabla g_i(x) + \sum_{i=1}^p \nabla h_i(x) = 0 \quad \text{(stationarity)}\\
+\lambda_i g_i(x) = 0 \text{ for all } i = 1, \dots, m \quad \text{(complementarity)}
+\end{cases}
+\end{align*}
+\end{theorem}
+\end{frame}
+
+
+\begin{frame}[t] 
+\frametitle{Duality}
+\vspace{-5pt}
+Consider the primal problem of minimizing $f_0(x) = \frac{1}{2}x^\top Q x$ subject to $h(x) = Ax - b$, where $Q$ is a symmetric positive definite $n \times n$ matrix 
+and $A$ is $m \times n$, with $m \leq n$, with full rank $m$ (in other words, $A$ has $m$ linearly independent rows. There are no inequality constraints.
+\begin{enumerate}
+\item Write down the Lagrangian $L(x, \nu)$.
+\item Since $L(x,\nu)$ is convex, differentiable and bounded below in $x$, set its gradient to zero to find its minimizer and write down a formula for the Lagrange dual function $g(\nu) = \inf_x L(x,\nu)$ (as $\inf$ can be replaced by $\min$, in this case).
+\item Find the maximizer $\nu^*$ of the Lagrange dual function $g(\nu)$ (which is concave) by setting its
+gradient to zero. What is the dual optimal value $d^* = g(\nu^*)$?
+\item Find the associated $\hat{x}$ attaining the minimizer of the Lagrangian $L(x, \nu^*)$.
+%\item Check whether $\hat{x}$ is feasible for the primal problem (whether it satisfies $Ax = b$).
+\end{enumerate}
+\pause
+\end{frame}
+
+\begin{frame}[t] 
+\frametitle{Duality}
+\vspace{-5pt}
+\begin{enumerate}
+\setcounter{enumi}{4}
+\item Check whether $\hat{x}$ is feasible for the primal problem (whether it satisfies $Ax = b$).
+\item Find the primal value $f_0(\hat{x})$. If $\hat{x}$ is primal feasible, then the optimal primal value $p^* \leq f_0(\hat{x})$.
+\item Do you conclude that there is no duality gap, i.e., that $d^* = p^*$?
+\item Is Slater's condition verified?
+\end{enumerate}
+\pause
+\end{frame}
+
+\begin{frame}[t] 
+\frametitle{Duality}
+\vspace{-5pt}
+\begin{enumerate}
+\setcounter{enumi}{0}
+\item Write down the Lagrangian $L(x, \nu)$.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[t] 
+\frametitle{Duality}
+\vspace{-5pt}
+\begin{enumerate}
+\setcounter{enumi}{1}
+\item Since $L(x,\nu)$ is convex, differentiable and bounded below in $x$, set its gradient to zero to find its minimizer and write down a formula for the Lagrange dual function $g(\nu) = \inf_x L(x,\nu)$ (as $\inf$ can be replaced by $\min$, in this case).
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[t] 
+\frametitle{Duality}
+\vspace{-5pt}
+\begin{enumerate}
+\setcounter{enumi}{2}
+\item Find the maximizer $\nu^*$ of the Lagrange dual function $g(\nu)$ (which is concave) by setting its
+gradient to zero. What is the dual optimal value $d^* = g(\nu^*)$?
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[t] 
+\frametitle{Duality}
+\vspace{-5pt}
+\begin{enumerate}
+\setcounter{enumi}{3}
+\item Find the associated $\hat{x}$ attaining the minimizer of the Lagrangian $L(x, \nu^*)$.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[t] 
+\frametitle{Duality}
+\vspace{-5pt}
+\begin{enumerate}
+\setcounter{enumi}{4}
+\item Check whether $\hat{x}$ is feasible for the primal problem (whether it satisfies $Ax = b$).
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[t] 
+\frametitle{Duality}
+\vspace{-5pt}
+\begin{enumerate}
+\setcounter{enumi}{5}
+\item Find the primal value $f_0(\hat{x})$. If $\hat{x}$ is primal feasible, then the optimal primal value $p^* \leq f_0(\hat{x})$.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[t] 
+\frametitle{Duality}
+\vspace{-5pt}
+\begin{enumerate}
+\setcounter{enumi}{6}
+\item Do you conclude that there is no duality gap, i.e., that $d^* = p^*$?
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[t] 
+\frametitle{Duality}
+\vspace{-5pt}
+\begin{enumerate}
+\setcounter{enumi}{7}
+\item Is Slater's condition verified?
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[t] 
+\frametitle{Penalized \& constrained problems}
+\vspace{-5pt}
+For $\lambda > 0$, consider the ridge regression problem we saw in the previous recitation:
+\vspace{-5pt}
+\begin{align} \label{eq:penalized}
+\min_{x \in \R^n} \{ \|Ax - y\|^2 + \lambda \|x\|^2 \}
+\end{align}
+For $t > 0$, consider as well the constrained optimization problem 
+\begin{align}
+\begin{split} \label{eq:constrained_ridge}
+\min \quad &\|Ax - y\|^2 \\
+\text{st} \quad &\|x\|^2 \leq t
+\end{split}
+\end{align}
+Use the KKT conditions to show that when $y \notin \text{Im}(A)$, the two problems are "equivalent" in the following sense: for all $\lambda > 0$ any solution of \eqref{eq:penalized} is a solution of \eqref{eq:constrained_ridge} for some $t > 0$, and vice versa, for all $t > 0$ any solution of \eqref{eq:constrained_ridge} is a solution of \eqref{eq:penalized} for some $\lambda > 0$.
+\end{frame}
+
+
+\begin{frame}[t]
+\pause
+\pause
+\pause
+\pause
+\end{frame}
+
+
+\end{document}
+
+
