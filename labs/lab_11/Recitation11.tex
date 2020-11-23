@@ -1,0 +1,204 @@
+\documentclass{beamer}
+\usepackage{amsthm}
+\usepackage[utf8]{inputenc}
+\usetheme{Madrid}
+\usepackage{../latex_style/packages_old}
+\usepackage{../latex_style/notations_old}
+\usepackage{outlines}
+\usepackage{enumitem}
+\renewenvironment{itemize}
+\usefonttheme{serif}
+\def\labelenumi{\theenumi}
+\usefonttheme{serif}
+\usepackage{comment}
+
+%\setbeamertemplate{itemize items}[default]
+%\setbeamertemplate{enumerate items}[default]
+
+% define smaller font command
+\newcommand*{\horzbar}{\rule[.5ex]{2.5ex}{0.5pt}}
+\newcommand\fonteight{\fontsize{8}{9.6}\selectfont}
+\newcommand\fontten{\fontsize{10}{1.2}\selectfont}
+
+%define enumerate with periods
+\renewenvironment{enumerate}%
+{\begin{list}{\arabic{enumi}.}%  \langle ------ dot here
+      {\setlength{\leftmargin}{2.5em}%
+       \setlength{\itemsep}{-\parsep}%
+       \setlength{\topsep}{-\parskip}%%
+       \usecounter{enumi}}%
+ }{\end{list}}
+%define itemize with arrows
+\renewenvironment{itemize}%
+{\begin{list}{$\blacktriangleright$}%  \langle ------ dot here
+      {\setlength{\leftmargin}{2.5em}%
+       \setlength{\itemsep}{-\parsep}%
+       \setlength{\topsep}{-\parskip}%%
+       \usecounter{enumi}}%
+ }{\end{list}}
+
+%Information to be included in the title page:
+\title{Recitation 11}
+\author{Alex Dong}
+\institute{CDS, NYU}
+\date{Fall 2020}
+
+
+\makeatletter
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.4\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\insertshortauthor\expandafter\ifblank\expandafter{\beamer@shortinstitute}{}{~~(\insertshortinstitute)}
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.3\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.3\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+    \insertframenumber{} / \inserttotalframenumber\hspace*{2ex} 
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\setbeamertemplate{navigation symbols}{}
+\makeatother
+
+\begin{document}
+%1
+\frame{\titlepage} 
+%2
+
+\begin{frame}
+\frametitle{Questions: Unconstrained Optimization}
+Let $f: \R^n \rightarrow \R$ be twice differentiable. Let $x,h\in \R^n$.\\
+ True or False.
+\begin{enumerate}
+\item If $f$ is convex, then $f(x+h)>f(x)+\langle \nabla f(x),h \rangle$.
+\item If $f$ is strictly convex, then $f(x+h)>f(x)+\langle \nabla f(x),h \rangle$.
+\item If $f$ is strongly convex, then $f(x+h)>f(x)+\langle \nabla f(x),h \rangle$.
+\item If $f$ is convex, then $f$ cannot have saddle points.
+\item If $\nabla f(x) = 0$, then $x$ is a local minimum of $f$.
+\item If $\nabla f(x) = 0$ and $H_f(x) \succeq 0$, then $x$ is a local minimum of $f$.
+\item If $\nabla f(x) = 0$ and $H_f(x) \succ 0$, then $x$ is a local minimum of $f$.
+\item If $\nabla f(x) = 0$ and $f$ is convex, then $x$ is a local minimum of $f$.
+\end {enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Solutions: Unconstrained Optimization}
+Let $f: \R^n \rightarrow \R$ be twice differentiable. Let $x,h\in \R^n$.\\
+ True or False.
+\begin{solution}
+\begin{enumerate}
+\item If $f$ is convex, then $f(x+h)>f(x)+\langle \nabla f(x),h \rangle$.
+False, consider $f(x) = <x,w>$ for some $w\in\R^n$. 
+\item If $f$ is strictly convex, then $f(x+h)>f(x)+\langle \nabla f(x),h \rangle$.\\
+True. (From Lec 9)
+\item If $f$ is strongly convex, then $f(x+h)>f(x)+\langle \nabla f(x),h \rangle$.\\
+True, because strongly convex implies strictly convex
+\item If $f$ is convex, then $f$ cannot have saddle points.\\
+True. If f had a saddle point, we could draw a chord below $f$ on the "negative" side of the saddle.
+\end{enumerate}
+\end{solution}
+\end{frame}
+
+\begin{frame}
+\frametitle{Solutions: Unconstrained Optimization}
+Let $f: \R^n \rightarrow \R$ be twice differentiable. Let $x,h\in \R^n$.\\
+ True or False.
+\begin{solution}
+\begin{enumerate}
+\item[5.] If $\nabla f(x) = 0$, then $x$ is a local minimum of $f$.\\
+False! Consider $f(x) = -x^2$.
+\item[6.] If $\nabla f(x) = 0$ and $H_f(x) \succeq 0$, then $x$ is a local minimum of $f$.\\
+False, consider $f(x) = -x^4$.
+\item[7.] If $\nabla f(x) = 0$ and $H_f(x) \succ 0$, then $x$ is a local minimum of $f$.\\
+True, this is exactly the condition we need for local minimums!
+\item[8.] If $\nabla f(x) = 0$ and $f$ is convex, then $x$ is a local minimum of $f$.\\
+True, $f$ being convex implies the Hessian is PSD everywhere.
+\end{enumerate}
+\end{solution}
+\end{frame}
+
+\begin{frame}
+\frametitle{Questions: Constrained Optimization}
+Let $f: \R^n \rightarrow \R$ be twice differentiable. Let $g(x) \leq 0$, and $h(x)=0$ be two constraints. Let $x\in \R^n$ be in the feasible set.\\
+True or False.
+\begin{enumerate}
+\item If $f,g,h$ are convex, and $\nabla f(x) = 0$, then $x$ is a local minimum.
+\item If $f,g,h$ are convex, and $\nabla f(x) = 0$, then $x$ is a global minimum. 
+\item If $x$ is a local minimum in the feasible set, then $\nabla f(x) = 0$.
+\item (Ignoring $h$) If $x$ is a local minimum in the feasible set, and $g(x) < 0$, then $\nabla f(x) = 0$. 
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Solutions : Constrained Optimization}
+Let $f: \R^n \rightarrow \R$ be twice differentiable. Let $g(x) \leq 0$, and $h(x)=0$ be two constraints. Let $x\in \R^n$ be in the feasible set.\\
+True or False.
+\begin{solution}
+\begin{enumerate}
+\item If $f,g,h$ are convex, and $\nabla f(x) = 0$, then $x$ is a local minimum. \\
+True! Since $x$ is in the feasible set and $\nabla f(x) = 0$ , and $f$ is convex, then $x$ is a local minimum.
+
+\item If $f,g,h$ are convex, and $\nabla f(x) = 0$, then $x$ is a global minimum. \\
+True! Local minimums are global minimums since $f$ is convex.
+
+\item If $x$ is a local minimum in the feasible set, then $\nabla f(x) = 0$. \\
+False, we could be limited by a constraint. Consider $f(x) = x^2$, $0 \geq g(x) = x+1$.  
+
+\item (Ignoring $h$) If $x$ is a local minimum in the feasible set, and $g(x) < 0$, then $\nabla f(x) = 0$. \\
+True! Since our constraint is not active, the lagrange multiplier is 0.
+\end{enumerate}
+\end{solution}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Question : Constrained Optimization}
+Let $f(x,y) = x^2-10y$. Let $h(x,y) = x^2+y^2 = 36$
+\begin{enumerate}
+\item Find the minimum of $f$ constrained by $h(x,y) = 0$.
+\end{enumerate}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Solution : Constrained Optimization}
+Let $f(x,y) = x^2-10x + y^2 - 4y$. Let $h(x,y) = x^2+y^2 = 26$
+\begin{solution}
+Since h is an active constraint, we can solve this by considering the following system of equations.\\
+\quad $\nabla f(x,y) + \lambda \nabla g(x,y) = 0$ and  $h(x,y) = 0$. \\
+Now, 
+$\nabla f(x,y) = 
+\begin{bmatrix}
+2x - 10  \\
+2y - 4 \\
+\end{bmatrix}$, 
+$\nabla h(x,y) = 
+\begin{bmatrix}
+2x \\
+2y \\
+\end{bmatrix}$. \\
+This gives us a system of three equations and three unknowns.\\
+\quad $2x - 10 + \lambda 2 x = 0$ \\
+\quad $2y - 2  + \lambda 2 y = 0$ \\
+\quad $x^2+y^2 = 26$ \\
+Solving this system of equations gives two combinations of $(\lambda, x, y)$\\
+$(\lambda, x, y)  =  (0,5,1),$ and $(\lambda, x, y) = (-2,-5,-1)$.
+
+Note: $\nabla^2 f(x,y) = H_f(x,y) = 
+\begin{bmatrix}
+2 & 0 \\
+0 & 2 \\
+\end{bmatrix}$, so both points are local minima. f(5,1) = -28, f(-5,-1) = 79 
+\end{solution}
+\end{frame}
+
+
+
+
+
+\end{document}
