@@ -70,12 +70,13 @@ Show that the solution $x^{\text{ridge}}$ of ridge regression is given by the fo
 x^{\text{ridge}} = (A^{\top} A + \lambda \text{Id} )^{-1} A^{\top} y
 \end{align*}
 \pause
+\pause
 \end{frame}
 
 \begin{frame}[t] 
 \frametitle{Lasso for orthogonal $A$}
 \vspace{-10pt}
-1. For $x_0 \in \R$, let $f_{x_0} : \R \rightarrow \R$ be defined as $f_{x_0}(x) = \frac{1}{2}x^2 - x_0 x + \lambda |x|$. Show that the function $f_{x_0}$ admits a unique minimizer given by $x^{*} = \eta(x_0; \lambda)$, where $\eta$ is the \textit{soft-thresholding} function:
+1. For $x_0 \in \R$, let $f_{x_0} : \R \rightarrow \R$ be defined as $f_{x_0}(x) = \frac{1}{2}x^2 - x_0 x + \lambda |x|$. Show that  for $\lambda \geq 0$, the function $f_{x_0}$ admits a unique minimizer given by $x^{*} = \eta(x_0; \lambda)$, where $\eta$ is the \textit{soft-thresholding} function:
 \begin{align*}
 \eta(x_0; \lambda) = 
 \begin{cases}
@@ -84,6 +85,8 @@ x_0 - \lambda & \text{if } x_0 \geq \lambda \\
 x_0 + \lambda & \text{if } x_0 \leq  - \lambda
 \end{cases}
 \end{align*}
+\pause
+\pause
 \pause
 \end{frame}
 
@@ -141,6 +144,7 @@ Show that for a given $A \in \R^{n \times d}$, there exists a unique matrix $A^{
 \pause
 \end{frame}
 
+\iffalse
 \begin{frame}[t]
 \frametitle{Proximal operators}
 The ridge and lasso solutions admit a generalization in a certain sense. We define the proximal operator $prox_f : \R^d \rightarrow \R_d$ as
@@ -159,7 +163,7 @@ The ridge and lasso solutions admit a generalization in a certain sense. We defi
 \text{prox}_f(v) = \argmin_{x \in \R^d} \|x-v\|^2 + f(x)
 \end{align*}
 \begin{enumerate}
-\item Remember that a function $f$ is strongly convex if there exists $\alpha > 0$ such that $g(x) = f(x) - \frac{\alpha}{2} \|x\|^2$ is convex. Prove that if $f : \R^d \rightarrow \R$ is strongly convex differentiable function, then it has a unique minimizer. (Hint: Use the Weierstrass extreme value theorem: every continuous function defined in a closed bounded set has a minimum. Note: the differentiability assumption can be removed.)
+\item Remember that a function $f$ is strongly convex if there exists $\alpha > 0$ such that $g(x) = f(x) - \frac{\alpha}{2} \|x\|^2$ is convex. Prove that if $f : \R^d \rightarrow \R$ is strongly convex function, then it has a unique minimizer. (Hint: Use the Weierstrass extreme value theorem: every continuous function defined in a closed bounded set has a minimum.)
 \item Let $f : \R^n \rightarrow \R$ be a convex function. Show that $\text{prox}_f : \R^n \rightarrow \R$ is well defined (that is, the sets where the argmin is achieved are singletons).
 \item Show that when $A=\text{Id}$, we have $x^{\text{ridge}} = \text{prox}_{\lambda \|\cdot\|_2^2}(y)$ and $x^{\text{Lasso}} = \text{prox}_{\lambda \|\cdot\|_1}(v)$.
 \end{enumerate}
@@ -187,6 +191,27 @@ The ridge and lasso solutions admit a generalization in a certain sense. We defi
 \frametitle{Strong convexity \& Prox operators}
 \vspace{-5pt}
 3. Show that when $A=\text{Id}$, we have $x^{\text{ridge}} = \text{prox}_{\lambda \|\cdot\|_2^2}(y)$ and $x^{\text{Lasso}} = \text{prox}_{\lambda \|\cdot\|_1}(v)$.
+\end{frame}
+\fi
+
+\begin{frame}[t]
+\frametitle{Extra: Bayesian view}
+\vspace{-5pt}
+This exercise studies a simple setting in Bayesian statistics where ridge regression appears. Suppose that we have $n$ data points $(a_i, y_i) \in \R^{d} \times \R$ and we know that for all $i \in [1:n]$, $y_i = x^\top a_i + \epsilon_i$, where $\epsilon_i$ has a standard normal distribution and $x$ has a prior $\mathcal{N}(0, \sigma^2 Id)$. By Bayes' theorem, the posterior density for $x$ is 
+\begin{align*}
+\mathbb{P}( x \ | \ (a_i, y_i)_{i=1}^n ) = \frac{\mathbb{P}((a_i, y_i)_{i=1}^n \ | \ x ) \mathbb{P}(x )}{\mathbb{P}((a_i, y_i)_{i=1}^n)}
+\end{align*}
+The maximum a posteriori (MAP) estimator is defined as
+\begin{align*}
+\hat{x} = \argmax_{x \in \R^d} \mathbb{P}((a_i, y_i)_{i=1}^n \ | \ x ) \mathbb{P}(x ).
+\end{align*}
+Show that the MAP estimator computation corresponds to solving a ridge regression problem.
+\end{frame}
+
+\begin{frame}[t]
+\pause
+\pause
+\pause
 \end{frame}
 
 
