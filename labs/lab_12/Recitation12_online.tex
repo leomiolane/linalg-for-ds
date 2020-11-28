@@ -116,7 +116,7 @@ Using the KKT necessary conditions, find the minimum and the minimizer(s) of the
 The Lagrangian of problem \eqref{eq:constrained_opti} is defined as:
 \vspace{-5pt}
 \begin{align*}
-L(x, \mu, \nu) = f(x) + \sum_{i=1}^m \lambda_i \nabla g_i(x) + \sum_{i=1}^p \nu_i \nabla h_i(x) 
+L(x, \lambda, \nu) = f(x) + \sum_{i=1}^m \lambda_i g_i(x) + \sum_{i=1}^p \nu_i h_i(x) 
 \end{align*}
 \vspace{-5pt}
 \end{definition}
@@ -125,14 +125,14 @@ L(x, \mu, \nu) = f(x) + \sum_{i=1}^m \lambda_i \nabla g_i(x) + \sum_{i=1}^p \nu_
 The Lagrange dual function is defined as 
 \vspace{-5pt}
 \begin{align*}
-\ell(\mu,\nu) = \inf_{x \in \R^n} L(x, \mu, \nu)
+\ell(\lambda,\nu) = \inf_{x \in \R^n} L(x, \lambda, \nu)
 \end{align*}
 \vspace{-5pt}
 and the dual problem is defined as
 \vspace{-5pt}
 \begin{align} 
 \begin{split} \label{eq:dual}
-\text{maximize} \quad &\ell(\mu,\nu) \\
+\text{maximize} \quad &\ell(\lambda,\nu) \\
 \text{subject to} \quad &\lambda_i \geq 0, \quad i = 1, \dots, m \\
                             &\nu_i \in \R, \quad i = 1, \dots, p.
 \end{split}                            
@@ -230,6 +230,8 @@ gradient to zero. What is the dual optimal value $d^* = g(\nu^*)$?
 \item Find the maximizer $\nu^*$ of the Lagrange dual function $g(\nu)$ (which is concave) by setting its
 gradient to zero. What is the dual optimal value $d^* = g(\nu^*)$?
 \end{enumerate}
+\pause
+\pause
 \end{frame}
 
 \begin{frame}[t] 
@@ -237,7 +239,7 @@ gradient to zero. What is the dual optimal value $d^* = g(\nu^*)$?
 \vspace{-5pt}
 \begin{enumerate}
 \setcounter{enumi}{3}
-\item Find the associated $\hat{x}$ attaining the minimizer of the Lagrangian $L(x, \nu^*)$.
+\item Find the associated $x^*$ attaining the minimizer of the Lagrangian $L(x, \nu^*)$.
 \end{enumerate}
 \end{frame}
 
@@ -246,7 +248,7 @@ gradient to zero. What is the dual optimal value $d^* = g(\nu^*)$?
 \vspace{-5pt}
 \begin{enumerate}
 \setcounter{enumi}{4}
-\item Check whether $\hat{x}$ is feasible for the primal problem (whether it satisfies $Ax = b$).
+\item Check whether $x^*$ is feasible for the primal problem (whether it satisfies $Ax = b$).
 \end{enumerate}
 \end{frame}
 
@@ -255,7 +257,7 @@ gradient to zero. What is the dual optimal value $d^* = g(\nu^*)$?
 \vspace{-5pt}
 \begin{enumerate}
 \setcounter{enumi}{5}
-\item Find the primal value $f_0(\hat{x})$. If $\hat{x}$ is primal feasible, then the optimal primal value $p^* \leq f_0(\hat{x})$.
+\item Find the primal value $f_0(x^*)$. If $x^*$ is primal feasible, then the optimal primal value $p^* \leq f_0(x^*)$.
 \end{enumerate}
 \end{frame}
 
@@ -292,7 +294,7 @@ For $t > 0$, consider as well the constrained optimization problem
 \text{st} \quad &\|x\|^2 \leq t
 \end{split}
 \end{align}
-Use the KKT conditions to show that when $y \notin \text{Im}(A)$, the two problems are "equivalent" in the following sense: for all $\lambda > 0$ any solution of \eqref{eq:penalized} is a solution of \eqref{eq:constrained_ridge} for some $t > 0$, and vice versa, for all $t > 0$ any solution of \eqref{eq:constrained_ridge} is a solution of \eqref{eq:penalized} for some $\lambda > 0$.
+Use the KKT conditions to show that the two problems are "equivalent" in the following sense: for all $\lambda \geq 0$ any solution of \eqref{eq:penalized} is a solution of \eqref{eq:constrained_ridge} for some $t \geq 0$, and vice versa, for all $t \geq 0$ any solution of \eqref{eq:constrained_ridge} is a solution of \eqref{eq:penalized} for some $\lambda \geq 0$.
 \end{frame}
 
 
