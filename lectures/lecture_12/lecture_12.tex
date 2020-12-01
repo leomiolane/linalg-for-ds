@@ -373,10 +373,9 @@ $$
 When $\alpha_t \to 0$, 
 $$\log \prod_{t=1}^T (1-\mu \alpha_t) =\sum_{t=1}^T \log (1-\mu \alpha_t) \sim - \mu \sum_{t=0}^{T} \alpha_t.$$
 Hence, we need that $\sum_{t \geq 0} \alpha_t = +\infty$ in order to make the first term go to zero.
-\\
-
-\paragraph{Conclusion.}
-Taking $\alpha_t = 1/(\mu t)$, we get:
+Taking $\alpha_t = 1/(\mu t)$, we get that $\mu \sum_{t=0}^{T} \alpha_t \sim \log(T)$.
+Hence $\prod_{t=1}^T (1-\mu \alpha_t) \sim 1/T$.
+The remaining terms are $O(1/T)$, so we conclude:
 $$
 \E[R(\theta_T)] = O(1/T).
 $$
