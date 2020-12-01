@@ -1,0 +1,152 @@
+\documentclass{beamer}
+
+\usepackage{../../latex_style/beamerthemeExecushares}
+\usepackage{../../latex_style/notations}
+\usepackage{dsfont}
+
+\title{Recitation 12}
+\author{Carles Domingo}
+\date{Fall 2020}
+
+
+\begin{document}
+
+\frame{\titlepage} 
+
+\setcounter{showProgressBar}{0}
+\setcounter{showSlideNumbers}{1}
+
+\begin{frame}[t]
+\frametitle{Exercise 4, 2018 review}
+Let $A \in \R^{n \times n}$ be symmetric matrix with eigenvalues $\lambda_1, \dots, \lambda_n$. Prove that $\|Ax\| \leq \max_i |\lambda_i| \|x\|$ for any $x \in \R^n$.
+\pause
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Exercise 8, 2018 review}
+Suppose $A \in \R^{m \times n}$ has rank $m$. Prove that $A A^{\top}$ is invertible.
+\pause
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Exercise 9, 2018 review}
+\vspace{-5pt}
+Consider the optimization problem
+\begin{align*}
+\text{minimize }_x &\|x\|_2 \\
+\text{subject to } &Ax = b 
+\end{align*}
+where $A \in \R^{m \times n}$ and $b \in \R^m$ are fixed and $b \in \text{Im}(A)$.
+\begin{enumerate}[(a)]
+\item Prove that any minimizer $x^{*}$ must belong to $\text{Im}(A^{\top})$.
+\item Give a formula for the minimizer $x^{*}$, and show it is unique.
+\end{enumerate}
+\pause
+\pause
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Exercise 10, 2018 review}
+\vspace{-5pt}
+Let $A \in \R^{n \times m}$ and $B \in \R^{n \times k}$ and define the block matrix $C \in \R^{n \times (m+k)}$ by 
+\begin{align*}
+C = \begin{bmatrix}
+A & B
+\end{bmatrix}.
+\end{align*}
+Either prove the following statement or give a counterexample: 
+\begin{align*}
+\text{Rank}(C) = \text{Rank}(A) + \text{Rank}(B).
+\end{align*}
+\pause
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Exercise 20, 2018 review}
+\vspace{-5pt}
+Let $A \in \R^{n \times n}$ be a square matrix with the (unusual) property that the image space (or column space) $\text{Im}(A)$ of $A$ is equal to its kernel (or nullspace) $\text{Ker}(A)$.
+\begin{enumerate}[(a)]
+\item What can you say about $A^2$? 
+\item Give an example of such an $A$.
+\end{enumerate}
+\pause
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Exercise 25, 2018 review}
+\vspace{-5pt}
+Let $A = U \Sigma V^{\top}$ denote the Singular Value Decomposition of $A \in \R^{m \times n}$. Let $A' = U \Sigma' V^{\top}$ where $\Sigma'$ is obtained from $\Sigma$ by replacing every entry by zero except for the entry corresponding to the largest singular value.
+\begin{enumerate}[(a)]
+\item Show that $A'$ is the best rank 1 approximation of $A$ in the Frobenius norm, meaning that $A'$ is the solution to $\min_{B: \text{rank}(B)=1} \|B - A\|_F$.
+\item Show that $A'$ is the best rank 1 approximation of $A$ in the spectral norm, meaning that $A'$ is the solution to $\min_{B: \text{rank}(B)=1} \|B - A\|$.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Exercise 25, 2018 review}
+\vspace{-5pt}
+(a) Show that $A'$ is the best rank 1 approximation of $A$ in the Frobenius norm, meaning that $A'$ is the solution to $\min_{B: \text{rank}(B)=1} \|B - A\|_F$.
+\pause
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Exercise 25, 2018 review}
+\vspace{-5pt}
+(b) Show that $A'$ is the best rank 1 approximation of $A$ in the spectral norm, meaning that $A'$ is the solution to $\min_{B: \text{rank}(B)=1} \|B - A\|$.
+\pause
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Exercise 0.9, 2019 review}
+\vspace{-5pt}
+For each of the following statement, say if they are true or false and justify your answer.
+\begin{itemize}
+\item If a continuous function $f : \R \rightarrow \R$ has a unique minimizer then f is convex.
+\item If a continuous function $f : \R \rightarrow \R$ is such that there exists $x_0$ such that $f$ is decreasing on
+$(-\infty, x_0]$ and increasing on $[x_0, +\infty)$ then $f$ is convex.
+\item A twice differentiable function $f : \R \rightarrow \R$ whose derivative $f'$ is non-decreasing is convex.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Exercise 0.9, 2019 review}
+\vspace{-5pt}
+\begin{itemize}
+\item If a continuous function $f : \R \rightarrow \R$ has a unique minimizer then f is convex.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Exercise 0.9, 2019 review}
+\vspace{-5pt}
+\begin{itemize}
+\item If a continuous function $f : \R \rightarrow \R$ is such that there exists $x_0$ such that $f$ is decreasing on
+$(-\infty, x_0]$ and increasing on $[x_0, +\infty)$ then $f$ is convex.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Exercise 0.9, 2019 review}
+\vspace{-5pt}
+\begin{itemize}
+\item A twice differentiable function $f : \R \rightarrow \R$ whose derivative $f'$ is non-decreasing is convex.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Exercise 0.10, 2019 review}
+\vspace{-5pt}
+Let $f : \R^n \rightarrow \R$ be a convex, differentiable function. Assume that there exist $x,y \in \R^n$ such that $\nabla f(x) = \nabla f(y) = 0$. Show that $\nabla f((x+y)/2) = 0$.
+\end{frame}
+
+\begin{frame}[t]
+\pause
+\pause
+\pause
+\pause
+\end{frame}
+
+
+\end{document}
+
+

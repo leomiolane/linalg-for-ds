@@ -1,7 +1,7 @@
 \documentclass[11pt,nocut]{article}
 
-\usepackage{../latex_style/packages}
-\usepackage{../latex_style/notations}
+\usepackage{../../latex_style/packages}
+\usepackage{../../latex_style/notations}
 
 \title{\vspace{-2.0cm}%
 	Optimization and Computational Linear Algebra for Data Science\\
@@ -13,7 +13,34 @@ Hints for the review exercises}
 \begin{document}
 \maketitle
 %\input{./preamble_homeworks.tex}
-\section{Last year's review exercises}
+\begin{center}
+	{\large
+	hints. please only look at the hints if you have spent a reasonable time thinking about the problems!
+	}
+\end{center}
+\section{2019 review exercises}
+
+\begin{enumerate}
+	\item Use the fact that $\|Ax\|^2 = x^{\sT} A^{\sT} A x$ and then use the SVD decomposition of $A$ to rewrite $A^{\sT} A$.
+	\item Use the SVD of $A$.
+	\item (a) True (b) False (c) False (eigenvalues can be negative but singular values can not. The singular values of a symmetric matrix are the absolute value of its eigenvalues).
+	\item Use the definitions of kernel and image.
+	\item Use the SVD decomposition of $A$ to compute $(A^{\sT}A)^{-1}A^{\sT}$ and see that it corresponds to the definition of $\A^{\dagger}$.
+	\item Convex, convex, not convex.
+	\item Convex, not convex, convex.
+	\item Express the columns of $B$ using the left-singular vectors of the matrix $A$ whose rows are the $a_i$.
+	\item False. False. True.
+	\item Show that $(x+y)/2$ is a global minimizer of $f$.
+	\item Normalizing the dataset is useless for ordinary least-squares, but can be useful for Lasso.
+	\item Compute gradient and Hessian. 
+	\item Use Lagrange multipliers.
+	\item If the columns of $A$ are linearly dependent, then $f$ will be $L$-smooth but not strongly convex, hence the speed of gradient descent will be $O(1/t)$.
+		If the columns of $A$ are linearly independent then you can show that $f(x)$ is $\mu$-strongly convex and $L$-smooth, for some $\mu,L>0$. Hence the error of gradient descent will be $O(e^{-\rho t})$ after $t$ steps, for some constant $\rho>0$. 
+	\item 1 step.
+	\item See lecture notes.
+\end{enumerate}
+
+\section{2018 review exercises}
 
 \begin{enumerate}
 	\item Show that for all $x \in \R^n$, $ABx=BAx$. (You can decompose such $x$ in the given basis)
@@ -83,7 +110,7 @@ Hints for the review exercises}
 	\item Apply the spectral theorem to $A$.
 \end{enumerate}
 
-\section{Last year's review exercises}
+\section{2018 final}
 
 \begin{enumerate}
 	\item (a) Show that $w \defeq u-v \neq 0$ belongs to $\Ker(A)$ and then that $x=u+tw$ is a solution to $Ax=b$ for all $t \in \R$. (b) Use the $w$ defined in (a).
