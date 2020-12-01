@@ -158,8 +158,7 @@ True! Since our constraint is not active, the lagrange multiplier is 0.
 
 \begin{frame}
 \frametitle{Question : Constrained Optimization}
-Let $f(x,y) = x^2-10y$. Let $h(x,y) = x^2+y^2 = 36$
-\begin{enumerate}
+Let $f(x,y) = x^2-10x + y^2 - 2y$. Let $h(x,y) = x^2+y^2 = 26$\begin{enumerate}
 \item Find the minimum of $f$ constrained by $h(x,y) = 0$.
 \end{enumerate}
 \end{frame}
@@ -167,7 +166,7 @@ Let $f(x,y) = x^2-10y$. Let $h(x,y) = x^2+y^2 = 36$
 
 \begin{frame}
 \frametitle{Solution : Constrained Optimization}
-Let $f(x,y) = x^2-10x + y^2 - 4y$. Let $h(x,y) = x^2+y^2 = 26$
+Let $f(x,y) = x^2-10x + y^2 - 2y$. Let $h(x,y) = x^2+y^2 = 26$
 \begin{solution}
 Since h is an active constraint, we can solve this by considering the following system of equations.\\
 \quad $\nabla f(x,y) + \lambda \nabla g(x,y) = 0$ and  $h(x,y) = 0$. \\
