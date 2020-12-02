@@ -1,20 +1,20 @@
 \documentclass[11pt,nocut]{article}
 
-\usepackage{../latex_style/packages}
-\usepackage{../latex_style/notations}
+\usepackage{../../latex_style/packages}
+\usepackage{../../latex_style/notations}
 
 \title{\vspace{-2.0cm}%
 	Optimization and Computational Linear Algebra for Data Science\\
 Homework 12: Gradient descent}
 \date{}
-\author{Due on December 13, 2019}
+\author{Due on December 13, 2020}
 \setcounter{section}{12}
 
 \begin{document}
 \maketitle
 \input{./preamble_homeworks.tex}
 
-\vspace{1mm}
+\vspace{-3mm}
 
 \begin{problem}[2 points] The following plot shows the contour lines of a function $f:\R^2 \to \R$.
 	\begin{figure}[H]
@@ -102,7 +102,7 @@ $$
 \qquad \text{and} \qquad
 \gamma = \left(\frac{\sqrt{L}-\sqrt{\mu}}{\sqrt{L}+\sqrt{\mu}}\right)^{\! 2}.
 $$
-Show now that the $\alpha_i(t) \defeq \langle v_i, x_t - x^* \rangle$ satisfy a second order linear recurrence relation (as a sequence indexed by $t$). Using this relation, show that for all $t \geq 0$
+Show that the $\alpha_i(t) \defeq \langle v_i, x_t - x^* \rangle$ satisfy a second order linear recurrence relation (as a sequence indexed by $t$). Using this relation, show that for all $t \geq 0$
 $$
 |\alpha_i(t)| \leq C_i \left(\frac{\sqrt{L}-\sqrt{\mu}}{\sqrt{L} + \sqrt{\mu}}\right)^{\! t}
 $$
