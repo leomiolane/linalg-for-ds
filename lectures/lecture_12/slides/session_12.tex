@@ -1,0 +1,156 @@
+\documentclass{beamer}
+
+\usepackage{../../../latex_style/beamerthemeExecushares}
+\usepackage{../../../latex_style/notations}
+
+\title{Session 12: Gradient descent}
+\subtitle{Optimization and Computational Linear Algebra for Data Science}
+\author{Léo Miolane}
+\date{}
+
+\setcounter{showSlideNumbers}{1}
+
+\begin{document}
+\setcounter{showProgressBar}{0}
+\setcounter{showSlideNumbers}{0}
+
+\frame{\titlepage}
+\setcounter{framenumber}{0}
+%\setcounter{showProgressBar}{1}
+\setcounter{showSlideNumbers}{1}
+
+\begin{frame}
+	\frametitle{Contents}
+	\begin{enumerate}
+		\item Gradient descent
+		\item Convergence analysis for convex functions
+		\item Improvements
+	\end{enumerate}
+\end{frame}
+
+\section{Gradient descent}
+
+\begin{frame}[t]{Gradient descent algorithm}
+	\grid
+
+	\textbf{Goal:} minimize a differentiable function $f: \R^n \to \R$.
+	\vspace{-0.2cm}
+	\begin{exampleblock}{}
+		Starting from a point $x_0 \in \R^n$, perform the updates:
+		$$
+		x_{t+1} = x_t - \alpha_t \nabla f(x_t).
+		$$
+	\end{exampleblock}
+
+\end{frame}
+
+
+\section{Convergence analysis for convex functions}
+
+\begin{frame}[t]{Smoothness and strong convexity}
+	\grid
+
+	\vspace{-0.4cm}
+	\begin{definition}
+		Given $L,\mu > 0$, we say that a twice-differentiable convex function $f:\R^n \to \R$ is
+		\begin{itemize}
+			\item $L$-smooth if for all $x \in \R^n$, \ \ $\lambda_{\rm max}(H_f(x))\leq L$.
+			\item $\mu$-strongly convex if for all $x \in \R^n$, \ \ $\lambda_{\rm min}(H_f(x))\geq \mu$.
+		\end{itemize}
+	\end{definition}
+\end{frame}
+
+\begin{frame}[t]{Speed for $L$-smooth functions}
+	\grid
+
+	\vspace{-0.4cm}
+	\begin{block}{Proposition}
+		Assume that $f$ is convex, $L$-smooth and admits a global minimizer $x^{\star} \in \R^n$.
+		Then, gradient descent with constant step size $\alpha_t = 1/L$ verifies:
+		$$
+		f(x_t) - f(x^{\star}) \leq \frac{2 L \|x_0 - x^{\star}\|^2}{t+4}.
+		$$
+	\end{block}
+\end{frame}
+
+\begin{frame}[t]{$L$-smooth + $\mu$-strongly cvx functions}
+	\grid
+
+	\vspace{-0.4cm}
+	\begin{block}{Theorem}
+		Assume that $f$ is convex, $L$-smooth and $\mu$-strongly convex.
+		Then, gradient descent with constant step size $\alpha_t = 1/L$ verifies:
+		$$
+		f(x_t) - f(x^{\star}) \leq \Big(1 - \frac{\mu}{L} \Big)^t (f(x_0) - f(x^{\star})).
+		$$
+	\end{block}
+\end{frame}
+
+\begin{frame}[t]{Proof}
+	\grid
+
+\end{frame}
+
+
+\begin{frame}[t]{Choosing the step size}
+	\grid
+
+	\begin{block}{Backtracking line search}
+		Start with $\alpha = 1$ and while
+		$$
+		f\big(x_t - \alpha \nabla f(x_t) \big) \geq f(x_t) - \frac{\alpha}{2} \|\nabla f(x_t) \|^2,
+		$$
+		update $\alpha = \beta \alpha$.
+	\end{block}
+\end{frame}
+
+
+
+\section{Improvements}
+
+
+
+\begin{frame}[t]{Gradient descent + momentum}
+	\grid
+
+	\textbf{Idea:} mimic the trajectory of an << heavy ball >> that goes down the slope:
+	\vspace{-0.3cm}
+	\begin{exampleblock}{}
+		\vspace{-0.3cm}
+		$$
+		x_{t+1} = x_t + v_t \qquad \text{where} \quad v_t = - \alpha_t \nabla f(x_t)  \ + \ \beta_t v_{t-1} \,.
+		$$
+	\end{exampleblock}
+
+\end{frame}
+
+\begin{frame}[t]{Newton's method}
+	\grid
+
+	\vspace{-0.2cm}
+	Assume that $f$ is $\mu$-strongly convex and $L$-smooth.
+		\vspace{-0.3cm}
+	\begin{exampleblock}{}
+		Newton's method perform the updates:
+		$$
+		x_{t+1} = x_t - H_f(x_t)^{-1} \nabla f(x_t).
+		$$
+	\end{exampleblock}
+\end{frame}
+
+
+
+\appendix
+\backupbegin
+\begin{frame}[t]
+	\frametitle{Questions?}
+	\grid
+
+	\pause
+\end{frame}
+\backupend
+
+
+
+
+\end{document}

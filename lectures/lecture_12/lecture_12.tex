@@ -1,7 +1,7 @@
 \documentclass[11pt,nocut]{article}
 
-\usepackage{../latex_style/packages}
-\usepackage{../latex_style/notations}
+\usepackage{../../latex_style/packages}
+\usepackage{../../latex_style/notations}
 %\externaldocument{../lecture_02/lecture_02}
 \externaldocument{../lecture_07/lecture_07}
 
@@ -151,7 +151,7 @@ This is a way to prevent zigzagging trajectories when doing gradient descent by 
 \begin{align*}
 	x_{t+1} = x_t + v_t
 	\quad \text{where} \quad
-	v_t = \alpha_t v_{t-1} - \beta_t \nabla f(x_{t}),
+	v_t =  - \alpha_t \nabla f(x_{t}) + \beta_t v_{t-1},
 \end{align*}
 for some $\alpha_t,\beta_t$. The idea is to keep momentum from past iterations in order to avoid zigzagging. It is possible to show that adding the momentum term leads to a better rate when $f$ is twice differentiable, $L$-smooth and $\mu$-strongly convex:
 $$
