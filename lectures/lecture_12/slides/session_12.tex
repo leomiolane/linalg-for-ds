@@ -44,6 +44,39 @@
 
 \end{frame}
 
+\begin{frame}[t]{Convex  \ \ vs \ \ non-convex}
+	\grid
+
+	\begin{columns}
+		\begin{column}{0.45\textwidth}
+			\begin{center}
+				\textbf{Convex}
+			\end{center}
+			\vspace{7cm}
+	\end{column}
+	\vrule
+		\begin{column}{0.55\textwidth}
+			\begin{center}
+				\textbf{Non-convex}
+			\end{center}
+			\vspace{7cm}
+	\end{column}
+	\end{columns}
+
+\end{frame}
+
+\begin{frame}[t]{Numerical observations}
+	\grid
+
+	\begin{itemize}
+		\item If the step size $\alpha$ is small enough, gradient descent converges to $x^{\star}$ \textbf{but} this may take a while.
+			\vspace{0.4cm}
+		\item If the step size $\alpha$ is large, gradient descent moves faster \textbf{but} it may oscilate or even diverge.
+			\vspace{0.4cm}
+		\item The convergence is faster when the eigenvalues of the Hessian $H_f$ are of close to each other.
+	\end{itemize}
+
+\end{frame}
 
 \section{Convergence analysis for convex functions}
 
@@ -109,6 +142,19 @@
 \section{Improvements}
 
 
+\begin{frame}[t]{Issues with gradient descent}
+	\grid
+
+	When the condition number $\kappa = L / \mu$ is large:
+	\vspace{0.2cm}
+	\begin{enumerate}
+		\item the norm $ \|\nabla f(x) \|$ is sometimes too small.
+			\below{\normalsize \color{ExecusharesRed} $\to$ gradient descent steps are too small.}
+		\item The vector $- \nabla f(x)$ does << not really >> points towards the minimizer $x^{\star}$.
+			\below{\normalsize \color{ExecusharesRed} $\to$ gradient descent oscilates.}
+	\end{enumerate}
+
+\end{frame}
 
 \begin{frame}[t]{Gradient descent + momentum}
 	\grid
@@ -138,6 +184,28 @@
 	\end{exampleblock}
 \end{frame}
 
+\begin{frame}[t]{Graphical interpretation}
+	\grid
+
+
+\end{frame}
+
+\begin{frame}[t]{Advantages and drawbacks}
+	\grid
+
+			\vspace{-0.2cm}
+	\begin{itemize}
+		\item Extremly fast there exists $C,\rho > 0$ such that
+			$$
+			\|x_t - x^{\star} \|^{2} \leq C e^{- \rho 2^t}.
+			$$
+		\item Computationally expensive: requires $\sim n^3$ operations to compute the inverse of the $n \times n$ matrix $H_f(x_t)$.
+	\end{itemize}
+
+			\vspace{0.5cm}
+	\textbf{Quasi-Newton methods}: try to approximate $H_f(x_t)$ by matrices $B_t$ that are easier to compute.
+
+\end{frame}
 
 
 \appendix
