@@ -1,0 +1,254 @@
+\documentclass{beamer}
+\usepackage{amsthm}
+\usepackage[utf8]{inputenc}
+\usetheme{Madrid}
+\usepackage{../latex_style/packages_old}
+\usepackage{../latex_style/notations_old}
+\usepackage{outlines}
+\usepackage{enumitem}
+\renewenvironment{itemize}
+\usefonttheme{serif}
+\def\labelenumi{\theenumi}
+\usefonttheme{serif}
+\usepackage{comment}
+
+%\setbeamertemplate{itemize items}[default]
+%\setbeamertemplate{enumerate items}[default]
+
+% define smaller font command
+\newcommand*{\horzbar}{\rule[.5ex]{2.5ex}{0.5pt}}
+\newcommand\fonteight{\fontsize{8}{9.6}\selectfont}
+\newcommand\fontten{\fontsize{10}{1.2}\selectfont}
+
+%define enumerate with periods
+\renewenvironment{enumerate}%
+{\begin{list}{\arabic{enumi}.}%  \langle ------ dot here
+      {\setlength{\leftmargin}{2.5em}%
+       \setlength{\itemsep}{-\parsep}%
+       \setlength{\topsep}{-\parskip}%%
+       \usecounter{enumi}}%
+ }{\end{list}}
+%define itemize with arrows
+\renewenvironment{itemize}%
+{\begin{list}{$\blacktriangleright$}%  \langle ------ dot here
+      {\setlength{\leftmargin}{2.5em}%
+       \setlength{\itemsep}{-\parsep}%
+       \setlength{\topsep}{-\parskip}%%
+       \usecounter{enumi}}%
+ }{\end{list}}
+
+%Information to be included in the title page:
+\title{Recitation (Review Week)}
+\author{Alex Dong}
+\institute{CDS, NYU}
+\date{Fall 2020}
+
+
+\makeatletter
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.4\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\insertshortauthor\expandafter\ifblank\expandafter{\beamer@shortinstitute}{}{~~(\insertshortinstitute)}
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.3\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.3\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+    \insertframenumber{} / \inserttotalframenumber\hspace*{2ex} 
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\setbeamertemplate{navigation symbols}{}
+\makeatother
+
+\begin{document}
+%1
+\frame{\titlepage} 
+%2
+
+\begin{frame}
+\frametitle{Review day: Linear Regression and SVD}
+\begin{itemize}
+\item Your Questions
+\item Linear Regression Review
+\item SVD Review
+\end{itemize}
+
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Question: Linear Regression Review 1}
+
+\begin{itemize}
+\item Goal is to minimize $\ell = \|X\beta - y\|_2^2$ w.r.t $\beta$
+\begin{itemize}
+\item $\ell$ is loss
+\item $X$ is your data/design matrix
+\item $\beta$ is the coefficients that transform $X$ into $y$
+\end{itemize}
+\end{itemize}
+ 
+Let $x_1,..,x_n \in \R^d$, $y_1,..,y_n, \in\R$. Let $\beta \in\R^d$\\
+\begin{enumerate}
+\item Recall that $X$ is defined to have $x_1,..,x_n$ as the rows of $X$, and $y$ is defined to have $y_1,...,y_n$ as its entries. \\
+Show that $\|X\beta - y\|_2^2 = \sum_{i=1}^n (y_i - \langle x_i,\beta \rangle)^2$
+
+\item Notice that when $x_i = \vec{0}$, $\langle x_i, \beta \rangle = 0$. Suppose we wanted to add an `intercept', or `bias' $\beta_0\in \R$,
+so that we are trying to minimize $\|X\beta - y\|_2^2 = \sum_{i=1}^n (y_i - \langle x_i,\beta \rangle-\beta_0)^2$.\\
+How can we modify our definitions of $X,y,\beta$ to easily do this?
+\end{enumerate}
+
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Solutions: Linear Regression Review 1}
+\begin{solution}
+\begin{enumerate}
+\item Recall that $X$ is defined to have $x_1,..,x_n$ as the rows of $X$, and $y$ is defined to have $y_1,...,y_n$ as its entries. \\
+Show that $\|X\beta - y\|_2^2 = \sum_{i=1}^n (y_i - \langle x_i,\beta \rangle)^2$ \\
+Use Inner product method of matrix multiplication
+\item Notice that when $x_i = \vec{0}$, $\langle x_i, \beta \rangle = 0$. Suppose we wanted to add an `intercept', or `bias' $\beta_0\in \R$,
+so that we are trying to minimize $\|X\beta - y\|_2^2 = \sum_{i=1}^n (y_i - \langle x_i,\beta \rangle-\beta_0)^2$.\\
+How can we modify our definitions of $X,y,\beta$ to easily do this?\\
+Append/prepend a column of $1$'s to $X$, and append/prepend $\beta_0$.
+\end{enumerate}
+\end{solution}
+\end{frame}
+
+\begin{frame}
+\frametitle{Questions: Ridge Regression and Multicollinearity}
+Let $X \in \R^{n\times d}$, $n>d$, and \textit{not have full rank}. ($X$ is a data matrix) \\
+Recall that the OLS solution is $\hat{x} = (X^TX)^{-1}X^Ty$.
+\begin{enumerate}
+\item Since $X$ is not full rank, what does this say about the features?
+\item What is the issue with the OLS solution?
+\item The ridge regression solution is given by $(X^TX+\lambda Id_d)^{-1}X^Ty$. How does this fix the issue?
+\item Suppose that $X$ has SVD $X=U\Sigma V^T$, and $X$ has singular values $\sigma_1,...,\sigma_d$. What are the eigenvalues of 
+$X^TX + \lambda Id_d$?
+\item How does increasing $\lambda$ affect the condition number of $(X^TX + \lambda Id_d)$?
+\end{enumerate}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Solutions: Ridge Regression and Multicollinearity}
+Let $X \in \R^{n\times d}$, $n>d$, and \textit{not have full rank}. ($X$ is a data matrix) \\
+Recall that the OLS solution is $\hat{x} = (X^TX)^{-1}X^Ty$.
+\begin{solution}
+\begin{enumerate}
+\item Since $X$ is not full rank, what does this say about the features?\\
+Columns of $X$ are not linearly independent, so some of the features can be perfectly explained by other features.
+\item What is the issue with the OLS solution? \\
+Since $X$ does not have full rank, $X^TX$ doesn't have full rank and is not invertible. So the OLS solution is not well-defined.
+\item The ridge regression solution is given by $(X^TX+\lambda Id_d)^{-1}X^Ty$. How does this fix the issue? \\
+Adding $\lambda Id_d$ to $X^TX$ shifts its eigenvalues up, which makes $(X^TX+\lambda Id_d)$ invertible.
+\end{enumerate}
+\end{solution}
+\end{frame}
+
+\begin{frame}
+\frametitle{Solutions: Ridge Regression and Multicollinearity}
+Let $X \in \R^{n\times d}$, $n>d$, and \textit{not have full rank}. ($X$ is a data matrix) \\
+Recall that the OLS solution is $\hat{x} = (X^TX)^{-1}X^Ty$.
+\begin{solution}
+\begin{enumerate}
+\item[4.] Suppose that $X$ has SVD $X=U\Sigma V^T$, and $X$ has singular values $\sigma_1,...,\sigma_d$. What are the eigenvalues of 
+$X^TX + \lambda Id_d$? \\
+Note that $X^TX = V\Sigma^T \Sigma V^T$\\
+Eigvals of $X^TX$: $\sigma_1^2,...,\sigma_d^2$, (Note: $X$ isn't full rank, so $\sigma_d = 0$) \\
+Eigvals of $X^TX+\lambda Id_d$: $\sigma_1^2 + \lambda ,..., \sigma_d^2+\lambda$.\\
+\item[5.] How does increasing $\lambda$ affect the condition number of $(X^TX + \lambda Id_d)$ vs $X^TX$?\\
+Condition number of $X^TX = \frac{\sigma_1^2}{\sigma_d^2} = \infty$ \\
+Condition number of $(X^TX + \lambda Id_d) = \frac{\sigma_1^2+\lambda}{\sigma_d^2+\lambda}$\\
+Furthermore, for $\lambda_1 > \lambda_2$, we get the relationship \\
+\quad $ \frac{\sigma_1^2+\lambda_1}{\sigma_d^2+\lambda_1} <  \frac{\sigma_1^2+\lambda_2}{\sigma_d^2+\lambda_2}$
+\end{enumerate}
+\end{solution}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Questions: More SVD}
+Let $A\in \R^{n\times m}$, where $n>m$, have SVD $A=U\Sigma V^T$.\\ 
+Let $e_{i,m}, e_{i,n}$ denote the $i$th standard basis vector in $\R^m$, and $\R^n$.\begin{enumerate}
+
+\item Give basis transformations for $U$, $\Sigma$, $V^T$.\\
+(Your answer should look like $T(a) = b$. where you select convenient $a$'s that form a basis for the origin space of T.  Be careful about the dimensions w/ $\Sigma$!)
+
+\medskip
+\item Let $x\in \R^m$ s.t $x = \sum_{i=1}^m\alpha_i v_i$, where $v_i$ are the columns of $V$.\\
+ and write the expressions for $V^Tx$, $\Sigma V^Tx$, and $U\Sigma V^Tx$.
+\medskip
+\item Use this to show $Im(AA^T) = Im(A)$
+\end{enumerate}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Solutions 1: More SVD}
+Let $A\in \R^{n\times m}$, where $n>m$, have SVD $A=U\Sigma V^T$.\\ 
+Let $e_{i,m}, e_{i,n}$ denote the $i$th standard basis vector in $\R^m$, and $\R^n$.
+\begin{enumerate}
+\item Give basis transformations for $U$, $\Sigma$, $V^T$.\\
+(Your answer should look like $T(a) = b$. where you select convenient $a$'s that form a basis for the origin space of T.  Be careful about the dimensions w/ $\Sigma$!)
+\begin{solution}
+$V^T(v_i) = e_{i,m}$ \quad for $i\in\{1,...,m\}$ \\
+$\Sigma(e_{i,m}) = \sigma_i e_{i,n}$ \quad for $i \in \{1, ..., m\}$ (Note the $m$ here) \\
+$U(e_{i,n}) = u_{i}$ \quad for $i \in \{1, ..., n\}$ \\
+\end{solution}
+\end{enumerate}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Solutions 2: More SVD}
+Let $A\in \R^{n\times m}$, where $n>m$, have SVD $A=U\Sigma V^T$.\\ 
+Let $e_{i,m}, e_{i,n}$ denote the $i$th standard basis vector in $\R^m$, and $\R^n$.
+\begin{enumerate}
+\item[2.] Let $x\in \R^m$ s.t $x = \sum_{i=1}^m\alpha_i v_i$, where $v_i$ are the columns of $V$.\\ Write the expressions for $V^Tx$ $\Sigma V^Tx$, and $U\Sigma V^Tx$.
+\begin{solution}
+Let $e_{i,m}$ denote the $i$th standard basis vector in $\R^m$. \\
+$x = \sum_{i=1}^m\alpha_i v_i$\\
+$V^Tx = \sum_{i=1}^m\alpha_i e_{i,m}$ \\
+$\Sigma V^Tx = \sum_{i=1}^{min(m,n)} \sigma_i \alpha_i e_{i,n}$ \\
+$U \Sigma V^Tx = \sum_{i=1}^{min(m,n)} \sigma_i \alpha_i u_i$ \\
+\end{solution}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Solutions 3: More SVD}
+Let $A\in \R^{n\times m}$, where $n>m$, have SVD $A=U\Sigma V^T$.\\ 
+Let $e_{i,m}, e_{i,n}$ denote the $i$th standard basis vector in $\R^m$, and $\R^n$.
+\begin{enumerate}
+\item[3.] Use this to show $Im(AA^T) = Im(A)$
+\begin{solution}
+Let $x \in \R^m, x = \sum_{i=1}^m \alpha_i v_i$. Then $Ax =  \sum_{i=1}^m \alpha_i \sigma_i u_i$. \\
+Let $y \in \R^n, y = \sum_{i=1}^n \beta_i u_i$. Then $AA^Ty = U\Sigma\Sigma^TU^Ty = \sum_{i=1}^m \beta_i \sigma_i^2 u_i$.\\
+
+We show $Im(A) \subset Im(AA^T)$\\
+Now, let $p \in \Im(A) \subset\R^n$.\\
+$z$ must be of the form $p = \sum_{i=1}^m \gamma_i u_i$. \\
+Notice that for $q\in \R^m$, where\\
+\quad  $q = \sum_{i=1}^m c_i v_i$,\quad and \quad $c_i = \frac{\gamma_i}{\sigma_i}$ if $\gamma_i\neq 0$, $c_i = 0$ if $\gamma_i=0$\\
+We get $Aq = p$.
+Similarly, if we let $r\in \R^n$ where\\
+\quad $r =  \sum_{i=1}^m d_i v_i$, \quad and \quad $d_i = \frac{\gamma_i}{\sigma_i^2}$ if $\gamma_i\neq 0$, $d_i = 0$ if $\gamma_i=0$\\
+We get $AA^Tr = p$.\\
+So, we have found a vector r, s.t $AA^Tr = p\in Im(A$). Then $Im(A)\subset Im(A^T).$
+\end{solution}
+\end{enumerate}
+\end{frame}
+
+
+
+\end{document}
