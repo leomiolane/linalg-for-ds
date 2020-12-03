@@ -33,14 +33,17 @@
 \begin{frame}[t]{Gradient descent algorithm}
 	\grid
 
-	\textbf{Goal:} minimize a differentiable function $f: \R^n \to \R$.
 	\vspace{-0.2cm}
+	\textbf{Goal:} minimize a differentiable function $f: \R^n \to \R$.
+	\vspace{-0.3cm}
 	\begin{exampleblock}{}
 		Starting from a point $x_0 \in \R^n$, perform the updates:
 		$$
 		x_{t+1} = x_t - \alpha_t \nabla f(x_t).
+	\vspace{-0.2cm}
 		$$
 	\end{exampleblock}
+	\hspace*{-5mm}\includegraphics[width=3.5cm]{cauchy.jpg}
 
 \end{frame}
 
@@ -133,8 +136,10 @@
 		$$
 		f\big(x_t - \alpha \nabla f(x_t) \big) \geq f(x_t) - \frac{\alpha}{2} \|\nabla f(x_t) \|^2,
 		$$
-		update $\alpha = \beta \alpha$.
+		update let's say $\alpha = 0.8 \alpha$.
 	\end{block}
+	\vspace{0.7cm}
+	\hspace*{0.7cm}\includegraphics[width=15cm]{../figures/contour.pdf}
 \end{frame}
 
 
@@ -145,13 +150,22 @@
 \begin{frame}[t]{Issues with gradient descent}
 	\grid
 
+	\vspace{-0.3cm}
 	When the condition number $\kappa = L / \mu$ is large:
 	\vspace{0.2cm}
 	\begin{enumerate}
 		\item the norm $ \|\nabla f(x) \|$ is sometimes too small.
 			\below{\normalsize \color{ExecusharesRed} $\to$ gradient descent steps are too small.}
+			\vspace{-1.0cm}$$
+			$$
+			\hspace*{1cm}
+			\includegraphics[width=11cm]{../figures/contour.pdf}
 		\item The vector $- \nabla f(x)$ does << not really >> points towards the minimizer $x^{\star}$.
 			\below{\normalsize \color{ExecusharesRed} $\to$ gradient descent oscilates.}
+			\vspace{-1.0cm}$$
+			$$
+			\hspace*{1cm}
+			\includegraphics[width=11cm]{../figures/contour.pdf}
 	\end{enumerate}
 
 \end{frame}
@@ -167,6 +181,10 @@
 		x_{t+1} = x_t + v_t \qquad \text{where} \quad v_t = - \alpha_t \nabla f(x_t)  \ + \ \beta_t v_{t-1} \,.
 		$$
 	\end{exampleblock}
+
+	\vspace{0.7cm}
+	\hspace*{0.7cm}\includegraphics[width=15cm]{../figures/contour.pdf}
+			
 
 \end{frame}
 
@@ -200,6 +218,8 @@
 			\|x_t - x^{\star} \|^{2} \leq C e^{- \rho 2^t}.
 			$$
 		\item Computationally expensive: requires $\sim n^3$ operations to compute the inverse of the $n \times n$ matrix $H_f(x_t)$.
+			\vspace{0.2cm}
+		\item In non-convex setting, Newton's method gets attracted by any critical points (which could be saddle points/maximas...).
 	\end{itemize}
 
 			\vspace{0.5cm}
