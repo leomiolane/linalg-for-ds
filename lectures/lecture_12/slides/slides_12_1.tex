@@ -1,0 +1,88 @@
+\documentclass{beamer}
+
+\usepackage{../../../latex_style/beamerthemeExecushares}
+\usepackage{../../../latex_style/notations}
+
+\title{About the Lagrangian}
+\subtitle{Optimization and Computational Linear Algebra for Data Science}
+\author{Léo Miolane}
+\date{}
+
+\setcounter{showSlideNumbers}{1}
+
+\begin{document}
+\setcounter{showProgressBar}{0}
+\setcounter{showSlideNumbers}{0}
+
+\frame{\titlepage}
+\setcounter{framenumber}{0}
+%\setcounter{showProgressBar}{1}
+\setcounter{showSlideNumbers}{1}
+
+
+
+\begin{frame}[t]{Lagrange multipliers}
+	\grid
+
+	\vspace{-0.5cm}
+	$$
+	\text{minimize}  \qquad f(x) \qquad \text{subject to} \qquad g(x) = 0.
+	$$
+
+
+\end{frame}
+
+\begin{frame}[t]{Encoding the constraint in $L$}
+	\grid
+
+	\vspace{-0.2cm}
+	We have $L(x,\lambda) = f(x) + \lambda g(x)$, hence
+	$$
+	\max_{\lambda \in \R} L(x,\lambda) = 
+	\begin{cases}
+		f(x) & \text{if} \quad g(x) = 0 \\
+		+\infty & \text{otherwise}.
+	\end{cases}
+	$$
+
+
+
+\end{frame}
+
+\begin{frame}[t]{Primal and dual problems}
+	\grid
+
+	\vspace{-0.2cm}
+	\begin{itemize}
+		\item Primal optimization problem:
+			$$
+			\text{minimize} \quad \max_{\lambda \in \R} \ L(x,\lambda) \quad \text{subject to} \quad x \in \R^n.
+			$$
+		\item Dual optimization problem:
+			$$
+			\text{maximize} \quad \min_{x \in \R^n} \ L(x,\lambda) \quad \text{subject to} \quad \lambda \in \R.
+			$$
+	\end{itemize}
+
+\end{frame}
+
+\begin{frame}[t]{Saddle point interpretation}
+	\grid
+
+	\vspace{-0.2cm}
+
+	\begin{theorem}
+		Assume that:
+	\begin{itemize}
+		\item $x^{\star}$ is a solution to the primal problem.
+		\item $\lambda^{\star}$ is a solution to the dual problem.
+		\item Strong duality holds: $\min_x \max_{\lambda} L(x,\lambda) = \max_{\lambda} \min_{x} L(x,\lambda)$.
+	\end{itemize}
+	\vspace{0.2cm}
+	Then $(x^{\star},\lambda^{\star})$ is a saddle-point of the Lagrangian $L$.
+	\end{theorem}
+
+\end{frame}
+
+
+\end{document}
