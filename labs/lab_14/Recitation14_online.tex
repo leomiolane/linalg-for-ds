@@ -1,0 +1,243 @@
+\documentclass{beamer}
+
+\usepackage{../../latex_style/beamerthemeExecushares}
+\usepackage{../../latex_style/notations}
+\usepackage{dsfont}
+
+\title{Recitation 14}
+\author{Carles Domingo}
+\date{Fall 2020}
+
+
+\begin{document}
+
+\frame{\titlepage} 
+
+\setcounter{showProgressBar}{0}
+\setcounter{showSlideNumbers}{1}
+
+\begin{frame}[t]
+\frametitle{Convergence of gradient descent}
+Given an initial point $x_0 \in \R^n$, the gradient descent algorithm follows the updates:
+\begin{align}
+x_{t+1} = x_t - \alpha_t \nabla f(x_t),
+\end{align}
+\begin{definition}[Smoothness and strong convexity]
+For $L, \mu > 0$, we say that a twice-differentiable convex function $f : \R^n \rightarrow \R$ is 
+\begin{itemize}
+\item $L$-smooth if for all $x \in \R^n$, $\lambda_{\max}(Hf (x)) \leq L$.
+\item $\mu$-strongly convex if for all $x \in \R^n$, $\lambda_{\min}(Hf (x)) \geq \mu$.
+\end{itemize}
+\end{definition}
+$L$-smooth and $\mu$-strongly convex functions are very convenient since they can be “sandwiched” as follows (see homework 9 for a proof): for all $x,h \in \R^n$,
+\begin{align}
+f(x)+ \langle h, \nabla f(x) \rangle +\frac{\mu}{2} \|h\|^2 \leq f(x+h) \leq f(x)+ \langle h, \nabla f(x)\rangle + \frac{L}{2} \|h\|^2, 
+\end{align}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Convergence of gradient descent}
+\begin{theorem}[Convex functions]
+Assume that $f$ is convex, $L$-smooth and that $f$ admits a (global) minimizer $x^{\star} \in \R^n$. Then the gradient descent iterates (1) with constant step-size $\alpha_t = 1/L$ verify
+\begin{align}
+f(x_t)- f(x^{\star}) \leq \frac{2L \|x_0 - x^{\star}\|^2}{t+4} 
+\end{align}
+\end{theorem}
+\vspace{-3pt}
+\begin{theorem}[Strongly convex functions]
+Assume that $f$ is $L$-smooth and $\mu$-strongly convex. Then $f$ admits a unique minimizer global $x^{\star}$ and the gradient descent iterates (1) with constant step-size $\alpha_t = 1/L$ verify
+\begin{align}
+f(x_t) - f(x^{\star}) \leq \left(􏰉1 - \frac{\mu}{􏰊L}\right)^t (f(x_0)-f(x^{\star})).
+\end{align}
+\end{theorem}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Convergence of gradient descent}
+\textbf{Proof of the result for strongly convex functions.}
+Let $t \geq 0$. Applying (2) for $x = x_t$ and $h = -L^{-1} \nabla f(x_t)$, we get
+$f(x_{t+1}) \leq f(x_t) - \frac{1}{L} \|\nabla f(x_t)\|^2 + \frac{1}{2L} \|\nabla f(x_t)\|^2 = f(x_t) -  \frac{1}{2L} \|\nabla f(x_t)\|^2$.
+Now, since $f$ is $\mu$-strongly convex, we have (\textbf{exercise!}) for all $x \in \R^n$,
+\begin{align*}
+f(x)-f(x^{\star}) \leq \frac{1}{2 \mu}\|\nabla f(x)\|^2.
+\end{align*} 
+We get that $f(x_{t+1}) \leq f(x_t) - \frac{\mu}{L} (f(x_t) - f(x^{\star}))$, hence
+\begin{align*}
+f(x_{t+1})-f(x^{\star}) \leq \left(􏰉1- \frac{\mu}{L} \right) 􏰊(f(x_t)-f(x^{\star})),
+\end{align*}
+from which the theorem follows.
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Convergence of gradient descent}
+Show that if $f$ is a $\mu$-strongly convex with minimizer $x^{\star}$, then for all $x \in \R^n$,
+\begin{align*}
+f(x)-f(x^{\star}) \leq \frac{1}{2 \mu}\|\nabla f(x)\|^2.
+\end{align*} 
+\pause
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Problem 0.14, 2019 review}
+Assume that we are doing standard gradient descent to minimize the least-square cost
+$f(x) = \|Ax - y\|^2$.
+Assume that the columns of $A$ are linearly dependent, meaning that $\text{Ker}(A) \neq \{0\}$. At which speed should gradient descent converge to the minimum? If now $\text{Ker}(A) = \{0\}$, at which speed should gradient descent converge? By speed, we only ask about the dependence in $t$, the number of iterations, of the gap $f(x_t)-\min f$, where $x_t$ is the position of gradient descent after $t$ iterations.
+\pause
+\pause
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Accelerated gradient methods}
+\vspace{-8pt}
+\begin{theorem}[Gradient descent with momentum]
+We add a momentum term to gradient descent:
+\begin{align}
+x_{t+1} = x_t + v_t \text{ where } v_t = -\alpha_t \nabla f(x_t) + \beta_t v_{t-1},
+\end{align}
+for some $\alpha_t, \beta_t$. If $\alpha_t, \beta_t$ are chosen appropriately, for $f$ $L$-smooth and $\mu$-strongly convex,
+\begin{align}
+\|x_t-x^{\star}\| \leq \left( \frac{\sqrt{L}-\sqrt{l}}{\sqrt{L}+\sqrt{l}} \right)^t \|x_0-x^{\star}\| 
+\end{align}
+\end{theorem}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Accelerated gradient methods}
+\vspace{-8pt}
+\begin{theorem}[Nesterov’s accelerated gradient descent]
+The updates are of the form
+\begin{align}
+x_{t+1} = x_t + v_t \text{ where } v_t = \alpha_t v_{t - 1} - \beta_t \nabla f(x_t + \alpha_t v_{t-1})
+\end{align}
+If $f$ is $L$-smooth and $\mu$-strongly convex, and if its minimum is attained at some $x^{\star}$, then for $\alpha_t = \frac{1-\sqrt{\mu/L}}{1+\sqrt{\mu/L}}$ and $\beta_t = 1/L$ we have
+\begin{align}
+f(x_t)-f(x^{\star}) \leq L\|x_0-x^{\star}\|^2 (1- \mu/L)^t .
+\end{align}
+\end{theorem}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Newton's method}
+\vspace{-5pt}
+\begin{theorem}
+Newton’s method performs updates according to
+\begin{align}
+x_{t+1} =x_t -Hf(x_t)^{-1} \nabla f(x_t).
+\end{align}
+When $f$ is $\mu$-strongly convex and $L$-smooth, for $t$ large enough
+\begin{align}
+\|x_t - x^{\star}\|_2 \leq C e^{-\rho 2^t},
+\end{align}
+where $C, \rho > 0$ are constants depending on $f$ and $x_0$.
+\end{theorem}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Convergence of Newton's method}
+\vspace{-7pt}
+\begin{enumerate}
+\item Show that if ${(x_{t})}_{t \geq 0}$ are iterates of Newton's method for $f$ $\mu$-strongly convex and $L$-smooth, then  
+\begin{align*}
+\frac{L}{2 \mu^2} \|\nabla f(x_{t+1})\| \leq \left(\frac{L}{2 \mu^2} \|\nabla f(x_{t})\| \right)^2
+\end{align*}
+\item Show that for a $\mu$-strongly convex differentiable function and any $x, y \in \R^n$,
+\begin{align*}
+\langle \nabla f(x) - \nabla f(y), x - y \rangle \geq \mu \|x-y\|^2
+\end{align*}
+"The gradient of a strongly convex function is a strongly monotone operator."
+\item Show that if the gradient at initialization is small enough, then 
+\begin{align*}
+\|x_t - x^{\star}\|_2 \leq C e^{-\rho 2^t},
+\end{align*}
+where $C, \rho > 0$ are constants depending on $f$ and $x_0$. Identify these constants.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Convergence of Newton's method}
+\vspace{-7pt}
+1. Show that if ${(x_{t})}_{t \geq 0}$ are iterates of Newton's method for $f$ $\mu$-strongly convex and $L$-smooth, then  
+\begin{align*}
+\frac{L}{2 \mu^2} \|\nabla f(x_{t+1})\| \leq \left(\frac{L}{2 \mu^2} \|\nabla f(x_{t})\| \right)^2
+\end{align*}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Convergence of Newton's method}
+\vspace{-7pt}
+2. Show that for a $\mu$-strongly convex differentiable function and any $x, y \in \R^n$,
+\begin{align*}
+\langle \nabla f(x) - \nabla f(y), x - y \rangle \geq \mu \|x-y\|^2
+\end{align*}
+"The gradient of a strongly convex function is a strongly monotone operator."
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Convergence of Newton's method}
+\vspace{-7pt}
+3. Show that if the gradient at initialization is small enough, then 
+\begin{align*}
+\|x_t - x^{\star}\|_2 \leq C e^{-\rho 2^t},
+\end{align*}
+where $C, \rho > 0$ are constants depending on $f$ and $x_0$. Identify these constants.
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Problem 0.15, 2019 review}
+\vspace{-5pt}
+Let $A \in \R^{n \times d}$. Assume that the columns of $A$ are linearly independent. How many steps of Newton’s method do you need to minimize
+$\|Ax-y\|^2$? ($y \in \R^n$ is a fixed vector). Justify your answer.
+\pause
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Stochastic gradient descent}
+\vspace{-5pt}
+Instead of the full-gradient $\nabla R_N (\theta) = \frac{1}{􏰍N} \sum_{i=1}^N \nabla f_i(\theta)$, updates are of the following form:
+\begin{enumerate}
+\item Pick $i$ uniformly at random in $\{1, \dots , N\}$, 
+\item Update $\theta_{t+1} = \theta_t - \alpha_t \nabla f_i(\theta_t)$.
+\end{enumerate}
+Classical results on stochastic gradient descent show that
+\begin{itemize}
+\item If the $f_i$ are $\mu$-strongly convex and smooth, then SGD with step sizes $\alpha_t = 1/(\mu t)$ achieves after $t$ steps an error of $O(1/t)$.
+\item If the $f_i$ are convex and smooth, then SGD with step sizes $\alpha_t = 1/\sqrt{t}$ achieves after $t$ steps an
+ error of $O(1/\sqrt{t})$.
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Convergence of SGD}
+\vspace{-5pt}
+In the appendix of the lecture notes (beginning of page 8), it is shown that
+\vspace{-5pt}
+\begin{align*}
+\mathbb{E} R(\theta_{t+1}) \leq (1 - \mu \alpha_t) \mathbb{E} R(\theta_t) + L \alpha_t^2 \sigma^2.
+\end{align*}
+The last steps of the proof are sketched but not detailed. Starting from this equation, show that if $\alpha_t = \frac{2}{\mu t}$, then
+\vspace{-5pt}
+\begin{align*}
+\mathbb{E}R(\theta_t) \leq \frac{2L \sigma^2}{\mu^2 t}
+\end{align*}
+\pause
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Problem 0.16, 2019 review}
+\vspace{-5pt}
+When running stochastic gradient descent, what are upsides and downsides of having a rapidly decaying learning rate?
+\pause
+\end{frame}
+
+
+\begin{frame}[t]
+\pause
+\pause
+\pause
+\pause
+\end{frame}
+
+
+\end{document}
+
+
