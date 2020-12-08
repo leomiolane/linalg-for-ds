@@ -1,0 +1,201 @@
+\documentclass{beamer}
+\usepackage{amsthm}
+\usepackage[utf8]{inputenc}
+\usetheme{Madrid}
+\usepackage{../latex_style/packages_old}
+\usepackage{../latex_style/notations_old}
+\usepackage{outlines}
+\usepackage{enumitem}
+\renewenvironment{itemize}
+\usefonttheme{serif}
+\def\labelenumi{\theenumi}
+\usefonttheme{serif}
+\usepackage{comment}
+
+%\setbeamertemplate{itemize items}[default]
+%\setbeamertemplate{enumerate items}[default]
+
+% define smaller font command
+\newcommand*{\horzbar}{\rule[.5ex]{2.5ex}{0.5pt}}
+\newcommand\fonteight{\fontsize{8}{9.6}\selectfont}
+\newcommand\fontten{\fontsize{10}{1.2}\selectfont}
+
+%define enumerate with periods
+\renewenvironment{enumerate}%
+{\begin{list}{\arabic{enumi}.}%  \langle ------ dot here
+      {\setlength{\leftmargin}{2.5em}%
+       \setlength{\itemsep}{-\parsep}%
+       \setlength{\topsep}{-\parskip}%%
+       \usecounter{enumi}}%
+ }{\end{list}}
+%define itemize with arrows
+\renewenvironment{itemize}%
+{\begin{list}{$\blacktriangleright$}%  \langle ------ dot here
+      {\setlength{\leftmargin}{2.5em}%
+       \setlength{\itemsep}{-\parsep}%
+       \setlength{\topsep}{-\parskip}%%
+       \usecounter{enumi}}%
+ }{\end{list}}
+
+%Information to be included in the title page:
+\title{Recitation 12}
+\author{Alex Dong}
+\institute{CDS, NYU}
+\date{Fall 2020}
+
+
+\makeatletter
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.4\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\insertshortauthor\expandafter\ifblank\expandafter{\beamer@shortinstitute}{}{~~(\insertshortinstitute)}
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.3\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.3\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+    \insertframenumber{} / \inserttotalframenumber\hspace*{2ex} 
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\setbeamertemplate{navigation symbols}{}
+\makeatother
+
+\begin{document}
+%1
+\frame{\titlepage} 
+%2
+
+\begin{frame}
+\frametitle{Gradient Descent}
+\begin{itemize}
+\item We made it! Last recitation
+\item Conceptually very simple; in practice, can be pretty tricky
+\begin{itemize}
+\item How to pick $\alpha$?
+\item Many, MANY variations. SGD, Adagrad, Adam
+\item How to deal with nondifferentiability?
+\item A lot more will be covered in Machine Learning
+\end{itemize}
+\item Analyzing convergence depends on eigenvalues of the Hessian.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Questions: Linear Separator }
+Let $(x_1,y_1),...,(x_n,y_n)$ be a centered dataset. \\
+Each $x_i\in\R^d$, $y_i\in\{-1,1\}$.\\
+Assume that our points are \textit{linearly seperable}.
+\begin{enumerate}
+\item Intuitively, describe what it means to be linearly separable. 
+\item Mathematically, give a condition for determining whether the points are linearly seperable or not. (Hint: use inner products)
+\item Let our loss function be $\ell(w_i;y_i,x_i)) = e^{-f(w;y_i,x_i)}$. (Note: $f(w,x_i)$ is defined in the answer to the previous question). Write the loss function for the entire dataset.
+\item What is the gradient descent update step?
+\item What's the computational cost of the update step in terms of $n, d$?
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Solutions 1: Linear Separator }
+Let $(x_1,y_1),...,(x_n,y_n)$ be a centered dataset. \\
+Each $x_i\in\R^d$, $y_i\in\{-1,1\}$.\\
+We want to determine whether the points are linearly separable.
+\begin{solution}
+\begin{enumerate}
+\item Intuitively, describe what it means to be linearly separable. \\
+A two class dataset is linearly seperable when we can draw a hyperplane in the space, 
+where all the points of one class fall entirely on one side of the hyperplane, and all the points of the other class fall entirely on the other side of the hyperplane.\\
+\medskip
+\item Mathematically, give a condition for determining whether the points are linearly seperable or not. (Hint: use inner products)\\
+The dataset is seperable if $\exists w$, such that \\
+\quad $f(w;y_i,x_i) = y_i\langle w,x_i \rangle \geq 0, \forall i \in \{1,...,n\}$
+
+\end{enumerate}
+\end{solution}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Solutions 2: Linear Separator }
+Let $(x_1,y_1),...,(x_n,y_n)$ be a centered dataset. \\
+Each $x_i\in\R^d$, $y_i\in\{-1,1\}$.\\
+We want to determine whether the points are linearly separable.
+\begin{solution}
+\begin{enumerate}
+
+\item[3.] Let our loss function be $\ell(w;y_i,x_i)) = e^{-f(w;y_i,x_i)}$.\\
+Here, we use $f(w;y_i,x_i) =  y_i \langle w,x_i \rangle$.
+The loss function will be $L(w;(x_1, y_1),...,(x_n, y_n)) = \sum_{i=1}^{n}e^{-y_iw^Tx_i}$
+\item[4.] What is the gradient descent update step?\\
+The gradient is $\nabla_w(L) = \sum_{i=1}^{n}-y_i x_i e^{-y_iw^Tx_i}$.\\
+The update step is $w_{t+1} = w_t  + \alpha \sum_{i=1}^{n}y_i x_i e^{-y_iw^Tx_i}$
+\item[5.] What's the computational cost of the update step in terms of $n, d$?\\
+$y_i$ is a scalar, $x_i$ and $w$ are $d$-dimensional vectors\\
+Calculating $-y_ix_ie^{-y_iw^Tx_i}$ is about $d$ calculations\\
+Calculating $\sum_{i=1}^{n}-y_i x_i e^{-y_iw^Tx_i}$ is about $nd$ calculations
+
+\end{enumerate}
+\end{solution}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Questions: Gradient Descent}
+True or False:
+\begin{enumerate}
+\item[1.] Gradient descent will always find a global minimum.
+\item[2.] Gradient descent will always find a local minimum.
+\item[3.] Standardizing your features will help with gradient descent.
+\end{enumerate}
+Conceptual
+\begin{enumerate}
+\item[4.] The step size in gradient descent is not actual “step size” because the true length of the step in gradient descent will be $\alpha \| \nabla_w L(w;y,x) \|$. Suppose we  scale the gradients to make them unit norm before we do gradient descent. What’s the problem with this?
+\item[5.] What happens to the speed of gradient descent for linear regression when we first perform some dimensionality reduction to the features?
+\item[6.] What are possible stopping criteria the gradient descent algorithm?
+\end{enumerate}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Solutions 1: Gradient Descent}
+\begin{solution}
+\begin{enumerate}
+\item[1.] Gradient descent will always find a global minimum.\\
+False, it can find a local minimum, (but it could also diverge)
+\item[2.] Gradient descent will always find a local minimum.\\
+False, if your step size is too large, you could diverge
+
+\item[3.] Standardizing your features will help with gradient descent.
+True. Gradient descent converges best when all the features are on the same scale. \\
+Another way to think about this is that you don't want large differences in the eigenvalues of the Hessian at any point. If there are large differences in the eigenvalues of the Hessian, then that will mean you are in a valley.
+\end{enumerate}
+
+\end{solution}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Solutions 2: Gradient Descent}
+\begin{solution}
+\begin{enumerate}
+\item[4.] 
+When you get close to the minimum, you will step away from it/ be unable to converge to it.
+\item[5.]
+Assuming you reduce irrelevant dimensions, dimensionality reduction will “remove” the smallest eigenvalues of the covariance matrix (which turns out to be also the Hessian of the cost function), hence improving the condition number and therefore the speed of convergence.
+Also, iterations are computationally less expensive.
+\item[6.] 
+1) Iterate a fixed amount of steps. \\
+2) Loss function doesn't change much: $\|L(w_{t+1})-L(w_t)\| < \epsilon$ \\
+3) weight parameter doesnt change much $\|w_{t+1} - w_t\| < \epsilon$ \\
+We tend to prefer (2), because we are specifically interested in minimizing loss. Also weights are in high dimension, and we dont know how sensitive they are. (Small change in weight could lead to large change in loss)
+\end{enumerate}
+\end{solution}
+\end{frame}
+
+
+
+\end{document}
