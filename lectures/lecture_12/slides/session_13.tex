@@ -11,6 +11,7 @@
 \setcounter{showSlideNumbers}{1}
 
 \begin{document}
+
 \setcounter{showProgressBar}{0}
 \setcounter{showSlideNumbers}{0}
 
@@ -19,46 +20,73 @@
 %\setcounter{showProgressBar}{1}
 \setcounter{showSlideNumbers}{1}
 
+
+\begin{frame}{Final exam}
+	\begin{itemize}
+		\item Scope: everything except today's lecture and this week's video.
+			\vspace{2mm}
+		\item Of course, it will be a bit more focused on what we did after the midterm (PCA, linear regression, convex functions, optimization...)
+			\vspace{2mm}
+		\item Same format as for the midterm
+			\vspace{2mm}
+		\item ``24 hours window'' on Thursday December 17th.
+			\vspace{2mm}
+		\item 1 hour 40 minutes to work + 20 minutes to scan + upload on Gradescope.
+	\end{itemize}
+\end{frame}
+
 \begin{frame}
 	\frametitle{Contents}
 	\begin{enumerate}
-		\item Gradient descent
-		\item Convergence analysis for convex functions
-		\item Improvements
+		\item Introduction: supervised learning
+		\item Stochastic gradient descent
+		\item Convergence analysis
 	\end{enumerate}
+\end{frame}
+
+
+\section{Introduction}
+
+
+\begin{frame}[t]{Supervised learning}
+	\grid
+
+	\pause
+	\pause
+
+\end{frame}
+
+\begin{frame}[t]{Why not using gradient descent ?}
+	\grid
+	$$
+	f(\theta) = \frac{1}{N} \sum_{i=1}^N f_i(\theta).
+	$$
+	\vspace{-0.6cm}
+	\begin{exampleblock}{}
+		Gradient descent iterations:
+\begin{align*}
+	\theta_{t+1} 
+	&= \theta_t - \alpha_t \nabla f(\theta_t) 
+	\\
+	&= \theta_t - \frac{\alpha_t}{N} \sum_{i=1}^N \nabla f_i(\theta_t).
+\end{align*}
+	\end{exampleblock}
+
 \end{frame}
 
 \section{Stochastic gradient descent}
 
-\begin{frame}[t]{Setting}
-	\grid
-
-	\vspace{-0.2cm}
-	In machine learning, one often has to minimize functions of the form
-	$$
-	f(x) = \frac{1}{N} \sum_{i=1}^N f_i(x).
-	$$
-	where $f_i : \R^n \to \R$.
-
-\end{frame}
-
-\begin{frame}[t]{Setting}
-	\grid
-
-
-\end{frame}
-
 \begin{frame}[t]{Stochastic gradient descent}
 	\grid
 	$$
-	f(x) = \frac{1}{N} \sum_{i=1}^N f_i(x).
+	f(\theta) = \frac{1}{N} \sum_{i=1}^N f_i(\theta).
 	$$
-
+	\vspace{-0.6cm}
 	\begin{exampleblock}{}
-		Starting at some $x_0 \in \R^n$, perform the updates:
+		Starting at some $\theta_0 \in \R^n$, perform the updates:
 \begin{align*}
 	&\text{Pick} \quad i \quad \text{uniformly at random in} \quad \{1, \dots, N\}, \\
-	&\text{Update} \quad x_{t+1} = x_t - \alpha_t \nabla f_i(x_t),
+	&\text{Update} \quad \theta_{t+1} = \theta_t - \alpha_t \nabla f_i(\theta_t),
 \end{align*}
 	\end{exampleblock}
 
@@ -89,15 +117,46 @@
 
 \end{frame}
 
-
-\begin{frame}[t]{Convergence analysis}
+\begin{frame}[t]{SGD in practice}
 	\grid
+	\vspace{-0.6cm}
+	\begin{exampleblock}{}
+		Mini-batch stochastic gradient descent:
+\begin{align*}
+	&\text{Pick a mini-batch} \quad i_1, \dots, i_k \quad \text{in} \quad \{1, \dots, N\}, \\
+	&\text{Update} \quad \theta_{t+1} = \theta_t - \frac{\alpha_t}{k}\sum_{m=1}^k \nabla f_{i_m}(\theta_t),
+\end{align*}
+	\end{exampleblock}
+
+	\begin{itemize}
+		\item Decrease the step size after a fixed number of epochs.
+		\item Use momentum + ``adaptive gradient'': Adagrad, RMSprop, Adedelta, Adam, Adamax, Nadam...
+	\end{itemize}
+	\vspace{0.3cm}
+
+	Excellent reference:
+	\begin{center}
+		\url{https://arxiv.org/pdf/1609.04747.pdf}
+	\end{center}
 
 \end{frame}
-\begin{frame}[t]{Convergence analysis}
+
+
+\section{Convergence analysis}
+
+\begin{frame}[t]{Convergence rates}
 	\grid
 
+	\begin{exampleblock}{}
+		\begin{itemize}
+			\item if the $f_i$ are convex and $L$-smooth: SGD with $\alpha_t = 1 / \sqrt{t}$ achieves an error $\leq C / \sqrt{t}$.
+			\item if the $f_i$ are $\mu$-strongly convex and $L$-smooth: SGD with $\alpha_t = 1 / (\mu t)$ achieves an error $\leq C / t$.
+		\end{itemize}
+	\end{exampleblock}
+
 \end{frame}
+
+
 \begin{frame}[t]{GD \ vs \ SGD}
 	\grid
 
@@ -129,16 +188,28 @@
 
 \end{frame}
 
+\begin{frame}[t]{GD \ vs \ SGD: who wins ?}
+	\grid
+
+	\begin{itemize}
+		\item If one is looking for a very small optimization error $f(\theta_t) - \min f$, then gradient descent wins.
+			\vspace{2mm}
+		\item If one has a limited time budget and does not need a very small $f(\theta_t) - \min f$, then stochastic gradient descent wins.
+	\end{itemize}
+
+\end{frame}
+
 \appendix
 \backupbegin
+
 \begin{frame}[t]
 	\frametitle{Questions?}
 	\grid
 
 	\pause
 \end{frame}
-\backupend
 
+\backupend
 
 
 
