@@ -24,7 +24,7 @@
 \begin{frame}{Final exam}
 	\begin{itemize}
 		\item Scope: everything except today's lecture and this week's video.
-			\vspace{2mm}
+			\vspace{1mm}
 		\item Of course, it will be a bit more focused on what we did after the midterm (PCA, linear regression, convex functions, optimization...)
 			\vspace{2mm}
 		\item Same format as for the midterm
@@ -32,6 +32,8 @@
 		\item ``24 hours window'' on Thursday December 17th.
 			\vspace{2mm}
 		\item 1 hour 40 minutes to work + 20 minutes to scan + upload on Gradescope.
+			\vspace{2mm}
+		\item In case you have any issue when uploading: \textbf{email me your work}.
 	\end{itemize}
 \end{frame}
 
@@ -40,7 +42,7 @@
 	\begin{enumerate}
 		\item Introduction: supervised learning
 		\item Stochastic gradient descent
-		\item Convergence analysis
+		\item Convergence analysis, comparison with gradient descent
 	\end{enumerate}
 \end{frame}
 
@@ -61,7 +63,7 @@
 	$$
 	f(\theta) = \frac{1}{N} \sum_{i=1}^N f_i(\theta).
 	$$
-	\vspace{-0.6cm}
+	\vspace{-0.8cm}
 	\begin{exampleblock}{}
 		Gradient descent iterations:
 \begin{align*}
@@ -70,6 +72,7 @@
 	\\
 	&= \theta_t - \frac{\alpha_t}{N} \sum_{i=1}^N \nabla f_i(\theta_t).
 \end{align*}
+\vspace{-0.5cm}
 	\end{exampleblock}
 
 \end{frame}
@@ -102,7 +105,7 @@
 				\textbf{Rapidly decaying step sizes}
 			\end{center}
 			\hspace*{-0.4cm}\includegraphics[width=9cm]{../figures/contour.pdf}
-			\vspace{7cm}
+			\vspace{2.7cm}
 	\end{column}
 	\vrule
 		\begin{column}{0.55\textwidth}
@@ -111,7 +114,7 @@
 				\textbf{Slowly decaying step sizes}
 			\end{center}
 			\hspace*{0.4cm}\includegraphics[width=9cm]{../figures/contour.pdf}
-			\vspace{7cm}
+			\vspace{2.7cm}
 	\end{column}
 	\end{columns}
 
@@ -166,7 +169,14 @@
 			\begin{center}
 				\textbf{Gradient descent}
 			\end{center}
-			\vspace{7cm}
+			\begin{itemize}
+				\item Time per step
+			\vspace{1cm}
+				\item Error after $t$ steps
+			\vspace{2cm}
+				\item Log-error after $\tau$ units of time
+			\vspace{2cm}
+			\end{itemize}
 	\end{column}
 	\vrule
 		\begin{column}{0.55\textwidth}
@@ -174,7 +184,14 @@
 			\begin{center}
 				\textbf{Stochastic gradient descent}
 			\end{center}
-			\vspace{7cm}
+			\begin{itemize}
+				\item Time per step
+			\vspace{1cm}
+				\item Error after $t$ steps
+			\vspace{2cm}
+				\item Log-error after $\tau$ units of time
+			\vspace{2cm}
+			\end{itemize}
 	\end{column}
 	\end{columns}
 
